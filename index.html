@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TLS — quiz gamificado de política brasileira, com foco em fatos, leis e políticas públicas.">
+<title>TLS — O Quiz de Política</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+<header class="topbar"><div class="brand"><span class="brand-mark">T</span> TLS</div><div class="topbar-note">POLÍTICA • LEIS • PODER</div></header>
+<main>
+<section class="hero" id="hero">
+<div class="eyebrow"><span></span> TESTE O QUE VOCÊ REALMENTE SABE</div>
+<h1>Você conhece as decisões<br><strong>por trás da política?</strong></h1>
+<p class="hero-copy">Responda ao quiz e descubra quanto você sabe sobre leis, programas e decisões públicas que marcaram a política brasileira nos últimos anos.</p>
+<button class="primary-btn" id="startBtn">COMEÇAR O QUIZ <span>→</span></button>
+<p class="microcopy">10 perguntas • sem cadastro • resultado no final</p>
+</section>
+
+<section class="quiz-section hidden" id="quizSection"><div class="quiz-shell">
+<div class="quiz-head"><div><span class="eyebrow">DESAFIO TLS</span><h2 id="questionNumber">Pergunta 01</h2></div>
+<div class="progress-wrap"><div class="progress"><div id="progressBar"></div></div><span id="progressText">1/10</span></div></div>
+<div class="question-card"><div class="category" id="category">POLÍTICAS PÚBLICAS</div><h3 id="question"></h3><div class="options" id="options"></div>
+<div class="quiz-footer"><span id="feedback"></span><button class="next-btn" id="nextBtn" disabled>CONTINUAR →</button></div></div>
+</div></section>
+
+<section class="result-section hidden" id="resultSection"><div class="result-card">
+<span class="eyebrow">QUIZ CONCLUÍDO</span><div class="score-ring"><span id="score">0</span><small>/10</small></div>
+<h2 id="resultTitle">Você chegou até o fim.</h2><p id="resultText"></p>
+<button class="primary-btn" id="unlockBtn">LIBERAR O CONTEÚDO COMPLETO <span>→</span></button><button class="ghost-btn" id="restartBtn">Refazer quiz</button>
+</div></section>
+
+<section class="paywall hidden" id="paywall"><div class="paywall-card">
+<div class="lock-icon">🔒</div><span class="eyebrow">ÁREA BLOQUEADA</span><h2>Quer ir além do quiz?</h2>
+<p class="paywall-lead">Aprofunde-se em uma biblioteca organizada por período, tema e legislação — com contexto, datas e fontes oficiais.</p>
+<div class="price"><small>acesso</small>R$ 19,90</div>
+<ul><li><span>✓</span> Linha do tempo de políticas públicas</li><li><span>✓</span> Leis e programas para consulta</li><li><span>✓</span> Contexto histórico e institucional</li><li><span>✓</span> Fontes oficiais para conferir cada informação</li></ul>
+<button class="primary-btn full" id="checkoutBtn">DESBLOQUEAR POR R$ 19,90</button>
+<p class="checkout-note">O botão está preparado para receber seu checkout. Nenhuma informação paga é exibida antes da compra.</p>
+</div></section>
+
+<section class="sources"><div><span class="eyebrow">TRANSPARÊNCIA</span><h2>Fatos primeiro.</h2>
+<p>O quiz apresenta fatos verificáveis sobre leis e políticas públicas. A classificação ideológica de uma medida pode ser debatida; por isso, o conteúdo diferencia fato, contexto e interpretação.</p></div>
+<div class="source-list"><div><strong>01</strong><span>Planalto — legislação oficial</span></div><div><strong>02</strong><span>Câmara dos Deputados — legislação e processo</span></div><div><strong>03</strong><span>Senado Federal — acompanhamento legislativo</span></div></div></section>
+</main>
+<footer>© 2026 TLS • Conteúdo educacional • Consulte sempre as fontes oficiais.</footer>
+<div class="toast hidden" id="toast"></div>
+<script src="./app.js"></script>
+</body></html>
