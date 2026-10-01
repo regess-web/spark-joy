@@ -145,7 +145,7 @@ function WeightLossQuiz() {
   }, [scores]);
 
   function choose(index: number) {
-    if (selected !== null) return;
+    // A resposta só é contabilizada ao avançar; até lá, o usuário pode trocar a opção.
     setSelected(index);
   }
 
