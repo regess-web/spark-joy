@@ -212,6 +212,7 @@ function TrainingApp() {
   const [foodUnit, setFoodUnit] = useState<"g" | "un">("g");
   const [foodItems, setFoodItems] = useState<Array<{name:string; amount:number; unit:string; calories:number}>>([]);
   const [showDietOffer, setShowDietOffer] = useState(false);
+  const [showSimpleDietOffer, setShowSimpleDietOffer] = useState(false);
   const [showHomeUpgrade, setShowHomeUpgrade] = useState(false);
   const [homeUpgradeUnlocked, setHomeUpgradeUnlocked] = useState(false);
 
@@ -359,7 +360,7 @@ function TrainingApp() {
               <div className="diet-meal"><b>ALMOÇO</b><span>Proteína + carboidrato + vegetais.</span></div>
               <div className="diet-meal"><b>LANCHE</b><span>Uma opção simples e prática.</span></div>
               <div className="diet-meal"><b>JANTAR</b><span>Uma refeição equilibrada.</span></div>
-              <button className="training-main-btn">LIBERAR DIETA • R$ 7,90 →</button>
+              <button className="training-main-btn" onClick={() => setShowSimpleDietOffer(true)}>LIBERAR DIETA • R$ 7,90 →</button>
             </div>
           ) : (
             <div className="diet-content-card calorie-card">
@@ -373,7 +374,7 @@ function TrainingApp() {
               </div>
               <div className="food-list">{foodItems.length === 0 ? <div className="food-empty">Adicione um alimento para começar.</div> : foodItems.map((item,index) => <div className="food-row" key={index}><span>{item.name}</span><small>{item.amount} {item.unit}</small><b>{item.calories} kcal</b></div>)}</div>
               <div className="food-total"><span>TOTAL</span><strong>{foodTotal} kcal</strong></div>
-              <button className="training-main-btn">LIBERAR DIETA + CONTADOR • R$ 12,90 →</button>
+              <button className="training-main-btn" onClick={() => setShowDietOffer(true)}>LIBERAR DIETA + CONTADOR • R$ 12,90 →</button>
             </div>
           )}
         </section>
@@ -390,6 +391,20 @@ function TrainingApp() {
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 11,99</strong></div>
             <button className="training-main-btn diet-offer-cta">EVOLUIR MEU TREINO • R$ 11,99 →</button>
             <button className="diet-offer-later" onClick={() => setShowHomeUpgrade(false)}>Agora não</button>
+          </div>
+        </div>
+      )}
+      {showSimpleDietOffer && (
+        <div className="diet-offer-overlay" role="dialog" aria-modal="true" aria-labelledby="simple-diet-offer-title" onClick={() => setShowSimpleDietOffer(false)}>
+          <div className="diet-offer-modal" onClick={e => e.stopPropagation()}>
+            <button className="diet-offer-close" aria-label="Fechar oferta" onClick={() => setShowSimpleDietOffer(false)}>×</button>
+            <div className="diet-offer-icon">🥗</div>
+            <div className="feature-page-kicker">NUTRIÇÃO VIRADAFIT</div>
+            <h2 id="simple-diet-offer-title">Libere sua dieta</h2>
+            <p>Tenha acesso ao <strong>plano alimentar completo</strong>, organizado para acompanhar sua rotina de forma simples e prática.</p>
+            <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 7,90</strong></div>
+            <button className="training-main-btn diet-offer-cta">COMPRAR DIETA • R$ 7,90 →</button>
+            <button className="diet-offer-later" onClick={() => setShowSimpleDietOffer(false)}>Agora não</button>
           </div>
         </div>
       )}
