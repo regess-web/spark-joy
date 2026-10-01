@@ -107,16 +107,20 @@ const days: DayPlan[] = [
 function TrainingVisual({ type }: { type: string }) {
   return (
     <div className={"training-visual visual-" + type} aria-label="Demonstração animada do movimento">
+      <span className="visual-motion" aria-hidden="true">↕</span>
       <div className="visual-person" aria-hidden="true">
         <span className="visual-head" />
-        <span className="visual-body" />
-        <span className="visual-arm a1" />
-        <span className="visual-arm a2" />
-        <span className="visual-leg l1" />
-        <span className="visual-leg l2" />
+        <span className="visual-neck" />
+        <span className="visual-torso" />
+        <span className="visual-hip" />
+        <span className="visual-arm arm-left"><i /><b /></span>
+        <span className="visual-arm arm-right"><i /><b /></span>
+        <span className="visual-leg leg-left"><i /><b /></span>
+        <span className="visual-leg leg-right"><i /><b /></span>
       </div>
       <span className="visual-floor" />
-      <span className="visual-label">ANIMAÇÃO • DEMONSTRAÇÃO</span>
+      <span className="visual-label">DEMONSTRAÇÃO ANIMADA</span>
+      <span className="visual-loop">↻ movimento em loop</span>
     </div>
   );
 }
