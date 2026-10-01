@@ -160,6 +160,7 @@ function TrainingApp() {
   const [selectedDay, setSelectedDay] = useState(1);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [completed, setCompleted] = useState<string[]>([]);
+  const [notes, setNotes] = useState<Record<string, string>>({});
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -170,8 +171,10 @@ function TrainingApp() {
   useEffect(() => {
     const saved = localStorage.getItem("viva-training-start");
     const done = localStorage.getItem("viva-training-completed");
+    const savedNotes = localStorage.getItem("viva-training-notes");
     if (saved) setStartedAt(Number(saved));
     if (done) setCompleted(JSON.parse(done));
+    if (savedNotes) setNotes(JSON.parse(savedNotes));
   }, []);
 
   function startProgram() {
@@ -195,6 +198,13 @@ function TrainingApp() {
     const m = Math.floor((safe % 3600000) / 60000);
     const s = Math.floor((safe % 60000) / 1000);
     return String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  }
+
+  function saveNote(id: string, value: string) {
+    const key = "d" + selectedDay + "-" + id;
+    const next = { ...notes, [key]: value };
+    setNotes(next);
+    localStorage.setItem("viva-training-notes", JSON.stringify(next));
   }
 
   function markComplete(id: string) {
@@ -294,6 +304,18 @@ function TrainingApp() {
             <button className={"complete-btn " + (completed.includes("d" + selectedDay + "-" + selectedExercise.id) ? "completed" : "")} onClick={() => markComplete(selectedExercise.id)}>
               {completed.includes("d" + selectedDay + "-" + selectedExercise.id) ? "EXERCÍCIO CONCLUÍDO ✓" : "MARCAR COMO CONCLUÍDO"}
             </button>
+            <div className="exercise-notes">
+              <label htmlFor={"note-" + selectedExercise.id}>MINHAS NOTAS</label>
+              <textarea
+                id={"note-" + selectedExercise.id}
+                value={notes["d" + selectedDay + "-" + selectedExercise.id] ?? ""}
+                onChange={e => saveNote(selectedExercise.id, e.target.value)}
+                maxLength={500}
+                placeholder="Anote como foi o exercício, cargas, repetições ou como você se sentiu..."
+                rows={3}
+              />
+              <small>{(notes["d" + selectedDay + "-" + selectedExercise.id] ?? "").length}/500</small>
+            </div>
           </div>
         </div>
       )}
