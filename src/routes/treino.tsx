@@ -162,6 +162,13 @@ function TrainingApp() {
   const [completed, setCompleted] = useState<string[]>([]);
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [now, setNow] = useState(Date.now());
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<"treino" | "chat" | "dieta">("treino");
+  const [dietMode, setDietMode] = useState<"dieta" | "contador">("contador");
+  const [foodName, setFoodName] = useState("");
+  const [foodAmount, setFoodAmount] = useState("");
+  const [foodUnit, setFoodUnit] = useState<"g" | "un">("g");
+  const [foodItems, setFoodItems] = useState<Array<{name:string; amount:number; unit:string; calories:number}>>([]);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -214,6 +221,16 @@ function TrainingApp() {
     localStorage.setItem("viva-training-completed", JSON.stringify(next));
   }
 
+  function openSection(section: "treino" | "chat" | "dieta") { setActiveSection(section); setMenuOpen(false); }
+  function addFood() {
+    const amount = Number(foodAmount.replace(",", "."));
+    if (!foodName.trim() || !Number.isFinite(amount) || amount <= 0) return;
+    const calories = Math.round(130 * amount / 100);
+    setFoodItems(items => [...items, { name: foodName.trim(), amount, unit: foodUnit, calories }]);
+    setFoodName(""); setFoodAmount("");
+  }
+  const foodTotal = foodItems.reduce((sum, item) => sum + item.calories, 0);
+
   if (!startedAt) {
     return (
       <main className="training-app training-welcome">
@@ -233,19 +250,15 @@ function TrainingApp() {
   return (
     <main className="training-app">
       <header className="training-topbar">
-        <div className="training-logo">ViradaFIT</div>
+        <div className="training-header-left"><button className="training-menu-btn" aria-label="Abrir menu" onClick={() => setMenuOpen(true)}>☰</button><button className="training-logo training-logo-btn" onClick={() => openSection("treino")}>ViradaFIT</button></div>
         <div className="training-top-status">SEMANA 1 <strong>{unlockedDay}/7</strong></div>
       </header>
-
-      <section className="training-hero">
-        <div>
-          <div className="training-kicker">SEU PLANO • 7 DIAS</div>
-          <h1>Um dia de cada vez.<br /><em>Sem pressa.</em></h1>
-          <p>Complete a rotina de hoje e volte amanhã para encontrar o próximo treino liberado.</p>
-        </div>
-        <div className="training-progress-ring"><strong>{Math.round((unlockedDay / 7) * 100)}%</strong><span>liberado</span></div>
-      </section>
-
+      {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
+        <button className={activeSection === "treino" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("treino")}><span>🏋️</span><div><b>Treino personalizado</b><small>R$ 9,90</small></div></button>
+        <button className={activeSection === "chat" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("chat")}><span>💬</span><div><b>Chat global</b><small>R$ 4,90/mês</small></div></button>
+        <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span>🥗</span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
+      </aside></>}
+      {activeSection === "chat" ? <section className="feature-page"><div className="feature-page-kicker">COMUNIDADE VIRADAFIT</div><h1>Chat <em>global.</em></h1><p>Converse, troque experiências e acompanhe outras pessoas na jornada.</p><div className="feature-coming-card"><span>💬</span><h2>Comunidade</h2><p>Acesso por assinatura de <strong>R$ 4,90/mês</strong>.</p><button className="training-main-btn">ASSINAR • R$ 4,90/MÊS →</button></div></section> : activeSection === "dieta" ? <section className="feature-page diet-page"><div className="feature-page-kicker">NUTRIÇÃO VIRADAFIT</div><h1>Dieta que acompanha <em>sua rotina.</em></h1><p>Escolha a dieta simples ou a versão com contador de calorias.</p><div className="diet-plans"><button className={dietMode === "dieta" ? "diet-plan active" : "diet-plan"} onClick={() => setDietMode("dieta")}><span>DIETA</span><strong>R$ 7,90</strong><small>Plano alimentar organizado.</small></button><button className={dietMode === "contador" ? "diet-plan active" : "diet-plan"} onClick={() => setDietMode("contador")}><span>DIETA + CONTADOR</span><strong>R$ 12,90</strong><small>Dieta + contador diário.</small></button></div>{dietMode === "dieta" ? <div className="diet-content-card"><h2>Seu plano alimentar</h2><div className="diet-meal"><b>CAFÉ DA MANHÃ</b><span>Proteína + fruta + acompanhamento.</span></div><div className="diet-meal"><b>ALMOÇO</b><span>Proteína + carboidrato + vegetais.</span></div><div className="diet-meal"><b>LANCHE</b><span>Uma opção simples e prática.</span></div><div className="diet-meal"><b>JANTAR</b><span>Uma refeição equilibrada.</span></div><button className="training-main-btn">LIBERAR DIETA • R$ 7,90 →</button></div> : <div className="diet-content-card calorie-card"><h2>Contador de calorias</h2><p className="calorie-disclaimer">Estimativas podem variar conforme marca, preparo e porção.</p><div className="food-input-grid"><input value={foodName} onChange={e => setFoodName(e.target.value)} placeholder="Alimento" /><input value={foodAmount} onChange={e => setFoodAmount(e.target.value)} inputMode="decimal" placeholder="Quantidade" /><select value={foodUnit} onChange={e => setFoodUnit(e.target.value as "g" | "un")}><option value="g">g</option><option value="un">un.</option></select><button className="training-main-btn" onClick={addFood}>+ ADICIONAR</button></div><div className="food-list">{foodItems.length === 0 ? <div className="food-empty">Adicione um alimento para começar.</div> : foodItems.map((item,index) => <div className="food-row" key={index}><span>{item.name}</span><small>{item.amount} {item.unit}</small><b>{item.calories} kcal</b></div>)}</div><div className="food-total"><span>TOTAL</span><strong>{foodTotal} kcal</strong></div><button className="training-main-btn">LIBERAR DIETA + CONTADOR • R$ 12,90 →</button></div>}</section> : <>
       <section className="training-days">
         <div className="training-section-head"><div><span>JORNADA</span><h2>Seu calendário</h2></div><small>{unlockedDay < 7 ? "Próximo dia em " + formatRemaining((startedAt ?? now) + unlockedDay * 86400000 - now) : "Semana completa"}</small></div>
         <div className="training-day-grid">
@@ -287,6 +300,8 @@ function TrainingApp() {
           })}
         </div>
       </section>
+
+      </>}
 
       <footer className="training-note">Material educativo de bem-estar. Adapte a intensidade ao seu nível e procure orientação profissional quando necessário.</footer>
 
