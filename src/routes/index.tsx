@@ -22,6 +22,8 @@ function TLSHome() {
   const [picked, setPicked] = useState<number | null>(null);
   const [done, setDone] = useState(false);
   const [paidArea, setPaidArea] = useState(false);
+  const [portalArea, setPortalArea] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("HOJE");
 
   const current = questions[step];
   const progress = ((step + (picked !== null ? 1 : 0)) / questions.length) * 100;
@@ -45,6 +47,7 @@ function TLSHome() {
     setPicked(null);
     setDone(false);
     setPaidArea(false);
+    setPortalArea(false);
     setStarted(true);
   }
 
@@ -117,7 +120,7 @@ function TLSHome() {
         </main>
       )}
 
-      {paidArea && (
+      {paidArea && !portalArea && (
         <main className="tls-paywall">
           <div className="tls-lock">ACESSO PREMIUM</div>
           <div className="tls-kicker center"><b /> INFORMAÇÃO ELEITORAL <b /></div>
@@ -125,9 +128,52 @@ function TLSHome() {
           <p className="tls-paywall-lead">Uma central organizada para acompanhar notícias e acontecimentos eleitorais, propostas e declarações de candidatos, decisões relevantes e referências para você conferir as informações por conta própria.</p>
           <div className="tls-price"><small>PREÇO ÚNICO</small><div><s>R$ 29,90</s></div><strong>R$ 19,90</strong></div>
           <div className="tls-benefits"><span>✓ Notícias organizadas por assunto</span><span>✓ Acompanhamento de candidatos</span><span>✓ Propostas e declarações</span><span>✓ Fontes para conferência</span></div>
-          <button className="tls-cta wide" onClick={() => alert("Conecte aqui o link do seu checkout.")}>ACESSAR POR R$ 19,90 <span>→</span></button>
-          <p className="tls-small">O conteúdo premium deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
+          <button className="tls-cta wide" onClick={() => setPortalArea(true)}>VISUALIZAR A CENTRAL <span>→</span></button>
+          <p className="tls-small">Na versão real, este acesso deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
           <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar</button>
+        </main>
+      )}
+
+      {paidArea && portalArea && (
+        <main className="tls-portal">
+          <div className="tls-portal-head">
+            <div>
+              <div className="tls-kicker"><b /> CENTRAL DE INFORMAÇÃO ELEITORAL</div>
+              <h2>Tudo organizado para você acompanhar o que aconteceu.</h2>
+              <p>Conteúdo separado por tema, com contexto, data e fontes para consulta. A seção “Direita” reúne cobertura factual sobre partidos e candidatos desse campo político, sem substituir as fontes originais.</p>
+            </div>
+            <div className="tls-portal-date">PAINEL • 2026</div>
+          </div>
+
+          <div className="tls-category-nav">
+            {["HOJE","ELEIÇÕES","DIREITA","ENTREVISTAS","DEBATES","JORNAIS","PROPAGANDA","CANDIDATOS","PROPOSTAS","CHECAGENS","PESQUISAS","FONTES"].map((cat) => (
+              <button key={cat} className={activeCategory === cat ? "active" : ""} onClick={() => setActiveCategory(cat)}>{cat}</button>
+            ))}
+          </div>
+
+          <section className="tls-portal-grid">
+            <article className="tls-feature-card">
+              <span className="tls-tag">{activeCategory}</span>
+              <h3>{activeCategory === "DIREITA" ? "Acompanhe os principais acontecimentos envolvendo partidos e candidatos de direita" : "O que aconteceu hoje em " + activeCategory.toLowerCase()}</h3>
+              <p>Resumo cronológico, contexto e links para as fontes originais. O conteúdo deve ser atualizado pela equipe responsável pelo portal antes da publicação.</p>
+              <small>DEMONSTRAÇÃO DA INTERFACE • FONTE A INSERIR</small>
+            </article>
+            <article className="tls-news-list">
+              <div><b>01</b><span><strong>Notícia e contexto</strong>Registro do acontecimento, horário e fonte original.</span></div>
+              <div><b>02</b><span><strong>Declaração ou entrevista</strong>O que foi dito, por quem e onde foi publicado.</span></div>
+              <div><b>03</b><span><strong>Debate ou propaganda</strong>Resumo do conteúdo e referência para conferência.</span></div>
+              <div><b>04</b><span><strong>Checagem</strong>Afirmação, evidências disponíveis e fontes consultadas.</span></div>
+            </article>
+          </section>
+
+          <section className="tls-portal-columns">
+            <div><h3>ACONTECIMENTOS DO DIA</h3><p>Timeline com os fatos relevantes, organizada por horário e assunto.</p></div>
+            <div><h3>PARTIDOS E CANDIDATOS</h3><p>Páginas individuais com declarações, propostas, agenda e registros públicos.</p></div>
+            <div><h3>FONTES ORIGINAIS</h3><p>Acesso direto a TSE, documentos públicos, entrevistas e veículos de imprensa.</p></div>
+          </section>
+
+          <div className="tls-portal-disclaimer">Este painel é uma demonstração de produto. Informações eleitorais reais devem ser verificadas, datadas e acompanhadas da fonte original antes de serem publicadas.</div>
+          <button className="tls-reset" onClick={() => setPortalArea(false)}>← Voltar para a oferta</button>
         </main>
       )}
 
