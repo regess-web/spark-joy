@@ -1,1 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900"><defs><linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f5f7f6"/><stop offset=".45" stop-color="#d9dfdc"/><stop offset="1" stop-color="#9ba7a1"/></linearGradient><linearGradient id="dark" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#18251f"/><stop offset="1" stop-color="#050a07"/></linearGradient><filter id="shadow"><feDropShadow dx="0" dy="25" stdDeviation="22" flood-opacity=".35"/></filter></defs><ellipse cx="450" cy="830" rx="260" ry="34" fill="#000" opacity=".3"/><g filter="url(#shadow)"><path d="M245 510 L655 510 L625 775 Q450 835 275 775Z" fill="url(#body)" stroke="#7f8b85" stroke-width="5"/><path d="M270 520 L630 520 L605 735 Q450 785 295 735Z" fill="#c8d0cc"/><path d="M225 225 Q450 125 675 225 L650 515 Q450 585 250 515Z" fill="url(#body)" stroke="#7f8b85" stroke-width="6"/><path d="M255 230 Q450 160 645 230 L630 475 Q450 535 270 475Z" fill="url(#dark)" stroke="#3c4942" stroke-width="7"/><rect x="295" y="245" width="310" height="185" rx="10" fill="#07110c" stroke="#27372f" stroke-width="6"/><rect x="312" y="262" width="276" height="151" rx="5" fill="#0b1e14"/><text x="450" y="310" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="23" font-weight="800">JUSTIÇA ELEITORAL</text><text x="450" y="347" text-anchor="middle" fill="#ffd21f" font-family="Arial,sans-serif" font-size="18" font-weight="800">ELEIÇÃO</text><rect x="335" y="366" width="230" height="18" rx="9" fill="#1e8b52"/><path d="M365 450 L535 450" stroke="#ffd21f" stroke-width="9" stroke-linecap="round"/><rect x="325" y="570" width="250" height="145" rx="12" fill="#18241f" stroke="#64736b" stroke-width="5"/><g fill="#d7ddd9"><rect x="345" y="590" width="38" height="28" rx="5"/><rect x="393" y="590" width="38" height="28" rx="5"/><rect x="441" y="590" width="38" height="28" rx="5"/><rect x="489" y="590" width="38" height="28" rx="5"/><rect x="345" y="628" width="38" height="28" rx="5"/><rect x="393" y="628" width="38" height="28" rx="5"/><rect x="441" y="628" width="38" height="28" rx="5"/><rect x="489" y="628" width="38" height="28" rx="5"/><rect x="345" y="666" width="38" height="28" rx="5"/><rect x="393" y="666" width="38" height="28" rx="5"/><rect x="441" y="666" width="38" height="28" rx="5"/><rect x="489" y="666" width="38" height="28" rx="5"/></g><circle cx="600" cy="645" r="34" fill="#16231d" stroke="#ffd21f" stroke-width="5"/><path d="M585 645h30M600 630v30" stroke="#ffd21f" stroke-width="5"/><path d="M330 785 L570 785" stroke="#7f8b85" stroke-width="10" stroke-linecap="round"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+<title id="title">Urna eletrônica brasileira estilizada</title>
+<desc id="desc">Representação frontal de uma urna eletrônica com tela e teclado numérico.</desc>
+<defs>
+  <linearGradient id="case" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f4f5f3"/><stop offset=".52" stop-color="#d5dad7"/><stop offset="1" stop-color="#9aa39e"/></linearGradient>
+  <linearGradient id="front" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#202b26"/><stop offset="1" stop-color="#080d0b"/></linearGradient>
+  <filter id="shadow"><feDropShadow dx="0" dy="26" stdDeviation="24" flood-opacity=".42"/></filter>
+</defs>
+<ellipse cx="450" cy="842" rx="260" ry="28" fill="#000" opacity=".32"/>
+<g filter="url(#shadow)">
+  <path d="M188 222 Q450 102 712 222 L676 710 Q450 806 224 710Z" fill="url(#case)" stroke="#7b8580" stroke-width="6"/>
+  <path d="M205 224 Q450 133 695 224 L665 681 Q450 762 235 681Z" fill="#bfc7c3"/>
+  <path d="M220 228 Q450 150 680 228 L653 515 Q450 588 247 515Z" fill="url(#front)" stroke="#5d6963" stroke-width="6"/>
+  <rect x="278" y="236" width="344" height="247" rx="9" fill="#101914" stroke="#3d4b44" stroke-width="7"/>
+  <rect x="294" y="252" width="312" height="215" rx="5" fill="#06100b"/>
+  <rect x="310" y="268" width="280" height="183" rx="3" fill="#0a1b12"/>
+  <path d="M328 290H572" stroke="#284b39" stroke-width="3"/>
+  <text x="450" y="323" text-anchor="middle" fill="#e9efec" font-family="Arial,sans-serif" font-size="17" font-weight="800">JUSTIÇA ELEITORAL</text>
+  <text x="450" y="351" text-anchor="middle" fill="#93a69c" font-family="Arial,sans-serif" font-size="13">TELA DE VOTAÇÃO</text>
+  <rect x="337" y="377" width="226" height="2" fill="#1d6d43"/>
+  <text x="450" y="414" text-anchor="middle" fill="#ffd21f" font-family="Arial,sans-serif" font-size="12" font-weight="800">DIGITE O NÚMERO</text>
+
+  <rect x="274" y="545" width="352" height="175" rx="12" fill="#111b17" stroke="#69736e" stroke-width="5"/>
+  <g font-family="Arial,sans-serif" font-size="16" font-weight="800" text-anchor="middle">
+    <g fill="#d9dddb">
+      <rect x="296" y="562" width="68" height="31" rx="4"/><rect x="374" y="562" width="68" height="31" rx="4"/><rect x="452" y="562" width="68" height="31" rx="4"/>
+      <rect x="296" y="603" width="68" height="31" rx="4"/><rect x="374" y="603" width="68" height="31" rx="4"/><rect x="452" y="603" width="68" height="31" rx="4"/>
+      <rect x="296" y="644" width="68" height="31" rx="4"/><rect x="374" y="644" width="68" height="31" rx="4"/><rect x="452" y="644" width="68" height="31" rx="4"/>
+      <rect x="374" y="685" width="68" height="24" rx="4"/>
+    </g>
+    <g fill="#26322c">
+      <text x="330" y="584">1</text><text x="408" y="584">2</text><text x="486" y="584">3</text>
+      <text x="330" y="625">4</text><text x="408" y="625">5</text><text x="486" y="625">6</text>
+      <text x="330" y="666">7</text><text x="408" y="666">8</text><text x="486" y="666">9</text>
+      <text x="408" y="703">0</text>
+    </g>
+  </g>
+  <rect x="536" y="562" width="70" height="47" rx="5" fill="#e8e9e7"/>
+  <rect x="536" y="618" width="70" height="47" rx="5" fill="#d68a1c"/>
+  <rect x="536" y="674" width="70" height="35" rx="5" fill="#238b4f"/>
+  <text x="571" y="591" text-anchor="middle" fill="#303a35" font-family="Arial,sans-serif" font-size="8" font-weight="800">BRANCO</text>
+  <text x="571" y="647" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="8" font-weight="800">CORRIGE</text>
+  <text x="571" y="696" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="8" font-weight="900">CONFIRMA</text>
+</g>
+</svg>
