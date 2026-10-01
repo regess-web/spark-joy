@@ -436,7 +436,7 @@ function TrainingApp() {
             <h2 id="simple-diet-offer-title">Libere sua dieta</h2>
             <p>Tenha acesso ao <strong>plano alimentar completo</strong>, organizado para acompanhar sua rotina de forma simples e prática.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 7,90</strong></div>
-            <button className="training-main-btn diet-offer-cta">COMPRAR DIETA • R$ 7,90 →</button>
+            <button className="training-main-btn diet-offer-cta" onClick={() => { window.location.href = "https://pay.cakto.com.br/35taav4_1161076"; }}>COMPRAR DIETA • R$ 7,90 →</button>
             <button className="diet-offer-later" onClick={() => setShowSimpleDietOffer(false)}>Agora não</button>
           </div>
         </div>
