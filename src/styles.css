@@ -92,3 +92,100 @@
 @media(max-width:700px){.tls-ballot-gate{padding:30px 0 70px}.tls-ballot-art{min-height:290px}.tls-ballot-copy{padding:30px 22px}.tls-ballot-copy h1{letter-spacing:-2px}.tls-ballot-input{flex-direction:column}.tls-ballot-input input{width:100%;height:58px}.tls-question-horizontal{grid-template-columns:1fr;min-height:0}.tls-question-image-wrap{height:270px;min-height:270px}.tls-question-content{padding:23px}}
 
 .tls-ballot-art{position:relative}.tls-ballot-art.verified{filter:drop-shadow(0 0 24px rgba(255,210,31,.2))}.tls-ballot-art.verified::after{content:"CÓDIGO 22 CONFIRMADO";position:absolute;top:18px;right:18px;background:var(--tls-yellow);color:#07110b;font-size:8px;font-weight:900;letter-spacing:1px;padding:8px 10px;border-radius:99px;box-shadow:0 8px 25px rgba(0,0,0,.25)}.tls-ballot-photo{position:absolute;left:50%;top:37%;transform:translate(-50%,-50%);width:170px;height:150px;border:7px solid #07130d;border-radius:7px;overflow:hidden;background:#06120d;box-shadow:0 10px 25px rgba(0,0,0,.45);z-index:3}.tls-ballot-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}.tls-ballot-photo span{position:absolute;right:5px;bottom:5px;background:var(--tls-yellow);color:#07110b;font-size:11px;font-weight:900;padding:4px 7px;border-radius:4px}.tls-ballot-input button:disabled{opacity:.7;cursor:default;transform:none}.tls-question-image{background:#10291d}@media(max-width:700px){.tls-ballot-photo{width:135px;height:118px;top:38%}.tls-ballot-art.verified::after{top:10px;right:10px;font-size:7px}}
+
+
+/* Quiz image treatment: consistent framing, darker edges and slightly reduced brightness */
+.tls-question-image-wrap{
+  border-right:1px solid #0b1a12;
+  overflow:hidden;
+  background:#050c08;
+  isolation:isolate;
+}
+.tls-question-image-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.32),transparent 24%,transparent 76%,rgba(0,0,0,.38)),
+    linear-gradient(180deg,rgba(0,0,0,.28),transparent 24%,transparent 76%,rgba(0,0,0,.46));
+}
+.tls-question-image{
+  width:100%;
+  height:100%;
+  min-height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  filter:brightness(.87) saturate(.92) contrast(1.03);
+  transform:scale(1.015);
+}
+.tls-image-caption{z-index:3}
+.tls-ballot-art{
+  position:relative;
+  overflow:hidden;
+  border-right:1px solid #07110b;
+}
+.tls-ballot-art > img{
+  position:relative;
+  z-index:1;
+  filter:drop-shadow(0 25px 45px rgba(0,0,0,.55));
+}
+.tls-ballot-screen{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  top:35.2%;
+  width:31%;
+  height:25%;
+  transform:translate(-50%,-50%);
+  border-radius:5px;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  background:#07130d;
+  border:3px solid #1d3027;
+  box-shadow:inset 0 0 18px rgba(0,0,0,.75),0 8px 20px rgba(0,0,0,.35);
+}
+.tls-ballot-screen strong{
+  color:#ffd21f;
+  font-size:clamp(30px,4vw,48px);
+  font-weight:900;
+  letter-spacing:7px;
+  text-shadow:0 0 12px rgba(255,210,31,.25);
+}
+.tls-ballot-screen.show-photo{
+  display:block;
+  background:#0a1710;
+}
+.tls-ballot-screen.show-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 18%;
+  display:block;
+  filter:brightness(.93) contrast(1.04);
+}
+.tls-ballot-screen.show-photo span{
+  position:absolute;
+  right:4px;
+  bottom:4px;
+  padding:3px 6px;
+  border-radius:3px;
+  background:#ffd21f;
+  color:#07110b;
+  font-size:9px;
+  font-weight:900;
+}
+@media(max-width:700px){
+  .tls-question-image-wrap{
+    border-right:0;
+    border-bottom:1px solid #0b1a12;
+  }
+  .tls-ballot-screen{
+    top:36%;
+    width:34%;
+    height:27%;
+  }
+}
