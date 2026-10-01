@@ -3,15 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 
 export const Route = createFileRoute("/treino")({ component: TrainingApp });
 
-      { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Escolha uma altura que permita boa técnica.", how:["Apoie as mãos.","Desça controlando os cotovelos.","Empurre de volta."] },
-            { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça lentamente."] },
-            { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
-            { id:"panturrilha-d7", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
-    ]rt { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
-
-export const Route = createFileRoute("/treino")({ component: TrainingApp });
-
 type Exercise = {
   id: string;
   name: string;
@@ -45,10 +36,10 @@ const days: DayPlan[] = [
       { id:"marcha", name:"Marcha parada", muscle:"Corpo inteiro", sets:3, reps:"40 s", rest:30, tip:"Mantenha um ritmo confortável e aumente gradualmente.", how:["Fique em pé com postura confortável.","Alterne a elevação dos joelhos.","Balance os braços naturalmente durante o movimento."] }
     ],
     homeUpgradeExercises: [
-      { id:"flexao-inclinada-premium", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos em uma superfície firme.","Mantenha o corpo alinhado.","Flexione os cotovelos e empurre de volta."] },
-            { id:"elevacao-pelvica-premium", name:"Elevação pélvica com pausa", muscle:"Glúteos e posteriores", sets:3, reps:"12–15", rest:45, tip:"Pause no topo sem arquear demais a lombar.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Pause e desça lentamente."] },
-            { id:"bird-dog-premium", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o quadril estável.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne e alterne."] },
-            { id:"panturrilha-premium", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça com controle.", how:["Fique em pé com apoio próximo.","Eleve os calcanhares.","Desça lentamente."] }
+      { id:"flexao-inclinada", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:45, tip:"Use uma superfície firme e estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"bird-dog", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o quadril estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"panturrilha-premium", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:45, tip:"Suba e desça com controle.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"dead-bug-premium", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize controle e estabilidade.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -62,10 +53,10 @@ const days: DayPlan[] = [
       { id:"panturrilha", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça lentamente, sem balançar o corpo.", how:["Fique em pé com apoio próximo se precisar.","Eleve os calcanhares.","Desça devagar até a posição inicial."] }
     ],
     homeUpgradeExercises: [
-      { id:"flexao-inclinada-d2", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Ajuste a altura da superfície ao seu nível.", how:["Apoie as mãos em uma superfície firme.","Mantenha o corpo alinhado.","Flexione e estenda os braços."] },
-            { id:"ponte-d2", name:"Ponte de glúteos", muscle:"Glúteos e posteriores", sets:3, reps:"12–15", rest:45, tip:"Concentre o movimento no quadril.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Desça devagar."] },
-            { id:"dead-bug-d2", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize controle e estabilidade.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
-            { id:"marcha-d2", name:"Marcha com joelhos altos", muscle:"Pernas e cardio", sets:3, reps:"40 s", rest:30, tip:"Mantenha um ritmo controlado.", how:["Fique em pé.","Alterne os joelhos.","Use os braços naturalmente."] }
+      { id:"flexao-d2", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:45, tip:"Ajuste a altura da superfície ao seu nível.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"ponte-d2", name:"Ponte de glúteos", muscle:"Glúteos e posteriores", sets:3, reps:"12–15", rest:45, tip:"Concentre o movimento no quadril.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"dead-bug-d2", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize controle e estabilidade.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"marcha-d2", name:"Marcha com joelhos altos", muscle:"Pernas e cardio", sets:3, reps:"40 s", rest:30, tip:"Mantenha um ritmo controlado.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -79,10 +70,10 @@ const days: DayPlan[] = [
       { id:"prancha", name:"Prancha inclinada", muscle:"Core e ombros", sets:3, reps:"20–30 s", rest:45, tip:"Use uma superfície firme e estável para apoiar as mãos.", how:["Apoie as mãos em uma superfície estável.","Afaste os pés e forme uma linha confortável com o corpo.","Contraia suavemente o abdômen e respire."] }
     ],
     homeUpgradeExercises: [
-      { id:"agachamento-d3", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:60, tip:"Use uma amplitude confortável.", how:["Pés estáveis.","Desça levando o quadril para trás.","Suba empurrando o chão."] },
-            { id:"flexao-parede-d3", name:"Flexão na parede", muscle:"Peito e braços", sets:3, reps:"10–15", rest:45, tip:"Afaste os pés da parede para aumentar o desafio.", how:["Apoie as mãos na parede.","Aproxime o corpo com controle.","Empurre até a posição inicial."] },
-            { id:"ponte-d3", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"12–15", rest:45, tip:"Evite compensar com a lombar.", how:["Deite de costas.","Eleve o quadril.","Desça com controle."] },
-            { id:"panturrilha-d3", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
+      { id:"agachamento-d3", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:45, tip:"Use uma amplitude confortável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"flexao-parede-d3", name:"Flexão na parede", muscle:"Peito e braços", sets:3, reps:"10–15", rest:45, tip:"Afaste os pés da parede para aumentar o desafio.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"ponte-d3", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"12–15", rest:45, tip:"Evite compensar com a lombar.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"panturrilha-d3", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:45, tip:"Use apoio próximo se necessário.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -96,10 +87,10 @@ const days: DayPlan[] = [
       { id:"marcha-alta", name:"Marcha com joelhos altos", muscle:"Corpo inteiro", sets:3, reps:"40 s", rest:40, tip:"A altura dos joelhos deve permitir que você mantenha o controle.", how:["Comece em pé.","Eleve um joelho de cada vez.","Aumente o ritmo somente se continuar confortável."] }
     ],
     homeUpgradeExercises: [
-      { id:"agachamento-pausa-d4", name:"Agachamento com pausa", muscle:"Pernas e glúteos", sets:3, reps:"8–10", rest:60, tip:"Pause brevemente no ponto mais baixo confortável.", how:["Desça de forma controlada.","Pause.","Suba sem impulsos."] },
-            { id:"ponte-d4", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Mantenha o abdômen levemente ativo.", how:["Deite de costas.","Eleve o quadril.","Desça devagar."] },
-            { id:"dead-bug-d4", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize estabilidade do tronco.", how:["Deite de costas.","Estenda braço e perna opostos.","Volte e alterne."] },
-            { id:"panturrilha-d4", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Pause brevemente no alto.", how:["Eleve os calcanhares.","Pause no alto.","Desça lentamente."] }
+      { id:"agachamento-pausa-d4", name:"Agachamento com pausa", muscle:"Pernas e glúteos", sets:3, reps:"8–10", rest:45, tip:"Pause brevemente no ponto mais baixo confortável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"ponte-d4", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Mantenha o abdômen levemente ativo.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"dead-bug-d4", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize estabilidade do tronco.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"panturrilha-d4", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:45, tip:"Pause brevemente no alto.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -113,10 +104,10 @@ const days: DayPlan[] = [
       { id:"panturrilha-2", name:"Panturrilha com pausa", muscle:"Panturrilhas", sets:3, reps:"12–15", rest:40, tip:"Faça uma pausa breve no alto.", how:["Eleve os calcanhares lentamente.","Pause no alto.","Desça com controle."] }
     ],
     homeUpgradeExercises: [
-      { id:"flexao-inclinada-d5", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos.","Mantenha o corpo alinhado.","Flexione e empurre de volta."] },
-            { id:"bird-dog-d5", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Evite girar o quadril.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne lentamente."] },
-            { id:"ponte-d5", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça."] },
-            { id:"marcha-d5", name:"Marcha com joelhos altos", muscle:"Corpo inteiro", sets:3, reps:"45 s", rest:30, tip:"Mantenha um ritmo sustentável.", how:["Fique em pé.","Alterne os joelhos.","Use os braços naturalmente."] }
+      { id:"flexao-d5", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:45, tip:"Use uma superfície firme e estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"bird-dog-d5", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Evite girar o quadril.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"ponte-d5", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"marcha-d5", name:"Marcha com joelhos altos", muscle:"Corpo inteiro", sets:3, reps:"45 s", rest:30, tip:"Mantenha um ritmo sustentável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -130,10 +121,10 @@ const days: DayPlan[] = [
       { id:"ponte-2", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Movimente o quadril com controle.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Desça lentamente."] }
     ],
     homeUpgradeExercises: [
-      { id:"agachamento-d6", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:60, tip:"Use uma amplitude confortável.", how:["Pés estáveis.","Desça com controle.","Suba empurrando o chão."] },
-            { id:"bird-dog-d6", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne e troque."] },
-            { id:"panturrilha-d6", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça lentamente.", how:["Fique em pé.","Eleve os calcanhares.","Desça com controle."] },
-            { id:"prancha-d6", name:"Prancha inclinada", muscle:"Core e ombros", sets:3, reps:"20–30 s", rest:45, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos.","Forme uma linha confortável com o corpo.","Respire mantendo o abdômen ativo."] }
+      { id:"agachamento-d6", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:45, tip:"Use uma amplitude confortável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"bird-dog-d6", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"panturrilha-d6", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:45, tip:"Suba e desça lentamente.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"prancha-d6", name:"Prancha inclinada", muscle:"Core e ombros", sets:3, reps:"20–30 s", rest:30, tip:"Use uma superfície firme e estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   },
   {
@@ -147,10 +138,10 @@ const days: DayPlan[] = [
       { id:"marcha-final", name:"Marcha moderada", muscle:"Corpo inteiro", sets:4, reps:"45 s", rest:30, tip:"Finalize em um ritmo sustentável.", how:["Comece devagar.","Aumente o ritmo gradualmente.","Reduza o ritmo no último minuto."] }
     ],
     homeUpgradeExercises: [
-      { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Escolha uma altura que permita boa técnica.", how:["Apoie as mãos.","Desça controlando os cotovelos.","Empurre de volta."] },
-      { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça lentamente."] },
-      { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
-      { id:"panturrilha-d7", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
+      { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:45, tip:"Escolha uma altura que permita boa técnica.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] },
+      { id:"panturrilha-d7", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:45, tip:"Use apoio próximo se necessário.", how:["Faça o movimento com controle.","Mantenha uma amplitude confortável.","Descanse antes da próxima série."] }
     ]
   }
 ];
@@ -277,7 +268,7 @@ function TrainingApp() {
     localStorage.setItem("viva-training-completed", JSON.stringify(next));
   }
 
-  function openSection(section: "treino" | "dieta") { setActiveSection(section); setMenuOpen(false); }
+  function openSection(section: "treino" | "chat" | "dieta") { setActiveSection(section); setMenuOpen(false); }
   function addFood() {
     setShowDietOffer(true);
   }
@@ -395,9 +386,9 @@ function TrainingApp() {
             <div className="diet-offer-icon">🏠</div>
             <div className="feature-page-kicker">UPGRADE VIRADAFIT</div>
             <h2 id="home-upgrade-title">Evolua seu treino em casa</h2>
-            <p>Ao adquirir o upgrade, cada dia passa a ter <strong>8 exercícios</strong>, adicionando movimentos para pernas, glúteos, peito, costas, core e condicionamento.</p>
+            <p>Libere um <strong>treino completo em casa</strong>, com uma rotina mais completa para continuar evoluindo sem precisar de academia.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 11,99</strong></div>
-            <button className="training-main-btn diet-offer-cta">COMPRAR TREINO COMPLETO • R$ 11,99 →</button>
+            <button className="training-main-btn diet-offer-cta">EVOLUIR MEU TREINO • R$ 11,99 →</button>
             <button className="diet-offer-later" onClick={() => setShowHomeUpgrade(false)}>Agora não</button>
           </div>
         </div>
