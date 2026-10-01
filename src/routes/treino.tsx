@@ -105,26 +105,59 @@ const days: DayPlan[] = [
 ];
 
 function TrainingVisual({ type }: { type: string }) {
+  const poseClass = type === "core" ? "pose-core" : type === "prancha" ? "pose-plank" : type === "ponte" ? "pose-bridge" : type === "parede" ? "pose-push" : type === "passo" ? "pose-lunge" : type === "panturrilha" ? "pose-calf" : type === "marcha" ? "pose-march" : "pose-standing";
+
   return (
-    <div className={"training-visual visual-" + type} aria-label="Posição ilustrativa do exercício">
-      <span className="visual-motion" aria-hidden="true">↕</span>
-      <div className="visual-person" aria-hidden="true">
-        <span className="visual-head" />
-        <span className="visual-neck" />
-        <span className="visual-torso" />
-        <span className="visual-hip" />
-        <span className="visual-arm arm-left"><i /><b /></span>
-        <span className="visual-arm arm-right"><i /><b /></span>
-        <span className="visual-leg leg-left"><i /><b /></span>
-        <span className="visual-leg leg-right"><i /><b /></span>
-      </div>
-      <span className="visual-floor" />
+    <div className={"training-visual visual-" + type + " " + poseClass} aria-label="Ilustração feminina da posição do exercício">
       <span className="visual-label">POSIÇÃO DO EXERCÍCIO</span>
-      
+      <svg className="exercise-figure" viewBox="0 0 220 180" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="vivaSkin" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="#c77a52" />
+            <stop offset="100%" stopColor="#a95d39" />
+          </linearGradient>
+        </defs>
+        <ellipse className="figure-shadow" cx="110" cy="158" rx="64" ry="7" />
+        <g className="figure-woman">
+          <g className="figure-hair">
+            <path d="M100 25 C92 19 91 10 100 7 C111 2 124 8 126 20 C128 29 123 35 119 37 C118 29 113 25 100 25Z" />
+            <circle cx="127" cy="16" r="5" />
+          </g>
+          <circle className="figure-head" cx="110" cy="29" r="11" />
+          <rect className="figure-neck" x="106" y="38" width="8" height="8" rx="4" />
+          <path className="figure-torso" d="M101 44 Q110 40 119 44 L123 73 Q119 82 110 83 Q101 82 97 73Z" />
+          <path className="figure-top" d="M100 45 Q110 41 120 45 L118 61 Q110 65 102 61Z" />
+          <path className="figure-hip" d="M98 72 Q110 78 122 72 L126 84 Q118 91 110 90 Q102 91 94 84Z" />
+          <g className="figure-arm arm-a">
+            <path d="M100 48 L91 69" />
+            <path d="M91 69 L84 88" />
+            <circle cx="91" cy="69" r="3.5" />
+            <circle cx="84" cy="88" r="3" />
+          </g>
+          <g className="figure-arm arm-b">
+            <path d="M120 48 L129 69" />
+            <path d="M129 69 L136 88" />
+            <circle cx="129" cy="69" r="3.5" />
+            <circle cx="136" cy="88" r="3" />
+          </g>
+          <g className="figure-leg leg-a">
+            <path d="M103 84 L99 119" />
+            <path d="M99 119 L96 150" />
+            <circle cx="99" cy="119" r="4" />
+            <path d="M92 151 Q98 147 104 151 L105 155 L91 155Z" />
+          </g>
+          <g className="figure-leg leg-b">
+            <path d="M117 84 L121 119" />
+            <path d="M121 119 L124 150" />
+            <circle cx="121" cy="119" r="4" />
+            <path d="M120 151 Q126 147 132 151 L133 155 L119 155Z" />
+          </g>
+        </g>
+      </svg>
+      <span className="visual-floor" />
     </div>
   );
 }
-
 function TrainingApp() {
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [selectedDay, setSelectedDay] = useState(1);
