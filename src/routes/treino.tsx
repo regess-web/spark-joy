@@ -104,9 +104,9 @@ const days: DayPlan[] = [
   }
 ];
 
-function TrainingVisual({ type }: { type: string }) {
+function TrainingVisual({ type, animate = false }: { type: string; animate?: boolean }) {
   return (
-    <div className={"training-visual visual-" + type} aria-label="Demonstração animada do movimento">
+    <div className={"training-visual visual-" + type + (animate ? " is-playing" : "")} aria-label="Demonstração animada do movimento">
       <span className="visual-motion" aria-hidden="true">↕</span>
       <div className="visual-person" aria-hidden="true">
         <span className="visual-head" />
@@ -254,7 +254,7 @@ function TrainingApp() {
         <div className="exercise-modal" role="dialog" aria-modal="true" onClick={() => setSelectedExercise(null)}>
           <div className="exercise-modal-card" onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setSelectedExercise(null)}>×</button>
-            <TrainingVisual type={selectedExercise.visual} />
+            <TrainingVisual type={selectedExercise.visual} animate={true} />
             <div className="modal-kicker">{selectedExercise.muscle}</div>
             <h2>{selectedExercise.name}</h2>
             <div className="modal-stats"><span><b>{selectedExercise.sets}</b> séries</span><span><b>{selectedExercise.reps}</b> repetições</span><span><b>{selectedExercise.rest}s</b> descanso</span></div>
