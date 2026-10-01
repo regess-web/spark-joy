@@ -257,7 +257,7 @@ function TrainingApp() {
         <div className="training-top-status">SEMANA 1 <strong>{unlockedDay}/7</strong></div>
       </header>
       {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
-        <button className={activeSection === "treino" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("treino")}><span>🏋️</span><div><b>Treino personalizado</b><small>3 planos/semana • R$ 9,90/mês</small></div></button>
+        <button className={activeSection === "treino" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("treino")}><span>🏋️</span><div><b>Treino personalizado</b><small>3 planos/semana • R$ 17,90/mês</small></div></button>
         <button className={activeSection === "chat" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("chat")}><span>💬</span><div><b>Chat global</b><small>R$ 4,90/mês</small></div></button>
         <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span>🥗</span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
       </aside></>}
