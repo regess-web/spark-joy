@@ -105,56 +105,125 @@ const days: DayPlan[] = [
 ];
 
 function TrainingVisual({ type }: { type: string }) {
-  const poseClass = type === "core" ? "pose-core" : type === "prancha" ? "pose-plank" : type === "ponte" ? "pose-bridge" : type === "parede" ? "pose-push" : type === "passo" ? "pose-lunge" : type === "panturrilha" ? "pose-calf" : type === "marcha" ? "pose-march" : "pose-standing";
+  const pose = type === "core" ? "deadbug" :
+    type === "prancha" ? "plank" :
+    type === "ponte" ? "bridge" :
+    type === "parede" ? "wall" :
+    type === "passo" ? "lunge" :
+    type === "panturrilha" ? "calf" :
+    type === "marcha" ? "march" :
+    type === "sumo" ? "sumo" :
+    type === "agachamento-bracos" ? "squat-arms" : "squat";
 
   return (
-    <div className={"training-visual visual-" + type + " " + poseClass} aria-label="Ilustração feminina da posição do exercício">
-      <span className="visual-label">POSIÇÃO DO EXERCÍCIO</span>
-      <svg className="exercise-figure" viewBox="0 0 220 180" role="img" aria-hidden="true">
+    <div className={"training-visual-v2 pose-" + pose} aria-label="Ilustração feminina da posição do exercício">
+      <svg className="exercise-illustration-v2" viewBox="0 0 300 190" role="img" aria-hidden="true">
         <defs>
-          <linearGradient id="vivaSkin" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="#c77a52" />
-            <stop offset="100%" stopColor="#a95d39" />
-          </linearGradient>
+          <filter id="vivaSoftShadow" x="-30%" y="-30%" width="160%" height="180%">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
+            <feOffset dy="3" />
+            <feComponentTransfer><feFuncA type="linear" slope=".16" /></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
         </defs>
-        <ellipse className="figure-shadow" cx="110" cy="158" rx="64" ry="7" />
-        <g className="figure-woman">
-          <g className="figure-hair">
-            <path d="M100 25 C92 19 91 10 100 7 C111 2 124 8 126 20 C128 29 123 35 119 37 C118 29 113 25 100 25Z" />
-            <circle cx="127" cy="16" r="5" />
+
+        <ellipse cx="150" cy="171" rx="83" ry="7" className="v2-ground" />
+
+        {pose === "wall" && (
+          <g className="v2-wall">
+            <rect x="236" y="28" width="4" height="135" rx="2" />
+            <rect x="240" y="28" width="24" height="4" rx="2" />
           </g>
-          <circle className="figure-head" cx="110" cy="29" r="11" />
-          <rect className="figure-neck" x="106" y="38" width="8" height="8" rx="4" />
-          <path className="figure-torso" d="M101 44 Q110 40 119 44 L123 73 Q119 82 110 83 Q101 82 97 73Z" />
-          <path className="figure-top" d="M100 45 Q110 41 120 45 L118 61 Q110 65 102 61Z" />
-          <path className="figure-hip" d="M98 72 Q110 78 122 72 L126 84 Q118 91 110 90 Q102 91 94 84Z" />
-          <g className="figure-arm arm-a">
-            <path d="M100 48 L91 69" />
-            <path d="M91 69 L84 88" />
-            <circle cx="91" cy="69" r="3.5" />
-            <circle cx="84" cy="88" r="3" />
+        )}
+
+        {pose === "bridge" && (
+          <rect x="64" y="151" width="170" height="7" rx="3.5" className="v2-mat" />
+        )}
+
+        {pose === "plank" && (
+          <rect x="222" y="101" width="7" height="55" rx="3.5" className="v2-bench" />
+        )}
+
+        <g className={"v2-woman v2-" + pose} filter="url(#vivaSoftShadow)">
+          <g className="v2-hair">
+            <path d="M132 26c-7-12 1-24 17-24 16 0 25 10 22 23-2 8-7 13-14 16l-5-7c-6 4-13 3-20-8Z"/>
+            <path d="M139 16c-7 6-8 17-6 30-9-9-10-23-5-33 5-9 15-13 23-11Z"/>
           </g>
-          <g className="figure-arm arm-b">
-            <path d="M120 48 L129 69" />
-            <path d="M129 69 L136 88" />
-            <circle cx="129" cy="69" r="3.5" />
-            <circle cx="136" cy="88" r="3" />
+          <circle className="v2-skin" cx="155" cy="27" r="13"/>
+          <path className="v2-face" d="M164 27c4 1 5 3 1 5-2 1-4 0-5-2Z"/>
+          <rect className="v2-skin" x="151" y="38" width="8" height="11" rx="4"/>
+
+          <path className="v2-top" d="M139 47c8-5 22-5 31 1l4 33c-9 7-27 7-37 0Z"/>
+          <path className="v2-skin" d="M141 50c-5 6-8 17-9 28l7 2 9-24Z"/>
+          <path className="v2-skin" d="M168 50c6 5 8 16 10 28l-7 2-10-24Z"/>
+
+          <path className="v2-pants-hip" d="M137 78c10-5 26-5 37 1l3 18c-10 7-31 7-42 0Z"/>
+          <path className="v2-pants" d="M138 89c-2 17-1 32 4 44l13-1 1-41Z"/>
+          <path className="v2-pants" d="M157 91l2 41 13 1c5-13 6-28 2-44Z"/>
+
+          <path className="v2-skin" d="M142 130l13 1-3 28c-1 7-4 10-9 10h-9c-2-3 0-6 4-8Z"/>
+          <path className="v2-skin" d="M159 131l13-1 5 31c1 5 4 7 8 9-2 3-6 4-12 3l-8-7Z"/>
+          <path className="v2-shoe" d="M134 164c7-1 13 1 18 5 2 2 1 5-2 6h-28c-3-4 2-8 12-11Z"/>
+          <path className="v2-shoe" d="M175 165c8 1 16 4 21 8 2 2 1 4-2 5h-30c-2-5 1-9 11-13Z"/>
+
+          <g className="v2-arm v2-arm-left">
+            <path className="v2-skin" d="M141 52c-6 5-11 15-12 25l7 3c6-7 10-16 11-24Z"/>
+            <path className="v2-skin" d="M132 77c-3 6-4 12-2 18l7-1 2-15Z"/>
+            <circle className="v2-skin" cx="134" cy="95" r="5"/>
           </g>
-          <g className="figure-leg leg-a">
-            <path d="M103 84 L99 119" />
-            <path d="M99 119 L96 150" />
-            <circle cx="99" cy="119" r="4" />
-            <path d="M92 151 Q98 147 104 151 L105 155 L91 155Z" />
+          <g className="v2-arm v2-arm-right">
+            <path className="v2-skin" d="M169 52c6 5 10 15 12 25l-7 3c-6-7-9-16-11-24Z"/>
+            <path className="v2-skin" d="M176 77c3 6 4 12 2 18l-7-1-2-15Z"/>
+            <circle className="v2-skin" cx="173" cy="95" r="5"/>
           </g>
-          <g className="figure-leg leg-b">
-            <path d="M117 84 L121 119" />
-            <path d="M121 119 L124 150" />
-            <circle cx="121" cy="119" r="4" />
-            <path d="M120 151 Q126 147 132 151 L133 155 L119 155Z" />
-          </g>
+
+          {(pose === "squat-arms") && (
+            <g className="v2-raised-arms">
+              <path className="v2-skin" d="M142 52c-5-8-7-16-8-24l7-2c5 7 8 15 9 23Z"/>
+              <path className="v2-skin" d="M131 28c0-8 2-14 6-19l6 3c-2 7-2 12 0 18Z"/>
+              <path className="v2-skin" d="M169 52c5-8 7-16 8-24l-7-2c-5 7-8 15-9 23Z"/>
+              <path className="v2-skin" d="M180 28c0-8-2-14-6-19l-6 3c2 7 2 12 0 18Z"/>
+            </g>
+          )}
+
+          {(pose === "squat" || pose === "sumo" || pose === "lunge" || pose === "calf") && (
+            <g className="v2-dumbbells">
+              <rect x="125" y="91" width="7" height="15" rx="2"/>
+              <rect x="175" y="91" width="7" height="15" rx="2"/>
+              <rect x="122" y="94" width="13" height="5" rx="2.5"/>
+              <rect x="172" y="94" width="13" height="5" rx="2.5"/>
+            </g>
+          )}
         </g>
+
+        {pose === "bridge" && (
+          <g className="v2-bridge-figure" filter="url(#vivaSoftShadow)">
+            <circle className="v2-skin" cx="91" cy="126" r="12"/>
+            <path className="v2-hair" d="M81 119c2-10 14-14 22-8 5 4 5 11 1 17-7-4-15-4-23-9Z"/>
+            <path className="v2-top" d="M100 123c18-5 36 0 48 10l-5 13-49-8Z"/>
+            <path className="v2-skin" d="M144 134c10 2 18 7 28 15l-5 6c-10-7-18-8-28-8Z"/>
+            <path className="v2-pants" d="M164 145c8 3 18 9 25 16l-6 8-27-17Z"/>
+            <path className="v2-pants" d="M148 143c-1 7-5 12-10 17l-9-4c4-9 7-15 13-20Z"/>
+            <path className="v2-skin" d="M128 155c-4 5-8 9-14 13l-7-4c4-7 8-12 13-16Z"/>
+            <path className="v2-skin" d="M184 160c7 1 14 4 20 8 2 2 1 4-2 5h-22c-3-4-1-8 4-13Z"/>
+            <path className="v2-shoe" d="M106 163c7 0 12 2 16 5 2 2 1 4-2 5H97c-2-4 1-7 9-10Z"/>
+          </g>
+        )}
+
+        {pose === "plank" && (
+          <g className="v2-plank-figure" filter="url(#vivaSoftShadow)">
+            <circle className="v2-skin" cx="84" cy="91" r="11"/>
+            <path className="v2-hair" d="M74 86c0-9 10-15 18-10 5 3 7 9 4 15-7-3-14-3-22-5Z"/>
+            <path className="v2-top" d="M94 89c22 0 42 7 59 17l-5 12c-22-6-41-8-58-12Z"/>
+            <path className="v2-pants" d="M146 103c17 7 31 12 44 16l-5 12c-17-3-31-7-46-14Z"/>
+            <path className="v2-skin" d="M183 116c13 2 22 7 31 15l-5 7c-11-6-20-7-31-8Z"/>
+            <path className="v2-shoe" d="M207 128c8 1 14 3 20 7 2 2 1 4-2 5h-21c-2-4-1-8 3-12Z"/>
+            <path className="v2-skin" d="M99 98c-7 8-12 17-17 29l8 3c7-9 13-17 19-25Z"/>
+            <path className="v2-skin" d="M88 126c-6 7-8 14-9 21l8 1c3-7 7-12 12-18Z"/>
+          </g>
+        )}
       </svg>
-      <span className="visual-floor" />
+      <span className="v2-caption">POSIÇÃO DO EXERCÍCIO</span>
     </div>
   );
 }
