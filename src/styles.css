@@ -288,3 +288,131 @@
 .visual-prancha .figure-woman{transform:translate(9px,43px) rotate(76deg) scale(.74);transform-origin:110px 92px}
 .exercise-modal-card .training-visual{height:250px}.exercise-modal-card .exercise-figure{inset:22px 28px 32px;width:calc(100% - 56px);height:calc(100% - 54px)}
 @media(max-width:560px){.exercise-card .training-visual{height:180px}.exercise-modal-card .training-visual{height:210px}.exercise-modal-card .exercise-figure{inset:16px 18px 25px;width:calc(100% - 36px);height:calc(100% - 41px)}}
+
+
+/* VIVA+ flat fitness illustrations — inspired by modern exercise demo vectors */
+.training-visual-v2{
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  border-radius:16px 16px 0 0;
+  background:linear-gradient(180deg,#fffdfb 0%,#fff8f3 100%);
+}
+.training-visual-v2::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border-radius:13px;
+  background:radial-gradient(circle at 50% 42%,rgba(232,138,23,.08),transparent 42%);
+  pointer-events:none;
+}
+.exercise-illustration-v2{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:visible;
+}
+.v2-ground{fill:#e7ddd6}
+.v2-mat{fill:#d8bca9}
+.v2-wall rect{fill:#d7c1b2}
+.v2-bench{fill:#d7b18e}
+.v2-skin{fill:#f2bf8b}
+.v2-top{fill:#e58a17}
+.v2-pants,.v2-pants-hip{fill:#3b252a}
+.v2-shoe{fill:#d95f58}
+.v2-hair{fill:#5a3a2d}
+.v2-face{fill:#e9a873}
+.v2-woman,.v2-bridge-figure,.v2-plank-figure{transform-origin:150px 95px}
+.v2-caption{
+  position:absolute;
+  left:14px;
+  top:12px;
+  z-index:5;
+  padding:5px 7px;
+  border-radius:6px;
+  background:rgba(255,255,255,.86);
+  color:#8d786b;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:1px;
+  box-shadow:0 2px 8px rgba(75,45,30,.05);
+}
+
+/* Upright / squat family */
+.pose-squat .v2-woman{
+  transform:translateY(12px) scale(.92);
+}
+.pose-squat .v2-pants-hip,
+.pose-squat .v2-top{
+  transform:translateY(5px) rotate(4deg);
+  transform-origin:150px 90px;
+}
+.pose-squat .v2-arm-left{transform:rotate(-5deg);transform-origin:141px 52px}
+.pose-squat .v2-arm-right{transform:rotate(5deg);transform-origin:169px 52px}
+
+.pose-sumo .v2-woman{
+  transform:translateY(13px) scale(.91);
+}
+.pose-sumo .v2-pants-hip,
+.pose-sumo .v2-top{transform:rotate(-2deg);transform-origin:150px 90px}
+
+.pose-squat-arms .v2-woman{
+  transform:translateY(10px) scale(.92);
+}
+.pose-squat-arms .v2-pants-hip{transform:translateY(5px) rotate(4deg);transform-origin:150px 90px}
+
+/* Standing variations */
+.pose-march .v2-woman{transform:translateY(-2px) scale(.95)}
+.pose-march .v2-arm-left{transform:rotate(12deg);transform-origin:141px 52px}
+.pose-march .v2-arm-right{transform:rotate(-12deg);transform-origin:169px 52px}
+
+/* Reverse lunge */
+.pose-lunge .v2-woman{transform:translate(-5px,8px) scale(.93)}
+.pose-lunge .v2-top,.pose-lunge .v2-pants-hip{transform:rotate(3deg);transform-origin:150px 90px}
+.pose-lunge .v2-arm-left{transform:rotate(-8deg);transform-origin:141px 52px}
+.pose-lunge .v2-arm-right{transform:rotate(8deg);transform-origin:169px 52px}
+
+/* Calf raise */
+.pose-calf .v2-woman{transform:translateY(-6px) scale(.95)}
+.pose-calf .v2-shoe{transform:translateY(-4px)}
+
+/* Wall push-up — side profile */
+.pose-wall .v2-woman{
+  transform:translate(13px,38px) rotate(55deg) scale(.72);
+  transform-origin:150px 95px;
+}
+.pose-wall .v2-wall{opacity:.85}
+
+/* Bridge is a dedicated horizontal illustration */
+.pose-bridge .v2-bridge-figure{
+  transform:translate(0,-2px);
+}
+.v2-bridge-figure .v2-top{transform:rotate(10deg);transform-origin:125px 135px}
+.v2-bridge-figure .v2-pants{transform:rotate(-5deg);transform-origin:165px 150px}
+
+/* Dead bug */
+.pose-deadbug .v2-woman{
+  transform:translate(-8px,46px) rotate(90deg) scale(.68);
+  transform-origin:150px 95px;
+}
+.pose-deadbug .v2-arm-left,.pose-deadbug .v2-arm-right{
+  transform:rotate(22deg);
+}
+
+/* Incline plank is a dedicated horizontal illustration */
+.pose-plank .v2-plank-figure{
+  transform:translate(0,4px);
+}
+
+/* Keep the old visual components out of the new card */
+.exercise-card .training-visual-v2{height:190px}
+.exercise-modal-card .training-visual-v2{
+  height:250px;
+  border-radius:18px;
+}
+.exercise-modal-card .training-visual-v2 .v2-caption{top:16px;left:18px}
+@media(max-width:560px){
+  .exercise-card .training-visual-v2{height:180px}
+  .exercise-modal-card .training-visual-v2{height:215px}
+}
