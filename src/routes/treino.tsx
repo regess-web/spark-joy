@@ -1,5 +1,8 @@
-impo,
-    homeUpgradeExercises: [
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useMemo, useState } from "react";
+
+export const Route = createFileRoute("/treino")({ component: TrainingApp });
+
       { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Escolha uma altura que permita boa técnica.", how:["Apoie as mãos.","Desça controlando os cotovelos.","Empurre de volta."] },
             { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça lentamente."] },
             { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
