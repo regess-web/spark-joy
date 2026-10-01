@@ -132,7 +132,7 @@ function TLSHome() {
       )}
 
       <section className="tls-sources" id="fontes">
-        <div><div className="tls-kicker"><b /> FONTES</div><h2>Informação antes de opinião.</h2><p>Use fontes originais para conferir notícias, propostas, declarações e acontecimentos eleitorais.</p></div>
+        <div><div className="tls-kicker"><b /> FONTES</div><h2>Acompanhe as informações eleitorais em um só lugar.</h2><p>Reúna notícias, propostas, declarações e acontecimentos eleitorais em uma única central, com referências para consulta.</p></div>
         <div className="tls-source-grid"><div><b>01</b><span>Tribunal Superior Eleitoral</span></div><div><b>02</b><span>Câmara dos Deputados</span></div><div><b>03</b><span>Senado Federal</span></div><div><b>04</b><span>Fontes oficiais e imprensa</span></div></div>
       </section>
 
