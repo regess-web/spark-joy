@@ -10,3 +10,120 @@
 @media(max-width:560px){.training-welcome-card{padding:38px 22px}.training-preview{gap:4px}.training-preview span{width:33px;height:33px}.training-topbar{padding:0 20px}.training-hero{width:90%;padding-top:35px;flex-direction:column}.training-progress-ring{display:none}.training-day-grid{grid-template-columns:repeat(2,1fr)}.training-days,.training-routine{width:90%}.training-section-head{align-items:start;gap:15px}.training-section-head small{max-width:90px;text-align:right}.exercise-grid{grid-template-columns:1fr}.training-routine-head{align-items:start;gap:20px}.exercise-modal-card{padding:14px}.exercise-modal-card .training-visual{height:190px}.modal-stats{grid-template-columns:1fr 1fr 1fr}.modal-stats span{padding:8px 3px;font-size:8px}}
 
 .visual-person{animation:fit-idle 1.8s ease-in-out infinite}.visual-body,.visual-arm,.visual-leg{transition:transform .12s ease-out}.visual-agachamento .visual-person,.visual-sumo .visual-person,.visual-agachamento-bracos .visual-person{animation:fit-squat 1.8s ease-in-out infinite}.visual-agachamento .visual-leg,.visual-sumo .visual-leg,.visual-agachamento-bracos .visual-leg{transform-origin:top center}.visual-agachamento .visual-arm,.visual-sumo .visual-arm,.visual-agachamento-bracos .visual-arm{transform-origin:top center}.visual-ponte .visual-person,.visual-ponte-unilateral .visual-person,.visual-ponte-2 .visual-person{animation:fit-bridge 1.8s ease-in-out infinite}.visual-parede .visual-person,.visual-parede-2 .visual-person,.visual-flexao .visual-person{animation:fit-push 1.5s ease-in-out infinite}.visual-panturrilha .visual-person,.visual-panturrilha-2 .visual-person{animation:fit-calf 1.4s ease-in-out infinite}.visual-marcha .visual-person,.visual-marcha-alta .visual-person,.visual-marcha-final .visual-person,.visual-step .visual-person{animation:fit-march .85s ease-in-out infinite}.visual-passo .visual-person{animation:fit-lunge 1.8s ease-in-out infinite}.visual-core .visual-person{animation:fit-core 1.8s ease-in-out infinite}.visual-prancha .visual-person{animation:fit-plank 1.8s ease-in-out infinite}.visual-label{background:rgba(255,255,255,.78);padding:5px 7px;border-radius:5px}@keyframes fit-idle{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(-3px)}}@keyframes fit-squat{0%,100%{transform:translateX(-50%) translateY(0) scaleY(1)}45%{transform:translateX(-50%) translateY(34px) scaleY(.84)}60%{transform:translateX(-50%) translateY(34px) scaleY(.84)}85%{transform:translateX(-50%) translateY(0) scaleY(1)}}@keyframes fit-bridge{0%,100%{transform:translateX(-50%) translateY(15px) rotate(0deg)}45%{transform:translateX(-50%) translateY(-5px) rotate(0deg)}65%{transform:translateX(-50%) translateY(-5px) rotate(0deg)}}@keyframes fit-push{0%,100%{transform:translateX(-50%) translateY(0) scale(.98)}45%{transform:translateX(-50%) translateY(15px) scale(.98)}65%{transform:translateX(-50%) translateY(0) scale(.98)}}@keyframes fit-calf{0%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-10px)}60%{transform:translateX(-50%) translateY(-10px)}}@keyframes fit-march{0%,100%{transform:translateX(-50%) translateY(0)}25%{transform:translateX(-50%) translateY(-8px) rotate(-3deg)}50%{transform:translateX(-50%) translateY(0) rotate(3deg)}75%{transform:translateX(-50%) translateY(-8px) rotate(-3deg)}}@keyframes fit-lunge{0%,100%{transform:translateX(-50%) translateY(0) translateX(0)}45%{transform:translateX(-50%) translateY(15px) translateX(-5px)}65%{transform:translateX(-50%) translateY(15px) translateX(-5px)}}@keyframes fit-core{0%,100%{transform:translateX(-50%) rotate(90deg) translateY(0)}45%{transform:translateX(-50%) rotate(90deg) translateY(-7px)}65%{transform:translateX(-50%) rotate(90deg) translateY(-7px)}}@keyframes fit-plank{0%,100%{transform:translateX(-50%) rotate(90deg) scaleX(1)}50%{transform:translateX(-50%) rotate(90deg) scaleX(.95)}}@media (prefers-reduced-motion:reduce){.visual-person{animation:none!important}}
+
+/* Enhanced exercise demonstrations */
+.training-visual{
+  background:
+    radial-gradient(circle at 50% 45%,rgba(216,149,112,.18),transparent 34%),
+    linear-gradient(145deg,#fbefe8,#fffaf6 62%,#f5e8df);
+}
+.training-visual:after{
+  content:"";position:absolute;inset:18px;border:1px solid rgba(184,107,69,.10);
+  border-radius:18px;pointer-events:none;
+}
+.visual-person{
+  width:112px;height:142px;top:27px;z-index:2;
+  transform-origin:50% 78%;
+  filter:drop-shadow(0 8px 7px rgba(80,52,35,.12));
+}
+.visual-head{
+  width:25px;height:25px;left:44px;top:0;
+  background:#7f5545;border:2px solid #684436;
+  box-shadow:inset -4px -3px 0 rgba(50,30,25,.12);
+}
+.visual-neck{position:absolute;width:9px;height:10px;left:52px;top:22px;background:#9b6955;border-radius:4px}
+.visual-torso{
+  position:absolute;width:34px;height:55px;left:39px;top:28px;
+  background:linear-gradient(90deg,#a95d39,#c77a52,#a95d39);
+  border-radius:13px 13px 10px 10px;
+}
+.visual-hip{
+  position:absolute;width:40px;height:17px;left:36px;top:76px;
+  background:#8e5947;border-radius:50% 50% 8px 8px;
+}
+.visual-arm,.visual-leg{position:absolute;display:block;background:none;transform-origin:top center}
+.visual-arm{width:9px;height:53px;top:32px}
+.visual-arm i,.visual-arm b,.visual-leg i,.visual-leg b{
+  position:absolute;display:block;background:#8e5947;border-radius:8px;
+}
+.visual-arm i{width:9px;height:29px;top:0}.visual-arm b{width:8px;height:27px;top:25px;transform-origin:top center}
+.arm-left{left:32px;transform:rotate(18deg)}.arm-left b{transform:rotate(-12deg)}
+.arm-right{left:71px;transform:rotate(-18deg)}.arm-right b{transform:rotate(12deg)}
+.visual-leg{width:11px;height:65px;top:87px}
+.visual-leg i{width:11px;height:33px;top:0}.visual-leg b{width:9px;height:34px;top:29px;transform-origin:top center}
+.leg-left{left:43px;transform:rotate(5deg)}.leg-left b{transform:rotate(5deg)}
+.leg-right{left:60px;transform:rotate(-5deg)}.leg-right b{transform:rotate(-5deg)}
+.visual-floor{
+  bottom:28px;height:4px;width:72%;left:14%;
+  background:#d8bca9;border-radius:99px;box-shadow:0 5px 10px rgba(130,88,65,.12);
+}
+.visual-motion{
+  position:absolute;right:18px;top:45px;width:28px;height:28px;
+  border:1px solid rgba(184,107,69,.25);border-radius:50%;
+  display:grid;place-items:center;color:#b86b45;font-weight:800;font-size:16px;
+  animation:motion-pulse 1s ease-in-out infinite;z-index:3;
+}
+.visual-loop{
+  position:absolute;right:14px;bottom:12px;font-size:7px;letter-spacing:.8px;
+  color:#a18f83;background:rgba(255,255,255,.72);padding:5px 7px;border-radius:8px;z-index:3;
+}
+.visual-label{z-index:3}
+
+/* Exercise-specific biomechanics */
+.visual-agachamento .visual-person,.visual-sumo .visual-person,.visual-agachamento-bracos .visual-person{
+  animation:better-squat 1.8s ease-in-out infinite;
+}
+.visual-agachamento .visual-leg,.visual-sumo .visual-leg,.visual-agachamento-bracos .visual-leg{transform-origin:top center}
+.visual-ponte .visual-person,.visual-ponte-unilateral .visual-person,.visual-ponte-2 .visual-person{animation:better-bridge 1.7s ease-in-out infinite}
+.visual-parede .visual-person,.visual-parede-2 .visual-person,.visual-flexao .visual-person{animation:better-push 1.5s ease-in-out infinite}
+.visual-panturrilha .visual-person,.visual-panturrilha-2 .visual-person{animation:better-calf 1.35s ease-in-out infinite}
+.visual-marcha .visual-person,.visual-marcha-alta .visual-person,.visual-marcha-final .visual-person,.visual-step .visual-person{animation:better-march .85s ease-in-out infinite}
+.visual-passo .visual-person{animation:better-lunge 1.8s ease-in-out infinite}
+.visual-core .visual-person{animation:better-core 1.8s ease-in-out infinite}
+.visual-prancha .visual-person{animation:better-plank 1.8s ease-in-out infinite}
+
+.visual-ponte .visual-motion,.visual-ponte-unilateral .visual-motion,.visual-ponte-2 .visual-motion{transform:rotate(90deg)}
+.visual-parede .visual-motion,.visual-flexao .visual-motion,.visual-parede-2 .visual-motion{transform:rotate(90deg)}
+.visual-marcha .visual-motion,.visual-marcha-alta .visual-motion,.visual-marcha-final .visual-motion,.visual-step .visual-motion{content:"↔"}
+.visual-core .visual-motion,.visual-prancha .visual-motion{transform:rotate(90deg)}
+
+@keyframes better-squat{
+  0%,100%{transform:translateX(-50%) translateY(0) scaleY(1)}
+  38%{transform:translateX(-50%) translateY(29px) scaleY(.83)}
+  55%{transform:translateX(-50%) translateY(29px) scaleY(.83)}
+  82%{transform:translateX(-50%) translateY(0) scaleY(1)}
+}
+@keyframes better-bridge{
+  0%,100%{transform:translateX(-50%) translateY(15px) rotate(0)}
+  42%,65%{transform:translateX(-50%) translateY(-9px) rotate(0)}
+}
+@keyframes better-push{
+  0%,100%{transform:translateX(-50%) translateY(0) rotate(0)}
+  43%,62%{transform:translateX(-50%) translateY(13px) rotate(1deg)}
+}
+@keyframes better-calf{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  38%,60%{transform:translateX(-50%) translateY(-9px)}
+}
+@keyframes better-march{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  25%{transform:translateX(-50%) translateY(-7px) rotate(-3deg)}
+  50%{transform:translateX(-50%) translateY(0) rotate(3deg)}
+  75%{transform:translateX(-50%) translateY(-7px) rotate(-3deg)}
+}
+@keyframes better-lunge{
+  0%,100%{transform:translateX(-50%) translateY(0)}
+  42%,62%{transform:translateX(-50%) translateY(13px) translateX(-5px)}
+}
+@keyframes better-core{
+  0%,100%{transform:translateX(-50%) rotate(90deg) translateY(0)}
+  42%,62%{transform:translateX(-50%) rotate(90deg) translateY(-7px)}
+}
+@keyframes better-plank{
+  0%,100%{transform:translateX(-50%) rotate(90deg) scaleX(1)}
+  50%{transform:translateX(-50%) rotate(90deg) scaleX(.96)}
+}
+@keyframes motion-pulse{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.05)}}
+@media (prefers-reduced-motion:reduce){
+  .visual-person,.visual-motion{animation:none!important}
+}
