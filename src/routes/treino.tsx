@@ -197,6 +197,40 @@ function DurationClock({ exercise }: { exercise: Exercise }) {
   );
 }
 
+function CaktoUpsellButtons() {
+  useEffect(() => {
+    const src = "https://caktoscripts.nyc3.cdn.digitaloceanspaces.com/upsell.js";
+    const existing = document.querySelector('script[src="' + src + '"]');
+    if (!existing) {
+      const script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = src;
+      document.body.appendChild(script);
+    }
+  }, []);
+
+  return (
+    <div className="cakto-upsell-container">
+      <div className="cakto-upsell-buttons">
+        <cakto-upsell-accept
+          bg-color="#b1986cff"
+          text-color="#000000"
+          upsell-accept-url="members_area"
+          offer-id="t3b6job"
+          app-base-url="https://app.cakto.com.br"
+          offer-type="upsell"
+          upsell-reject-url="members_area"
+        >
+          Sim, quero aproveitar a oferta
+        </cakto-upsell-accept>
+        <cakto-upsell-reject upsell-reject-url="members_area">
+          Não, eu não quero aproveitar a oferta
+        </cakto-upsell-reject>
+      </div>
+    </div>
+  );
+}
+
 function TrainingApp() {
   const [startedAt, setStartedAt] = useState<number | null>(null);
   const [selectedDay, setSelectedDay] = useState(1);
