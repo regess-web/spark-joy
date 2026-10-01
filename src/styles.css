@@ -575,3 +575,44 @@
   .exercise-modal-card .exercise-duration-clock{height:210px}
   .exercise-modal-card .duration-clock-svg{width:150px;height:150px}
 }
+
+
+/* Exercise notes */
+.exercise-notes{
+  margin-top:12px;
+  padding:14px;
+  border:1px solid #eaded3;
+  border-radius:12px;
+  background:#fff;
+}
+.exercise-notes label{
+  display:block;
+  margin-bottom:7px;
+  color:#8c8076;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.4px;
+}
+.exercise-notes textarea{
+  display:block;
+  width:100%;
+  min-height:76px;
+  box-sizing:border-box;
+  resize:vertical;
+  border:1px solid #eaded3;
+  border-radius:9px;
+  outline:none;
+  padding:10px 11px;
+  background:#fffaf7;
+  color:#514941;
+  font:10px/1.55 "DM Sans",sans-serif;
+}
+.exercise-notes textarea::placeholder{color:#b0a49a}
+.exercise-notes textarea:focus{border-color:#d89570;background:#fff}
+.exercise-notes small{
+  display:block;
+  margin-top:5px;
+  text-align:right;
+  color:#b0a49a;
+  font-size:7px;
+}
