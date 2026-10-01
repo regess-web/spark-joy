@@ -172,7 +172,7 @@ function WeightLossQuiz() {
             <span>✓ Guia para acompanhar sua evolução</span>
             <span>✓ Acesso imediato ao material</span>
           </div>
-          <button className="fit-primary">QUERO COMEÇAR AGORA <span>→</span></button>
+          <button className="fit-primary" onClick={() => { window.location.href = "/treino"; }}>QUERO COMEÇAR AGORA <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
       </main>
