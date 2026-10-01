@@ -134,3 +134,13 @@
 .training-visual.is-playing .visual-person,
 .training-visual.is-playing .visual-motion{animation-play-state:running!important}
 .exercise-card:hover .training-visual .visual-person{animation-play-state:paused!important}
+
+/* Final interaction fixes */
+.fit-start-button{position:relative;z-index:5;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.fit-start-button:active{transform:translateY(0)!important}
+.fit-answer-confirmation{margin-top:16px;padding:11px 13px;border:1px solid var(--fit-line);border-radius:10px;background:#fffaf7;color:#8e847a;font-size:10px;line-height:1.5}
+.training-visual .visual-person,.training-visual .visual-motion{animation-play-state:var(--visual-play-state,paused)}
+.training-visual.is-playing .visual-person,.training-visual.is-playing .visual-motion{animation-play-state:running}
+@media (prefers-reduced-motion:reduce){
+  .training-visual .visual-person,.training-visual .visual-motion{animation-play-state:var(--visual-play-state,paused)!important}
+}
