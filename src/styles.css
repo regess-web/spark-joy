@@ -262,3 +262,29 @@
 .training-visual .visual-label{
   content:"POSIÇÃO DO EXERCÍCIO";
 }
+
+
+/* VIVA+ exercise illustration — original centered female fitness figure */
+.training-visual{height:190px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 46%,rgba(184,107,69,.14),transparent 38%),linear-gradient(145deg,#fbefe8,#fffaf6 62%,#f5e8df)}
+.exercise-figure{position:absolute;inset:16px 18px 24px;width:calc(100% - 36px);height:calc(100% - 40px);overflow:visible}
+.figure-woman{fill:none;stroke:#a95d39;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;transform-origin:110px 92px}
+.figure-head,.figure-neck,.figure-torso,.figure-hip{fill:#b86b45;stroke:#8f543b;stroke-width:1.4}
+.figure-head{stroke-width:1.2}.figure-top{fill:#a95d39;stroke:#8f543b;stroke-width:1}.figure-hair{fill:#684436;stroke:#58372c;stroke-width:1}
+.figure-arm,.figure-leg{fill:none;stroke:#a95d39;stroke-width:9;stroke-linecap:round;stroke-linejoin:round}
+.figure-arm circle,.figure-leg circle{fill:#c77a52;stroke:#8f543b;stroke-width:1}.figure-shadow{fill:rgba(120,82,61,.12);stroke:none}
+.visual-label{z-index:5}.visual-floor{z-index:1}
+.visual-agachamento .figure-woman,.visual-sumo .figure-woman,.visual-agachamento-bracos .figure-woman{transform:translateY(13px) scale(.92)}
+.visual-agachamento .leg-a,.visual-agachamento-bracos .leg-a{transform:rotate(20deg);transform-origin:103px 84px}.visual-agachamento .leg-b,.visual-agachamento-bracos .leg-b{transform:rotate(-20deg);transform-origin:117px 84px}
+.visual-sumo .leg-a{transform:rotate(26deg);transform-origin:103px 84px}.visual-sumo .leg-b{transform:rotate(-26deg);transform-origin:117px 84px}
+.visual-agachamento-bracos .arm-a{transform:rotate(-38deg);transform-origin:100px 48px}.visual-agachamento-bracos .arm-b{transform:rotate(38deg);transform-origin:120px 48px}
+.visual-ponte .figure-woman,.visual-ponte-unilateral .figure-woman,.visual-ponte-2 .figure-woman{transform:translate(18px,48px) rotate(90deg) scale(.78);transform-origin:110px 92px}
+.visual-parede .figure-woman,.visual-parede-2 .figure-woman,.visual-flexao .figure-woman{transform:translate(18px,25px) rotate(63deg) scale(.72);transform-origin:110px 92px}
+.visual-parede:before,.visual-parede-2:before,.visual-flexao:before{content:"";position:absolute;right:27px;top:38px;height:112px;width:3px;border-radius:4px;background:#d8bca9;opacity:.75}
+.visual-panturrilha .figure-woman,.visual-panturrilha-2 .figure-woman{transform:translateY(-5px)}.visual-panturrilha .leg-a,.visual-panturrilha-2 .leg-a,.visual-panturrilha .leg-b,.visual-panturrilha-2 .leg-b{transform:translateY(-4px)}
+.visual-marcha .figure-woman,.visual-marcha-alta .figure-woman,.visual-marcha-final .figure-woman,.visual-step .figure-woman{transform:translateY(-4px) scale(.95)}
+.visual-marcha .leg-a,.visual-marcha-alta .leg-a,.visual-marcha-final .leg-a,.visual-step .leg-a{transform:rotate(25deg);transform-origin:103px 84px}.visual-marcha .leg-b,.visual-marcha-alta .leg-b,.visual-marcha-final .leg-b,.visual-step .leg-b{transform:rotate(-25deg);transform-origin:117px 84px}
+.visual-passo .figure-woman{transform:translateY(7px) scale(.93)}.visual-passo .leg-a{transform:rotate(42deg);transform-origin:103px 84px}.visual-passo .leg-b{transform:rotate(-14deg);transform-origin:117px 84px}
+.visual-core .figure-woman{transform:translate(15px,54px) rotate(90deg) scale(.73);transform-origin:110px 92px}
+.visual-prancha .figure-woman{transform:translate(9px,43px) rotate(76deg) scale(.74);transform-origin:110px 92px}
+.exercise-modal-card .training-visual{height:250px}.exercise-modal-card .exercise-figure{inset:22px 28px 32px;width:calc(100% - 56px);height:calc(100% - 54px)}
+@media(max-width:560px){.exercise-card .training-visual{height:180px}.exercise-modal-card .training-visual{height:210px}.exercise-modal-card .exercise-figure{inset:16px 18px 25px;width:calc(100% - 36px);height:calc(100% - 41px)}}
