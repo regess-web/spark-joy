@@ -185,52 +185,114 @@ function TLSHome() {
       )}
 
       {paidArea && portalArea && (
-        <main className="tls-portal" id="portal">
-          <div className="tls-portal-head">
-            <div>
-              <div className="tls-kicker"><b /> CENTRAL DE INFORMAÇÃO ELEITORAL</div>
-              <h2>Tudo organizado para você acompanhar o que aconteceu.</h2>
-              <p>Conteúdo separado por tema, com contexto, data e fontes para consulta. A seção “Direita” reúne cobertura factual sobre partidos e candidatos desse campo político, sem substituir as fontes originais.</p>
-            </div>
-            <div className="tls-portal-date">PAINEL • 2026</div>
+        <main className="tls-ebook" id="portal">
+          <div className="tls-ebook-cover">
+            <div className="tls-kicker"><b /> EDIÇÃO • 30 DE SETEMBRO DE 2026</div>
+            <h2>ELEIÇÕES 2026<br /><em>o que aconteceu até agora</em></h2>
+            <p>Um guia visual, em ordem cronológica, com os principais acontecimentos, candidatos, propostas, declarações, decisões eleitorais e pesquisas — sempre com data e referência.</p>
+            <div className="tls-ebook-hint">DESLIZE PARA A DIREITA <span>→</span></div>
           </div>
 
-          <div className="tls-category-nav">
-            {["HOJE","ELEIÇÕES","DIREITA","ENTREVISTAS","DEBATES","JORNAIS","PROPAGANDA","CANDIDATOS","PROPOSTAS","CHECAGENS","PESQUISAS","FONTES"].map((cat) => (
-              <button key={cat} className={activeCategory === cat ? "active" : ""} onClick={() => setActiveCategory(cat)}>{cat}</button>
-            ))}
+          <div className="tls-ebook-track">
+            <article className="tls-ebook-slide tls-slide-intro">
+              <span className="tls-slide-no">01 / 08</span>
+              <div className="tls-kicker"><b /> VISÃO GERAL</div>
+              <h3>Onde a eleição está agora?</h3>
+              <p>O primeiro turno está marcado para <strong>4 de outubro de 2026</strong>. Se nenhum candidato obtiver mais de 50% dos votos válidos, o segundo turno está previsto para <strong>25 de outubro</strong>.</p>
+              <div className="tls-stat-row"><div><strong>30/09</strong><small>data desta edição</small></div><div><strong>2026</strong><small>ano eleitoral</small></div><div><strong>4/10</strong><small>1º turno</small></div></div>
+              <small className="tls-source-line">Fonte: TSE • Eleições 2026</small>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">02 / 08</span>
+              <div className="tls-kicker"><b /> LINHA DO TEMPO</div>
+              <h3>Os marcos da campanha</h3>
+              <div className="tls-timeline">
+                <div><b>15 AGO</b><span>Prazo para registro das candidaturas à Presidência.</span></div>
+                <div><b>24 SET</b><span>O TSE lançou uma página que organiza os planos de governo por oito macrotemas.</span></div>
+                <div><b>27 SET</b><span>Foram divulgados detalhes do plano de governo de Flávio Bolsonaro, incluindo propostas econômicas, administrativas e de segurança.</span></div>
+                <div><b>29 SET</b><span>Pesquisa AtlasIntel/Bloomberg registrou cenário de primeiro turno com Lula em 45,3% e Flávio Bolsonaro em 42,2%.</span></div>
+                <div><b>30 SET</b><span>Pesquisa Meio/Ideia apontou empate técnico entre Lula e Flávio nos cenários divulgados.</span></div>
+              </div>
+              <small className="tls-source-line">Fontes: TSE, UOL/Folha e pesquisas registradas no TSE.</small>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">03 / 08</span>
+              <div className="tls-kicker"><b /> QUEM ESTÁ NA DISPUTA</div>
+              <h3>Candidatos registrados para o 1º turno</h3>
+              <div className="tls-candidate-grid">
+                {[
+                  ["13","Lula","PT"],["22","Flávio Bolsonaro","PL"],["30","Romeu Zema","NOVO"],["55","Ronaldo Caiado","PSD"],
+                  ["14","Renan Santos","Missão"],["70","Augusto Cury","Avante"],["16","Hertz Dias","PSTU"],["21","Edmilson Costa","PCB"],
+                  ["27","Clariana Barão","DC"],["29","Rui Costa Pimenta","PCO"],["35","Wilson Grassi","Democrata"],["80","Samara Martins","UP"],["28","Leonardo Avalanche","PRTB"]
+                ].map(([n,name,party]) => <div key={n}><b>{n}</b><span>{name}</span><small>{party}</small></div>)}
+              </div>
+              <p className="tls-note">A situação jurídica e eleitoral das candidaturas pode mudar até a eleição. Leonardo Avalanche teve sua retirada noticiada em 30/09; a relação do TSE consultada para esta edição ainda o listava.</p>
+              <small className="tls-source-line">Fonte principal: TSE • planos de governo e registros de 2026. Atualização sobre Avalanche: Agência Brasil, 30/09/2026.</small>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">04 / 08</span>
+              <div className="tls-kicker"><b /> PROPOSTAS</div>
+              <h3>O que os principais candidatos propõem?</h3>
+              <div className="tls-proposal-grid">
+                <div><h4>Lula • PT</h4><p>O plano apresenta continuidade de políticas públicas, com propostas em áreas como economia, saúde, educação, trabalho, desenvolvimento e meio ambiente.</p></div>
+                <div><h4>Flávio Bolsonaro • PL</h4><p>Propõe reduzir ministérios e cargos comissionados, revisar a reforma tributária, retomar privatizações e endurecer políticas contra o crime organizado.</p></div>
+                <div><h4>Romeu Zema • NOVO</h4><p>Defende uma agenda de maior liberdade econômica, eficiência administrativa, responsabilidade fiscal e reformas na gestão pública.</p></div>
+                <div><h4>Ronaldo Caiado • PSD</h4><p>O plano aborda segurança, saúde, educação, desenvolvimento regional, gestão pública e fortalecimento de políticas de produção e infraestrutura.</p></div>
+                <div><h4>Renan Santos • Missão</h4><p>O programa enfatiza mudanças institucionais, liberdade econômica e revisão de políticas públicas, com críticas a estruturas estatais existentes.</p></div>
+                <div><h4>Augusto Cury • Avante</h4><p>O programa apresenta propostas ligadas a educação, saúde, desenvolvimento humano, economia e empreendedorismo.</p></div>
+              </div>
+              <small className="tls-source-line">Fonte: planos de governo oficiais reunidos pelo TSE. O resumo não substitui os documentos completos.</small>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">05 / 08</span>
+              <div className="tls-kicker"><b /> PESQUISAS</div>
+              <h3>Intenção de voto: números datados</h3>
+              <div className="tls-poll-card"><strong>AtlasIntel / Bloomberg • 29/09</strong><div><span>Lula</span><b>45,3%</b></div><div><span>Flávio Bolsonaro</span><b>42,2%</b></div><div><span>Renan Santos</span><b>5,2%</b></div><div><span>Augusto Cury</span><b>2,0%</b></div><div><span>Ronaldo Caiado</span><b>1,8%</b></div><div><span>Romeu Zema</span><b>0,9%</b></div><small>5.005 entrevistados • 23–28/09 • margem de erro ±1 p.p. • 95% de confiança • registro BR-04391/2026</small></div>
+              <div className="tls-poll-card"><strong>Meio/Ideia • 30/09</strong><p>O levantamento divulgado em 30/09 apontou empate técnico entre Lula e Flávio Bolsonaro nos cenários de 1º e 2º turno apresentados.</p><small>2.000 eleitores • entrevistas por telefone • 25–28/09 • margem de erro ±2,2 p.p. • 95% de confiança • registro BR-08706/2026</small></div>
+              <p className="tls-note">Pesquisas são retratos de um período e usam metodologias diferentes; não representam o resultado da eleição.</p>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">06 / 08</span>
+              <div className="tls-kicker"><b /> DECLARAÇÕES E ACONTECIMENTOS</div>
+              <h3>O que marcou os últimos dias</h3>
+              <div className="tls-event-list">
+                <div><b>29/09</b><span>Debates e declarações sobre responsabilidade fiscal colocaram reforma tributária, gastos públicos e políticas econômicas no centro da discussão.</span></div>
+                <div><b>27/09</b><span>Foram detalhadas propostas do plano de Flávio Bolsonaro em segurança, economia, administração, educação, saúde e meio ambiente.</span></div>
+                <div><b>24/09</b><span>O TSE disponibilizou uma nova interface para consultar propostas presidenciais por assunto, usando os documentos apresentados pelas chapas.</span></div>
+                <div><b>SET/26</b><span>Pesquisas sucessivas registraram variações nas intenções de voto conforme instituto, período e metodologia.</span></div>
+              </div>
+              <small className="tls-source-line">Fontes: TSE, Agência Brasil, UOL e levantamentos eleitorais registrados.</small>
+            </article>
+
+            <article className="tls-ebook-slide">
+              <span className="tls-slide-no">07 / 08</span>
+              <div className="tls-kicker"><b /> DECISÕES E CONFERÊNCIA</div>
+              <h3>Onde conferir antes de acreditar</h3>
+              <div className="tls-reference-grid">
+                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026" target="_blank" rel="noreferrer"><b>TSE</b><span>Calendário, regras, estatísticas e informações oficiais da eleição.</span></a>
+                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026-content/propostas-de-governo-dos-candidatos-ao-cargo-de-presidente-da-republica-eleicoes-2026/planos-de-governo-dos-candidatos-ao-cargo-de-presidente-da-republica-eleicoes-2026" target="_blank" rel="noreferrer"><b>PLANOS DE GOVERNO</b><span>Documentos oficiais apresentados pelas chapas.</span></a>
+                <a href="https://dadosabertos.tse.jus.br/pt_BR/dataset/candidatos-2026" target="_blank" rel="noreferrer"><b>DADOS ABERTOS TSE</b><span>Dados de candidaturas, propostas e registros eleitorais.</span></a>
+                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026" target="_blank" rel="noreferrer"><b>DIVULGACANDCONTAS</b><span>Informações de candidaturas, contas, doadores e fornecedores.</span></a>
+              </div>
+              <p className="tls-note">A ideia desta seção é permitir que o leitor confira a fonte original em vez de depender apenas do resumo.</p>
+            </article>
+
+            <article className="tls-ebook-slide tls-slide-end">
+              <span className="tls-slide-no">08 / 08</span>
+              <div className="tls-kicker"><b /> FECHAMENTO DA EDIÇÃO</div>
+              <h3>O cenário em 30 de setembro</h3>
+              <p>A eleição entra na reta final com o primeiro turno marcado para 4 de outubro. As propostas oficiais estão disponíveis no TSE, enquanto pesquisas recentes mostram resultados diferentes conforme instituto e metodologia.</p>
+              <div className="tls-final-box"><strong>Atualizado em 30/09/2026</strong><span>Próxima atualização: conforme novos fatos, decisões, pesquisas e declarações forem publicados.</span></div>
+              <small className="tls-source-line">Esta edição organiza informações públicas e não indica em quem votar.</small>
+            </article>
           </div>
 
-          <section className="tls-portal-grid">
-            <article className="tls-feature-card">
-              <span className="tls-tag">{activeCategory}</span>
-              <h3>{news[0]?.title || (activeCategory === "DIREITA" ? "Acompanhe os principais acontecimentos envolvendo partidos e candidatos de direita" : "O que aconteceu hoje em " + activeCategory.toLowerCase())}</h3>
-              <p>{news[0]?.summary || "As notícias aparecerão aqui automaticamente quando a integração estiver configurada."}</p>
-              {news[0]?.image_url && <img className="tls-feature-image" src={news[0].image_url} alt="" onError={(e) => { e.currentTarget.src = "/news-fallback.svg"; }} />}
-              <small>{news[0] ? news[0].source_name + " • " + new Date(news[0].published_at).toLocaleString("pt-BR") : "AGUARDANDO INTEGRAÇÃO • FONTE A INSERIR"}</small>
-            </article>
-            <article className="tls-news-list">
-              {newsLoading && <div className="tls-news-loading">Atualizando notícias...</div>}
-              {!newsLoading && news.length === 0 && <div className="tls-news-loading">Nenhuma notícia disponível nesta categoria.</div>}
-              {news.slice(0, 5).map((item, i) => (
-                <a className="tls-news-item" key={item.id} href={item.url} target="_blank" rel="noreferrer">
-                  <img src={item.image_url || "/news-fallback.svg"} alt="" onError={(e) => { e.currentTarget.src = "/news-fallback.svg"; }} />
-                  <b>{String(i + 1).padStart(2, "0")}</b>
-                  <span><strong>{item.title}</strong><small>{item.source_name} • {new Date(item.published_at).toLocaleString("pt-BR")}</small></span>
-                </a>
-              ))}
-              {newsError && <div className="tls-news-error">{newsError}</div>}
-            </article>
-          </section>
-
-          <section className="tls-portal-columns">
-            <div><h3>ACONTECIMENTOS DO DIA</h3><p>Timeline com os fatos relevantes, organizada por horário e assunto.</p></div>
-            <div><h3>PARTIDOS E CANDIDATOS</h3><p>Páginas individuais com declarações, propostas, agenda e registros públicos.</p></div>
-            <div><h3>FONTES ORIGINAIS</h3><p>Acesso direto a TSE, documentos públicos, entrevistas e veículos de imprensa.</p></div>
-          </section>
-
-          <div className="tls-portal-disclaimer">Este painel é uma demonstração de produto. Informações eleitorais reais devem ser verificadas, datadas e acompanhadas da fonte original antes de serem publicadas.</div>
-          <button className="tls-reset" onClick={() => setPortalArea(false)}>← Voltar para a oferta</button>
+          <div className="tls-ebook-bottom"><span>←→ DESLIZE HORIZONTALMENTE</span><button className="tls-reset" onClick={() => setPortalArea(false)}>← Voltar para a oferta</button></div>
         </main>
       )}
 
