@@ -63,3 +63,11 @@
 .tls-news-item small{color:#62766c;font-size:8px}
 .tls-news-loading,.tls-news-error{padding:28px 4px;color:#687c72;font-size:11px;line-height:1.5}
 .tls-news-error{color:#c7a66b}
+
+.tls-question-horizontal{display:grid;grid-template-columns:1fr 3fr;padding:0;overflow:hidden;min-height:560px}
+.tls-question-image-wrap{position:relative;min-height:560px;background:#07130d}
+.tls-question-image{width:100%;height:100%;object-fit:cover;display:block}
+.tls-image-caption{position:absolute;left:18px;bottom:18px;background:rgba(6,18,13,.82);border:1px solid rgba(255,210,31,.35);color:var(--tls-yellow);padding:8px 10px;border-radius:6px;font-size:8px;font-weight:900;letter-spacing:1.5px}
+.tls-question-content{padding:38px;display:flex;flex-direction:column;justify-content:center}
+.tls-question-content h3{max-width:900px}
+@media(max-width:700px){.tls-question-horizontal{grid-template-columns:1fr;min-height:0}.tls-question-image-wrap{height:240px;min-height:240px}.tls-question-content{padding:23px}}
