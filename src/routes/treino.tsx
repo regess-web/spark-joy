@@ -186,14 +186,6 @@ function TrainingVisual({ type }: { type: string }) {
             </g>
           )}
 
-          {(pose === "squat" || pose === "sumo" || pose === "lunge" || pose === "calf") && (
-            <g className="v2-dumbbells">
-              <rect x="125" y="91" width="7" height="15" rx="2"/>
-              <rect x="175" y="91" width="7" height="15" rx="2"/>
-              <rect x="122" y="94" width="13" height="5" rx="2.5"/>
-              <rect x="172" y="94" width="13" height="5" rx="2.5"/>
-            </g>
-          )}
         </g>
 
         {pose === "bridge" && (
