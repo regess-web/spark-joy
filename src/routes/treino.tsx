@@ -228,12 +228,6 @@ function TrainingApp() {
   function openSection(section: "treino" | "chat" | "dieta") { setActiveSection(section); setMenuOpen(false); }
   function addFood() {
     setShowDietOffer(true);
-    return;
-    const amount = Number(foodAmount.replace(",", "."));
-    if (!foodName.trim() || !Number.isFinite(amount) || amount <= 0) return;
-    const calories = Math.round(130 * amount / 100);
-    setFoodItems(items => [...items, { name: foodName.trim(), amount, unit: foodUnit, calories }]);
-    setFoodName(""); setFoodAmount("");
   }
   const foodTotal = foodItems.reduce((sum, item) => sum + item.calories, 0);
 
