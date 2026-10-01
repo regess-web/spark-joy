@@ -5,16 +5,16 @@ import { fetchNews, type NewsItem } from "../lib/news";
 export const Route = createFileRoute("/")({ component: TLSHome });
 
 const questions = [
-  { category: "HISTÓRICO", image: "https://upload.wikimedia.org/wikipedia/commons/7/71/Presidente_Jair_Messisas_Bolsonaro%28cropped%29.jpg", q: "Você gostaria de consultar informações documentadas sobre o governo de Jair Bolsonaro em um só lugar?", options: ["Sim", "Talvez", "Só alguns temas", "Não"] },
-  { category: "CANDIDATOS", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio_Bolsonaro_01.09.26_%28cropped_2%29.jpg", q: "Você gostaria de acompanhar declarações e posicionamentos públicos de candidatos e políticos?", options: ["Sim, todos", "Os principais", "Só alguns", "Não"] },
-  { category: "BRASIL", image: "https://commons.wikimedia.org/wiki/Special:FilePath/States_of_Brazil.svg", q: "Você quer acompanhar acontecimentos políticos de diferentes estados e regiões do Brasil?", options: ["Sim", "Principalmente meu estado", "Só os principais fatos", "Não"] },
-  { category: "POSICIONAMENTOS", image: "https://imgs.search.brave.com/wNUFu72w9kLL0IqGTRFJH8zx5NPcSKlcQ8SMfwaisTs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taWRp/YXMuY29ycmVpb2Jy/YXppbGllbnNlLmNvbS5ici9fbWlk/aWFzL2pwZy8yMDI0LzA5LzA3LzAwMF8zNmZuNzRyLTM5ODU0Mzc3LmpwZw", q: "Você gostaria de ver cobertura de diferentes partidos e correntes políticas, com as fontes originais?", options: ["Sim", "Seria útil", "Talvez", "Não"] },
-  { category: "FONTES", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Brazil.svg", q: "Quando uma informação política chama sua atenção, você gostaria de ter acesso à fonte original?", options: ["Sempre", "Na maioria das vezes", "Às vezes", "Não"] },
-  { category: "ELEIÇÕES", image: "https://imgs.search.brave.com/z3yXCmj8i13yre0yMCy2dt-_12Egcs5rC_yvvBPYXLg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcuZnJlZXBpay5jb20vZm90b3MtcHJlbWl1bS9tdWxoZXItZGUt cGUtY29tLWJhbmRlaXJhLWJyYXNpbGVpcmEtYS1iZWlyYS1kYS1waXNjaW5hXzEwNDg5NDQtMTc4NzMxNzEuanBnP3NlbXQ9YWlzX2h5YnJpZCZ3PTc0MA", q: "Você gostaria de acompanhar notícias eleitorais organizadas por tema e data?", options: ["Sim, diariamente", "Com frequência", "Quando necessário", "Não"] },
-  { category: "DECLARAÇÕES", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio_Bolsonaro_01.09.26_%28cropped_2%29.jpg", q: "Você gostaria de encontrar declarações públicas completas, em vez de depender apenas de cortes e manchetes?", options: ["Sim", "Seria útil", "Às vezes", "Não"] },
-  { category: "HISTÓRICO", image: "https://upload.wikimedia.org/wikipedia/commons/7/71/Presidente_Jair_Messisas_Bolsonaro%28cropped%29.jpg", q: "Você gostaria de consultar fatos, decisões e registros oficiais do período de cada governo?", options: ["Sim", "Os principais", "Só alguns assuntos", "Não"] },
-  { category: "CONFERÊNCIA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Flag_of_Brazil.svg", q: "Você prefere conferir uma informação em fontes diferentes antes de formar sua própria opinião?", options: ["Sempre", "Na maioria das vezes", "Às vezes", "Raramente"] },
-  { category: "CENTRAL", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio_Bolsonaro_01.09.26_%28cropped_2%29.jpg", q: "Se existisse uma central com notícias, documentos, propostas e fontes originais reunidas, isso ajudaria você a acompanhar o período eleitoral?", options: ["Ajudaria muito", "Ajudaria", "Talvez", "Não"] }
+  { category: "HISTÓRICO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jair%20Bolsonaro%202022%20%28cropped%29.jpg", q: "Informações documentadas sobre o governo de Jair Bolsonaro reunidas em um só lugar.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "CANDIDATOS", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio%20Bolsonaro%2001.09.26%20%28cropped%202%29.jpg", q: "Declarações e posicionamentos públicos de candidatos e políticos organizados por tema e data.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "CONGRESSO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Imagens%20de%20Bras%C3%ADlia%20-%20Congresso%20Nacional%20%2850060213016%29.jpg", q: "Acontecimentos e decisões do Congresso Nacional apresentados com contexto e fontes.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "JUSTIÇA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Supremo%20Tribunal%20Federal%2C%20Brasilia.jpg", q: "Decisões relevantes do STF e de outros tribunais, acompanhadas dos documentos correspondentes.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "GOVERNO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pal%C3%A1cio%20do%20Planalto%20%2830890615422%29.jpg", q: "Atos, medidas e informações oficiais do Governo Federal reunidos para consulta.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "ELEIÇÕES", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Sede%20do%20Tribunal%20Superior%20Eleitoral%20%281%29.jpg", q: "Informações eleitorais organizadas por assunto, data, órgão responsável e fonte original.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "LEGISLATIVO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/C%C3%A2mara%20dos%20Deputados%20%285944392503%29.jpg", q: "Atividades da Câmara dos Deputados acompanhadas de referências para conferência.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "SENADO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Senado%20Federal%20do%20Brasil%20%2814588978177%29.jpg", q: "Projetos, votações e declarações do Senado Federal organizados em um único painel.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "VOTAÇÃO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Urna%20Eletr%C3%B4nica%20Brasileira.jpg", q: "Explicações e referências sobre o funcionamento da votação e da urna eletrônica.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
+  { category: "CONFERÊNCIA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Alexandre%20de%20Moraes.jpg", q: "Fontes originais e registros públicos para conferir uma informação antes de formar sua própria opinião.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] }
 ];
 
 function TLSHome() {
@@ -91,12 +91,19 @@ function TLSHome() {
           <section className="tls-ballot-card">
             <div className={"tls-ballot-art " + (verified ? "verified" : "")}>
               <img src="/urna-eleitoral.svg" alt="Urna eletrônica" />
-              {verified && <div className="tls-ballot-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio_Bolsonaro_01.09.26_%28cropped_2%29.jpg" alt="Flávio Bolsonaro" /><span>22</span></div>}
+              <div className={"tls-ballot-screen " + (verified ? "show-photo" : "")}>
+                {verified ? (
+                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio%20Bolsonaro%2001.09.26%20%28cropped%202%29.jpg" alt="Flávio Bolsonaro" />
+                ) : (
+                  <strong>{voteCode || "--"}</strong>
+                )}
+                {verified && <span>22</span>}
+              </div>
             </div>
             <div className="tls-ballot-copy">
               <div className="tls-kicker"><b /> ACESSO AO QUIZ</div>
               <h1>Antes de começar, <em>confirme o código.</em></h1>
-              <p>{verified ? "Código confirmado. A urna registrou o número e liberou o acesso." : "Digite o número indicado na urna para liberar as perguntas."}</p>
+              <p>{verified ? "Código confirmado. A tela da urna exibiu o registro e liberou o acesso." : "Digite o número indicado na urna para liberar o acesso ao quiz."}</p>
               <div className="tls-ballot-input">
                 <input
                   inputMode="numeric"
