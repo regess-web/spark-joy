@@ -450,7 +450,7 @@ function TrainingApp() {
             <h2 id="diet-offer-title">Libere seu contador de calorias</h2>
             <p>Para adicionar alimentos e acompanhar seu total diário, você precisa do plano completo <strong>Dieta + Contador</strong>.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 12,90</strong></div>
-            <button className="training-main-btn diet-offer-cta">COMPRAR DIETA + CONTADOR →</button>
+            <button className="training-main-btn diet-offer-cta" onClick={() => { window.location.href = "https://pay.cakto.com.br/eu7vctt_1161061"; }}>COMPRAR DIETA + CONTADOR →</button>
             <button className="diet-offer-later" onClick={() => setShowDietOffer(false)}>Agora não</button>
           </div>
         </div>
