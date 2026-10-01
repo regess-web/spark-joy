@@ -22,3 +22,32 @@
 .tls-review small{font-size:7px;letter-spacing:1.3px;color:#587067}
 .tls-sources{width:min(1120px,90%);margin:auto;border-top:1px solid var(--tls-line);padding:70px 0;display:grid;grid-template-columns:1fr 1fr;gap:80px}.tls-sources h2{font-size:42px;letter-spacing:-2px;margin:12px 0}.tls-sources p{color:#778b81;line-height:1.7;font-size:13px;max-width:530px}.tls-source-grid{display:grid;grid-template-columns:1fr 1fr}.tls-source-grid div{padding:20px 0;border-bottom:1px solid #183126;display:flex;gap:16px}.tls-source-grid b{color:var(--tls-yellow);font-size:10px}.tls-source-grid span{color:#9aaaA1;font-size:12px}.tls-footer{border-top:1px solid var(--tls-line);padding:25px 6%;text-align:center;color:#50635a;font-size:9px;letter-spacing:2px}
 @media(max-width:700px){.tls-nav{height:64px;padding:0 5%}.tls-nav-links{display:none}.tls-status{font-size:8px}.tls-hero{min-height:calc(100vh - 64px);padding:50px 0}.tls-hero h1{letter-spacing:-3px}.tls-hero>p{font-size:15px}.tls-cards{grid-template-columns:1fr}.tls-quiz,.tls-result,.tls-paywall{padding:50px 0 90px}.tls-question{padding:23px}.tls-quiz-top{align-items:start}.tls-options{grid-template-columns:1fr}.tls-question-footer{align-items:stretch;flex-direction:column}.tls-next{width:100%}.tls-result-card{padding:30px 20px}.tls-paywall h2{letter-spacing:-2px}.tls-benefits{grid-template-columns:1fr}.tls-sources{grid-template-columns:1fr;gap:30px;padding:55px 0}}
+
+.tls-portal{width:min(1180px,92%);margin:auto;padding:65px 0 110px}
+.tls-portal-head{display:flex;justify-content:space-between;gap:40px;align-items:end;padding-bottom:30px;border-bottom:1px solid var(--tls-line)}
+.tls-portal-head h2{font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:-2.5px;max-width:820px;margin:14px 0}
+.tls-portal-head p{color:#8d9e96;max-width:760px;line-height:1.7;font-size:13px;margin:0}
+.tls-portal-date{font-size:9px;letter-spacing:2px;color:#667970;white-space:nowrap}
+.tls-category-nav{display:flex;gap:8px;overflow:auto;padding:18px 0;border-bottom:1px solid var(--tls-line);scrollbar-width:none}
+.tls-category-nav::-webkit-scrollbar{display:none}
+.tls-category-nav button{border:1px solid #1d3a2d;background:#0b1d14;color:#71857b;border-radius:99px;padding:9px 12px;font-size:9px;font-weight:900;letter-spacing:.8px;white-space:nowrap;cursor:pointer}
+.tls-category-nav button:hover,.tls-category-nav button.active{color:#07110b;background:var(--tls-yellow);border-color:var(--tls-yellow)}
+.tls-portal-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:14px;margin-top:18px}
+.tls-feature-card,.tls-news-list{background:linear-gradient(145deg,#0d2419,#08150f);border:1px solid var(--tls-line);border-radius:16px}
+.tls-feature-card{padding:30px;min-height:330px;display:flex;flex-direction:column;justify-content:end}
+.tls-tag{color:var(--tls-yellow);font-size:9px;font-weight:900;letter-spacing:2px}
+.tls-feature-card h3{font-size:30px;line-height:1.08;letter-spacing:-1.4px;margin:13px 0}
+.tls-feature-card p{color:#84978e;font-size:12px;line-height:1.7;max-width:700px}
+.tls-feature-card small{color:#53665d;font-size:8px;letter-spacing:1px;margin-top:10px}
+.tls-news-list{padding:8px 20px}
+.tls-news-list div{display:flex;gap:15px;padding:20px 0;border-bottom:1px solid #183126}
+.tls-news-list div:last-child{border-bottom:0}
+.tls-news-list b{color:var(--tls-yellow);font-size:10px}
+.tls-news-list span{display:flex;flex-direction:column;gap:5px;color:#7f9188;font-size:11px;line-height:1.5}
+.tls-news-list strong{color:#e5ece8;font-size:12px}
+.tls-portal-columns{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.tls-portal-columns>div{border:1px solid var(--tls-line);border-radius:12px;padding:22px;background:#09170f}
+.tls-portal-columns h3{font-size:10px;letter-spacing:1.3px;margin:0 0 9px;color:var(--tls-yellow)}
+.tls-portal-columns p{margin:0;color:#71857b;font-size:11px;line-height:1.6}
+.tls-portal-disclaimer{margin:18px 0;text-align:center;color:#52655c;font-size:9px;line-height:1.6}
+@media(max-width:700px){.tls-portal{padding:45px 0 80px}.tls-portal-head{display:block}.tls-portal-date{margin-top:20px}.tls-portal-grid{grid-template-columns:1fr}.tls-feature-card{min-height:280px}.tls-portal-columns{grid-template-columns:1fr}.tls-category-nav{margin-right:-5vw}}
