@@ -416,3 +416,72 @@
   .exercise-card .training-visual-v2{height:180px}
   .exercise-modal-card .training-visual-v2{height:215px}
 }
+
+
+/* VIVA+ exercise illustrations v3 — cleaner flat human anatomy */
+.training-visual-v3{
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  background:#fff;
+  border-radius:16px 16px 0 0;
+}
+.exercise-illustration-v3{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+.v3-shadow{fill:#eee9e6}
+.v3-skin{fill:#ffd3a6}
+.v3-face{fill:#efb887}
+.v3-neck{fill:#f4c397}
+.v3-top{fill:#f28b18}
+.v3-legwear{fill:#3c292d}
+.v3-shoe{fill:#e96760}
+.v3-hair{fill:#5b3c30}
+.v3-prop{fill:#d9bba5}
+.v3-mat{fill:#eadfd8}
+.v3-bench{fill:#e6ad67}
+.v3-bench rect:first-child{fill:#e9aa61}
+.v3-bench rect:last-child{fill:#634337}
+.v3-dumbbell{fill:#e66b68}
+.v3-caption{
+  position:absolute;
+  left:14px;
+  top:12px;
+  padding:5px 8px;
+  border-radius:6px;
+  background:rgba(255,255,255,.9);
+  color:#927c70;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.9px;
+}
+.v3-standing,.v3-lunge-figure,.v3-push-figure,.v3-bridge-figure,.v3-deadbug,.v3-birddog{
+  transform-box:fill-box;
+}
+.pose-squat .v3-standing{transform:translateY(7px) scale(.82);transform-origin:center bottom}
+.pose-sumo .v3-standing{transform:translateY(9px) scale(.82);transform-origin:center bottom}
+.pose-squatarms .v3-standing{transform:translateY(5px) scale(.82);transform-origin:center bottom}
+.pose-march .v3-standing{transform:translateY(0) scale(.83);transform-origin:center bottom}
+.pose-calf .v3-standing{transform:translateY(-5px) scale(.83);transform-origin:center bottom}
+.pose-lunge .v3-lunge-figure{transform:translateY(1px) scale(.82);transform-origin:center bottom}
+.pose-push .v3-push-figure{transform:translate(16px,0) scale(.86);transform-origin:center}
+.pose-bridge .v3-bridge-figure{transform:translate(27px,-1px) scale(.82);transform-origin:center}
+.pose-deadbug .v3-deadbug{transform:translate(44px,10px) scale(.82);transform-origin:center}
+.pose-birddog .v3-birddog{transform:translate(42px,7px) scale(.82);transform-origin:center}
+.pose-squat .v3-standing .v3-legwear.left{transform:rotate(12deg);transform-origin:214px 130px}
+.pose-squat .v3-standing .v3-legwear.right{transform:rotate(-16deg);transform-origin:239px 133px}
+.pose-sumo .v3-standing .v3-legwear.left{transform:rotate(24deg);transform-origin:214px 130px}
+.pose-sumo .v3-standing .v3-legwear.right{transform:rotate(-24deg);transform-origin:239px 133px}
+.pose-squatarms .v3-standing .v3-arm-left{transform:rotate(-25deg);transform-origin:200px 75px}
+.pose-squatarms .v3-standing .v3-arm-right{transform:rotate(25deg);transform-origin:243px 75px}
+.pose-march .v3-standing .v3-legwear.left{transform:rotate(-12deg);transform-origin:214px 130px}
+.pose-march .v3-standing .v3-legwear.right{transform:rotate(17deg);transform-origin:239px 133px}
+.exercise-modal-card .training-visual-v3{height:250px;border-radius:18px}
+.exercise-modal-card .training-visual-v3 .v3-caption{top:16px;left:18px}
+@media(max-width:560px){
+  .exercise-card .training-visual-v3{height:180px}
+  .exercise-modal-card .training-visual-v3{height:220px}
+}
