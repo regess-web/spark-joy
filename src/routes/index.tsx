@@ -162,7 +162,7 @@ function TLSHome() {
           <div className="tls-result-card">
             <div className="tls-kicker center"><b /> AUTOAVALIAÇÃO CONCLUÍDA <b /></div>
             <div className="tls-score"><span>✓</span></div>
-            <h2>Quer saber tudo que está ocorrendo nas eleições?</h2>
+            <h2>Tudo que você precisa saber sobre as eleições</h2>
             <p>Tenha acesso a uma central organizada para acompanhar acontecimentos, propostas, declarações, decisões e fontes, sem precisar procurar cada informação separadamente.</p>
             <button className="tls-cta wide" onClick={() => setPaidArea(true)}>CLIQUE AQUI PARA SABER MAIS <span>→</span></button>
             <button className="tls-reset" onClick={restart}>Refazer perguntas</button>
