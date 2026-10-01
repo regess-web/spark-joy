@@ -104,12 +104,20 @@ const days: DayPlan[] = [
   }
 ];
 
+const visualGifs: Record<string,string> = {
+  agachamento: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squats.gif",
+  parede: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pushups.gif",
+  panturrilha: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Standing-calf-raises-1.gif"
+};
+
 function TrainingVisual({ type }: { type: string }) {
+  const gif = visualGifs[type];
   return (
-    <div className={"training-visual visual-" + type} aria-label="Ilustração do movimento">
-      <div className="visual-person"><span className="visual-head" /><span className="visual-body" /><span className="visual-arm a1" /><span className="visual-arm a2" /><span className="visual-leg l1" /><span className="visual-leg l2" /></div>
+    <div className={"training-visual visual-" + type} aria-label="Demonstração do movimento">
+      {gif ? <img className="training-gif" src={gif} alt="" /> : null}
+      {!gif && <div className="visual-person"><span className="visual-head" /><span className="visual-body" /><span className="visual-arm a1" /><span className="visual-arm a2" /><span className="visual-leg l1" /><span className="visual-leg l2" /></div>}
       <span className="visual-floor" />
-      <span className="visual-label">DEMONSTRAÇÃO</span>
+      <span className="visual-label">{gif ? "GIF • DEMONSTRAÇÃO" : "DEMONSTRAÇÃO"}</span>
     </div>
   );
 }
@@ -119,6 +127,12 @@ function TrainingApp() {
   const [selectedDay, setSelectedDay] = useState(1);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [completed, setCompleted] = useState<string[]>([]);
+  const [now, setNow] = useState(Date.now());
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     const saved = localStorage.getItem("viva-training-start");
@@ -135,12 +149,20 @@ function TrainingApp() {
 
   const unlockedDay = useMemo(() => {
     if (!startedAt) return 1;
-    const elapsed = Math.floor((Date.now() - startedAt) / 86400000);
+    const elapsed = Math.floor((now - startedAt) / 86400000);
     return Math.min(7, elapsed + 1);
-  }, [startedAt]);
+  }, [startedAt, now]);
 
   const currentDay = days[selectedDay - 1];
   const progress = Math.round((completed.filter(id => id.startsWith("d" + selectedDay + "-")).length / currentDay.exercises.length) * 100);
+
+  function formatRemaining(ms: number) {
+    const safe = Math.max(0, ms);
+    const h = Math.floor(safe / 3600000);
+    const m = Math.floor((safe % 3600000) / 60000);
+    const s = Math.floor((safe % 60000) / 1000);
+    return String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+  }
 
   function markComplete(id: string) {
     const key = "d" + selectedDay + "-" + id;
@@ -182,7 +204,7 @@ function TrainingApp() {
       </section>
 
       <section className="training-days">
-        <div className="training-section-head"><div><span>JORNADA</span><h2>Seu calendário</h2></div><small>1 novo dia a cada 24h</small></div>
+        <div className="training-section-head"><div><span>JORNADA</span><h2>Seu calendário</h2></div><small>{unlockedDay < 7 ? "Próximo dia em " + formatRemaining((startedAt ?? now) + unlockedDay * 86400000 - now) : "Semana completa"}</small></div>
         <div className="training-day-grid">
           {days.map(day => {
             const locked = day.day > unlockedDay;
