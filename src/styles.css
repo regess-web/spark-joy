@@ -684,6 +684,11 @@
   background: #f7f5ef;
   color: #171717;
 }
+.minimal-diet-icon {
+  color: #b86b45;
+  background: #fbefe8;
+  border-color: #eaded3;
+}
 .minimal-menu-icon svg {
   width: 22px;
   height: 22px;
