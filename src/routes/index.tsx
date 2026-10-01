@@ -19,6 +19,8 @@ const questions = [
 
 function TLSHome() {
   const [started, setStarted] = useState(false);
+  const [voteCode, setVoteCode] = useState("");
+  const [gateError, setGateError] = useState("");
   const [step, setStep] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
   const [done, setDone] = useState(false);
@@ -30,6 +32,15 @@ function TLSHome() {
   const [newsError, setNewsError] = useState("");
 
   const current = questions[step];
+
+  function unlockQuiz() {
+    if (voteCode.trim() === "22") {
+      setStarted(true);
+      setGateError("");
+    } else {
+      setGateError("Digite 22 para liberar o quiz.");
+    }
+  }
 
   useEffect(() => {
     if (!portalArea) return;
@@ -68,29 +79,41 @@ function TLSHome() {
 
       <header className="tls-nav">
         <div className="tls-logo"><span>T</span> TLS</div>
-        <div className="tls-nav-links"><a href="#como">COMO FUNCIONA</a><a href="#fontes">FONTES</a></div>
+        <div className="tls-nav-links"><a href="#quiz">QUIZ</a><a href="#portal">CENTRAL</a></div>
         <div className="tls-status"><i /> ELEIÇÕES ONLINE</div>
       </header>
 
       {!started && (
-        <main className="tls-landing">
-          <section className="tls-hero">
-            <div className="tls-kicker"><b /> CENTRAL DE INFORMAÇÃO ELEITORAL</div>
-            <h1>Cansado de notícias falsas? <em>Quer saber o que realmente está acontecendo?</em></h1>
-            <p>Responda algumas perguntas sobre como você acompanha as eleições, candidatos, propostas e notícias. Sem respostas certas ou erradas.</p>
-            <button className="tls-cta" onClick={() => setStarted(true)}>COMEÇAR AGORA <span>→</span></button>
-            <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> informação em um só lugar</div>
-          </section>
-          <section className="tls-cards" id="como">
-            <div><strong>01</strong><h3>Responda</h3><p>Conte como você acompanha notícias, candidatos e acontecimentos eleitorais.</p></div>
-            <div><strong>02</strong><h3>Continue</h3><p>As perguntas mostram quais tipos de informação você gostaria de acompanhar.</p></div>
-            <div><strong>03</strong><h3>Tenha contexto</h3><p>Conheça uma central organizada para consultar notícias, propostas e fontes.</p></div>
+        <main className="tls-ballot-gate">
+          <section className="tls-ballot-card">
+            <div className="tls-ballot-art">
+              <img src="/urna-eleitoral.svg" alt="Urna eletrônica" />
+            </div>
+            <div className="tls-ballot-copy">
+              <div className="tls-kicker"><b /> ACESSO AO QUIZ</div>
+              <h1>Antes de começar, <em>confirme o código.</em></h1>
+              <p>Digite o número indicado na urna para liberar as perguntas.</p>
+              <div className="tls-ballot-input">
+                <input
+                  inputMode="numeric"
+                  maxLength={2}
+                  value={voteCode}
+                  onChange={(e) => { setVoteCode(e.target.value.replace(/\\D/g, "").slice(0, 2)); setGateError(""); }}
+                  onKeyDown={(e) => { if (e.key === "Enter") unlockQuiz(); }}
+                  placeholder="00"
+                  aria-label="Código de acesso"
+                />
+                <button className="tls-cta" onClick={unlockQuiz}>CONFIRMAR <span>→</span></button>
+              </div>
+              {gateError && <div className="tls-gate-error">{gateError}</div>}
+              <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> acesso liberado pela urna</div>
+            </div>
           </section>
         </main>
       )}
 
       {started && !done && !paidArea && (
-        <main className="tls-quiz">
+        <main className="tls-quiz" id="quiz">
           <div className="tls-quiz-top">
             <div><div className="tls-kicker"><b /> AUTOAVALIAÇÃO TLS</div><h2>Você está acompanhando as eleições?</h2></div>
             <div className="tls-progress-meta"><span>0{step + 1}</span> / 10</div>
@@ -151,7 +174,7 @@ function TLSHome() {
       )}
 
       {paidArea && portalArea && (
-        <main className="tls-portal">
+        <main className="tls-portal" id="portal">
           <div className="tls-portal-head">
             <div>
               <div className="tls-kicker"><b /> CENTRAL DE INFORMAÇÃO ELEITORAL</div>
@@ -199,11 +222,6 @@ function TLSHome() {
           <button className="tls-reset" onClick={() => setPortalArea(false)}>← Voltar para a oferta</button>
         </main>
       )}
-
-      <section className="tls-sources" id="fontes">
-        <div><div className="tls-kicker"><b /> FONTES</div><h2>Acompanhe as informações eleitorais em um só lugar.</h2><p>Reúna notícias, propostas, declarações e acontecimentos eleitorais em uma única central, com referências para consulta.</p></div>
-        <div className="tls-source-grid"><div><b>01</b><span>Tribunal Superior Eleitoral</span></div><div><b>02</b><span>Câmara dos Deputados</span></div><div><b>03</b><span>Senado Federal</span></div><div><b>04</b><span>Fontes oficiais e imprensa</span></div></div>
-      </section>
 
       <footer className="tls-footer">TLS • CENTRAL DE INFORMAÇÃO ELEITORAL • 2026</footer>
     </div>
