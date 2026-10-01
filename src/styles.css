@@ -189,3 +189,70 @@
     height:27%;
   }
 }
+
+
+/* Ebook horizontal eleitoral */
+.tls-ebook{width:100%;padding:0 0 80px}
+.tls-ebook-cover{width:min(1080px,90%);min-height:calc(100vh - 78px);margin:auto;display:flex;flex-direction:column;justify-content:center;padding:70px 0}
+.tls-ebook-cover h2{font-size:clamp(48px,8vw,92px);line-height:.9;letter-spacing:-5px;margin:22px 0}
+.tls-ebook-cover h2 em{font-style:normal;color:var(--tls-yellow)}
+.tls-ebook-cover p{max-width:680px;color:#91a29a;line-height:1.75;font-size:14px}
+.tls-ebook-hint{margin-top:40px;color:#687b72;font-size:9px;letter-spacing:2px;font-weight:900}
+.tls-ebook-hint span{color:var(--tls-yellow);font-size:18px;margin-left:10px}
+.tls-ebook-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 5vw 30px;scrollbar-width:thin;scrollbar-color:#315142 transparent}
+.tls-ebook-slide{flex:0 0 min(88vw,930px);min-height:650px;scroll-snap-align:center;background:linear-gradient(145deg,#0d2419,#08150f);border:1px solid var(--tls-line);border-radius:22px;padding:44px;position:relative;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.25)}
+.tls-slide-no{position:absolute;right:30px;top:28px;color:#4e6259;font-size:9px;font-weight:900;letter-spacing:2px}
+.tls-ebook-slide h3{font-size:clamp(34px,5vw,55px);line-height:.98;letter-spacing:-2.5px;max-width:750px;margin:16px 0 22px}
+.tls-ebook-slide>p{color:#8d9e96;line-height:1.75;font-size:13px;max-width:760px}
+.tls-source-line{display:block;color:#53665d;font-size:8px;line-height:1.5;margin-top:28px;letter-spacing:.3px}
+.tls-stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:700px;margin-top:35px}
+.tls-stat-row div{border:1px solid var(--tls-line);background:#09170f;border-radius:12px;padding:20px}
+.tls-stat-row strong{display:block;color:var(--tls-yellow);font-size:24px}
+.tls-stat-row small{color:#65786f;font-size:9px;margin-top:6px;display:block}
+.tls-timeline{display:grid;gap:0;max-width:760px;margin-top:25px}
+.tls-timeline div{display:grid;grid-template-columns:90px 1fr;gap:20px;border-left:2px solid #274536;padding:13px 0 13px 18px}
+.tls-timeline b{color:var(--tls-yellow);font-size:9px;letter-spacing:1px}
+.tls-timeline span{color:#a3b1aa;font-size:11px;line-height:1.55}
+.tls-candidate-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:24px}
+.tls-candidate-grid div{display:grid;grid-template-columns:30px 1fr;column-gap:8px;align-items:center;border:1px solid var(--tls-line);background:#09170f;border-radius:9px;padding:10px}
+.tls-candidate-grid b{grid-row:span 2;color:var(--tls-yellow);font-size:10px}
+.tls-candidate-grid span{font-size:10px;font-weight:800;color:#e3ebe6}
+.tls-candidate-grid small{font-size:8px;color:#60736a}
+.tls-note{color:#63776d!important;font-size:9px!important;line-height:1.6!important;margin-top:18px!important}
+.tls-proposal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
+.tls-proposal-grid div{border:1px solid var(--tls-line);border-radius:10px;background:#09170f;padding:15px}
+.tls-proposal-grid h4{margin:0 0 7px;color:var(--tls-yellow);font-size:11px}
+.tls-proposal-grid p{margin:0;color:#8b9d94;font-size:10px;line-height:1.55}
+.tls-poll-card{max-width:690px;border:1px solid var(--tls-line);background:#09170f;border-radius:13px;padding:18px;margin:12px 0}
+.tls-poll-card>strong{font-size:10px;color:#e5ece8;display:block;margin-bottom:12px}
+.tls-poll-card>div{display:flex;justify-content:space-between;border-bottom:1px solid #183126;padding:7px 0;color:#8c9d95;font-size:10px}
+.tls-poll-card>div b{color:var(--tls-yellow)}
+.tls-poll-card p{color:#8c9d95;font-size:11px;line-height:1.6;margin:4px 0 10px}
+.tls-poll-card small{display:block;color:#53665d;font-size:8px;line-height:1.5;margin-top:10px}
+.tls-event-list{max-width:760px;margin-top:25px}
+.tls-event-list div{display:grid;grid-template-columns:80px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--tls-line)}
+.tls-event-list b{color:var(--tls-yellow);font-size:9px;letter-spacing:1px}
+.tls-event-list span{color:#9aaaA1;font-size:11px;line-height:1.6}
+.tls-reference-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:780px;margin-top:25px}
+.tls-reference-grid a{border:1px solid var(--tls-line);background:#09170f;border-radius:11px;padding:18px;text-decoration:none}
+.tls-reference-grid b{display:block;color:var(--tls-yellow);font-size:10px;margin-bottom:8px}
+.tls-reference-grid span{color:#879a91;font-size:10px;line-height:1.55}
+.tls-final-box{max-width:650px;border:1px solid #365443;background:rgba(24,169,87,.07);border-radius:14px;padding:22px;margin-top:28px}
+.tls-final-box strong{display:block;color:var(--tls-yellow);font-size:13px}
+.tls-final-box span{display:block;color:#8da098;font-size:10px;line-height:1.6;margin-top:7px}
+.tls-ebook-bottom{width:min(1080px,90%);margin:10px auto;display:flex;justify-content:space-between;align-items:center}
+.tls-ebook-bottom>span{color:#586b62;font-size:9px;letter-spacing:1.5px;font-weight:900}
+@media(max-width:700px){
+ .tls-ebook-cover{min-height:calc(100vh - 64px);padding:50px 0}
+ .tls-ebook-cover h2{letter-spacing:-3px}
+ .tls-ebook-track{padding-left:5vw;padding-right:5vw}
+ .tls-ebook-slide{flex-basis:90vw;min-height:760px;padding:27px 22px}
+ .tls-slide-no{right:18px;top:20px}
+ .tls-candidate-grid{grid-template-columns:repeat(2,1fr)}
+ .tls-proposal-grid{grid-template-columns:1fr}
+ .tls-reference-grid{grid-template-columns:1fr}
+ .tls-stat-row{grid-template-columns:1fr}
+ .tls-timeline div,.tls-event-list div{grid-template-columns:65px 1fr;gap:10px}
+ .tls-ebook-bottom{display:block;text-align:center}
+ .tls-ebook-bottom .tls-reset{display:block;margin:16px auto}
+}
