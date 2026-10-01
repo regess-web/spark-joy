@@ -175,9 +175,9 @@ function TLSHome() {
           <div className="tls-lock">ACESSO PREMIUM</div>
           <div className="tls-kicker center"><b /> INFORMAÇÃO ELEITORAL <b /></div>
           <h2>Saiba de tudo que está acontecendo<br /><em>em um só local.</em></h2>
-          <p className="tls-paywall-lead">Uma central organizada para acompanhar notícias e acontecimentos eleitorais, propostas e declarações de candidatos, decisões relevantes e referências para você conferir as informações por conta própria.</p>
+          <p className="tls-paywall-lead">Uma central atualizada com notícias e acontecimentos eleitorais, propostas e declarações dos candidatos à Presidência, decisões relevantes e referências para conferência. Você também encontra um histórico organizado da eleição de 2026, o que cada candidato propõe e já fez até o momento, além de pesquisas de intenção de voto sempre acompanhadas da data, instituto e fonte.</p>
           <div className="tls-price"><small>PREÇO ÚNICO</small><div><s>R$ 29,90</s></div><strong>R$ 19,90</strong></div>
-          <div className="tls-benefits"><span>✓ Notícias organizadas por assunto</span><span>✓ Acompanhamento de candidatos</span><span>✓ Propostas e declarações</span><span>✓ Fontes para conferência</span></div>
+          <div className="tls-benefits"><span>✓ Notícias e acontecimentos eleitorais</span><span>✓ Propostas e declarações dos candidatos</span><span>✓ Histórico e decisões relevantes</span><span>✓ Pesquisas com data, instituto e fonte</span><span>✓ Referências para conferência</span></div>
           <button className="tls-cta wide" onClick={() => setPortalArea(true)}>VISUALIZAR A CENTRAL <span>→</span></button>
           <p className="tls-small">Na versão real, este acesso deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
           <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar</button>
