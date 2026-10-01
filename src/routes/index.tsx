@@ -4,16 +4,16 @@ import { useState } from "react";
 export const Route = createFileRoute("/")({ component: TLSHome });
 
 const questions = [
-  { category: "BOLSO", q: "Depois que o 9 dedos voltou ao poder, você sentiu que seu dinheiro passou a render diferente no dia a dia?", options: ["Rende menos", "Rende mais", "Quase igual", "Não sei dizer"] },
-  { category: "MERCADO", q: "Desde a volta do barbudo ao Planalto, como você percebeu os preços no mercado e nas despesas de casa?", options: ["Ficaram mais pesados", "Ficaram mais leves", "Mudaram pouco", "Não acompanho"] },
-  { category: "CONTAS", q: "Depois que o petista reassumiu a Presidência, você ou sua família sentiu alguma mudança no quanto sobra no fim do mês?", options: ["Sobrou menos", "Sobrou mais", "Praticamente igual", "Não sei comparar"] },
-  { category: "IMPOSTOS", q: "Desde que ele voltou ao Planalto, você passou a prestar mais atenção em impostos e no impacto deles nos produtos que compra?", options: ["Sim, bastante", "Um pouco", "Quase nada", "Nunca parei para pensar nisso"] },
-  { category: "TRABALHO E RENDA", q: "Depois da volta do 9 dedos, você ou alguém próximo percebeu alguma mudança no emprego, salário ou renda?", options: ["Melhorou", "Piorou", "Ficou parecido", "Não sei avaliar"] },
-  { category: "SALÁRIO", q: "Com os reajustes do salário mínimo durante esse período, você percebeu alguma diferença concreta no orçamento da sua família?", options: ["Melhorou", "O aumento ajudou, mas outras despesas pesaram", "Pouca ou nenhuma diferença", "Não se aplica / não sei"] },
-  { category: "PROGRAMAS", q: "Quando pensa em programas como Bolsa Família e Minha Casa, Minha Vida durante o governo do barbudo, você ou alguém próximo foi afetado por eles?", options: ["Sim, positivamente", "Sim, de outra forma", "Conheço apenas pelas notícias", "Não acompanho"] },
-  { category: "GASTOS PÚBLICOS", q: "Quando você ouve falar dos gastos do governo do petista, você entende como isso pode se relacionar com juros, impostos e a economia?", options: ["Entendo", "Tenho uma noção", "Tenho muitas dúvidas", "Não sei como funciona"] },
-  { category: "NOTÍCIAS", q: "Quando aparece uma notícia dizendo que uma decisão do 9 dedos melhorou ou piorou a vida dos brasileiros, você costuma conferir os números e a fonte original?", options: ["Quase sempre", "Às vezes", "Raramente", "Nunca"] },
-  { category: "A VERDADE POR TRÁS DOS DADOS", q: "Se você pudesse conferir documentos, leis e números sobre o período do barbudo no poder, qual assunto mais gostaria de investigar?", options: ["Meu bolso, preços e impostos", "Emprego, salário e renda", "Programas sociais e investimentos", "Contas públicas e decisões do governo"] }
+  { category: "NOTÍCIAS", q: "Você está cansado de abrir as redes sociais e não saber mais o que é notícia verdadeira e o que é informação distorcida?", options: ["Sim, muito", "Às vezes", "Pouco", "Não"] },
+  { category: "ELEIÇÕES", q: "Você quer acompanhar tudo o que está acontecendo nas eleições sem precisar ficar procurando informações em vários lugares?", options: ["Sim, quero acompanhar tudo", "Quero acompanhar o principal", "Só algumas coisas", "Não tenho interesse"] },
+  { category: "CANDIDATOS", q: "Você gostaria de saber o que os candidatos estão fazendo, dizendo e propondo durante o período eleitoral?", options: ["Sim, tudo", "As principais coisas", "Só sobre alguns candidatos", "Não faço questão"] },
+  { category: "CHECAGEM", q: "Quando aparece uma afirmação política nas redes sociais, você sente dificuldade para descobrir se ela é verdadeira?", options: ["Muita dificuldade", "Às vezes", "Raramente", "Nunca"] },
+  { category: "PROPOSTAS", q: "Você gostaria de comparar as propostas dos candidatos em um só lugar, em vez de depender apenas de vídeos e manchetes?", options: ["Sim", "Seria útil", "Talvez", "Não"] },
+  { category: "DECISÕES", q: "Você quer acompanhar as decisões, votações e posicionamentos que podem afetar o país durante o período eleitoral?", options: ["Sim, de perto", "Só as mais importantes", "Às vezes", "Não acompanho"] },
+  { category: "DEBATES", q: "Você costuma assistir a debates, entrevistas ou pronunciamentos e depois fica com dúvida sobre o que realmente foi prometido?", options: ["Frequentemente", "Às vezes", "Raramente", "Nunca"] },
+  { category: "FONTES", q: "Você gostaria de ter as fontes originais para conferir uma informação antes de acreditar ou compartilhar?", options: ["Com certeza", "Seria útil", "Talvez", "Não faz diferença"] },
+  { category: "ACOMPANHAMENTO", q: "Se houvesse um único local reunindo notícias, propostas, decisões, declarações e checagens, você usaria para acompanhar as eleições?", options: ["Usaria diariamente", "Usaria com frequência", "Consultaria quando necessário", "Provavelmente não"] },
+  { category: "ÚLTIMA PERGUNTA", q: "O que mais faria diferença para você acompanhar as eleições com mais informação?", options: ["Notícias verificadas", "Ações e propostas dos candidatos", "Tudo reunido em um só lugar", "Fontes para conferir por conta própria"] }
 ];
 
 function TLSHome() {
@@ -56,22 +56,22 @@ function TLSHome() {
       <header className="tls-nav">
         <div className="tls-logo"><span>T</span> TLS</div>
         <div className="tls-nav-links"><a href="#como">COMO FUNCIONA</a><a href="#fontes">FONTES</a></div>
-        <div className="tls-status"><i /> QUIZ ONLINE</div>
+        <div className="tls-status"><i /> ELEIÇÕES ONLINE</div>
       </header>
 
       {!started && (
         <main className="tls-landing">
           <section className="tls-hero">
-            <div className="tls-kicker"><b /> AUTOAVALIAÇÃO POLÍTICA E ECONÔMICA</div>
-            <h1>Depois que o <em>9 dedos</em> voltou ao poder, você sentiu no bolso?</h1>
-            <p>Sem respostas certas ou erradas. Perguntas sobre preços, impostos, trabalho, renda, programas públicos e decisões tomadas em Brasília.</p>
+            <div className="tls-kicker"><b /> CENTRAL DE INFORMAÇÃO ELEITORAL</div>
+            <h1>Cansado de notícias falsas? <em>Quer saber o que realmente está acontecendo?</em></h1>
+            <p>Responda algumas perguntas sobre como você acompanha as eleições, candidatos, propostas e notícias. Sem respostas certas ou erradas.</p>
             <button className="tls-cta" onClick={() => setStarted(true)}>COMEÇAR AGORA <span>→</span></button>
-            <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> temas verificáveis</div>
+            <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> informação em um só lugar</div>
           </section>
           <section className="tls-cards" id="como">
-            <div><strong>01</strong><h3>Responda</h3><p>Conte como você percebeu as mudanças na sua vida cotidiana.</p></div>
-            <div><strong>02</strong><h3>Compare</h3><p>As alternativas contemplam experiências econômicas e sociais diferentes.</p></div>
-            <div><strong>03</strong><h3>Confira</h3><p>Ao final, você pode consultar documentos, leis, números e fontes oficiais.</p></div>
+            <div><strong>01</strong><h3>Responda</h3><p>Conte como você acompanha notícias, candidatos e acontecimentos eleitorais.</p></div>
+            <div><strong>02</strong><h3>Continue</h3><p>As perguntas mostram quais tipos de informação você gostaria de acompanhar.</p></div>
+            <div><strong>03</strong><h3>Tenha contexto</h3><p>Conheça uma central organizada para consultar notícias, propostas e fontes.</p></div>
           </section>
         </main>
       )}
@@ -79,7 +79,7 @@ function TLSHome() {
       {started && !done && !paidArea && (
         <main className="tls-quiz">
           <div className="tls-quiz-top">
-            <div><div className="tls-kicker"><b /> AUTOAVALIAÇÃO TLS</div><h2>Vamos falar do que aconteceu no seu dia a dia.</h2></div>
+            <div><div className="tls-kicker"><b /> AUTOAVALIAÇÃO TLS</div><h2>Você está acompanhando as eleições?</h2></div>
             <div className="tls-progress-meta"><span>0{step + 1}</span> / 10</div>
           </div>
           <div className="tls-progress"><div style={{ width: progress + "%" }} /></div>
@@ -96,9 +96,9 @@ function TLSHome() {
             </div>
             <div className="tls-question-footer">
               <div className={picked === null ? "tls-feedback muted" : "tls-feedback good"}>
-                {picked === null ? "Não há resposta certa. Escolha a alternativa que mais representa sua experiência." : "Resposta registrada. Continue."}
+                {picked === null ? "Não há resposta certa. Escolha a alternativa que mais representa você." : "Resposta registrada. Continue."}
               </div>
-              <button className="tls-next" disabled={picked === null} onClick={next}>{step === questions.length - 1 ? "VER RESULTADO" : "CONTINUAR"} <span>→</span></button>
+              <button className="tls-next" disabled={picked === null} onClick={next}>{step === questions.length - 1 ? "CONTINUAR" : "CONTINUAR"} <span>→</span></button>
             </div>
           </section>
         </main>
@@ -109,34 +109,34 @@ function TLSHome() {
           <div className="tls-result-card">
             <div className="tls-kicker center"><b /> AUTOAVALIAÇÃO CONCLUÍDA <b /></div>
             <div className="tls-score"><span>✓</span></div>
-            <h2>Você chegou até o fim.</h2>
-            <p>Suas respostas mostram quais aspectos do período analisado você quer entender melhor. O questionário não classifica sua ideologia nem considera uma resposta como politicamente correta.</p>
-            <button className="tls-cta wide" onClick={() => setPaidArea(true)}>VER O QUE PODE SER CONFERIDO NOS DADOS <span>→</span></button>
-            <button className="tls-reset" onClick={restart}>Refazer autoavaliação</button>
+            <h2>Quer saber tudo que está ocorrendo nas eleições?</h2>
+            <p>Tenha acesso a uma central organizada para acompanhar acontecimentos, propostas, declarações, decisões e fontes, sem precisar procurar cada informação separadamente.</p>
+            <button className="tls-cta wide" onClick={() => setPaidArea(true)}>CLIQUE AQUI PARA SABER MAIS <span>→</span></button>
+            <button className="tls-reset" onClick={restart}>Refazer perguntas</button>
           </div>
         </main>
       )}
 
       {paidArea && (
         <main className="tls-paywall">
-          <div className="tls-lock">LOCKED</div>
-          <div className="tls-kicker center"><b /> ÁREA PREMIUM <b /></div>
-          <h2>Você viu as perguntas.<br /><em>Agora vem a documentação.</em></h2>
-          <p className="tls-paywall-lead">Uma biblioteca organizada para consultar leis, programas públicos, decisões, indicadores econômicos, datas e fontes oficiais — com contexto para você conferir as afirmações por conta própria.</p>
-          <div className="tls-price"><small>ACESSO ÚNICO</small><strong>R$ 19,90</strong></div>
-          <div className="tls-benefits"><span>✓ Linha do tempo por tema</span><span>✓ Leis e programas com datas</span><span>✓ Dados econômicos e sociais</span><span>✓ Referências oficiais para conferência</span></div>
-          <button className="tls-cta wide" onClick={() => alert("Conecte aqui o link do seu checkout.")}>DESBLOQUEAR POR R$ 19,90 <span>→</span></button>
-          <p className="tls-small">O conteúdo premium não é exibido nesta página antes da compra. O checkout real deve confirmar o pagamento no servidor antes de liberar o acesso.</p>
-          <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar ao resultado</button>
+          <div className="tls-lock">ACESSO PREMIUM</div>
+          <div className="tls-kicker center"><b /> INFORMAÇÃO ELEITORAL <b /></div>
+          <h2>Saiba de tudo que está acontecendo<br /><em>em um só local.</em></h2>
+          <p className="tls-paywall-lead">Uma central organizada para acompanhar notícias e acontecimentos eleitorais, propostas e declarações de candidatos, decisões relevantes e referências para você conferir as informações por conta própria.</p>
+          <div className="tls-price"><small>PREÇO ÚNICO</small><div><s>R$ 29,90</s></div><strong>R$ 19,90</strong></div>
+          <div className="tls-benefits"><span>✓ Notícias organizadas por assunto</span><span>✓ Acompanhamento de candidatos</span><span>✓ Propostas e declarações</span><span>✓ Fontes para conferência</span></div>
+          <button className="tls-cta wide" onClick={() => alert("Conecte aqui o link do seu checkout.")}>ACESSAR POR R$ 19,90 <span>→</span></button>
+          <p className="tls-small">O conteúdo premium deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
+          <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar</button>
         </main>
       )}
 
       <section className="tls-sources" id="fontes">
-        <div><div className="tls-kicker"><b /> TRANSPARÊNCIA</div><h2>Fontes antes de opiniões.</h2><p>O conteúdo educacional deve diferenciar fatos documentados, contexto e interpretação. Consulte sempre a fonte original quando quiser verificar uma afirmação.</p></div>
-        <div className="tls-source-grid"><div><b>01</b><span>Presidência / Planalto</span></div><div><b>02</b><span>Câmara dos Deputados</span></div><div><b>03</b><span>Senado Federal</span></div><div><b>04</b><span>IBGE / indicadores oficiais</span></div></div>
+        <div><div className="tls-kicker"><b /> FONTES</div><h2>Informação antes de opinião.</h2><p>Use fontes originais para conferir notícias, propostas, declarações e acontecimentos eleitorais.</p></div>
+        <div className="tls-source-grid"><div><b>01</b><span>Tribunal Superior Eleitoral</span></div><div><b>02</b><span>Câmara dos Deputados</span></div><div><b>03</b><span>Senado Federal</span></div><div><b>04</b><span>Fontes oficiais e imprensa</span></div></div>
       </section>
 
-      <footer className="tls-footer">TLS • AUTOAVALIAÇÃO CÍVICA • 2026</footer>
+      <footer className="tls-footer">TLS • CENTRAL DE INFORMAÇÃO ELEITORAL • 2026</footer>
     </div>
   );
 }
