@@ -4,16 +4,16 @@ import { useState } from "react";
 export const Route = createFileRoute("/")({ component: TLSHome });
 
 const questions = [
-  { category: "GOVERNO LULA", q: "Desde o início do terceiro mandato de Luiz Inácio Lula da Silva, você percebeu alguma mudança no quanto o dinheiro rende no seu dia a dia?", options: ["Rende mais", "Rende menos", "Praticamente igual", "Não sei dizer"] },
-  { category: "BOLSO", q: "Nos últimos anos, como você sentiu as despesas da sua casa ou da sua família em relação à renda?", options: ["Ficaram mais pesadas", "Ficaram mais leves", "Não mudaram muito", "Não acompanho"] },
-  { category: "PREÇOS", q: "Quando você vai ao mercado, abastece o carro ou paga uma conta, você sente que as mudanças econômicas do período do governo Lula chegaram ao seu bolso?", options: ["Sim, claramente", "Um pouco", "Quase não percebi", "Nunca parei para relacionar"] },
-  { category: "IMPOSTOS", q: "Ao ouvir sobre mudanças em impostos e no sistema tributário durante o governo Lula, você sente que entende quanto isso pode representar no preço das coisas que compra?", options: ["Entendo bem", "Entendo parcialmente", "Tenho muita dúvida", "Nunca fui atrás"] },
-  { category: "TRABALHO E RENDA", q: "Desde 2023, você ou alguém próximo percebeu alguma mudança nas oportunidades de emprego, renda ou atividade profissional?", options: ["Melhorou", "Piorou", "Ficou parecido", "Não sei avaliar"] },
-  { category: "SALÁRIO MÍNIMO", q: "Quando o salário mínimo foi reajustado acima da inflação em diferentes anos do período Lula, você sentiu algum efeito concreto no orçamento da sua família?", options: ["Sim, positivo", "Sim, mas o aumento dos preços anulou parte do efeito", "Pouco ou nenhum", "Não se aplica / não sei"] },
-  { category: "PROGRAMAS SOCIAIS", q: "Quando você pensa em medidas como o Bolsa Família e o Minha Casa, Minha Vida retomados ou ampliados no período Lula, qual é a sua relação com esses programas?", options: ["Eu ou alguém próximo foi beneficiado", "Conheço pessoas beneficiadas", "Conheço apenas pelas notícias", "Não acompanho"] },
-  { category: "GASTOS DO GOVERNO", q: "Quando você ouve discussões sobre gastos públicos, déficit e dívida durante o governo Lula, você costuma pensar em como isso pode afetar juros, impostos ou a economia?", options: ["Sim, penso nisso", "Às vezes", "Raramente", "Não sei como funciona"] },
-  { category: "NOTÍCIAS", q: "Quando aparece uma notícia dizendo que uma medida do governo Lula melhorou ou piorou a vida dos brasileiros, você costuma procurar os números e a fonte original antes de formar uma opinião?", options: ["Quase sempre", "Às vezes", "Raramente", "Nunca"] },
-  { category: "A VERDADE POR TRÁS DOS DADOS", q: "Se você pudesse abrir uma biblioteca com leis, decisões, números econômicos e fontes oficiais para conferir o que realmente aconteceu durante o governo Lula, o que mais gostaria de investigar?", options: ["Meu bolso, preços e impostos", "Emprego, salário e renda", "Programas sociais e investimentos", "Contas públicas, leis e decisões do governo"] }
+  { category: "BOLSO", q: "Depois que o 9 dedos voltou ao poder, você sentiu que seu dinheiro passou a render diferente no dia a dia?", options: ["Rende menos", "Rende mais", "Quase igual", "Não sei dizer"] },
+  { category: "MERCADO", q: "Desde a volta do barbudo ao Planalto, como você percebeu os preços no mercado e nas despesas de casa?", options: ["Ficaram mais pesados", "Ficaram mais leves", "Mudaram pouco", "Não acompanho"] },
+  { category: "CONTAS", q: "Depois que o petista reassumiu a Presidência, você ou sua família sentiu alguma mudança no quanto sobra no fim do mês?", options: ["Sobrou menos", "Sobrou mais", "Praticamente igual", "Não sei comparar"] },
+  { category: "IMPOSTOS", q: "Desde que ele voltou ao Planalto, você passou a prestar mais atenção em impostos e no impacto deles nos produtos que compra?", options: ["Sim, bastante", "Um pouco", "Quase nada", "Nunca parei para pensar nisso"] },
+  { category: "TRABALHO E RENDA", q: "Depois da volta do 9 dedos, você ou alguém próximo percebeu alguma mudança no emprego, salário ou renda?", options: ["Melhorou", "Piorou", "Ficou parecido", "Não sei avaliar"] },
+  { category: "SALÁRIO", q: "Com os reajustes do salário mínimo durante esse período, você percebeu alguma diferença concreta no orçamento da sua família?", options: ["Melhorou", "O aumento ajudou, mas outras despesas pesaram", "Pouca ou nenhuma diferença", "Não se aplica / não sei"] },
+  { category: "PROGRAMAS", q: "Quando pensa em programas como Bolsa Família e Minha Casa, Minha Vida durante o governo do barbudo, você ou alguém próximo foi afetado por eles?", options: ["Sim, positivamente", "Sim, de outra forma", "Conheço apenas pelas notícias", "Não acompanho"] },
+  { category: "GASTOS PÚBLICOS", q: "Quando você ouve falar dos gastos do governo do petista, você entende como isso pode se relacionar com juros, impostos e a economia?", options: ["Entendo", "Tenho uma noção", "Tenho muitas dúvidas", "Não sei como funciona"] },
+  { category: "NOTÍCIAS", q: "Quando aparece uma notícia dizendo que uma decisão do 9 dedos melhorou ou piorou a vida dos brasileiros, você costuma conferir os números e a fonte original?", options: ["Quase sempre", "Às vezes", "Raramente", "Nunca"] },
+  { category: "A VERDADE POR TRÁS DOS DADOS", q: "Se você pudesse conferir documentos, leis e números sobre o período do barbudo no poder, qual assunto mais gostaria de investigar?", options: ["Meu bolso, preços e impostos", "Emprego, salário e renda", "Programas sociais e investimentos", "Contas públicas e decisões do governo"] }
 ];
 
 function TLSHome() {
@@ -62,16 +62,16 @@ function TLSHome() {
       {!started && (
         <main className="tls-landing">
           <section className="tls-hero">
-            <div className="tls-kicker"><b /> AUTOAVALIAÇÃO SOBRE O GOVERNO LULA</div>
-            <h1>Você sentiu as decisões do governo Lula <em>no seu bolso?</em></h1>
-            <p>Sem respostas certas ou erradas. As perguntas partem de situações do cotidiano e passam por preços, impostos, trabalho, renda, programas públicos e contas do governo.</p>
+            <div className="tls-kicker"><b /> AUTOAVALIAÇÃO POLÍTICA E ECONÔMICA</div>
+            <h1>Depois que o <em>9 dedos</em> voltou ao poder, você sentiu no bolso?</h1>
+            <p>Sem respostas certas ou erradas. Perguntas sobre preços, impostos, trabalho, renda, programas públicos e decisões tomadas em Brasília.</p>
             <button className="tls-cta" onClick={() => setStarted(true)}>COMEÇAR AGORA <span>→</span></button>
-            <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> baseado em temas verificáveis</div>
+            <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> temas verificáveis</div>
           </section>
           <section className="tls-cards" id="como">
-            <div><strong>01</strong><h3>Responda</h3><p>Conte como você percebeu os efeitos do período Lula na vida cotidiana.</p></div>
-            <div><strong>02</strong><h3>Compare</h3><p>As respostas abordam experiências e percepções diferentes, sem gabarito político.</p></div>
-            <div><strong>03</strong><h3>Aprofunde</h3><p>Ao final, você pode consultar uma biblioteca com leis, dados, datas e fontes oficiais.</p></div>
+            <div><strong>01</strong><h3>Responda</h3><p>Conte como você percebeu as mudanças na sua vida cotidiana.</p></div>
+            <div><strong>02</strong><h3>Compare</h3><p>As alternativas contemplam experiências econômicas e sociais diferentes.</p></div>
+            <div><strong>03</strong><h3>Confira</h3><p>Ao final, você pode consultar documentos, leis, números e fontes oficiais.</p></div>
           </section>
         </main>
       )}
@@ -110,7 +110,7 @@ function TLSHome() {
             <div className="tls-kicker center"><b /> AUTOAVALIAÇÃO CONCLUÍDA <b /></div>
             <div className="tls-score"><span>✓</span></div>
             <h2>Você chegou até o fim.</h2>
-            <p>Suas respostas mostram quais aspectos do período Lula você quer entender melhor. O questionário não classifica sua ideologia nem considera uma resposta como politicamente correta.</p>
+            <p>Suas respostas mostram quais aspectos do período analisado você quer entender melhor. O questionário não classifica sua ideologia nem considera uma resposta como politicamente correta.</p>
             <button className="tls-cta wide" onClick={() => setPaidArea(true)}>VER O QUE PODE SER CONFERIDO NOS DADOS <span>→</span></button>
             <button className="tls-reset" onClick={restart}>Refazer autoavaliação</button>
           </div>
@@ -122,7 +122,7 @@ function TLSHome() {
           <div className="tls-lock">LOCKED</div>
           <div className="tls-kicker center"><b /> ÁREA PREMIUM <b /></div>
           <h2>Você viu as perguntas.<br /><em>Agora vem a documentação.</em></h2>
-          <p className="tls-paywall-lead">Uma biblioteca organizada para consultar leis, programas públicos, decisões, indicadores econômicos, datas e fontes oficiais do período do governo Lula — com contexto para você conferir as afirmações por conta própria.</p>
+          <p className="tls-paywall-lead">Uma biblioteca organizada para consultar leis, programas públicos, decisões, indicadores econômicos, datas e fontes oficiais — com contexto para você conferir as afirmações por conta própria.</p>
           <div className="tls-price"><small>ACESSO ÚNICO</small><strong>R$ 19,90</strong></div>
           <div className="tls-benefits"><span>✓ Linha do tempo por tema</span><span>✓ Leis e programas com datas</span><span>✓ Dados econômicos e sociais</span><span>✓ Referências oficiais para conferência</span></div>
           <button className="tls-cta wide" onClick={() => alert("Conecte aqui o link do seu checkout.")}>DESBLOQUEAR POR R$ 19,90 <span>→</span></button>
