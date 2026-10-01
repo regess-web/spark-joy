@@ -1,302 +1,236 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { fetchNews, type NewsItem } from "../lib/news";
+import { useMemo, useState } from "react";
 
-export const Route = createFileRoute("/")({ component: TLSHome });
+export const Route = createFileRoute("/")({ component: WeightLossQuiz });
 
-const questions = [
-  { category: "HISTÓRICO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Jair%20Bolsonaro%202022%20%28cropped%29.jpg", q: "Informações documentadas sobre o governo de Jair Bolsonaro reunidas em um só lugar.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "CANDIDATOS", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio%20Bolsonaro%2001.09.26%20%28cropped%202%29.jpg", q: "Declarações e posicionamentos públicos de candidatos e políticos organizados por tema e data.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "CONGRESSO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Imagens%20de%20Bras%C3%ADlia%20-%20Congresso%20Nacional%20%2850060213016%29.jpg", q: "Acontecimentos e decisões do Congresso Nacional apresentados com contexto e fontes.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "JUSTIÇA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Supremo%20Tribunal%20Federal%2C%20Brasilia.jpg", q: "Decisões relevantes do STF e de outros tribunais, acompanhadas dos documentos correspondentes.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "GOVERNO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Pal%C3%A1cio%20do%20Planalto%20%2830890615422%29.jpg", q: "Atos, medidas e informações oficiais do Governo Federal reunidos para consulta.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "ELEIÇÕES", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Sede%20do%20Tribunal%20Superior%20Eleitoral%20%281%29.jpg", q: "Informações eleitorais organizadas por assunto, data, órgão responsável e fonte original.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "LEGISLATIVO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/C%C3%A2mara%20dos%20Deputados%20%285944392503%29.jpg", q: "Atividades da Câmara dos Deputados acompanhadas de referências para conferência.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "SENADO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Senado%20Federal%20do%20Brasil%20%2814588978177%29.jpg", q: "Projetos, votações e declarações do Senado Federal organizados em um único painel.", options: ["Quero acompanhar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "VOTAÇÃO", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Urna%20Eletr%C3%B4nica%20Brasileira.jpg", q: "Explicações e referências sobre o funcionamento da votação e da urna eletrônica.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] },
-  { category: "CONFERÊNCIA", image: "https://commons.wikimedia.org/wiki/Special:FilePath/Alexandre%20de%20Moraes.jpg", q: "Fontes originais e registros públicos para conferir uma informação antes de formar sua própria opinião.", options: ["Quero consultar", "Tenho interesse", "Talvez", "Não preciso"] }
+type Answer = { text: string; tag: "autoestima" | "rotina" | "corpo" | "energia" };
+
+const questions: { question: string; subtitle: string; answers: Answer[] }[] = [
+  {
+    question: "Você se sente cansada de chegar aos eventos e não se sentir do jeito que gostaria?",
+    subtitle: "Não existe resposta certa. Escolha o que mais combina com você hoje.",
+    answers: [
+      { text: "Sim, isso mexe bastante comigo", tag: "autoestima" },
+      { text: "Às vezes, principalmente em fotos", tag: "autoestima" },
+      { text: "Quero começar a mudar isso", tag: "corpo" },
+      { text: "Não penso muito nisso", tag: "rotina" }
+    ]
+  },
+  {
+    question: "Quando você se olha no espelho, como gostaria de se sentir?",
+    subtitle: "Pense mais na sensação que você quer ter do que em um número na balança.",
+    answers: [
+      { text: "Mais confiante comigo mesma", tag: "autoestima" },
+      { text: "Mais confortável com minhas roupas", tag: "corpo" },
+      { text: "Mais leve e disposta", tag: "energia" },
+      { text: "Mais satisfeita com minha rotina", tag: "rotina" }
+    ]
+  },
+  {
+    question: "O que mais dificulta cuidar do seu corpo atualmente?",
+    subtitle: "Sua rotina não precisa ser perfeita para começar.",
+    answers: [
+      { text: "Falta de tempo", tag: "rotina" },
+      { text: "Falta de constância", tag: "rotina" },
+      { text: "Não sei quais exercícios fazer", tag: "corpo" },
+      { text: "Começo e acabo desistindo", tag: "autoestima" }
+    ]
+  },
+  {
+    question: "Como você se sente quando uma roupa que gostava não veste como antes?",
+    subtitle: "Escolha a alternativa que mais se aproxima da sua experiência.",
+    answers: [
+      { text: "Fico insegura", tag: "autoestima" },
+      { text: "Fico frustrada", tag: "corpo" },
+      { text: "Penso que preciso voltar à rotina", tag: "rotina" },
+      { text: "Uso outra roupa e sigo o dia", tag: "energia" }
+    ]
+  },
+  {
+    question: "Se você tivesse mais disposição no dia a dia, o que mudaria?",
+    subtitle: "Imagine sua rotina alguns meses a partir de agora.",
+    answers: [
+      { text: "Eu aproveitaria mais os momentos fora de casa", tag: "energia" },
+      { text: "Me sentiria melhor nas fotos", tag: "autoestima" },
+      { text: "Voltaria a usar algumas roupas", tag: "corpo" },
+      { text: "Conseguiria manter uma rotina de exercícios", tag: "rotina" }
+    ]
+  },
+  {
+    question: "Qual dessas situações mais parece com você?",
+    subtitle: "Não é um teste. É só para entender o que você procura.",
+    answers: [
+      { text: "Quero mudar, mas não sei por onde começar", tag: "corpo" },
+      { text: "Sei o que fazer, mas tenho dificuldade em manter", tag: "rotina" },
+      { text: "Quero voltar a me sentir bem comigo mesma", tag: "autoestima" },
+      { text: "Quero ter mais energia para minha rotina", tag: "energia" }
+    ]
+  },
+  {
+    question: "Quanto tempo você conseguiria reservar para cuidar de você?",
+    subtitle: "Escolha pensando na sua rotina real, não na rotina perfeita.",
+    answers: [
+      { text: "10 a 20 minutos", tag: "rotina" },
+      { text: "20 a 30 minutos", tag: "corpo" },
+      { text: "30 a 45 minutos", tag: "energia" },
+      { text: "Ainda não sei, preciso de algo simples", tag: "autoestima" }
+    ]
+  },
+  {
+    question: "O que faria você olhar para trás e pensar: 'valeu a pena começar'?",
+    subtitle: "Essa resposta ajuda a personalizar sua experiência.",
+    answers: [
+      { text: "Me sentir mais confiante", tag: "autoestima" },
+      { text: "Perceber mudanças no meu corpo", tag: "corpo" },
+      { text: "Ter mais disposição", tag: "energia" },
+      { text: "Conseguir manter uma rotina", tag: "rotina" }
+    ]
+  },
+  {
+    question: "Como você gostaria de chegar ao verão?",
+    subtitle: "Sem comparação com ninguém. Pense em você.",
+    answers: [
+      { text: "Mais confiante e confortável comigo", tag: "autoestima" },
+      { text: "Com uma rotina de exercícios que eu consiga manter", tag: "rotina" },
+      { text: "Sentindo meu corpo mais leve e ativo", tag: "corpo" },
+      { text: "Com mais energia para aproveitar", tag: "energia" }
+    ]
+  },
+  {
+    question: "Se existisse um plano simples para você começar hoje, o que seria mais importante?",
+    subtitle: "Última pergunta. Escolha o que mais importa para você.",
+    answers: [
+      { text: "Exercícios práticos e objetivos", tag: "corpo" },
+      { text: "Uma rotina fácil de seguir", tag: "rotina" },
+      { text: "Voltar a gostar do que vejo no espelho", tag: "autoestima" },
+      { text: "Ter mais disposição no dia a dia", tag: "energia" }
+    ]
+  }
 ];
 
-function TLSHome() {
+const resultCopy = {
+  autoestima: { title: "Você encontrou o lugar certo.", text: "Pelas suas respostas, o que você procura vai além de simplesmente fazer exercícios: você quer voltar a se sentir bem, confiante e confortável consigo mesma." },
+  rotina: { title: "Você encontrou o lugar certo.", text: "Suas respostas mostram que o mais importante para você é ter algo simples o suficiente para entrar na sua rotina e que você consiga manter de verdade." },
+  corpo: { title: "Você encontrou o lugar certo.", text: "Pelas suas respostas, você está buscando uma forma mais prática de cuidar do corpo, com exercícios objetivos e uma rotina que faça sentido para você." },
+  energia: { title: "Você encontrou o lugar certo.", text: "Suas respostas mostram que você quer mais do que uma mudança estética: você quer se sentir mais ativa, disposta e preparada para aproveitar seus dias." }
+};
+
+function WeightLossQuiz() {
   const [started, setStarted] = useState(false);
-  const [voteCode, setVoteCode] = useState("");
-  const [verified, setVerified] = useState(false);
-  const [gateError, setGateError] = useState("");
   const [step, setStep] = useState(0);
-  const [picked, setPicked] = useState<number | null>(null);
-  const [done, setDone] = useState(false);
-  const [paidArea, setPaidArea] = useState(false);
-  const [portalArea, setPortalArea] = useState(false);
-  const [activeCategory, setActiveCategory] = useState("HOJE");
-  const [news, setNews] = useState<NewsItem[]>([]);
-  const [newsLoading, setNewsLoading] = useState(false);
-  const [newsError, setNewsError] = useState("");
+  const [selected, setSelected] = useState<number | null>(null);
+  const [scores, setScores] = useState<Record<string, number>>({ autoestima: 0, rotina: 0, corpo: 0, energia: 0 });
+  const [result, setResult] = useState<string | null>(null);
+  const [offer, setOffer] = useState(false);
 
   const current = questions[step];
+  const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
 
-  function unlockQuiz() {
-    if (voteCode.trim() === "22") {
-      setGateError("");
-      setVerified(true);
-      window.setTimeout(() => setStarted(true), 1800);
-    } else {
-      setGateError("Digite 22 para liberar o quiz.");
-      setVerified(false);
-    }
-  }
+  const dominant = useMemo(() => {
+    return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
+  }, [scores]);
 
-  useEffect(() => {
-    if (!portalArea) return;
-    setNewsLoading(true);
-    fetchNews(activeCategory).then((items) => { setNews(items); setNewsError(""); }).catch(() => setNewsError("Não foi possível carregar as notícias agora.")).finally(() => setNewsLoading(false));
-  }, [portalArea, activeCategory]);
-  const progress = ((step + (picked !== null ? 1 : 0)) / questions.length) * 100;
-
-  function answer(index: number) {
-    if (picked !== null) return;
-    setPicked(index);
+  function choose(index: number) {
+    if (selected !== null) return;
+    setSelected(index);
   }
 
   function next() {
-    if (picked === null) return;
-    if (step === questions.length - 1) setDone(true);
-    else {
+    if (selected === null) return;
+    const tag = current.answers[selected].tag;
+    const nextScores = { ...scores, [tag]: (scores[tag] || 0) + 1 };
+    setScores(nextScores);
+    if (step === questions.length - 1) {
+      const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
+      setResult(finalTag);
+    } else {
       setStep((s) => s + 1);
-      setPicked(null);
+      setSelected(null);
     }
   }
 
   function restart() {
+    setStarted(false);
     setStep(0);
-    setPicked(null);
-    setDone(false);
-    setPaidArea(false);
-    setPortalArea(false);
-    setStarted(true);
+    setSelected(null);
+    setScores({ autoestima: 0, rotina: 0, corpo: 0, energia: 0 });
+    setResult(null);
+    setOffer(false);
+  }
+
+  if (offer) {
+    return (
+      <main className="fit-app fit-offer">
+        <div className="fit-offer-card">
+          <div className="fit-kicker">SEU PRÓXIMO PASSO</div>
+          <h1>Comece a cuidar de você<br /><em>do seu jeito.</em></h1>
+          <p>Por apenas <strong>R$ 19,90</strong>, tenha acesso a um guia de exercícios práticos para ajudar você a construir uma rotina ativa e chegar ao verão se sentindo mais confiante.</p>
+          <div className="fit-price"><s>R$ 39,90</s><strong>R$ 19,90</strong><span>acesso ao guia</span></div>
+          <div className="fit-benefits">
+            <span>✓ Exercícios organizados por objetivo</span>
+            <span>✓ Rotinas simples para começar</span>
+            <span>✓ Guia para acompanhar sua evolução</span>
+            <span>✓ Acesso imediato ao material</span>
+          </div>
+          <button className="fit-primary">QUERO COMEÇAR AGORA <span>→</span></button>
+          <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
+        </div>
+      </main>
+    );
+  }
+
+  if (result) {
+    const copy = resultCopy[result as keyof typeof resultCopy];
+    return (
+      <main className="fit-app fit-result">
+        <div className="fit-result-card">
+          <div className="fit-kicker">SEU RESULTADO</div>
+          <div className="fit-result-icon">✓</div>
+          <p className="fit-overline">PELO QUE VOCÊ RESPONDEU...</p>
+          <h1>{copy.title}</h1>
+          <p className="fit-result-text">{copy.text}</p>
+          <div className="fit-special">✨ Este é o seu momento de começar a olhar para você com mais carinho.</div>
+          <button className="fit-primary" onClick={() => setOffer(true)}>CONTINUAR <span>→</span></button>
+          <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
+        </div>
+      </main>
+    );
+  }
+
+  if (!started) {
+    return (
+      <main className="fit-app fit-start">
+        <div className="fit-start-card">
+          <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
+          <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
+          <p>Responda algumas perguntas rápidas para entender o que você realmente procura neste momento. Não existe resposta certa ou errada.</p>
+          <button className="fit-primary" onClick={() => setStarted(true)}>COMEÇAR MEU QUIZ <span>→</span></button>
+          <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>sem resposta certa</span><i>•</i><span>resultado personalizado</span></div>
+        </div>
+      </main>
+    );
   }
 
   return (
-    <div className="tls-app">
-      <div className="tls-glow tls-glow-a" />
-      <div className="tls-glow tls-glow-b" />
-
-      <header className="tls-nav">
-        <div className="tls-logo"><span>T</span> TLS</div>
-        <div className="tls-nav-links"><a href="#quiz">QUIZ</a><a href="#portal">CENTRAL</a></div>
-        <div className="tls-status"><i /> ELEIÇÕES ONLINE</div>
-      </header>
-
-      {!started && (
-        <main className="tls-ballot-gate">
-          <section className="tls-ballot-card">
-            <div className={"tls-ballot-art " + (verified ? "verified" : "")}>
-              <img src="/urna-eleitoral.svg" alt="Urna eletrônica" />
-              <div className={"tls-ballot-screen " + (verified ? "show-photo" : "")}>
-                {verified ? (
-                  <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Fl%C3%A1vio%20Bolsonaro%2001.09.26%20%28cropped%202%29.jpg" alt="Flávio Bolsonaro" />
-                ) : (
-                  <strong>{voteCode || "--"}</strong>
-                )}
-                {verified && <span>22</span>}
-              </div>
-            </div>
-            <div className="tls-ballot-copy">
-              <div className="tls-kicker"><b /> ACESSO AO QUIZ</div>
-              <h1>Antes de começar, <em>confirme o código.</em></h1>
-              <p>{verified ? "Código confirmado. A tela da urna exibiu o registro e liberou o acesso." : "Digite o número indicado na urna para liberar o acesso ao quiz."}</p>
-              <div className="tls-ballot-input">
-                <input
-                  inputMode="numeric"
-                  maxLength={2}
-                  value={voteCode}
-                  onChange={(e) => { setVoteCode(e.target.value.replace(/\D/g, "").slice(0, 2)); setGateError(""); }}
-                  onKeyDown={(e) => { if (e.key === "Enter") unlockQuiz(); }}
-                  placeholder="00"
-                  aria-label="Código de acesso"
-                />
-                <button className="tls-cta" onClick={unlockQuiz} disabled={verified}>{verified ? "CONFIRMADO ✓" : "CONFIRMAR"} <span>→</span></button>
-              </div>
-              {gateError && <div className="tls-gate-error">{gateError}</div>}
-              <div className="tls-proof"><span>10</span> perguntas <span>•</span> sem respostas certas <span>•</span> acesso liberado pela urna</div>
-            </div>
-          </section>
-        </main>
-      )}
-
-      {started && !done && !paidArea && (
-        <main className="tls-quiz" id="quiz">
-          <div className="tls-quiz-top">
-            <div><div className="tls-kicker"><b /> AUTOAVALIAÇÃO TLS</div><h2>Você está acompanhando as eleições?</h2></div>
-            <div className="tls-progress-meta"><span>0{step + 1}</span> / 10</div>
-          </div>
-          <div className="tls-progress"><div style={{ width: progress + "%" }} /></div>
-          <section className="tls-question tls-question-horizontal">
-            <div className="tls-question-image-wrap">
-              <img src={current.image} alt="" className="tls-question-image" onError={(e) => { e.currentTarget.src = "/question-fallback.svg"; }} />
-              <div className="tls-image-caption">{current.category}</div>
-            </div>
-            <div className="tls-question-content">
-              <div className="tls-category">{current.category}</div>
-              <div className="tls-question-number">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
-              <h3>{current.q}</h3>
-            <div className="tls-options">
-              {current.options.map((option, i) => (
-                <button key={option} className={"tls-option " + (picked === i ? "selected" : "")} onClick={() => answer(i)}>
-                  <span>{String.fromCharCode(65 + i)}</span>{option}
-                </button>
-              ))}
-            </div>
-              <div className="tls-question-footer">
-              <div className={picked === null ? "tls-feedback muted" : "tls-feedback good"}>
-                {picked === null ? "Não há resposta certa. Escolha a alternativa que mais representa você." : "Resposta registrada. Continue."}
-              </div>
-              <button className="tls-next" disabled={picked === null} onClick={next}>{step === questions.length - 1 ? "CONTINUAR" : "CONTINUAR"} <span>→</span></button>
-              </div>
-            </div>
-          </section>
-        </main>
-      )}
-
-      {started && done && !paidArea && (
-        <main className="tls-result">
-          <div className="tls-result-card">
-            <div className="tls-kicker center"><b /> AUTOAVALIAÇÃO CONCLUÍDA <b /></div>
-            <div className="tls-score"><span>✓</span></div>
-            <h2>Tudo que você precisa saber sobre as eleições</h2>
-            <p>Tenha acesso a uma central organizada para acompanhar acontecimentos, propostas, declarações, decisões e fontes, sem precisar procurar cada informação separadamente.</p>
-            <button className="tls-cta wide" onClick={() => setPaidArea(true)}>CLIQUE AQUI PARA SABER MAIS <span>→</span></button>
-            <button className="tls-reset" onClick={restart}>Refazer perguntas</button>
-          </div>
-        </main>
-      )}
-
-      {paidArea && !portalArea && (
-        <main className="tls-paywall">
-          <div className="tls-lock">ACESSO PREMIUM</div>
-          <div className="tls-kicker center"><b /> INFORMAÇÃO ELEITORAL <b /></div>
-          <h2>Saiba de tudo que está acontecendo<br /><em>em um só local.</em></h2>
-          <p className="tls-paywall-lead">Uma central atualizada com notícias e acontecimentos eleitorais, propostas e declarações dos candidatos à Presidência, decisões relevantes e referências para conferência. Você também encontra um histórico organizado da eleição de 2026, o que cada candidato propõe e já fez até o momento, além de pesquisas de intenção de voto sempre acompanhadas da data, instituto e fonte.</p>
-          <div className="tls-price"><small>PREÇO ÚNICO</small><div><s>R$ 29,90</s></div><strong>R$ 19,90</strong></div>
-          <div className="tls-benefits"><span>✓ Notícias e acontecimentos eleitorais</span><span>✓ Propostas e declarações dos candidatos</span><span>✓ Histórico e decisões relevantes</span><span>✓ Pesquisas com data, instituto e fonte</span><span>✓ Referências para conferência</span></div>
-          <button className="tls-cta wide" onClick={() => setPortalArea(true)}>VISUALIZAR A CENTRAL <span>→</span></button>
-          <p className="tls-small">Na versão real, este acesso deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
-          <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar</button>
-        </main>
-      )}
-
-      {paidArea && portalArea && (
-        <main className="tls-ebook" id="portal">
-          <div className="tls-ebook-cover">
-            <div className="tls-kicker"><b /> EDIÇÃO • 30 DE SETEMBRO DE 2026</div>
-            <h2>ELEIÇÕES 2026<br /><em>o que aconteceu até agora</em></h2>
-            <p>Um guia visual, em ordem cronológica, com os principais acontecimentos, candidatos, propostas, declarações, decisões eleitorais e pesquisas — sempre com data e referência.</p>
-            <div className="tls-ebook-hint">DESLIZE PARA A DIREITA <span>→</span></div>
-          </div>
-
-          <div className="tls-ebook-track">
-            <article className="tls-ebook-slide tls-slide-intro">
-              <span className="tls-slide-no">01 / 08</span>
-              <div className="tls-kicker"><b /> VISÃO GERAL</div>
-              <h3>Onde a eleição está agora?</h3>
-              <p>O primeiro turno está marcado para <strong>4 de outubro de 2026</strong>. Se nenhum candidato obtiver mais de 50% dos votos válidos, o segundo turno está previsto para <strong>25 de outubro</strong>.</p>
-              <div className="tls-stat-row"><div><strong>30/09</strong><small>data desta edição</small></div><div><strong>2026</strong><small>ano eleitoral</small></div><div><strong>4/10</strong><small>1º turno</small></div></div>
-              <small className="tls-source-line">Fonte: TSE • Eleições 2026</small>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">02 / 08</span>
-              <div className="tls-kicker"><b /> LINHA DO TEMPO</div>
-              <h3>Os marcos da campanha</h3>
-              <div className="tls-timeline">
-                <div><b>15 AGO</b><span>Prazo para registro das candidaturas à Presidência.</span></div>
-                <div><b>24 SET</b><span>O TSE lançou uma página que organiza os planos de governo por oito macrotemas.</span></div>
-                <div><b>27 SET</b><span>Foram divulgados detalhes do plano de governo de Flávio Bolsonaro, incluindo propostas econômicas, administrativas e de segurança.</span></div>
-                <div><b>29 SET</b><span>Pesquisa AtlasIntel/Bloomberg registrou cenário de primeiro turno com Lula em 45,3% e Flávio Bolsonaro em 42,2%.</span></div>
-                <div><b>30 SET</b><span>Pesquisa Meio/Ideia apontou empate técnico entre Lula e Flávio nos cenários divulgados.</span></div>
-              </div>
-              <small className="tls-source-line">Fontes: TSE, UOL/Folha e pesquisas registradas no TSE.</small>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">03 / 08</span>
-              <div className="tls-kicker"><b /> QUEM ESTÁ NA DISPUTA</div>
-              <h3>Candidatos registrados para o 1º turno</h3>
-              <div className="tls-candidate-grid">
-                {[
-                  ["13","Lula","PT"],["22","Flávio Bolsonaro","PL"],["30","Romeu Zema","NOVO"],["55","Ronaldo Caiado","PSD"],
-                  ["14","Renan Santos","Missão"],["70","Augusto Cury","Avante"],["16","Hertz Dias","PSTU"],["21","Edmilson Costa","PCB"],
-                  ["27","Clariana Barão","DC"],["29","Rui Costa Pimenta","PCO"],["35","Wilson Grassi","Democrata"],["80","Samara Martins","UP"],["28","Leonardo Avalanche","PRTB"]
-                ].map(([n,name,party]) => <div key={n}><b>{n}</b><span>{name}</span><small>{party}</small></div>)}
-              </div>
-              <p className="tls-note">A situação jurídica e eleitoral das candidaturas pode mudar até a eleição. Leonardo Avalanche teve sua retirada noticiada em 30/09; a relação do TSE consultada para esta edição ainda o listava.</p>
-              <small className="tls-source-line">Fonte principal: TSE • planos de governo e registros de 2026. Atualização sobre Avalanche: Agência Brasil, 30/09/2026.</small>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">04 / 08</span>
-              <div className="tls-kicker"><b /> PROPOSTAS</div>
-              <h3>O que os principais candidatos propõem?</h3>
-              <div className="tls-proposal-grid">
-                <div><h4>Lula • PT</h4><p>O plano apresenta continuidade de políticas públicas, com propostas em áreas como economia, saúde, educação, trabalho, desenvolvimento e meio ambiente.</p></div>
-                <div><h4>Flávio Bolsonaro • PL</h4><p>Propõe reduzir ministérios e cargos comissionados, revisar a reforma tributária, retomar privatizações e endurecer políticas contra o crime organizado.</p></div>
-                <div><h4>Romeu Zema • NOVO</h4><p>Defende uma agenda de maior liberdade econômica, eficiência administrativa, responsabilidade fiscal e reformas na gestão pública.</p></div>
-                <div><h4>Ronaldo Caiado • PSD</h4><p>O plano aborda segurança, saúde, educação, desenvolvimento regional, gestão pública e fortalecimento de políticas de produção e infraestrutura.</p></div>
-                <div><h4>Renan Santos • Missão</h4><p>O programa enfatiza mudanças institucionais, liberdade econômica e revisão de políticas públicas, com críticas a estruturas estatais existentes.</p></div>
-                <div><h4>Augusto Cury • Avante</h4><p>O programa apresenta propostas ligadas a educação, saúde, desenvolvimento humano, economia e empreendedorismo.</p></div>
-              </div>
-              <small className="tls-source-line">Fonte: planos de governo oficiais reunidos pelo TSE. O resumo não substitui os documentos completos.</small>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">05 / 08</span>
-              <div className="tls-kicker"><b /> PESQUISAS</div>
-              <h3>Intenção de voto: números datados</h3>
-              <div className="tls-poll-card"><strong>AtlasIntel / Bloomberg • 29/09</strong><div><span>Lula</span><b>45,3%</b></div><div><span>Flávio Bolsonaro</span><b>42,2%</b></div><div><span>Renan Santos</span><b>5,2%</b></div><div><span>Augusto Cury</span><b>2,0%</b></div><div><span>Ronaldo Caiado</span><b>1,8%</b></div><div><span>Romeu Zema</span><b>0,9%</b></div><small>5.005 entrevistados • 23–28/09 • margem de erro ±1 p.p. • 95% de confiança • registro BR-04391/2026</small></div>
-              <div className="tls-poll-card"><strong>Meio/Ideia • 30/09</strong><p>O levantamento divulgado em 30/09 apontou empate técnico entre Lula e Flávio Bolsonaro nos cenários de 1º e 2º turno apresentados.</p><small>2.000 eleitores • entrevistas por telefone • 25–28/09 • margem de erro ±2,2 p.p. • 95% de confiança • registro BR-08706/2026</small></div>
-              <p className="tls-note">Pesquisas são retratos de um período e usam metodologias diferentes; não representam o resultado da eleição.</p>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">06 / 08</span>
-              <div className="tls-kicker"><b /> DECLARAÇÕES E ACONTECIMENTOS</div>
-              <h3>O que marcou os últimos dias</h3>
-              <div className="tls-event-list">
-                <div><b>29/09</b><span>Debates e declarações sobre responsabilidade fiscal colocaram reforma tributária, gastos públicos e políticas econômicas no centro da discussão.</span></div>
-                <div><b>27/09</b><span>Foram detalhadas propostas do plano de Flávio Bolsonaro em segurança, economia, administração, educação, saúde e meio ambiente.</span></div>
-                <div><b>24/09</b><span>O TSE disponibilizou uma nova interface para consultar propostas presidenciais por assunto, usando os documentos apresentados pelas chapas.</span></div>
-                <div><b>SET/26</b><span>Pesquisas sucessivas registraram variações nas intenções de voto conforme instituto, período e metodologia.</span></div>
-              </div>
-              <small className="tls-source-line">Fontes: TSE, Agência Brasil, UOL e levantamentos eleitorais registrados.</small>
-            </article>
-
-            <article className="tls-ebook-slide">
-              <span className="tls-slide-no">07 / 08</span>
-              <div className="tls-kicker"><b /> DECISÕES E CONFERÊNCIA</div>
-              <h3>Onde conferir antes de acreditar</h3>
-              <div className="tls-reference-grid">
-                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026" target="_blank" rel="noreferrer"><b>TSE</b><span>Calendário, regras, estatísticas e informações oficiais da eleição.</span></a>
-                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026-content/propostas-de-governo-dos-candidatos-ao-cargo-de-presidente-da-republica-eleicoes-2026/planos-de-governo-dos-candidatos-ao-cargo-de-presidente-da-republica-eleicoes-2026" target="_blank" rel="noreferrer"><b>PLANOS DE GOVERNO</b><span>Documentos oficiais apresentados pelas chapas.</span></a>
-                <a href="https://dadosabertos.tse.jus.br/pt_BR/dataset/candidatos-2026" target="_blank" rel="noreferrer"><b>DADOS ABERTOS TSE</b><span>Dados de candidaturas, propostas e registros eleitorais.</span></a>
-                <a href="https://www.tse.jus.br/eleicoes/eleicoes-2026" target="_blank" rel="noreferrer"><b>DIVULGACANDCONTAS</b><span>Informações de candidaturas, contas, doadores e fornecedores.</span></a>
-              </div>
-              <p className="tls-note">A ideia desta seção é permitir que o leitor confira a fonte original em vez de depender apenas do resumo.</p>
-            </article>
-
-            <article className="tls-ebook-slide tls-slide-end">
-              <span className="tls-slide-no">08 / 08</span>
-              <div className="tls-kicker"><b /> FECHAMENTO DA EDIÇÃO</div>
-              <h3>O cenário em 30 de setembro</h3>
-              <p>A eleição entra na reta final com o primeiro turno marcado para 4 de outubro. As propostas oficiais estão disponíveis no TSE, enquanto pesquisas recentes mostram resultados diferentes conforme instituto e metodologia.</p>
-              <div className="tls-final-box"><strong>Atualizado em 30/09/2026</strong><span>Próxima atualização: conforme novos fatos, decisões, pesquisas e declarações forem publicados.</span></div>
-              <small className="tls-source-line">Esta edição organiza informações públicas e não indica em quem votar.</small>
-            </article>
-          </div>
-
-          <div className="tls-ebook-bottom"><span>←→ DESLIZE HORIZONTALMENTE</span><button className="tls-reset" onClick={() => setPortalArea(false)}>← Voltar para a oferta</button></div>
-        </main>
-      )}
-
-      <footer className="tls-footer">TLS • CENTRAL DE INFORMAÇÃO ELEITORAL • 2026</footer>
-    </div>
+    <main className="fit-app fit-quiz">
+      <header className="fit-header"><div className="fit-brand">VIVA<span>+</span></div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 10</div></header>
+      <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
+      <section className="fit-question-card">
+        <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
+        <h2>{current.question}</h2>
+        <p className="fit-subtitle">{current.subtitle}</p>
+        <div className="fit-answers">
+          {current.answers.map((answer, i) => (
+            <button key={answer.text} className={selected === i ? "selected" : ""} onClick={() => choose(i)}>
+              <span>{String.fromCharCode(65 + i)}</span>{answer.text}
+            </button>
+          ))}
+        </div>
+        <div className="fit-footer">
+          <small>{selected === null ? "Escolha a alternativa que mais combina com você." : "Resposta registrada."}</small>
+          <button className="fit-next" disabled={selected === null} onClick={next}>{step === 9 ? "VER MEU RESULTADO" : "CONTINUAR"} <span>→</span></button>
+        </div>
+      </section>
+    </main>
   );
 }
