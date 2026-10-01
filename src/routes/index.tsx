@@ -5,16 +5,16 @@ import { fetchNews, type NewsItem } from "../lib/news";
 export const Route = createFileRoute("/")({ component: TLSHome });
 
 const questions = [
-  { category: "NOTÍCIAS", q: "Você está cansado de abrir as redes sociais e não saber mais o que é notícia verdadeira e o que é informação distorcida?", options: ["Sim, muito", "Às vezes", "Pouco", "Não"] },
-  { category: "ELEIÇÕES", q: "Você quer acompanhar tudo o que está acontecendo nas eleições sem precisar ficar procurando informações em vários lugares?", options: ["Sim, quero acompanhar tudo", "Quero acompanhar o principal", "Só algumas coisas", "Não tenho interesse"] },
-  { category: "CANDIDATOS", q: "Você gostaria de saber o que os candidatos estão fazendo, dizendo e propondo durante o período eleitoral?", options: ["Sim, tudo", "As principais coisas", "Só sobre alguns candidatos", "Não faço questão"] },
-  { category: "CHECAGEM", q: "Quando aparece uma afirmação política nas redes sociais, você sente dificuldade para descobrir se ela é verdadeira?", options: ["Muita dificuldade", "Às vezes", "Raramente", "Nunca"] },
-  { category: "PROPOSTAS", q: "Você gostaria de comparar as propostas dos candidatos em um só lugar, em vez de depender apenas de vídeos e manchetes?", options: ["Sim", "Seria útil", "Talvez", "Não"] },
-  { category: "DECISÕES", q: "Você quer acompanhar as decisões, votações e posicionamentos que podem afetar o país durante o período eleitoral?", options: ["Sim, de perto", "Só as mais importantes", "Às vezes", "Não acompanho"] },
-  { category: "DEBATES", q: "Você costuma assistir a debates, entrevistas ou pronunciamentos e depois fica com dúvida sobre o que realmente foi prometido?", options: ["Frequentemente", "Às vezes", "Raramente", "Nunca"] },
-  { category: "FONTES", q: "Você gostaria de ter as fontes originais para conferir uma informação antes de acreditar ou compartilhar?", options: ["Com certeza", "Seria útil", "Talvez", "Não faz diferença"] },
-  { category: "ACOMPANHAMENTO", q: "Se houvesse um único local reunindo notícias, propostas, decisões, declarações e checagens, você usaria para acompanhar as eleições?", options: ["Usaria diariamente", "Usaria com frequência", "Consultaria quando necessário", "Provavelmente não"] },
-  { category: "ÚLTIMA PERGUNTA", q: "O que mais faria diferença para você acompanhar as eleições com mais informação?", options: ["Notícias verificadas", "Ações e propostas dos candidatos", "Tudo reunido em um só lugar", "Fontes para conferir por conta própria"] }
+  { category: "HISTÓRICO", image: "https://imgs.search.brave.com/k923OVRpKEDTZdIgT9_ujlOfXLKGWNWz-qtheM24MdI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tb25zLzcx/L1ByZXNpZGVudGVfSmFpcl9NZXNz aXNhc19Cb2xzb25hcm8oY3JvcHBlZCkuanBn", q: "Você gostaria de consultar informações documentadas sobre o governo de Jair Bolsonaro em um só lugar?", options: ["Sim", "Talvez", "Só alguns temas", "Não"] },
+  { category: "CANDIDATOS", image: "https://imgs.search.brave.com/wDL8BsNT0ywEpUXgQ22jAfF_zC2dy1Z_Nij5kAGf_PA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMjI2NTc4NTUyNy9waG90/by9icmF6aWxpYW4tc2VuYXRvci1mbGF2aW8tYm9sc29uYXJvLXNvbi1vZi1mb3JtZXItcHJlc2lkZW50LWphaXItYm9sc29uYXJvLXNwZWFrcy10by10aGUtcHJlc3MuanBnP3M9NjEyeDYxMiZ3PTAmaz0yMCZjPUVKSnIwckQ0NTJCdlMxU2ZJN2NpSTZHNk5OQ1JEbUtoaXJfSVpjdG94NUU9", q: "Você gostaria de acompanhar declarações e posicionamentos públicos de candidatos e políticos?", options: ["Sim, todos", "Os principais", "Só alguns", "Não"] },
+  { category: "BRASIL", image: "https://imgs.search.brave.com/_1PR2AHJEDrDKSRQcyZ2vPF9q8WQ6oBRkgeD8V4o0HU/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenkuY29tL3N5c3RlbS9yZXNvdXJjZXMvdGh1/bWJuYWlscy8wNzcvNzg5LzAyNS9zbWFsLzNkLW1hcC1vZi1icmF6aWwtc2hvd2luZy1zdGF0ZXMtaW4tZ3JlZW4tZnJlZS1wbmcucG5n", q: "Você quer acompanhar acontecimentos políticos de diferentes estados e regiões do Brasil?", options: ["Sim", "Principalmente meu estado", "Só os principais fatos", "Não"] },
+  { category: "POSICIONAMENTOS", image: "https://imgs.search.brave.com/wNUFu72w9kLL0IqGTRFJH8zx5NPcSKlcQ8SMfwaisTs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9taWRp/YXMuY29ycmVpb2Jy/YXppbGllbnNlLmNvbS5ici9fbWlk/aWFzL2pwZy8yMDI0LzA5LzA3LzAwMF8zNmZuNzRyLTM5ODU0Mzc3LmpwZw", q: "Você gostaria de ver cobertura de diferentes partidos e correntes políticas, com as fontes originais?", options: ["Sim", "Seria útil", "Talvez", "Não"] },
+  { category: "FONTES", image: "https://imgs.search.brave.com/M4nEXNyXQQBj5atvEF2abpSXR2TTgBGSUJhz5HMZjOE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzBmLzdh/LzVlLzBmN2E1ZWJi/N2NmZjQ2ZGNlNTg3MGZmZGI0NGFkYTI3LmpwZw", q: "Quando uma informação política chama sua atenção, você gostaria de ter acesso à fonte original?", options: ["Sempre", "Na maioria das vezes", "Às vezes", "Não"] },
+  { category: "ELEIÇÕES", image: "https://imgs.search.brave.com/z3yXCmj8i13yre0yMCy2dt-_12Egcs5rC_yvvBPYXLg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcuZnJlZXBpay5jb20vZm90b3MtcHJlbWl1bS9tdWxoZXItZGUt cGUtY29tLWJhbmRlaXJhLWJyYXNpbGVpcmEtYS1iZWlyYS1kYS1waXNjaW5hXzEwNDg5NDQtMTc4NzMxNzEuanBnP3NlbXQ9YWlzX2h5YnJpZCZ3PTc0MA", q: "Você gostaria de acompanhar notícias eleitorais organizadas por tema e data?", options: ["Sim, diariamente", "Com frequência", "Quando necessário", "Não"] },
+  { category: "DECLARAÇÕES", image: "https://imgs.search.brave.com/tommgMEoc2tUsES0prSrJHyvFJgUww2qSMqqgDYZIjM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRpYS5nZXR0eWltYWdlcy5jb20vaWQvMjI1MDI0MjY1MC9waG90/by9zZW5hdG9yLWZsYXZpby1ib2xzb25hcm8tc29uLW9mLWZvcm1lci1icmF6aWxpYW4tcHJlc2lkZW50LWphaXItYm9sc29uYXJvLXNwZWFrcy13aXRoLmpwZz9zPTYxMng2MTImdz0wJms9MjAmYz0xWEN5TURqSWpabC1iNXBGbU8tLWRvbTg4ZkxtUThILVNuWlJUN3lzR1JN", q: "Você gostaria de encontrar declarações públicas completas, em vez de depender apenas de cortes e manchetes?", options: ["Sim", "Seria útil", "Às vezes", "Não"] },
+  { category: "HISTÓRICO", image: "https://imgs.search.brave.com/LWb3yKJBqeBE6XmQB4wMn14MDoxmFtXYSRJZDiXRA7c/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRpYS5nZXR0eWltYWdlcy5jb20vaWQvMjIwNDg2NTMxMy9wdC9m/b3RvL2JyYXppbHMtZm9ybWVyLXByZXNpZGVudC1qYWlyLWJvbHNvbmFyb y1sb29rcy1vbi1kdXJpbmctYS1yYWxseS1pbi1yaW8tZGUtamFuZWlyby1icmF6aWwtb24uanBnP3M9NjEyeDYxMiZ3PTAmaz0yMCZjPVBvdDJQLXE3SUdvUGQtRWRjdUlDQmdjQklvZlJpREtxVjJCWng2d01zNnc9", q: "Você gostaria de consultar fatos, decisões e registros oficiais do período de cada governo?", options: ["Sim", "Os principais", "Só alguns assuntos", "Não"] },
+  { category: "CONFERÊNCIA", image: "https://imgs.search.brave.com/5j6bmVWPfe1GMP8x_apF4TSXg2iVDtkiQu39hyIv-ZE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/cGl4YWJheS5jb20vcGhvdG8vMjAyMi8xMC8xNy8yMi8zOC9iYW5kZWlyYS1kby1icmFzaWwtNzUyODgyNV82NDAuanBn", q: "Você prefere conferir uma informação em fontes diferentes antes de formar sua própria opinião?", options: ["Sempre", "Na maioria das vezes", "Às vezes", "Raramente"] },
+  { category: "CENTRAL", image: "https://imgs.search.brave.com/mHiR_K_KLcOQ7xTO2H4Xsp8vq__FDqHQG7r8dFxDFoY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRpYS5nZXR0eWltYWdlcy5jb20vaWQvMjI2MzcyNjk2OC9waG90/by9zZW5hdG9yLWFuZC1wcmVzaWRlbnRpYWwtY2FuZGlkYXRlLWZsYXZpby1ib2xzb25hcm8tZ2VzdHVyZXMtdG8tc3VwcG9ydGVycy1vZi1icmF6aWxzLWZvcm1lci5qcGc_cz02MTJ4NjEyJnc9MCZrPTIwJmM9cFppVjJ2OV9VTzB3T18ycjFZRHFkTFVuZ3A4bWVJYXJzNEZ1S3U4a21qUT0", q: "Se existisse uma central com notícias, documentos, propostas e fontes originais reunidas, isso ajudaria você a acompanhar o período eleitoral?", options: ["Ajudaria muito", "Ajudaria", "Talvez", "Não"] }
 ];
 
 function TLSHome() {
@@ -96,10 +96,15 @@ function TLSHome() {
             <div className="tls-progress-meta"><span>0{step + 1}</span> / 10</div>
           </div>
           <div className="tls-progress"><div style={{ width: progress + "%" }} /></div>
-          <section className="tls-question">
-            <div className="tls-category">{current.category}</div>
-            <div className="tls-question-number">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
-            <h3>{current.q}</h3>
+          <section className="tls-question tls-question-horizontal">
+            <div className="tls-question-image-wrap">
+              <img src={current.image} alt="" className="tls-question-image" />
+              <div className="tls-image-caption">{current.category}</div>
+            </div>
+            <div className="tls-question-content">
+              <div className="tls-category">{current.category}</div>
+              <div className="tls-question-number">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
+              <h3>{current.q}</h3>
             <div className="tls-options">
               {current.options.map((option, i) => (
                 <button key={option} className={"tls-option " + (picked === i ? "selected" : "")} onClick={() => answer(i)}>
@@ -107,11 +112,12 @@ function TLSHome() {
                 </button>
               ))}
             </div>
-            <div className="tls-question-footer">
+              <div className="tls-question-footer">
               <div className={picked === null ? "tls-feedback muted" : "tls-feedback good"}>
                 {picked === null ? "Não há resposta certa. Escolha a alternativa que mais representa você." : "Resposta registrada. Continue."}
               </div>
               <button className="tls-next" disabled={picked === null} onClick={next}>{step === questions.length - 1 ? "CONTINUAR" : "CONTINUAR"} <span>→</span></button>
+              </div>
             </div>
           </section>
         </main>
