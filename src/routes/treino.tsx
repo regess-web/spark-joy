@@ -218,7 +218,7 @@ function TrainingApp() {
     return (
       <main className="training-app training-welcome">
         <section className="training-welcome-card">
-          <div className="training-logo">VIVA<span>+</span></div>
+          <div className="training-logo">ViradaFIT</div>
           <div className="training-kicker">SEU PROGRAMA DE 7 DIAS</div>
           <h1>Uma semana para colocar <em>você</em> em movimento.</h1>
           <p>As rotinas foram organizadas em pequenas sessões para você acompanhar um dia de cada vez. O próximo dia fica disponível após 24 horas.</p>
@@ -233,7 +233,7 @@ function TrainingApp() {
   return (
     <main className="training-app">
       <header className="training-topbar">
-        <div className="training-logo">VIVA<span>+</span></div>
+        <div className="training-logo">ViradaFIT</div>
         <div className="training-top-status">SEMANA 1 <strong>{unlockedDay}/7</strong></div>
       </header>
 
