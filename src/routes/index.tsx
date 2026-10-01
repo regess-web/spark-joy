@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchNews, type NewsItem } from "../lib/news";
 
 export const Route = createFileRoute("/")({ component: TLSHome });
 
@@ -24,8 +25,17 @@ function TLSHome() {
   const [paidArea, setPaidArea] = useState(false);
   const [portalArea, setPortalArea] = useState(false);
   const [activeCategory, setActiveCategory] = useState("HOJE");
+  const [news, setNews] = useState<NewsItem[]>([]);
+  const [newsLoading, setNewsLoading] = useState(false);
+  const [newsError, setNewsError] = useState("");
 
   const current = questions[step];
+
+  useEffect(() => {
+    if (!portalArea) return;
+    setNewsLoading(true);
+    fetchNews(activeCategory).then((items) => { setNews(items); setNewsError(""); }).catch(() => setNewsError("Não foi possível carregar as notícias agora.")).finally(() => setNewsLoading(false));
+  }, [portalArea, activeCategory]);
   const progress = ((step + (picked !== null ? 1 : 0)) / questions.length) * 100;
 
   function answer(index: number) {
@@ -154,15 +164,22 @@ function TLSHome() {
           <section className="tls-portal-grid">
             <article className="tls-feature-card">
               <span className="tls-tag">{activeCategory}</span>
-              <h3>{activeCategory === "DIREITA" ? "Acompanhe os principais acontecimentos envolvendo partidos e candidatos de direita" : "O que aconteceu hoje em " + activeCategory.toLowerCase()}</h3>
-              <p>Resumo cronológico, contexto e links para as fontes originais. O conteúdo deve ser atualizado pela equipe responsável pelo portal antes da publicação.</p>
-              <small>DEMONSTRAÇÃO DA INTERFACE • FONTE A INSERIR</small>
+              <h3>{news[0]?.title || (activeCategory === "DIREITA" ? "Acompanhe os principais acontecimentos envolvendo partidos e candidatos de direita" : "O que aconteceu hoje em " + activeCategory.toLowerCase())}</h3>
+              <p>{news[0]?.summary || "As notícias aparecerão aqui automaticamente quando a integração estiver configurada."}</p>
+              {news[0]?.image_url && <img className="tls-feature-image" src={news[0].image_url} alt="" />}
+              <small>{news[0] ? news[0].source_name + " • " + new Date(news[0].published_at).toLocaleString("pt-BR") : "AGUARDANDO INTEGRAÇÃO • FONTE A INSERIR"}</small>
             </article>
             <article className="tls-news-list">
-              <div><b>01</b><span><strong>Notícia e contexto</strong>Registro do acontecimento, horário e fonte original.</span></div>
-              <div><b>02</b><span><strong>Declaração ou entrevista</strong>O que foi dito, por quem e onde foi publicado.</span></div>
-              <div><b>03</b><span><strong>Debate ou propaganda</strong>Resumo do conteúdo e referência para conferência.</span></div>
-              <div><b>04</b><span><strong>Checagem</strong>Afirmação, evidências disponíveis e fontes consultadas.</span></div>
+              {newsLoading && <div className="tls-news-loading">Atualizando notícias...</div>}
+              {!newsLoading && news.length === 0 && <div className="tls-news-loading">Nenhuma notícia disponível nesta categoria.</div>}
+              {news.slice(0, 5).map((item, i) => (
+                <a className="tls-news-item" key={item.id} href={item.url} target="_blank" rel="noreferrer">
+                  <img src={item.image_url || "/favicon.ico"} alt="" />
+                  <b>{String(i + 1).padStart(2, "0")}</b>
+                  <span><strong>{item.title}</strong><small>{item.source_name} • {new Date(item.published_at).toLocaleString("pt-BR")}</small></span>
+                </a>
+              ))}
+              {newsError && <div className="tls-news-error">{newsError}</div>}
             </article>
           </section>
 
