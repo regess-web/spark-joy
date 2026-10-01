@@ -485,3 +485,93 @@
   .exercise-card .training-visual-v3{height:180px}
   .exercise-modal-card .training-visual-v3{height:220px}
 }
+
+
+/* Exercise cards: replace illustrations with an analog total-duration clock */
+.exercise-duration-clock{
+  height:190px;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(145deg,#fffaf6,#f8eee7);
+  border-bottom:1px solid #eaded3;
+  color:#29251f;
+}
+.duration-clock-svg{
+  width:142px;
+  height:142px;
+  overflow:visible;
+}
+.clock-face{
+  fill:#fff;
+  stroke:#eaded3;
+  stroke-width:2;
+  filter:drop-shadow(0 8px 15px rgba(80,52,35,.08));
+}
+.clock-inner{
+  fill:none;
+  stroke:#f1e4db;
+  stroke-width:1;
+}
+.clock-mark{
+  stroke:#b86b45;
+  stroke-width:2;
+  stroke-linecap:round;
+  opacity:.72;
+}
+.clock-minute-hand{
+  stroke:#2e2924;
+  stroke-width:4;
+  stroke-linecap:round;
+}
+.clock-second-hand{
+  stroke:#b86b45;
+  stroke-width:2;
+  stroke-linecap:round;
+}
+.clock-center{
+  fill:#b86b45;
+  stroke:#fff;
+  stroke-width:2;
+}
+.clock-duration{
+  fill:#29251f;
+  font-family:"DM Sans",sans-serif;
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:-.5px;
+}
+.clock-label{
+  position:absolute;
+  left:14px;
+  top:12px;
+  color:#b86b45;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:1.4px;
+}
+.clock-breakdown{
+  position:absolute;
+  right:14px;
+  top:12px;
+  color:#9a8d83;
+  font-size:7px;
+  font-weight:600;
+  letter-spacing:.2px;
+}
+.exercise-modal-card .exercise-duration-clock{
+  height:250px;
+  border-radius:16px;
+  border:1px solid #eaded3;
+}
+.exercise-modal-card .duration-clock-svg{
+  width:175px;
+  height:175px;
+}
+@media(max-width:560px){
+  .exercise-card .exercise-duration-clock{height:180px}
+  .exercise-modal-card .exercise-duration-clock{height:210px}
+  .exercise-modal-card .duration-clock-svg{width:150px;height:150px}
+}
