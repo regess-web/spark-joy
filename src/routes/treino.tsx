@@ -255,9 +255,9 @@ function TrainingApp() {
         <div className="training-top-status">SEMANA 1 <strong>{unlockedDay}/7</strong></div>
       </header>
       {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
-        <button className="side-menu-item" onClick={openHomeUpgrade}><span>🏠</span><div><b>Upgrade de treino</b><small>Treino completo em casa • R$ 11,99</small></div></button>
-        <button className={activeSection === "chat" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("chat")}><span>💬</span><div><b>Chat global</b><small>R$ 4,90/mês</small></div></button>
-        <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span>🥗</span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
+        <button className="side-menu-item" onClick={openHomeUpgrade}><span className="minimal-menu-icon minimal-home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg></span><div><b>Upgrade de treino</b><small>Treino completo em casa • R$ 11,99</small></div></button>
+        <button className={activeSection === "chat" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("chat")}><span className="minimal-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></svg></span><div><b>Chat global</b><small>R$ 4,90/mês</small></div></button>
+        <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span className="minimal-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 5c2 2 2 4 2 6a3 3 0 0 1-6 0c0-2 2-4 4-6z"/><path d="M7 11v9M14 5v15M14 5c4 0 6 2 6 5s-2 5-6 5"/></svg></span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
       </aside></>}
       {activeSection === "treino" ? (
         <>
