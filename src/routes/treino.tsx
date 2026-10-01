@@ -106,7 +106,7 @@ const days: DayPlan[] = [
 
 function TrainingVisual({ type, animate = false }: { type: string; animate?: boolean }) {
   return (
-    <div className={"training-visual visual-" + type + (animate ? " is-playing" : "")} aria-label="Demonstração animada do movimento">
+    <div className={"training-visual visual-" + type + (animate ? " is-playing" : "")} style={{["--visual-play-state" as string]: animate ? "running" : "paused"}} aria-label="Demonstração animada do movimento">
       <span className="visual-motion" aria-hidden="true">↕</span>
       <div className="visual-person" aria-hidden="true">
         <span className="visual-head" />
