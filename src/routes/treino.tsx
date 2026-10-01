@@ -104,20 +104,19 @@ const days: DayPlan[] = [
   }
 ];
 
-const visualGifs: Record<string,string> = {
-  agachamento: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Squats.gif",
-  parede: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pushups.gif",
-  panturrilha: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Standing-calf-raises-1.gif"
-};
-
 function TrainingVisual({ type }: { type: string }) {
-  const gif = visualGifs[type];
   return (
-    <div className={"training-visual visual-" + type} aria-label="Demonstração do movimento">
-      {gif ? <img className="training-gif" src={gif} alt="" /> : null}
-      {!gif && <div className="visual-person"><span className="visual-head" /><span className="visual-body" /><span className="visual-arm a1" /><span className="visual-arm a2" /><span className="visual-leg l1" /><span className="visual-leg l2" /></div>}
+    <div className={"training-visual visual-" + type} aria-label="Demonstração animada do movimento">
+      <div className="visual-person" aria-hidden="true">
+        <span className="visual-head" />
+        <span className="visual-body" />
+        <span className="visual-arm a1" />
+        <span className="visual-arm a2" />
+        <span className="visual-leg l1" />
+        <span className="visual-leg l2" />
+      </div>
       <span className="visual-floor" />
-      <span className="visual-label">{gif ? "GIF • DEMONSTRAÇÃO" : "DEMONSTRAÇÃO"}</span>
+      <span className="visual-label">ANIMAÇÃO • DEMONSTRAÇÃO</span>
     </div>
   );
 }
