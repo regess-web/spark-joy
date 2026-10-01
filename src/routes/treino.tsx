@@ -387,7 +387,7 @@ function TrainingApp() {
             <div className="diet-offer-icon">🏠</div>
             <div className="feature-page-kicker">UPGRADE VIRADAFIT</div>
             <h2 id="home-upgrade-title">Evolua seu treino em casa</h2>
-            <p>Libere um <strong>treino completo em casa</strong>, com uma rotina mais completa para continuar evoluindo sem precisar de academia.</p>
+            <p>Com o upgrade, você adquire <strong>mais 28 exercícios para sua ViradaFIT</strong>, ampliando sua rotina ao longo dos 7 dias e trabalhando diferentes grupos musculares.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 11,99</strong></div>
             <button className="training-main-btn diet-offer-cta">EVOLUIR MEU TREINO • R$ 11,99 →</button>
             <button className="diet-offer-later" onClick={() => setShowHomeUpgrade(false)}>Agora não</button>
