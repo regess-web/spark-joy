@@ -144,3 +144,121 @@
 @media (prefers-reduced-motion:reduce){
   .training-visual .visual-person,.training-visual .visual-motion{animation-play-state:var(--visual-play-state,paused)!important}
 }
+
+
+/* Static exercise poses — no animation */
+.training-visual .visual-person,
+.training-visual .visual-motion{
+  animation:none!important;
+}
+.training-visual .visual-motion{display:none!important}
+
+/* Squat */
+.visual-agachamento .visual-person,
+.visual-sumo .visual-person,
+.visual-agachamento-bracos .visual-person{
+  transform:translateX(-50%) translateY(24px) scaleY(.88)!important;
+}
+.visual-agachamento .visual-leg,
+.visual-sumo .visual-leg,
+.visual-agachamento-bracos .visual-leg{
+  transform-origin:top center;
+}
+.visual-agachamento .leg-left,
+.visual-sumo .leg-left,
+.visual-agachamento-bracos .leg-left{transform:rotate(24deg)!important}
+.visual-agachamento .leg-right,
+.visual-sumo .leg-right,
+.visual-agachamento-bracos .leg-right{transform:rotate(-24deg)!important}
+.visual-agachamento-bracos .visual-arm,
+.visual-sumo .visual-arm{transform:rotate(0deg)!important}
+.visual-agachamento-bracos .arm-left{transform:rotate(-48deg)!important}
+.visual-agachamento-bracos .arm-right{transform:rotate(48deg)!important}
+
+/* Glute bridge */
+.visual-ponte .visual-person,
+.visual-ponte-unilateral .visual-person,
+.visual-ponte-2 .visual-person{
+  transform:translateX(-50%) translateY(18px)!important;
+}
+.visual-ponte .visual-body,
+.visual-ponte-unilateral .visual-body,
+.visual-ponte-2 .visual-body{
+  transform:rotate(70deg)!important;
+}
+.visual-ponte .visual-hip,
+.visual-ponte-unilateral .visual-hip,
+.visual-ponte-2 .visual-hip{
+  transform:rotate(70deg) translate(1px,-2px);
+}
+.visual-ponte .visual-leg,
+.visual-ponte-unilateral .visual-leg,
+.visual-ponte-2 .visual-leg{
+  transform-origin:top center;
+}
+.visual-ponte .leg-left,
+.visual-ponte-unilateral .leg-left,
+.visual-ponte-2 .leg-left{transform:rotate(-38deg)!important}
+.visual-ponte .leg-right,
+.visual-ponte-unilateral .leg-right,
+.visual-ponte-2 .leg-right{transform:rotate(-52deg)!important}
+
+/* Wall/incline push-up */
+.visual-parede .visual-person,
+.visual-parede-2 .visual-person,
+.visual-flexao .visual-person{
+  transform:translateX(-50%) translateY(15px) rotate(58deg) scale(.92)!important;
+}
+.visual-parede .visual-arm,
+.visual-parede-2 .visual-arm,
+.visual-flexao .visual-arm{transform:rotate(48deg)!important}
+
+/* Calf raise */
+.visual-panturrilha .visual-person,
+.visual-panturrilha-2 .visual-person{
+  transform:translateX(-50%) translateY(-5px)!important;
+}
+.visual-panturrilha .visual-leg,
+.visual-panturrilha-2 .visual-leg{transform:rotate(0)!important}
+
+/* March / step */
+.visual-marcha .visual-person,
+.visual-marcha-alta .visual-person,
+.visual-marcha-final .visual-person,
+.visual-step .visual-person{
+  transform:translateX(-50%) translateY(-4px)!important;
+}
+.visual-marcha .leg-left,
+.visual-marcha-alta .leg-left,
+.visual-marcha-final .leg-left,
+.visual-step .leg-left{transform:rotate(25deg)!important}
+.visual-marcha .leg-right,
+.visual-marcha-alta .leg-right,
+.visual-marcha-final .leg-right,
+.visual-step .leg-right{transform:rotate(-38deg)!important}
+
+/* Reverse lunge */
+.visual-passo .visual-person{
+  transform:translateX(-50%) translateY(14px)!important;
+}
+.visual-passo .leg-left{transform:rotate(42deg)!important}
+.visual-passo .leg-right{transform:rotate(-18deg)!important}
+
+/* Core / dead bug */
+.visual-core .visual-person{
+  transform:translateX(-50%) rotate(90deg) translateY(-4px)!important;
+}
+.visual-core .visual-arm{transform:rotate(28deg)!important}
+.visual-core .visual-leg{transform:rotate(-18deg)!important}
+
+/* Incline plank */
+.visual-prancha .visual-person{
+  transform:translateX(-50%) rotate(76deg) translateY(-4px)!important;
+}
+.visual-prancha .visual-arm{transform:rotate(58deg)!important}
+.visual-prancha .visual-leg{transform:rotate(-8deg)!important}
+
+/* Keep the illustration clearly static */
+.training-visual .visual-label{
+  content:"POSIÇÃO DO EXERCÍCIO";
+}
