@@ -142,6 +142,12 @@ const days: DayPlan[] = [
       { id:"agachamento-final", name:"Agachamento", muscle:"Pernas e glúteos", sets:3, reps:"12", rest:60, tip:"Qualidade do movimento antes de aumentar repetições.", how:["Pés firmes e postura confortável.","Desça controlando.","Suba mantendo o equilíbrio."] },
       { id:"bird-dog-final", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"10 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Volte e alterne."] },
       { id:"marcha-final", name:"Marcha moderada", muscle:"Corpo inteiro", sets:4, reps:"45 s", rest:30, tip:"Finalize em um ritmo sustentável.", how:["Comece devagar.","Aumente o ritmo gradualmente.","Reduza o ritmo no último minuto."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Escolha uma altura que permita boa técnica.", how:["Apoie as mãos.","Desça controlando os cotovelos.","Empurre de volta."] },
+      { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça lentamente."] },
+      { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
+      { id:"panturrilha-d7", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
     ]
   }
 ];
