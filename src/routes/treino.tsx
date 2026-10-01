@@ -104,118 +104,154 @@ const days: DayPlan[] = [
   }
 ];
 
-function TrainingVisual({ type }: { type: string }) {
-  const pose = type === "core" ? "deadbug" :
-    type === "prancha" ? "plank" :
+function TrainingVisual({ type, id = "" }: { type: string; id?: string }) {
+  const kind =
+    id.includes("dead-bug") ? "deadbug" :
+    id.includes("bird-dog") ? "birddog" :
     type === "ponte" ? "bridge" :
-    type === "parede" ? "wall" :
+    type === "parede" ? "push" :
     type === "passo" ? "lunge" :
     type === "panturrilha" ? "calf" :
     type === "marcha" ? "march" :
     type === "sumo" ? "sumo" :
-    type === "agachamento-bracos" ? "squat-arms" : "squat";
+    id.includes("agachamento-bracos") ? "squatarms" :
+    "squat";
+
+  const standing = kind === "squat" || kind === "sumo" || kind === "squatarms" || kind === "calf" || kind === "march";
+  const sidePose = kind === "lunge";
 
   return (
-    <div className={"training-visual-v2 pose-" + pose} aria-label="Ilustração feminina da posição do exercício">
-      <svg className="exercise-illustration-v2" viewBox="0 0 300 190" role="img" aria-hidden="true">
-        <defs>
-          <filter id="vivaSoftShadow" x="-30%" y="-30%" width="160%" height="180%">
-            <feGaussianBlur in="SourceAlpha" stdDeviation="3" />
-            <feOffset dy="3" />
-            <feComponentTransfer><feFuncA type="linear" slope=".16" /></feComponentTransfer>
-            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
+    <div className={"training-visual-v3 pose-" + kind} aria-label="Ilustração feminina do exercício">
+      <svg viewBox="0 0 420 230" className="exercise-illustration-v3" role="img" aria-hidden="true">
+        <ellipse className="v3-shadow" cx="210" cy="205" rx="116" ry="8" />
 
-        <ellipse cx="150" cy="171" rx="83" ry="7" className="v2-ground" />
-
-        {pose === "wall" && (
-          <g className="v2-wall">
-            <rect x="236" y="28" width="4" height="135" rx="2" />
-            <rect x="240" y="28" width="24" height="4" rx="2" />
+        {kind === "push" && (
+          <g className="v3-prop">
+            <rect x="310" y="35" width="7" height="148" rx="3.5" />
+            <rect x="317" y="35" width="47" height="7" rx="3.5" />
           </g>
         )}
 
-        {pose === "bridge" && (
-          <rect x="64" y="151" width="170" height="7" rx="3.5" className="v2-mat" />
+        {kind === "bridge" && <rect className="v3-mat" x="78" y="185" width="260" height="9" rx="4.5" />}
+        {kind === "birddog" && <rect className="v3-mat" x="70" y="190" width="280" height="9" rx="4.5" />}
+        {kind === "deadbug" && <rect className="v3-mat" x="78" y="190" width="260" height="9" rx="4.5" />}
+        {kind === "lunge" && (
+          <g className="v3-bench">
+            <rect x="54" y="142" width="110" height="12" rx="3" />
+            <rect x="70" y="154" width="9" height="47" rx="2" />
+          </g>
         )}
 
-        {pose === "plank" && (
-          <rect x="222" y="101" width="7" height="55" rx="3.5" className="v2-bench" />
-        )}
-
-        <g className={"v2-woman v2-" + pose} filter="url(#vivaSoftShadow)">
-          <g className="v2-hair">
-            <path d="M132 26c-7-12 1-24 17-24 16 0 25 10 22 23-2 8-7 13-14 16l-5-7c-6 4-13 3-20-8Z"/>
-            <path d="M139 16c-7 6-8 17-6 30-9-9-10-23-5-33 5-9 15-13 23-11Z"/>
-          </g>
-          <circle className="v2-skin" cx="155" cy="27" r="13"/>
-          <path className="v2-face" d="M164 27c4 1 5 3 1 5-2 1-4 0-5-2Z"/>
-          <rect className="v2-skin" x="151" y="38" width="8" height="11" rx="4"/>
-
-          <path className="v2-top" d="M139 47c8-5 22-5 31 1l4 33c-9 7-27 7-37 0Z"/>
-          <path className="v2-skin" d="M141 50c-5 6-8 17-9 28l7 2 9-24Z"/>
-          <path className="v2-skin" d="M168 50c6 5 8 16 10 28l-7 2-10-24Z"/>
-
-          <path className="v2-pants-hip" d="M137 78c10-5 26-5 37 1l3 18c-10 7-31 7-42 0Z"/>
-          <path className="v2-pants" d="M138 89c-2 17-1 32 4 44l13-1 1-41Z"/>
-          <path className="v2-pants" d="M157 91l2 41 13 1c5-13 6-28 2-44Z"/>
-
-          <path className="v2-skin" d="M142 130l13 1-3 28c-1 7-4 10-9 10h-9c-2-3 0-6 4-8Z"/>
-          <path className="v2-skin" d="M159 131l13-1 5 31c1 5 4 7 8 9-2 3-6 4-12 3l-8-7Z"/>
-          <path className="v2-shoe" d="M134 164c7-1 13 1 18 5 2 2 1 5-2 6h-28c-3-4 2-8 12-11Z"/>
-          <path className="v2-shoe" d="M175 165c8 1 16 4 21 8 2 2 1 4-2 5h-30c-2-5 1-9 11-13Z"/>
-
-          <g className="v2-arm v2-arm-left">
-            <path className="v2-skin" d="M141 52c-6 5-11 15-12 25l7 3c6-7 10-16 11-24Z"/>
-            <path className="v2-skin" d="M132 77c-3 6-4 12-2 18l7-1 2-15Z"/>
-            <circle className="v2-skin" cx="134" cy="95" r="5"/>
-          </g>
-          <g className="v2-arm v2-arm-right">
-            <path className="v2-skin" d="M169 52c6 5 10 15 12 25l-7 3c-6-7-9-16-11-24Z"/>
-            <path className="v2-skin" d="M176 77c3 6 4 12 2 18l-7-1-2-15Z"/>
-            <circle className="v2-skin" cx="173" cy="95" r="5"/>
-          </g>
-
-          {(pose === "squat-arms") && (
-            <g className="v2-raised-arms">
-              <path className="v2-skin" d="M142 52c-5-8-7-16-8-24l7-2c5 7 8 15 9 23Z"/>
-              <path className="v2-skin" d="M131 28c0-8 2-14 6-19l6 3c-2 7-2 12 0 18Z"/>
-              <path className="v2-skin" d="M169 52c5-8 7-16 8-24l-7-2c-5 7-8 15-9 23Z"/>
-              <path className="v2-skin" d="M180 28c0-8-2-14-6-19l-6 3c2 7 2 12 0 18Z"/>
+        {standing && (
+          <g className={"v3-standing v3-" + kind}>
+            <g className="v3-hair">
+              <path d="M189 39c-8-20 4-37 28-37 23 0 36 16 31 37-3 13-11 21-22 25l-8-12c-9 5-19 1-29-13Z"/>
+              <path d="M194 25c-9 9-11 26-9 43-12-12-14-31-7-45 7-14 23-21 36-17-8 4-14 11-20 19Z"/>
             </g>
-          )}
+            <circle className="v3-skin" cx="218" cy="43" r="17"/>
+            <path className="v3-face" d="M229 42c7 1 7 5 0 7-3 1-6-1-7-4Z"/>
+            <path className="v3-neck" d="M211 57h14v17h-14Z"/>
 
-        </g>
+            <path className="v3-top" d="M196 70c13-9 32-9 47 0l7 49c-14 8-36 8-51-1Z"/>
+            <path className="v3-mid" d="M199 116c15 5 31 5 47 0l8 18c-15 9-38 9-55 0Z"/>
+            <path className="v3-legwear left" d="M200 129c7 3 17 5 26 4l-1 48c-2 12-8 17-19 17h-17c-4-5 0-10 7-14Z"/>
+            <path className="v3-legwear right" d="M226 133c10 0 18-2 26-5l8 53c2 10 8 14 17 18-5 6-15 7-26 3l-17-15Z"/>
 
-        {pose === "bridge" && (
-          <g className="v2-bridge-figure" filter="url(#vivaSoftShadow)">
-            <circle className="v2-skin" cx="91" cy="126" r="12"/>
-            <path className="v2-hair" d="M81 119c2-10 14-14 22-8 5 4 5 11 1 17-7-4-15-4-23-9Z"/>
-            <path className="v2-top" d="M100 123c18-5 36 0 48 10l-5 13-49-8Z"/>
-            <path className="v2-skin" d="M144 134c10 2 18 7 28 15l-5 6c-10-7-18-8-28-8Z"/>
-            <path className="v2-pants" d="M164 145c8 3 18 9 25 16l-6 8-27-17Z"/>
-            <path className="v2-pants" d="M148 143c-1 7-5 12-10 17l-9-4c4-9 7-15 13-20Z"/>
-            <path className="v2-skin" d="M128 155c-4 5-8 9-14 13l-7-4c4-7 8-12 13-16Z"/>
-            <path className="v2-skin" d="M184 160c7 1 14 4 20 8 2 2 1 4-2 5h-22c-3-4-1-8 4-13Z"/>
-            <path className="v2-shoe" d="M106 163c7 0 12 2 16 5 2 2 1 4-2 5H97c-2-4 1-7 9-10Z"/>
+            <path className="v3-skin v3-leg-left" d="M197 177l27 1-3 23c-1 8-5 14-12 16h-25c-3-6 1-12 8-16Z"/>
+            <path className="v3-skin v3-leg-right" d="M248 180l22-1 7 18c3 7 9 11 18 14-6 6-17 7-27 3l-17-13Z"/>
+            <path className="v3-shoe" d="M183 200c12-5 27-3 39 4 6 4 5 10-3 11h-48c-5-6 1-11 12-15Z"/>
+            <path className="v3-shoe" d="M268 201c13-2 28 3 39 10 5 4 3 9-5 10h-48c-3-6 2-12 14-20Z"/>
+
+            <path className="v3-skin v3-arm-left" d="M201 74c-9 10-15 25-18 42l14 4c7-13 12-27 15-41Z"/>
+            <path className="v3-skin v3-arm-left2" d="M184 114c-3 11-3 21 2 30l13-4-1-27Z"/>
+            <circle className="v3-skin" cx="191" cy="145" r="7"/>
+            <path className="v3-skin v3-arm-right" d="M242 74c10 9 16 25 19 42l-14 4c-7-13-12-27-16-41Z"/>
+            <path className="v3-skin v3-arm-right2" d="M259 114c4 11 4 21-1 30l-13-4 1-27Z"/>
+            <circle className="v3-skin" cx="253" cy="145" r="7"/>
           </g>
         )}
 
-        {pose === "plank" && (
-          <g className="v2-plank-figure" filter="url(#vivaSoftShadow)">
-            <circle className="v2-skin" cx="84" cy="91" r="11"/>
-            <path className="v2-hair" d="M74 86c0-9 10-15 18-10 5 3 7 9 4 15-7-3-14-3-22-5Z"/>
-            <path className="v2-top" d="M94 89c22 0 42 7 59 17l-5 12c-22-6-41-8-58-12Z"/>
-            <path className="v2-pants" d="M146 103c17 7 31 12 44 16l-5 12c-17-3-31-7-46-14Z"/>
-            <path className="v2-skin" d="M183 116c13 2 22 7 31 15l-5 7c-11-6-20-7-31-8Z"/>
-            <path className="v2-shoe" d="M207 128c8 1 14 3 20 7 2 2 1 4-2 5h-21c-2-4-1-8 3-12Z"/>
-            <path className="v2-skin" d="M99 98c-7 8-12 17-17 29l8 3c7-9 13-17 19-25Z"/>
-            <path className="v2-skin" d="M88 126c-6 7-8 14-9 21l8 1c3-7 7-12 12-18Z"/>
+        {kind === "lunge" && (
+          <g className="v3-lunge-figure">
+            <g className="v3-hair"><path d="M207 40c-8-19 4-36 26-36 23 0 35 15 31 36-3 13-11 21-22 25l-8-12c-9 5-18 1-27-13Z"/><path d="M212 25c-9 10-10 26-8 43-12-13-14-31-7-45 7-13 21-20 34-18-8 5-14 12-19 20Z"/></g>
+            <circle className="v3-skin" cx="233" cy="43" r="17"/>
+            <path className="v3-face" d="M244 42c7 1 7 5 0 7-3 1-6-1-7-4Z"/>
+            <path className="v3-neck" d="M226 57h14v16h-14Z"/>
+            <path className="v3-top" d="M211 69c13-9 31-9 46 0l9 49c-17 8-38 8-53-1Z"/>
+            <path className="v3-legwear" d="M214 113c13 6 29 7 43 2l17 23-24 13-20-16-13 27-28-7 12-39Z"/>
+            <path className="v3-skin" d="M199 153l28 8-13 34c-4 10-10 15-19 18l-17-6c1-7 7-12 13-18Z"/>
+            <path className="v3-skin" d="M274 136l25 4 22 35c5 8 13 12 23 15-5 8-17 9-28 3l-37-29Z"/>
+            <path className="v3-shoe" d="M176 196c11-7 27-7 42-1 6 3 7 9 0 13h-49c-5-4-2-8 7-12Z"/>
+            <path className="v3-shoe" d="M316 185c14-1 29 4 40 12 5 4 4 9-4 11h-48c-3-7 1-14 12-23Z"/>
+            <path className="v3-skin" d="M213 74c-10 10-15 24-17 39l13 5c8-12 12-26 16-39Z"/>
+            <path className="v3-skin" d="M266 74c9 9 15 24 17 39l-13 5c-8-12-12-26-15-39Z"/>
+            <path className="v3-skin" d="M196 111c-3 10-3 20 2 28l12-4-1-27Z"/>
+            <path className="v3-skin" d="M280 111c4 10 4 20-1 28l-12-4 1-27Z"/>
+            <rect className="v3-dumbbell" x="184" y="135" width="20" height="9" rx="4"/>
+            <rect className="v3-dumbbell" x="273" y="135" width="20" height="9" rx="4"/>
+            <path className="v3-bench-top" d="M54 142h110v12H54Z"/>
           </g>
         )}
+
+        {kind === "push" && (
+          <g className="v3-push-figure">
+            <g className="v3-hair"><path d="M130 68c-7-16 3-31 22-31 19 0 29 13 25 31-3 10-9 17-18 20l-6-10c-8 4-15 0-23-10Z"/></g>
+            <circle className="v3-skin" cx="149" cy="70" r="14"/>
+            <path className="v3-face" d="M158 69c6 1 6 4 0 6-2 1-4-1-5-3Z"/>
+            <path className="v3-top" d="M137 84c11-7 24-7 35 0l8 42c-12 6-29 6-40-1Z"/>
+            <path className="v3-legwear" d="M169 123c20 5 42 13 61 23l-9 15c-21-7-39-10-58-15Z"/>
+            <path className="v3-skin" d="M220 145l12 14-27 21c-7 5-12 11-16 18l-12-5c2-11 7-18 16-27Z"/>
+            <path className="v3-shoe" d="M180 190c11-2 22 1 31 7 5 3 4 8-2 10h-34c-3-6-1-11 5-17Z"/>
+            <path className="v3-skin" d="M140 88c-10 7-19 14-26 25l9 8c9-8 17-14 27-20Z"/>
+            <path className="v3-skin" d="M122 112c-9 4-15 11-20 20l10 5c6-8 12-12 19-16Z"/>
+            <circle className="v3-skin" cx="106" cy="135" r="6"/>
+          </g>
+        )}
+
+        {kind === "bridge" && (
+          <g className="v3-bridge-figure">
+            <g className="v3-hair"><path d="M83 140c-7-14 3-28 20-28 17 0 27 12 23 28-2 9-8 15-16 18l-6-9c-7 3-14 0-21-9Z"/></g>
+            <circle className="v3-skin" cx="102" cy="143" r="14"/>
+            <path className="v3-top" d="M112 151c20-9 42-5 60 9l-7 18-62-10Z"/>
+            <path className="v3-legwear" d="M165 163c18 5 34 13 47 24l-11 13-42-23Z"/>
+            <path className="v3-skin" d="M205 187c10 0 19 4 27 10 4 3 2 8-4 9h-34c-3-7 1-13 11-19Z"/>
+            <path className="v3-legwear" d="M162 164c-2 10-7 18-15 25l-12-8c5-11 10-18 18-25Z"/>
+            <path className="v3-skin" d="M136 181c-6 8-12 13-20 17l-10-7c5-8 11-14 18-19Z"/>
+            <path className="v3-skin" d="M92 153c-8 0-16 3-23 9l5 8c8-4 15-5 22-5Z"/>
+          </g>
+        )}
+
+        {kind === "deadbug" && (
+          <g className="v3-deadbug">
+            <g className="v3-hair"><path d="M105 115c-6-14 3-27 19-27 16 0 25 11 22 26-2 8-7 13-15 16l-5-8c-6 3-13 0-21-7Z"/></g>
+            <circle className="v3-skin" cx="122" cy="117" r="13"/>
+            <path className="v3-top" d="M132 126c24-8 48-5 67 5l-6 17-69-8Z"/>
+            <path className="v3-legwear" d="M194 136c20 1 37 8 54 18l-7 14c-19-7-35-9-53-12Z"/>
+            <path className="v3-skin" d="M247 151c13 0 24 4 34 11 4 3 3 8-4 9h-38c-2-7 1-13 8-20Z"/>
+            <path className="v3-skin" d="M137 126c-10-10-18-17-28-23l-8 9c10 9 17 16 24 25Z"/>
+            <path className="v3-skin" d="M106 104c-8-3-16-2-23 3l4 10c7-2 13-1 19 3Z"/>
+            <path className="v3-skin" d="M145 127c9-11 18-19 28-27l9 9c-9 10-16 18-23 27Z"/>
+            <path className="v3-skin" d="M174 101c8-4 16-4 24 1l-5 10c-7-2-13-1-19 4Z"/>
+          </g>
+        )}
+
+        {kind === "birddog" && (
+          <g className="v3-birddog">
+            <g className="v3-hair"><path d="M106 117c-7-14 3-28 20-28 17 0 27 12 23 28-2 9-8 15-16 18l-6-9c-7 4-14 0-21-9Z"/></g>
+            <circle className="v3-skin" cx="126" cy="119" r="14"/>
+            <path className="v3-top" d="M136 130c20-9 39-8 57 2l-4 20-62-9Z"/>
+            <path className="v3-legwear" d="M188 144c18 3 34 9 50 18l-7 15c-19-6-34-9-51-12Z"/>
+            <path className="v3-skin" d="M231 160c12 0 23 4 32 10 4 3 3 8-4 9h-37c-3-7 1-13 9-19Z"/>
+            <path className="v3-skin" d="M138 132c-12 8-22 17-31 28l9 8c11-9 20-16 31-22Z"/>
+            <path className="v3-skin" d="M107 158c-8 6-13 13-17 21l10 6c5-8 11-14 18-19Z"/>
+            <path className="v3-skin" d="M188 145c14-8 29-17 43-28l9 10c-14 13-28 22-44 30Z"/>
+            <path className="v3-skin" d="M230 117c10-3 18-2 26 4l-5 10c-7-3-13-3-19 0Z"/>
+          </g>
+        )}
+
+        {kind === "calf" && <circle className="v3-rise" cx="211" cy="197" r="3" />}
       </svg>
-      <span className="v2-caption">POSIÇÃO DO EXERCÍCIO</span>
+      <span className="v3-caption">DEMONSTRAÇÃO DO MOVIMENTO</span>
     </div>
   );
 }
@@ -328,7 +364,7 @@ function TrainingApp() {
             const done = completed.includes("d" + selectedDay + "-" + exercise.id);
             return (
               <button key={exercise.id} className={"exercise-card " + (done ? "done" : "")} onClick={() => setSelectedExercise(exercise)}>
-                <TrainingVisual type={exercise.visual} />
+                <TrainingVisual type={exercise.visual} id={exercise.id} />
                 <div className="exercise-info">
                   <span>EXERCÍCIO {String(index + 1).padStart(2, "0")}</span>
                   <h3>{exercise.name}</h3>
@@ -348,7 +384,7 @@ function TrainingApp() {
         <div className="exercise-modal" role="dialog" aria-modal="true" onClick={() => setSelectedExercise(null)}>
           <div className="exercise-modal-card" onClick={e => e.stopPropagation()}>
             <button className="modal-close" onClick={() => setSelectedExercise(null)}>×</button>
-            <TrainingVisual type={selectedExercise.visual} />
+            <TrainingVisual type={selectedExercise.visual} id={selectedExercise.id} />
             <div className="modal-kicker">{selectedExercise.muscle}</div>
             <h2>{selectedExercise.name}</h2>
             <div className="modal-stats"><span><b>{selectedExercise.sets}</b> séries</span><span><b>{selectedExercise.reps}</b> repetições</span><span><b>{selectedExercise.rest}s</b> descanso</span></div>
