@@ -1,4 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
+impo,
+    homeUpgradeExercises: [
+      { id:"flexao-d7", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Escolha uma altura que permita boa técnica.", how:["Apoie as mãos.","Desça controlando os cotovelos.","Empurre de volta."] },
+            { id:"ponte-d7", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça lentamente."] },
+            { id:"dead-bug-d7", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
+            { id:"panturrilha-d7", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
+    ]rt { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
 export const Route = createFileRoute("/treino")({ component: TrainingApp });
@@ -20,6 +26,7 @@ type DayPlan = {
   subtitle: string;
   duration: string;
   exercises: Exercise[];
+  homeUpgradeExercises: Exercise[];
 };
 
 const days: DayPlan[] = [
@@ -33,6 +40,12 @@ const days: DayPlan[] = [
       { id:"ponte", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"12–15", rest:45, tip:"Evite arquear demais a lombar no topo do movimento.", how:["Deite de costas com os joelhos flexionados.","Apoie os pés no chão e eleve o quadril.","Pause brevemente no alto e desça com controle."] },
       { id:"parede", name:"Flexão na parede", muscle:"Peito e braços", sets:3, reps:"8–12", rest:45, tip:"Quanto mais distante da parede, maior a dificuldade.", how:["Apoie as mãos na parede na altura do peito.","Flexione os cotovelos levando o corpo em direção à parede.","Empurre a parede até voltar à posição inicial."] },
       { id:"marcha", name:"Marcha parada", muscle:"Corpo inteiro", sets:3, reps:"40 s", rest:30, tip:"Mantenha um ritmo confortável e aumente gradualmente.", how:["Fique em pé com postura confortável.","Alterne a elevação dos joelhos.","Balance os braços naturalmente durante o movimento."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"flexao-inclinada-premium", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos em uma superfície firme.","Mantenha o corpo alinhado.","Flexione os cotovelos e empurre de volta."] },
+            { id:"elevacao-pelvica-premium", name:"Elevação pélvica com pausa", muscle:"Glúteos e posteriores", sets:3, reps:"12–15", rest:45, tip:"Pause no topo sem arquear demais a lombar.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Pause e desça lentamente."] },
+            { id:"bird-dog-premium", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o quadril estável.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne e alterne."] },
+            { id:"panturrilha-premium", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça com controle.", how:["Fique em pé com apoio próximo.","Eleve os calcanhares.","Desça lentamente."] }
     ]
   },
   {
@@ -44,6 +57,12 @@ const days: DayPlan[] = [
       { id:"agachamento-pausa", name:"Agachamento com pausa", muscle:"Pernas e glúteos", sets:3, reps:"8–10", rest:60, tip:"Faça uma pausa curta no ponto mais baixo confortável.", how:["Posicione os pés com estabilidade.","Desça controlando o movimento.","Pause por um instante e suba sem impulsos."] },
       { id:"passo", name:"Passada para trás", muscle:"Pernas e glúteos", sets:3, reps:"8 cada lado", rest:60, tip:"Use uma amplitude confortável e mantenha o joelho alinhado.", how:["Fique em pé e dê um passo para trás.","Flexione os dois joelhos de forma controlada.","Volte à posição inicial e alterne os lados."] },
       { id:"panturrilha", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça lentamente, sem balançar o corpo.", how:["Fique em pé com apoio próximo se precisar.","Eleve os calcanhares.","Desça devagar até a posição inicial."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"flexao-inclinada-d2", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Ajuste a altura da superfície ao seu nível.", how:["Apoie as mãos em uma superfície firme.","Mantenha o corpo alinhado.","Flexione e estenda os braços."] },
+            { id:"ponte-d2", name:"Ponte de glúteos", muscle:"Glúteos e posteriores", sets:3, reps:"12–15", rest:45, tip:"Concentre o movimento no quadril.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Desça devagar."] },
+            { id:"dead-bug-d2", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize controle e estabilidade.", how:["Deite de costas.","Estenda braço e perna opostos.","Retorne e alterne."] },
+            { id:"marcha-d2", name:"Marcha com joelhos altos", muscle:"Pernas e cardio", sets:3, reps:"40 s", rest:30, tip:"Mantenha um ritmo controlado.", how:["Fique em pé.","Alterne os joelhos.","Use os braços naturalmente."] }
     ]
   },
   {
@@ -55,6 +74,12 @@ const days: DayPlan[] = [
       { id:"dead-bug", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize o controle em vez da velocidade.", how:["Deite de costas com braços e pernas elevados.","Estenda braço e perna opostos sem perder o controle do tronco.","Volte e alterne o lado."] },
       { id:"bird-dog", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Imagine que há um copo sobre suas costas: tente não deixá-lo cair.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne lentamente e troque o lado."] },
       { id:"prancha", name:"Prancha inclinada", muscle:"Core e ombros", sets:3, reps:"20–30 s", rest:45, tip:"Use uma superfície firme e estável para apoiar as mãos.", how:["Apoie as mãos em uma superfície estável.","Afaste os pés e forme uma linha confortável com o corpo.","Contraia suavemente o abdômen e respire."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"agachamento-d3", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:60, tip:"Use uma amplitude confortável.", how:["Pés estáveis.","Desça levando o quadril para trás.","Suba empurrando o chão."] },
+            { id:"flexao-parede-d3", name:"Flexão na parede", muscle:"Peito e braços", sets:3, reps:"10–15", rest:45, tip:"Afaste os pés da parede para aumentar o desafio.", how:["Apoie as mãos na parede.","Aproxime o corpo com controle.","Empurre até a posição inicial."] },
+            { id:"ponte-d3", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"12–15", rest:45, tip:"Evite compensar com a lombar.", how:["Deite de costas.","Eleve o quadril.","Desça com controle."] },
+            { id:"panturrilha-d3", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Use apoio próximo se necessário.", how:["Fique em pé.","Eleve os calcanhares.","Desça lentamente."] }
     ]
   },
   {
@@ -66,6 +91,12 @@ const days: DayPlan[] = [
       { id:"agachamento-bracos", name:"Agachamento + elevação de braços", muscle:"Pernas e ombros", sets:3, reps:"10", rest:60, tip:"Faça o movimento em um ritmo que permita boa técnica.", how:["Agache confortavelmente.","Ao subir, eleve os braços até uma altura confortável.","Baixe os braços e repita."] },
       { id:"flexao", name:"Flexão inclinada", muscle:"Peito, braços e ombros", sets:3, reps:"8–12", rest:60, tip:"Use uma superfície firme e alta se estiver começando.", how:["Apoie as mãos em uma superfície estável.","Mantenha o corpo alinhado.","Flexione os cotovelos e empurre de volta."] },
       { id:"marcha-alta", name:"Marcha com joelhos altos", muscle:"Corpo inteiro", sets:3, reps:"40 s", rest:40, tip:"A altura dos joelhos deve permitir que você mantenha o controle.", how:["Comece em pé.","Eleve um joelho de cada vez.","Aumente o ritmo somente se continuar confortável."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"agachamento-pausa-d4", name:"Agachamento com pausa", muscle:"Pernas e glúteos", sets:3, reps:"8–10", rest:60, tip:"Pause brevemente no ponto mais baixo confortável.", how:["Desça de forma controlada.","Pause.","Suba sem impulsos."] },
+            { id:"ponte-d4", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Mantenha o abdômen levemente ativo.", how:["Deite de costas.","Eleve o quadril.","Desça devagar."] },
+            { id:"dead-bug-d4", name:"Dead bug", muscle:"Core", sets:3, reps:"8 cada lado", rest:45, tip:"Priorize estabilidade do tronco.", how:["Deite de costas.","Estenda braço e perna opostos.","Volte e alterne."] },
+            { id:"panturrilha-d4", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Pause brevemente no alto.", how:["Eleve os calcanhares.","Pause no alto.","Desça lentamente."] }
     ]
   },
   {
@@ -77,6 +108,12 @@ const days: DayPlan[] = [
       { id:"ponte-unilateral", name:"Ponte de glúteos alternada", muscle:"Glúteos", sets:3, reps:"8 cada lado", rest:50, tip:"Se ficar difícil, volte para a ponte tradicional.", how:["Deite de costas e eleve o quadril.","Mantenha uma perna estável enquanto a outra fica levemente elevada.","Alterne com controle."] },
       { id:"sumo", name:"Agachamento sumô", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:60, tip:"Mantenha os joelhos acompanhando a direção dos pés.", how:["Afaste um pouco mais os pés e gire levemente as pontas para fora.","Desça mantendo o peito confortável.","Suba sem travar os joelhos."] },
       { id:"panturrilha-2", name:"Panturrilha com pausa", muscle:"Panturrilhas", sets:3, reps:"12–15", rest:40, tip:"Faça uma pausa breve no alto.", how:["Eleve os calcanhares lentamente.","Pause no alto.","Desça com controle."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"flexao-inclinada-d5", name:"Flexão inclinada", muscle:"Peito, ombros e braços", sets:3, reps:"8–12", rest:60, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos.","Mantenha o corpo alinhado.","Flexione e empurre de volta."] },
+            { id:"bird-dog-d5", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Evite girar o quadril.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne lentamente."] },
+            { id:"ponte-d5", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Pause no topo.", how:["Deite de costas.","Eleve o quadril.","Pause e desça."] },
+            { id:"marcha-d5", name:"Marcha com joelhos altos", muscle:"Corpo inteiro", sets:3, reps:"45 s", rest:30, tip:"Mantenha um ritmo sustentável.", how:["Fique em pé.","Alterne os joelhos.","Use os braços naturalmente."] }
     ]
   },
   {
@@ -88,6 +125,12 @@ const days: DayPlan[] = [
       { id:"step", name:"Step no lugar", muscle:"Pernas e cardio", sets:4, reps:"45 s", rest:30, tip:"Mantenha uma intensidade em que ainda consiga controlar a respiração.", how:["Alterne os pés como se estivesse subindo um degrau baixo.","Use os braços naturalmente.","Mantenha o ritmo confortável."] },
       { id:"parede-2", name:"Flexão na parede", muscle:"Peito e braços", sets:3, reps:"10–15", rest:45, tip:"Ajuste a distância da parede para controlar a dificuldade.", how:["Apoie as mãos na parede.","Aproxime o corpo com controle.","Empurre para retornar."] },
       { id:"ponte-2", name:"Ponte de glúteos", muscle:"Glúteos", sets:3, reps:"15", rest:45, tip:"Movimente o quadril com controle.", how:["Deite de costas com os pés apoiados.","Eleve o quadril.","Desça lentamente."] }
+    ],
+    homeUpgradeExercises: [
+      { id:"agachamento-d6", name:"Agachamento livre", muscle:"Pernas e glúteos", sets:3, reps:"10–12", rest:60, tip:"Use uma amplitude confortável.", how:["Pés estáveis.","Desça com controle.","Suba empurrando o chão."] },
+            { id:"bird-dog-d6", name:"Bird dog", muscle:"Core e costas", sets:3, reps:"8 cada lado", rest:45, tip:"Mantenha o tronco estável.", how:["Comece em quatro apoios.","Estenda braço e perna opostos.","Retorne e troque."] },
+            { id:"panturrilha-d6", name:"Elevação de panturrilhas", muscle:"Panturrilhas", sets:3, reps:"15", rest:40, tip:"Suba e desça lentamente.", how:["Fique em pé.","Eleve os calcanhares.","Desça com controle."] },
+            { id:"prancha-d6", name:"Prancha inclinada", muscle:"Core e ombros", sets:3, reps:"20–30 s", rest:45, tip:"Use uma superfície firme e estável.", how:["Apoie as mãos.","Forme uma linha confortável com o corpo.","Respire mantendo o abdômen ativo."] }
     ]
   },
   {
@@ -162,7 +205,7 @@ function TrainingApp() {
   const [notes, setNotes] = useState<Record<string, string>>({});
   const [now, setNow] = useState(Date.now());
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState<"treino" | "chat" | "dieta">("treino");
+  const [activeSection, setActiveSection] = useState<"treino" | "dieta">("treino");
   const [dietMode, setDietMode] = useState<"dieta" | "contador">("contador");
   const [foodName, setFoodName] = useState("");
   const [foodAmount, setFoodAmount] = useState("");
@@ -170,6 +213,7 @@ function TrainingApp() {
   const [foodItems, setFoodItems] = useState<Array<{name:string; amount:number; unit:string; calories:number}>>([]);
   const [showDietOffer, setShowDietOffer] = useState(false);
   const [showHomeUpgrade, setShowHomeUpgrade] = useState(false);
+  const [homeUpgradeUnlocked, setHomeUpgradeUnlocked] = useState(false);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(Date.now()), 1000);
@@ -183,6 +227,7 @@ function TrainingApp() {
     if (saved) setStartedAt(Number(saved));
     if (done) setCompleted(JSON.parse(done));
     if (savedNotes) setNotes(JSON.parse(savedNotes));
+    if (localStorage.getItem("viva-home-upgrade-unlocked") === "true") setHomeUpgradeUnlocked(true);
   }, []);
 
   function startProgram() {
@@ -198,7 +243,8 @@ function TrainingApp() {
   }, [startedAt, now]);
 
   const currentDay = days[selectedDay - 1];
-  const progress = Math.round((completed.filter(id => id.startsWith("d" + selectedDay + "-")).length / currentDay.exercises.length) * 100);
+  const visibleExercises = homeUpgradeUnlocked ? [...currentDay.exercises, ...currentDay.homeUpgradeExercises] : currentDay.exercises;
+  const progress = Math.round((completed.filter(id => id.startsWith("d" + selectedDay + "-")).length / visibleExercises.length) * 100);
 
   function formatRemaining(ms: number) {
     const safe = Math.max(0, ms);
@@ -222,7 +268,7 @@ function TrainingApp() {
     localStorage.setItem("viva-training-completed", JSON.stringify(next));
   }
 
-  function openSection(section: "treino" | "chat" | "dieta") { setActiveSection(section); setMenuOpen(false); }
+  function openSection(section: "treino" | "dieta") { setActiveSection(section); setMenuOpen(false); }
   function addFood() {
     setShowDietOffer(true);
   }
@@ -256,7 +302,6 @@ function TrainingApp() {
       </header>
       {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
         <button className="side-menu-item" onClick={openHomeUpgrade}><span className="minimal-menu-icon minimal-home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg></span><div><b>Upgrade de treino</b><small>Treino completo em casa • R$ 11,99</small></div></button>
-        <button className={activeSection === "chat" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("chat")}><span className="minimal-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4z"/></svg></span><div><b>Chat global</b><small>R$ 4,90/mês</small></div></button>
         <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span className="minimal-menu-icon minimal-diet-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
       </aside></>}
       {activeSection === "treino" ? (
@@ -282,7 +327,7 @@ function TrainingApp() {
               <div className="routine-progress"><strong>{progress}%</strong><small>concluído</small></div>
             </div>
             <div className="exercise-grid">
-              {currentDay.exercises.map((exercise, index) => {
+              {visibleExercises.map((exercise, index) => {
                 const done = completed.includes("d" + selectedDay + "-" + exercise.id);
                 return <button key={exercise.id} className={"exercise-card " + (done ? "done" : "")} onClick={() => setSelectedExercise(exercise)}>
                   <DurationClock exercise={exercise} />
@@ -298,17 +343,6 @@ function TrainingApp() {
             </div>
           </section>
         </>
-      ) : activeSection === "chat" ? (
-        <section className="feature-page">
-          <div className="feature-page-kicker">COMUNIDADE VIRADAFIT</div>
-          <h1>Chat <em>global.</em></h1>
-          <p>Converse, troque experiências e acompanhe outras pessoas na jornada.</p>
-          <div className="feature-coming-card">
-            <span>💬</span><h2>Comunidade</h2>
-            <p>Acesso por assinatura de <strong>R$ 4,90/mês</strong>.</p>
-            <button className="training-main-btn">ASSINAR • R$ 4,90/MÊS →</button>
-          </div>
-        </section>
       ) : (
         <section className="feature-page diet-page">
           <div className="feature-page-kicker">NUTRIÇÃO VIRADAFIT</div>
@@ -354,7 +388,7 @@ function TrainingApp() {
             <h2 id="home-upgrade-title">Evolua seu treino em casa</h2>
             <p>Libere um <strong>treino completo em casa</strong>, com uma rotina mais completa para continuar evoluindo sem precisar de academia.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 11,99</strong></div>
-            <button className="training-main-btn diet-offer-cta">EVOLUIR MEU TREINO • R$ 11,99 →</button>
+            <button className="training-main-btn diet-offer-cta" onClick={() => { setHomeUpgradeUnlocked(true); localStorage.setItem("viva-home-upgrade-unlocked", "true"); setShowHomeUpgrade(false); }}>LIBERAR TREINO COMPLETO →</button>
             <button className="diet-offer-later" onClick={() => setShowHomeUpgrade(false)}>Agora não</button>
           </div>
         </div>
