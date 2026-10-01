@@ -127,6 +127,37 @@ function TLSHome() {
           <div className="tls-benefits"><span>✓ Notícias organizadas por assunto</span><span>✓ Acompanhamento de candidatos</span><span>✓ Propostas e declarações</span><span>✓ Fontes para conferência</span></div>
           <button className="tls-cta wide" onClick={() => alert("Conecte aqui o link do seu checkout.")}>ACESSAR POR R$ 19,90 <span>→</span></button>
           <p className="tls-small">O conteúdo premium deve ser liberado somente após a confirmação do pagamento pelo checkout.</p>
+          <section className="tls-reviews" aria-label="Depoimentos ilustrativos">
+            <div className="tls-reviews-head">
+              <div className="tls-kicker center"><b /> EXPERIÊNCIAS ILUSTRATIVAS <b /></div>
+              <h3>O que as pessoas procuram em uma central de informação</h3>
+              <p>Exemplos fictícios para a apresentação escolar — não são avaliações reais de clientes.</p>
+            </div>
+            <div className="tls-review-grid">
+              {[
+                ["Maria", "58", "Agora finalmente tenho um lugar para ver minhas notícias sem ficar procurando em vários sites.", 1],
+                ["Carlos", "64", "Gostei da ideia de encontrar notícias e fontes organizadas em um só lugar.", 2],
+                ["Helena", "61", "Ficaria muito mais fácil acompanhar as informações importantes durante as eleições.", 3],
+                ["João", "69", "Ter as fontes para conferir as informações por conta própria faz diferença.", 4],
+                ["Sandra", "55", "Eu usaria para acompanhar propostas e declarações sem depender só das redes sociais.", 5],
+                ["Antônio", "72", "A organização por assunto deixaria muito mais simples acompanhar os acontecimentos.", 6],
+                ["Lúcia", "63", "Finalmente uma proposta pensada para quem quer entender o contexto das notícias.", 7],
+                ["Roberto", "67", "Gostaria de consultar as fontes originais antes de compartilhar uma informação.", 8],
+                ["Marta", "59", "Uma central assim ajudaria a separar o que é notícia do que é apenas comentário.", 9],
+                ["Paulo", "70", "Eu procuraria principalmente as propostas, decisões e informações verificáveis.", 10]
+              ].map(([name, age, review, img]) => (
+                <article className="tls-review" key={name}>
+                  <div className="tls-review-top">
+                    <img src={"https://i.pravatar.cc/96?img=" + img} alt="" />
+                    <div><strong>{name}, {age} anos</strong><span className="tls-stars">★★★★★</span></div>
+                  </div>
+                  <p>“{review}”</p>
+                  <small>DEPOIMENTO ILUSTRATIVO</small>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <button className="tls-reset" onClick={() => setPaidArea(false)}>← Voltar</button>
         </main>
       )}
