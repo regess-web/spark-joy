@@ -413,7 +413,7 @@ function TrainingApp() {
             <h2 id="simple-diet-offer-title">Libere sua dieta</h2>
             <p>Tenha acesso ao <strong>plano alimentar completo</strong>, organizado para acompanhar sua rotina de forma simples e prática.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 7,90</strong></div>
-            <button className="training-main-btn diet-offer-cta" onClick={() => { window.location.href = "/"; }}>VER ENTREGÁVEL DA DIETA →</button>
+            <button className="training-main-btn diet-offer-cta" onClick={() => { window.location.href = "https://pay.cakto.com.br/35taav4_1161076"; }}>COMPRAR DIETA • R$ 7,90 →</button>
             <button className="diet-offer-later" onClick={() => setShowSimpleDietOffer(false)}>Agora não</button>
           </div>
         </div>
@@ -427,7 +427,7 @@ function TrainingApp() {
             <h2 id="diet-offer-title">Libere seu contador de calorias</h2>
             <p>Para adicionar alimentos e acompanhar seu total diário, você precisa do plano completo <strong>Dieta + Contador</strong>.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 12,90</strong></div>
-            <button className="training-main-btn diet-offer-cta" onClick={() => { localStorage.setItem("viva-diet-counter-unlocked", "true"); setShowDietOffer(false); setActiveSection("dieta"); }}>VER ENTREGÁVEL + CONTADOR →</button>
+            <button className="training-main-btn diet-offer-cta" onClick={() => { window.location.href = "https://pay.cakto.com.br/eu7vctt_1161061"; }}>COMPRAR DIETA + CONTADOR →</button>
             <button className="diet-offer-later" onClick={() => setShowDietOffer(false)}>Agora não</button>
           </div>
         </div>
