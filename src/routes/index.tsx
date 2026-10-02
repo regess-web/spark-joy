@@ -181,8 +181,8 @@ function WeightLossQuiz() {
         <div className="fit-offer-card">
           <div className="fit-kicker">SEU PRÓXIMO PASSO</div>
           <h1>Comece a cuidar de você<br /><em>do seu jeito.</em></h1>
-          <p>Por apenas <strong>R$ 19,90</strong>, tenha acesso a um guia de exercícios práticos para ajudar você a construir uma rotina ativa e chegar ao verão se sentindo mais confiante.</p>
-          <div className="fit-price"><s>R$ 39,90</s><strong>R$ 19,90</strong><span>acesso ao guia</span></div>
+          <p>Por apenas <strong>R$ 27,99</strong>, tenha acesso a um guia de exercícios práticos para ajudar você a construir uma rotina ativa e chegar ao verão se sentindo mais confiante.</p>
+          <div className="fit-price"><s>R$ 39,90</s><strong>R$ 27,99</strong><span>acesso ao guia</span></div>
           <div className="fit-benefits">
             <span>✓ Exercícios organizados por objetivo</span><span>✓ Rotinas simples para começar</span><span>✓ Guia para acompanhar sua evolução</span><span>✓ Acesso imediato ao material</span>
           </div>
