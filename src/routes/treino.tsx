@@ -197,13 +197,13 @@ function DurationClock({ exercise }: { exercise: Exercise }) {
   );
 }
 
-function CaktoUpgradeButton() {
+function CaktoUpgradeButton({ onUnlock }: { onUnlock: () => void }) {
   return (
     <button
       className="training-main-btn diet-offer-cta"
-      onClick={() => { window.location.href = "https://pay.cakto.com.br/quucckn_1161084"; }}
+      onClick={onUnlock}
     >
-      EVOLUIR MEU TREINO • R$ 11,99 →
+      EVOLUIR MEU TREINO • R$ 17,90 →
     </button>
   );
 }
@@ -313,7 +313,7 @@ function TrainingApp() {
         <div className="training-top-status">SEMANA 1 <strong>{unlockedDay}/7</strong></div>
       </header>
       {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
-        <button className="side-menu-item" onClick={openHomeUpgrade}><span className="minimal-menu-icon minimal-home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg></span><div><b>{homeUpgradeUnlocked ? "Treino completo em casa" : "Upgrade de treino"}</b><small>{homeUpgradeUnlocked ? "8 exercícios por dia • desbloqueado" : "Treino completo em casa • R$ 11,99"}</small></div></button>
+        <button className="side-menu-item" onClick={openHomeUpgrade}><span className="minimal-menu-icon minimal-home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg></span><div><b>{homeUpgradeUnlocked ? "Treino completo em casa" : "Upgrade de treino"}</b><small>{homeUpgradeUnlocked ? "8 exercícios por dia • desbloqueado" : "Treino completo em casa • R$ 17,90"}</small></div></button>
         <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span className="minimal-menu-icon minimal-diet-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><div><b>Dieta + contador</b><small>Dieta R$ 7,90 • completo R$ 12,90</small></div></button>
       </aside></>}
       {activeSection === "treino" ? (
@@ -399,8 +399,8 @@ function TrainingApp() {
             <div className="feature-page-kicker">UPGRADE VIRADAFIT</div>
             <h2 id="home-upgrade-title">Evolua seu treino em casa</h2>
             <p>Com o upgrade, você adquire <strong>mais 28 exercícios para sua ViradaFIT</strong>, ampliando sua rotina ao longo dos 7 dias e trabalhando diferentes grupos musculares.</p>
-            <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 11,99</strong></div>
-            <CaktoUpgradeButton />
+            <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 17,90</strong></div>
+            <CaktoUpgradeButton onUnlock={() => { localStorage.setItem("viva-home-upgrade-unlocked", "true"); setHomeUpgradeUnlocked(true); setShowHomeUpgrade(false); }} />
           </div>
         </div>
       )}
