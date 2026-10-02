@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
+import "../diet-quiz.css";
 
 export const Route = createFileRoute("/")({ component: DietQuiz });
 
@@ -193,7 +194,6 @@ function DietQuiz() {
 
   const current = questions[step];
   const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
-
   const resultPlan = useMemo(() => (result ? plans[result] : null), [result]);
 
   function next() {
@@ -232,45 +232,29 @@ function DietQuiz() {
           <p className="fit-overline">PELAS SUAS RESPOSTAS...</p>
           <h1>{resultPlan.title}</h1>
           <p className="fit-result-text">{resultPlan.description}</p>
-
-          <div className="diet-result-badge">
-            <strong>4</strong>
-            <span>opções de dieta<br />analisadas no quiz</span>
-          </div>
-
+          <div className="diet-result-badge"><strong>4</strong><span>opções de dieta<br />analisadas no quiz</span></div>
           <div className="diet-scroll-plan">
             <div className="diet-plan-intro">
               <span>{resultPlan.eyebrow}</span>
               <h2>Seu cardápio de 7 dias</h2>
               <p>Role para baixo e acompanhe o que comer em cada dia. Toque em um dia para abrir ou fechar as refeições.</p>
             </div>
-
             {resultPlan.days.map((day, index) => (
               <article className={"diet-day-card " + (openDay === index ? "open" : "")} key={day.title}>
                 <button className="diet-day-header" onClick={() => setOpenDay(openDay === index ? -1 : index)}>
-                  <div>
-                    <span>{day.title}</span>
-                    <strong>{index === 0 ? "Comece por aqui" : index === 6 ? "Fechando a semana" : "Continue sua rotina"}</strong>
-                  </div>
+                  <div><span>{day.title}</span><strong>{index === 0 ? "Comece por aqui" : index === 6 ? "Fechando a semana" : "Continue sua rotina"}</strong></div>
                   <b>{openDay === index ? "−" : "+"}</b>
                 </button>
-                {openDay === index && (
-                  <div className="diet-day-meals">
-                    <div><span>CAFÉ DA MANHÃ</span><p>{day.breakfast}</p></div>
-                    <div><span>ALMOÇO</span><p>{day.lunch}</p></div>
-                    <div><span>LANCHE</span><p>{day.snack}</p></div>
-                    <div><span>JANTAR</span><p>{day.dinner}</p></div>
-                  </div>
-                )}
+                {openDay === index && <div className="diet-day-meals">
+                  <div><span>CAFÉ DA MANHÃ</span><p>{day.breakfast}</p></div>
+                  <div><span>ALMOÇO</span><p>{day.lunch}</p></div>
+                  <div><span>LANCHE</span><p>{day.snack}</p></div>
+                  <div><span>JANTAR</span><p>{day.dinner}</p></div>
+                </div>}
               </article>
             ))}
-
-            <div className="diet-plan-note">
-              <strong>Como usar</strong>
-              <p>{resultPlan.note}</p>
-            </div>
+            <div className="diet-plan-note"><strong>Como usar</strong><p>{resultPlan.note}</p></div>
           </div>
-
           <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
         </div>
       </main>
@@ -293,10 +277,7 @@ function DietQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header">
-        <div className="fit-brand">ViradaFIT</div>
-        <div className="fit-count">{String(step + 1).padStart(2, "0")} / 08</div>
-      </header>
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 08</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
@@ -311,9 +292,7 @@ function DietQuiz() {
         </div>
         <div className="fit-footer">
           <small>{selected === null ? "Escolha uma alternativa para continuar." : "Resposta selecionada."}</small>
-          <button className="fit-next" disabled={selected === null} onClick={next}>
-            {step === questions.length - 1 ? "MONTAR MINHA DIETA" : "CONTINUAR"} <span>→</span>
-          </button>
+          <button className="fit-next" disabled={selected === null} onClick={next}>{step === questions.length - 1 ? "MONTAR MINHA DIETA" : "CONTINUAR"} <span>→</span></button>
         </div>
       </section>
     </main>
