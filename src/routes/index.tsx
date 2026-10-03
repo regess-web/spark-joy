@@ -117,6 +117,12 @@ function WeightLossQuiz() {
   const [offer, setOffer] = useState(false);
   const [context, setContext] = useState<string>("");
 
+  function trackQuizEvent(eventName: string, params: Record<string, string | number> = {}) {
+    if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+      (window as any).fbq("trackCustom", eventName, params);
+    }
+  }
+
   const current = baseQuestions[step];
   const progress = ((step + (selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
   const selectedAnswer = selected === null ? null : current.answers[selected];
@@ -133,6 +139,7 @@ function WeightLossQuiz() {
   function next() {
     if (selected === null) return;
     const answer = current.answers[selected];
+    trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
     const nextScores = { ...scores, [answer.tag]: (scores[answer.tag] || 0) + 1 };
     setScores(nextScores);
     setContext(answer.followUp);
@@ -140,6 +147,7 @@ function WeightLossQuiz() {
     if (step === baseQuestions.length - 1) {
       const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
       setResult(finalTag);
+      trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
     } else {
       setStep((s) => s + 1);
       setSelected(null);
