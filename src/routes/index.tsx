@@ -78,47 +78,8 @@ const baseQuestions: QuizQuestion[] = [
       { text: "Quando surgir um espaço", tag: "rotina", recommendation: "Flexibilidade será importante: o treino precisa funcionar mesmo quando o horário mudar.", followUp: "Se aparecer uma janela inesperada, qual duração seria realista?" }
     ]
   },
-  {
-    question: "Quanto tempo você conseguiria reservar para cuidar de você?",
-    subtitle: "Agora vamos usar o seu tempo real para personalizar o próximo passo.",
-    answers: [
-      { text: "10 a 15 minutos", tag: "rotina", recommendation: "Com 10–15 minutos, a melhor escolha é um treino compacto: poucos movimentos, pouca espera e foco no essencial.", followUp: "Com esse tempo, você prefere um treino de corpo inteiro ou focado em uma região?" },
-      { text: "15 a 20 minutos", tag: "corpo", recommendation: "Com 15–20 minutos, dá para montar uma sessão curta com aquecimento, exercícios principais e descanso organizado.", followUp: "Você prefere usar quase todo o tempo em exercícios ou deixar alguns minutos para uma volta à calma?" },
-      { text: "30 minutos", tag: "energia", recommendation: "Com 30 minutos, podemos distribuir melhor o treino e incluir mais de um bloco de exercícios sem correr.", followUp: "Como você tem 30 minutos, prefere dividir em aquecimento + força + movimento ou fazer um circuito contínuo?" },
-      { text: "Mais de 30 minutos", tag: "corpo", recommendation: "Com mais tempo disponível, podemos usar uma sessão mais completa sem precisar acelerar cada exercício.", followUp: "Você prefere usar esse tempo em uma sessão completa ou guardar parte dele para mobilidade e descanso?" }
-    ]
-  },
-  {
-    question: "Como você quer organizar o seu tempo de treino?",
-    subtitle: "Sua resposta sobre duração já foi considerada nesta pergunta.",
-    answers: [
-      { text: "Um bloco direto, sem enrolação", tag: "rotina", recommendation: "Vamos manter a estrutura objetiva: começar, executar e terminar sem etapas desnecessárias.", followUp: "Você gostaria que cada exercício já mostrasse séries, repetições e descanso na tela?" },
-      { text: "Aquecimento + exercícios + finalização", tag: "energia", recommendation: "Uma estrutura em etapas pode deixar a sessão mais fácil de acompanhar.", followUp: "Você prefere que o site avise quando for hora de trocar de exercício?" },
-      { text: "Circuito com vários movimentos", tag: "corpo", recommendation: "Um circuito pode deixar o treino mais dinâmico, desde que a intensidade continue confortável.", followUp: "Você prefere repetir o circuito 2 ou 3 vezes?" },
-      { text: "Poucos exercícios, mas bem explicados", tag: "autoestima", recommendation: "Vamos valorizar clareza: menos movimentos, mais orientação para você saber exatamente o que fazer.", followUp: "Você gostaria de abrir uma demonstração antes de começar cada exercício?" }
-    ]
-  },
-  {
-    question: "O que mais ajudaria você a manter o programa por 7 dias?",
-    subtitle: "Pensando no formato que você escolheu, qual apoio faria mais diferença?",
-    answers: [
-      { text: "Ter tudo pronto", tag: "rotina", recommendation: "Seu programa deve tirar decisões do caminho: abrir o dia e saber exatamente o que fazer.", followUp: "Você gostaria de ver um checklist diário de exercícios concluídos?" },
-      { text: "Ver minha evolução", tag: "autoestima", recommendation: "Vamos transformar consistência em algo visível, acompanhando o que você concluiu.", followUp: "Você prefere acompanhar por exercícios concluídos ou por dias completos?" },
-      { text: "Ter demonstrações dos exercícios", tag: "corpo", recommendation: "As demonstrações podem reduzir a dúvida sobre como executar cada movimento.", followUp: "Você prefere uma animação curta ou instruções passo a passo junto da animação?" },
-      { text: "Receber um lembrete do próximo dia", tag: "energia", recommendation: "Um próximo passo claro ajuda a manter o ritmo sem precisar pensar no que vem depois.", followUp: "Você prefere um aviso do horário do próximo treino ou apenas um contador até o próximo dia?" }
-    ]
-  },
-  {
-    question: "Se você pudesse escolher uma prioridade para a próxima semana, qual seria?",
-    subtitle: "Última pergunta. Sua resposta vai ajudar a definir a recomendação final.",
-    answers: [
-      { text: "Criar constância", tag: "rotina", recommendation: "Sua recomendação final vai priorizar simplicidade e consistência, sem exigir uma rotina perfeita.", followUp: "Você quer começar com uma meta pequena e fácil de repetir?" },
-      { text: "Me sentir mais confiante", tag: "autoestima", recommendation: "Sua recomendação final vai valorizar pequenas vitórias e uma progressão que respeite seu ritmo.", followUp: "Você prefere medir sua evolução pelo que consegue fazer ou pelo que consegue manter?" },
-      { text: "Ficar mais ativa", tag: "energia", recommendation: "Sua recomendação final vai combinar movimento e sessões práticas para manter você ativa.", followUp: "Você gostaria de alternar dias mais leves e dias um pouco mais ativos?" },
-      { text: "Aprender a treinar melhor", tag: "corpo", recommendation: "Sua recomendação final vai dar destaque à execução, às séries, às repetições e ao descanso.", followUp: "Você gostaria que cada exercício tivesse uma explicação curta e uma demonstração animada?" }
-    ]
-  }
-];
+
+];;
 
 const resultCopy = {
   autoestima: { title: "Seu plano deve começar leve.", text: "Pelas suas respostas, você tende a se beneficiar de uma experiência simples, com pequenas vitórias e uma rotina que ajude você a se sentir mais confortável consigo mesma." },
@@ -215,11 +176,11 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">
         <div className="fit-start-card">
-          <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
+          <div className="fit-kicker">SEU MOMENTO • 6 PERGUNTAS</div>
           <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
           <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
           <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true); }}>COMEÇAR MEU QUIZ <span>→</span></button>
-          <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
+          <div className="fit-trust"><span>6 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
         </div>
       </main>
     );
@@ -227,7 +188,7 @@ function WeightLossQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 10</div></header>
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 06</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
@@ -247,7 +208,7 @@ function WeightLossQuiz() {
         )}
         <div className="fit-footer">
           <small>{selected === null ? "Escolha uma alternativa para personalizar a próxima etapa." : "Resposta registrada e próxima etapa personalizada."}</small>
-          <button className="fit-next" disabled={selected === null} onClick={next}>{step === 9 ? "VER MINHA RECOMENDAÇÃO" : "CONTINUAR"} <span>→</span></button>
+          <button className="fit-next" disabled={selected === null} onClick={next}>{step === baseQuestions.length - 1 ? "VER MINHA RECOMENDAÇÃO" : "CONTINUAR"} <span>→</span></button>
         </div>
       </section>
     </main>
