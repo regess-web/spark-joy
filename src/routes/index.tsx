@@ -167,7 +167,18 @@ function WeightLossQuiz() {
           <div className="fit-benefits">
             <span>✓ Exercícios organizados por objetivo</span><span>✓ Rotinas simples para começar</span><span>✓ Guia para acompanhar sua evolução</span><span>✓ Acesso imediato ao material</span>
           </div>
-          <button className="fit-primary" onClick={() => { window.location.href = "https://pay.cakto.com.br/34rfhf7_1160901"; }}>QUERO COMEÇAR AGORA <span>→</span></button>
+          <button
+            className="fit-primary"
+            onClick={() => {
+              if (typeof window !== "undefined" && typeof window.fbq === "function") {
+                window.fbq("track", "InitiateCheckout", {
+                  value: 27.99,
+                  currency: "BRL",
+                });
+              }
+              window.location.href = "https://pay.cakto.com.br/34rfhf7_1160901";
+            }}
+          >QUERO COMEÇAR AGORA <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
       </main>
