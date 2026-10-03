@@ -196,11 +196,19 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">
         <div className="fit-start-card">
-          <div className="fit-kicker">SEU MOMENTO • 8 PERGUNTAS</div>
-          <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
-          <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
-          <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true); }}>COMEÇAR MEU QUIZ <span>→</span></button>
-          <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
+          <div className="fit-start-image">
+            <img
+              src="https://images.pexels.com/photos/6551129/pexels-photo-6551129.jpeg?cs=srgb&dl=pexels-andres-ayrton-6551129.jpg&fm=jpg"
+              alt="Mulher segurando a região da barriga"
+            />
+          </div>
+          <div className="fit-start-content">
+            <div className="fit-kicker">SEU MOMENTO • 8 PERGUNTAS</div>
+            <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
+            <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
+            <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true); }}>COMEÇAR MEU QUIZ <span>→</span></button>
+            <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
+          </div>
         </div>
       </main>
     );
