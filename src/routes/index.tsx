@@ -78,6 +78,26 @@ const baseQuestions: QuizQuestion[] = [
       { text: "Quando surgir um espaço", tag: "rotina", recommendation: "Flexibilidade será importante: o treino precisa funcionar mesmo quando o horário mudar.", followUp: "Se aparecer uma janela inesperada, qual duração seria realista?" }
     ]
   },
+  {
+    question: "Quanto tempo você conseguiria reservar para cuidar de você?",
+    subtitle: "Escolha o tempo que parece mais realista para a sua rotina atual.",
+    answers: [
+      { text: "Até 15 minutos", tag: "rotina", recommendation: "Vamos priorizar uma rotina curta e objetiva, para facilitar a constância.", followUp: "Você prefere fazer esses minutos de uma vez ou dividir em pequenos blocos?" },
+      { text: "De 15 a 30 minutos", tag: "corpo", recommendation: "Esse tempo permite uma sequência equilibrada, sem deixar o treino pesado demais.", followUp: "Você prefere focar mais em força ou em movimentos para o corpo inteiro?" },
+      { text: "De 30 a 45 minutos", tag: "energia", recommendation: "Com esse tempo, dá para combinar diferentes movimentos e construir uma sessão mais completa.", followUp: "Você gostaria de um treino mais intenso ou moderado?" },
+      { text: "Depende do dia", tag: "rotina", recommendation: "Flexibilidade será importante para você, com opções que se adaptem aos dias mais corridos.", followUp: "Nos dias corridos, qual seria o mínimo de tempo que você conseguiria manter?" }
+    ]
+  },
+  {
+    question: "O que mais ajudaria você a manter o programa por 7 dias?",
+    subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
+    answers: [
+      { text: "Ter um treino pronto", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e deixa mais simples começar.", followUp: "Você prefere receber tudo organizado por dia?" },
+      { text: "Ver minha evolução", tag: "autoestima", recommendation: "Acompanhar pequenas conquistas pode ajudar a manter a motivação.", followUp: "Você gostaria de marcar cada treino concluído?" },
+      { text: "Exercícios fáceis de entender", tag: "corpo", recommendation: "Instruções claras ajudam você a saber exatamente o que fazer em cada etapa.", followUp: "Você prefere explicações rápidas ou mais detalhadas?" },
+      { text: "Sentir mais disposição", tag: "energia", recommendation: "Vamos priorizar movimentos que façam a rotina parecer ativa e sustentável.", followUp: "Você prefere começar devagar e aumentar o ritmo aos poucos?" }
+    ]
+  },
 
 ];;
 
@@ -176,11 +196,11 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">
         <div className="fit-start-card">
-          <div className="fit-kicker">SEU MOMENTO • 6 PERGUNTAS</div>
+          <div className="fit-kicker">SEU MOMENTO • 8 PERGUNTAS</div>
           <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
           <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
           <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true); }}>COMEÇAR MEU QUIZ <span>→</span></button>
-          <div className="fit-trust"><span>6 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
+          <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
         </div>
       </main>
     );
@@ -188,7 +208,7 @@ function WeightLossQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 06</div></header>
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 08</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
