@@ -225,7 +225,9 @@ function WeightLossQuiz() {
             <div className="fit-kicker">SEU MOMENTO • 8 PERGUNTAS</div>
             <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
-            <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true); }}>COMEÇAR MEU QUIZ <span>→</span></button>
+            <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
+                trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
+              }}>COMEÇAR MEU QUIZ <span>→</span></button>
             <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
           </div>
         </div>
