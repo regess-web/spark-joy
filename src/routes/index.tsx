@@ -112,8 +112,6 @@ const baseQuestions: QuizQuestion[] = [
       { text: "Cuidar mais do meu corpo", tag: "corpo", recommendation: "Vamos organizar uma sequência equilibrada para você saber como começar.", followUp: "Você gostaria de ter séries e repetições já definidas?" }
     ]
   },
-
-];
   {
     question: "O que mais ajudaria você a manter o programa por 7 dias?",
     subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
@@ -142,7 +140,7 @@ const baseQuestions: QuizQuestion[] = [
     max: 250,
     unit: "cm"
   },
-];;
+];
 
 const resultCopy = {
   autoestima: { title: "Seu plano deve começar leve.", text: "Pelas suas respostas, você tende a se beneficiar de uma experiência simples, com pequenas vitórias e uma rotina que ajude você a se sentir mais confortável consigo mesma." },
