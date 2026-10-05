@@ -201,7 +201,7 @@ function WeightLossQuiz() {
       const startedAt = Date.now();
       const interval = window.setInterval(() => {
         const elapsed = Date.now() - startedAt;
-        const pct = Math.min(100, (elapsed / 12000) * 100);
+        const pct = Math.min(100, (elapsed / 10000) * 100);
         setLoadingProgress(pct);
         if (pct >= 100) {
           window.clearInterval(interval);
@@ -357,7 +357,7 @@ function WeightLossQuiz() {
               <div className="fit-value-grid">
                 <div><b>26+</b><span>exercícios</span></div>
                 <div><b>7</b><span>dias de treino</span></div>
-                <div><b>10</b><span>perguntas</span></div>
+                <div><b>12</b><span>perguntas</span></div>
                 <div><b>100%</b><span>guiado</span></div>
               </div>
               <div className="fit-proof">
