@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 
-export const Route = createFileRoute("/")({ component: WeightLossQuiz });
+export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ViradaFIT | Sua Rotina de Treino" },
+      { name: "description", content: "Responda ao quiz e encontre uma rotina de treino adequada ao seu momento." },
+      { property: "og:title", content: "ViradaFIT | Sua Rotina de Treino" },
+      { property: "og:description", content: "Responda ao quiz e encontre uma rotina de treino adequada ao seu momento." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: WeightLossQuiz,
+});
 
 type Tag = "autoestima" | "rotina" | "corpo" | "energia";
 type Answer = {
@@ -21,7 +33,7 @@ type QuizQuestion = {
   unit?: string;
 };
 
-const baseQuestions: QuizQuestion[] = [
+const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
   {
     question: "Você se sente cansada de chegar aos eventos e não se sentir do jeito que gostaria?",
     subtitle: "Não existe resposta certa. Escolha o que mais combina com você hoje.",
@@ -175,7 +187,7 @@ function WeightLossQuiz() {
     }
   }
 
-  const current = baseQuestions[step];
+  const current = baseQuestions[step] ?? baseQuestions[0];
   const selected = answers[step];
   const isMeasurement = current.kind === "weight" || current.kind === "height";
   const measurementDone = !!measurementComplete[step];
@@ -190,7 +202,10 @@ function WeightLossQuiz() {
     const nextScores = { autoestima: 0, rotina: 0, corpo: 0, energia: 0 };
     nextAnswers.forEach((answerIndex, questionIndex) => {
       if (answerIndex !== null) {
-        const tag = baseQuestions[questionIndex].answers[answerIndex].tag;
+        const question = baseQuestions[questionIndex];
+        const answer = question?.answers[answerIndex];
+        if (!answer) return;
+        const tag = answer.tag;
         nextScores[tag] += 1;
       }
     });
@@ -199,7 +214,7 @@ function WeightLossQuiz() {
 
   function finishStep(nextScores = scores) {
     if (step === baseQuestions.length - 1) {
-      const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
+      const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "autoestima";
       setLoading(true);
       setLoadingProgress(0);
       trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
@@ -220,12 +235,14 @@ function WeightLossQuiz() {
   }
 
   function choose(index: number) {
+    const answer = current.answers[index];
+    if (!answer) return;
     const nextAnswers = [...answers];
     nextAnswers[step] = index;
     const nextScores = calculateScores(nextAnswers);
     setAnswers(nextAnswers);
     setScores(nextScores);
-    setContext(current.answers[index].followUp);
+    setContext(answer.followUp);
     trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
     window.setTimeout(() => finishStep(nextScores), 220);
   }
@@ -292,6 +309,7 @@ function WeightLossQuiz() {
       { title: "Fechamento da semana", focus: "Corpo inteiro", time: "16 min", exercises: [["Agachamento com braços", "3 x 10", "30s"], ["Bird dog", "3 x 8", "25s"], ["Ponte de glúteos", "3 x 12", "30s"]] }
     ];
     const day = trainingDays[activeDay];
+    if (!day) return null;
     const completedCount = Object.values(completedExercises).filter(Boolean).length;
     const goProduct = (product: "treino" | "dieta" | "contador" | "chat") => {
       setActiveProduct(product);

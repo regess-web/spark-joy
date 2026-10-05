@@ -2,7 +2,19 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import "../diet-quiz.css";
 
-export const Route = createFileRoute("/dieta")({ component: DietQuiz });
+export const Route = createFileRoute("/dieta")({
+  head: () => ({
+    meta: [
+      { title: "Quiz de Dieta | ViradaFIT" },
+      { name: "description", content: "Descubra um plano alimentar de 7 dias alinhado à sua rotina." },
+      { property: "og:title", content: "Quiz de Dieta | ViradaFIT" },
+      { property: "og:description", content: "Descubra um plano alimentar de 7 dias alinhado à sua rotina." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: DietQuiz,
+});
 
 type PlanId = "equilibrada" | "proteica" | "pratica" | "economica";
 type Answer = { text: string; tags: Partial<Record<PlanId, number>> };
@@ -27,7 +39,7 @@ type DietPlan = {
   days: Day[];
 };
 
-const questions: Question[] = [
+const questions: [Question, ...Question[]] = [
   {
     question: "Qual é o seu principal objetivo agora?",
     subtitle: "Escolha o resultado que mais combina com o momento em que você está.",
@@ -194,13 +206,14 @@ function DietQuiz() {
   const [openDay, setOpenDay] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const current = questions[step];
+  const current = questions[step] ?? questions[0];
   const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
   const resultPlan = useMemo(() => (result ? plans[result] : null), [result]);
 
   function next() {
     if (selected === null) return;
     const answer = current.answers[selected];
+    if (!answer) return;
     const nextScores = { ...scores };
     (Object.keys(nextScores) as PlanId[]).forEach((id) => {
       nextScores[id] += answer.tags[id] ?? 0;
