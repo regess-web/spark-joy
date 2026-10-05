@@ -43,24 +43,6 @@ const baseQuestions: QuizQuestion[] = [
     ]
   },
   {
-    question: "Qual é o seu peso atual?",
-    subtitle: "Arraste para escolher seu peso ou digite o valor exato no quadrinho.",
-    answers: [],
-    kind: "weight",
-    min: 0,
-    max: 250,
-    unit: "kg"
-  },
-  {
-    question: "Qual é a sua altura?",
-    subtitle: "Arraste para escolher sua altura ou digite o valor exato no quadrinho.",
-    answers: [],
-    kind: "height",
-    min: 0,
-    max: 250,
-    unit: "cm"
-  },
-  {
     question: "O que mais dificulta cuidar do seu corpo atualmente?",
     subtitle: "Agora vamos adaptar o plano ao obstáculo que mais aparece na sua rotina.",
     answers: [
@@ -129,6 +111,26 @@ const baseQuestions: QuizQuestion[] = [
       { text: "Me sentir mais ativa", tag: "energia", recommendation: "Vamos priorizar movimentos simples que ajudem você a colocar o corpo em ação.", followUp: "Você prefere uma rotina curta que seja fácil de repetir?" },
       { text: "Cuidar mais do meu corpo", tag: "corpo", recommendation: "Vamos organizar uma sequência equilibrada para você saber como começar.", followUp: "Você gostaria de ter séries e repetições já definidas?" }
     ]
+  },
+
+];
+  {
+    question: "Qual é o seu peso atual?",
+    subtitle: "Arraste para escolher seu peso ou digite o valor exato no quadrinho.",
+    answers: [],
+    kind: "weight",
+    min: 0,
+    max: 250,
+    unit: "kg"
+  },
+  {
+    question: "Qual é a sua altura?",
+    subtitle: "Arraste para escolher sua altura ou digite o valor exato no quadrinho.",
+    answers: [],
+    kind: "height",
+    min: 0,
+    max: 250,
+    unit: "cm"
   },
   {
     question: "O que mais ajudaria você a manter o programa por 7 dias?",
