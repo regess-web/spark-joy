@@ -8,6 +8,8 @@ type PlanId = "equilibrada" | "proteica" | "pratica" | "economica";
 type Answer = { text: string; tags: Partial<Record<PlanId, number>> };
 type Question = { question: string; subtitle: string; answers: Answer[] };
 
+
+
 type Day = {
   title: string;
   breakfast: string;
@@ -78,16 +80,35 @@ const questions: Question[] = [
   },
   {
     question: "Qual dessas opções você mais gostaria de ter no cardápio?",
-    subtitle: "Última pergunta. A resposta ajuda a escolher a composição dos pratos.",
+    subtitle: "Escolha a opção que mais combina com o que você gostaria de comer.",
     answers: [
       { text: "Arroz, feijão, carne e salada", tags: { equilibrada: 2, economica: 2 } },
       { text: "Ovos, frango, carne, peixe e iogurte", tags: { proteica: 3 } },
       { text: "Sanduíches, tapioca, omelete e bowls rápidos", tags: { pratica: 3 } },
       { text: "Arroz, feijão, ovos, sardinha e frango", tags: { economica: 3 } }
     ]
+  },
+  {
+    question: "Qual é a sua maior dificuldade para manter uma alimentação melhor?",
+    subtitle: "Pense no que mais costuma fazer você sair do plano.",
+    answers: [
+      { text: "Falta de organização", tags: { pratica: 3 } },
+      { text: "Fome ou pouca saciedade", tags: { proteica: 3 } },
+      { text: "Enjoar de comer sempre as mesmas coisas", tags: { equilibrada: 3 } },
+      { text: "O preço dos alimentos", tags: { economica: 3 } }
+    ]
+  },
+  {
+    question: "Qual rotina de alimentação você conseguiria manter por uma semana?",
+    subtitle: "A melhor estrutura é aquela que cabe de verdade na sua rotina.",
+    answers: [
+      { text: "Um cardápio variado e simples", tags: { equilibrada: 3 } },
+      { text: "Refeições com bastante proteína e boa saciedade", tags: { proteica: 3 } },
+      { text: "Poucas receitas e preparo rápido", tags: { pratica: 3 } },
+      { text: "Alimentos básicos e econômicos", tags: { economica: 3 } }
+    ]
   }
 ]
-
 const plans: Record<PlanId, DietPlan> = {
   equilibrada: {
     id: "equilibrada",
@@ -171,6 +192,7 @@ function DietQuiz() {
   });
   const [result, setResult] = useState<PlanId | null>(null);
   const [openDay, setOpenDay] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const current = questions[step];
@@ -256,11 +278,11 @@ function DietQuiz() {
     return (
       <main className="fit-app fit-start">
         <div className="fit-start-card">
-          <div className="fit-kicker">VIRADAFIT • 6 PERGUNTAS</div>
+          <div className="fit-kicker">VIRADAFIT • 8 PERGUNTAS</div>
           <h1>Descubra uma dieta que combina com <em>sua rotina.</em></h1>
           <p>Responda algumas perguntas sobre seu peso, objetivo, rotina e preferências. No final, você recebe uma das 4 estruturas de dieta e um cardápio vertical de 7 dias.</p>
           <button type="button" className="fit-primary fit-start-button" onClick={() => setStarted(true)}>COMEÇAR MEU QUIZ <span>→</span></button>
-          <div className="fit-trust"><span>6 perguntas</span><i>•</i><span>4 perfis de dieta</span><i>•</i><span>7 dias</span></div>
+          <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>4 perfis de dieta</span><i>•</i><span>7 dias</span></div>
         </div>
       </main>
     );
@@ -268,7 +290,17 @@ function DietQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 06</div></header>
+      <button className="diet-result-menu-btn diet-quiz-menu-btn" aria-label="Abrir menu" onClick={() => setMenuOpen(true)}>⋮</button>
+      {menuOpen && <>
+        <button className="diet-result-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} />
+        <aside className="diet-result-side-menu">
+          <div className="side-menu-head"><strong>ViradaFIT</strong><button aria-label="Fechar menu" onClick={() => setMenuOpen(false)}>×</button></div>
+          <button onClick={() => { window.location.href = "/treino"; }}>Treino</button>
+          <button onClick={() => setMenuOpen(false)}>Dieta</button>
+          <button onClick={() => { window.location.href = "/treino"; }}>Contador</button>
+        </aside>
+      </>}
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 08</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
