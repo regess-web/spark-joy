@@ -89,6 +89,26 @@ const baseQuestions: QuizQuestion[] = [
     ]
   },
   {
+    question: "Onde você prefere fazer seus treinos?",
+    subtitle: "Escolha o ambiente em que você realmente conseguiria manter uma rotina.",
+    answers: [
+      { text: "Em casa, sem equipamentos", tag: "rotina", recommendation: "Vamos priorizar exercícios simples que você consiga começar sem depender de academia.", followUp: "Você gostaria de receber tudo pronto para apenas abrir e seguir?" },
+      { text: "Na academia", tag: "corpo", recommendation: "Podemos considerar uma rotina mais completa e organizada para acompanhar sua evolução.", followUp: "Você prefere uma rotina já estruturada para não perder tempo escolhendo exercícios?" },
+      { text: "Um pouco de cada", tag: "energia", recommendation: "Flexibilidade pode ser a melhor estratégia para você manter o movimento mesmo quando a rotina muda.", followUp: "Você gostaria de ter opções diferentes conforme o tempo disponível?" },
+      { text: "Ainda não sei", tag: "autoestima", recommendation: "Tudo bem começar pelo mais simples e descobrir aos poucos o que funciona para você.", followUp: "Você prefere começar com uma rotina bem guiada?" }
+    ]
+  },
+  {
+    question: "O que você mais gostaria de conquistar nos próximos 7 dias?",
+    subtitle: "Pense em uma mudança que faria você sentir que valeu a pena começar.",
+    answers: [
+      { text: "Sentir que finalmente comecei", tag: "autoestima", recommendation: "Seu primeiro objetivo pode ser criar confiança através de pequenas vitórias.", followUp: "Ter uma sequência pronta ajudaria você a começar?" },
+      { text: "Criar uma rotina", tag: "rotina", recommendation: "Vamos valorizar consistência e praticidade para você conseguir repetir o plano.", followUp: "Você gostaria de saber exatamente o que fazer em cada dia?" },
+      { text: "Me sentir mais ativa", tag: "energia", recommendation: "Vamos priorizar movimentos simples que ajudem você a colocar o corpo em ação.", followUp: "Você prefere uma rotina curta que seja fácil de repetir?" },
+      { text: "Cuidar mais do meu corpo", tag: "corpo", recommendation: "Vamos organizar uma sequência equilibrada para você saber como começar.", followUp: "Você gostaria de ter séries e repetições já definidas?" }
+    ]
+  },
+  {
     question: "O que mais ajudaria você a manter o programa por 7 dias?",
     subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
     answers: [
@@ -111,7 +131,7 @@ const resultCopy = {
 function WeightLossQuiz() {
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
-  const [selected, setSelected] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<(number | null)[]>(() => Array(baseQuestions.length).fill(null));
   const [scores, setScores] = useState<Record<string, number>>({ autoestima: 0, rotina: 0, corpo: 0, energia: 0 });
   const [result, setResult] = useState<string | null>(null);
   const [offer, setOffer] = useState(false);
@@ -124,6 +144,7 @@ function WeightLossQuiz() {
   }
 
   const current = baseQuestions[step];
+  const selected = answers[step];
   const progress = ((step + (selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
   const selectedAnswer = selected === null ? null : current.answers[selected];
 
@@ -131,33 +152,47 @@ function WeightLossQuiz() {
     return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
   }, [scores]);
 
-  function choose(index: number) {
-    // A resposta só é contabilizada ao avançar; até lá, o usuário pode trocar a opção.
-    setSelected(index);
+  function calculateScores(nextAnswers: (number | null)[]) {
+    const nextScores = { autoestima: 0, rotina: 0, corpo: 0, energia: 0 };
+    nextAnswers.forEach((answerIndex, questionIndex) => {
+      if (answerIndex !== null) {
+        const tag = baseQuestions[questionIndex].answers[answerIndex].tag;
+        nextScores[tag] += 1;
+      }
+    });
+    return nextScores;
   }
 
-  function next() {
-    if (selected === null) return;
-    const answer = current.answers[selected];
-    trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
-    const nextScores = { ...scores, [answer.tag]: (scores[answer.tag] || 0) + 1 };
+  function choose(index: number) {
+    const nextAnswers = [...answers];
+    nextAnswers[step] = index;
+    const nextScores = calculateScores(nextAnswers);
+    setAnswers(nextAnswers);
     setScores(nextScores);
-    setContext(answer.followUp);
+    setContext(current.answers[index].followUp);
+    trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
 
-    if (step === baseQuestions.length - 1) {
-      const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
-      setResult(finalTag);
-      trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
-    } else {
-      setStep((s) => s + 1);
-      setSelected(null);
-    }
+    window.setTimeout(() => {
+      if (step === baseQuestions.length - 1) {
+        const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
+        setResult(finalTag);
+        trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
+      } else {
+        setStep((s) => s + 1);
+      }
+    }, 220);
+  }
+
+  function goBack() {
+    if (step === 0) return;
+    setStep((s) => s - 1);
+    setContext("");
   }
 
   function restart() {
     setStarted(false);
     setStep(0);
-    setSelected(null);
+    setAnswers(Array(baseQuestions.length).fill(null));
     setScores({ autoestima: 0, rotina: 0, corpo: 0, energia: 0 });
     setResult(null);
     setOffer(false);
@@ -227,13 +262,32 @@ function WeightLossQuiz() {
             />
           </div>
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • 8 PERGUNTAS</div>
+            <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
             <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
               }}>COMEÇAR MEU QUIZ <span>→</span></button>
-            <div className="fit-trust"><span>8 perguntas</span><i>•</i><span>perguntas adaptadas</span></div>
+            <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>rotina personalizada</span></div>
+            <div className="fit-conversion">
+              <div className="fit-conversion-block">
+                <strong>O que você recebe</strong>
+                <span>✓ Treinos organizados por dia</span>
+                <span>✓ Exercícios com séries, repetições e descanso</span>
+                <span>✓ Rotina simples para acompanhar sua evolução</span>
+              </div>
+              <div className="fit-conversion-block">
+                <strong>Como funciona</strong>
+                <span>1. Responda 10 perguntas rápidas</span>
+                <span>2. Descubra a rotina mais adequada ao seu perfil</span>
+                <span>3. Acesse o programa e comece no seu ritmo</span>
+              </div>
+              <div className="fit-proof">
+                <strong>Feito para quem quer começar sem complicar</strong>
+                <p>Uma experiência direta, guiada e pensada para transformar intenção em ação — sem precisar perder tempo montando o próprio treino.</p>
+                <small>Avaliações e depoimentos reais devem ser adicionados aqui somente com experiências verificadas de clientes.</small>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -242,7 +296,7 @@ function WeightLossQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 08</div></header>
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 10</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
@@ -257,12 +311,12 @@ function WeightLossQuiz() {
         </div>
         {selectedAnswer && (
           <div className="fit-answer-confirmation">
-            Resposta registrada. A próxima pergunta foi adaptada às suas respostas.
+            Resposta registrada. Avançando automaticamente...
           </div>
         )}
         <div className="fit-footer">
-          <small>{selected === null ? "Escolha uma alternativa para personalizar a próxima etapa." : "Resposta registrada e próxima etapa personalizada."}</small>
-          <button className="fit-next" disabled={selected === null} onClick={next}>{step === baseQuestions.length - 1 ? "VER MINHA RECOMENDAÇÃO" : "CONTINUAR"} <span>→</span></button>
+          <button className="fit-back" type="button" disabled={step === 0} onClick={goBack}>← Voltar</button>
+          <small>{selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
         </div>
       </section>
     </main>
