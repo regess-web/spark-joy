@@ -156,6 +156,9 @@ function WeightLossQuiz() {
   const [scores, setScores] = useState<Record<string, number>>({ autoestima: 0, rotina: 0, corpo: 0, energia: 0 });
   const [result, setResult] = useState<string | null>(null);
   const [offer, setOffer] = useState(false);
+  const [purchased, setPurchased] = useState(false);
+  const [activeDay, setActiveDay] = useState(0);
+  const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
   const [context, setContext] = useState<string>("");
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
@@ -274,6 +277,100 @@ function WeightLossQuiz() {
     );
   }
 
+
+  if (purchased) {
+    const trainingDays = [
+      { title: "Começo com energia", focus: "Corpo inteiro", time: "12 min", exercises: [["Agachamento", "3 x 10", "30s"], ["Marcha parada", "3 x 30s", "20s"], ["Ponte de glúteos", "3 x 12", "30s"]] },
+      { title: "Pernas em movimento", focus: "Pernas e glúteos", time: "14 min", exercises: [["Agachamento sumô", "3 x 10", "30s"], ["Elevação de panturrilha", "3 x 15", "20s"], ["Passo alternado", "3 x 8", "30s"]] },
+      { title: "Centro forte", focus: "Abdômen e estabilidade", time: "11 min", exercises: [["Prancha", "3 x 20s", "30s"], ["Dead bug", "3 x 8", "25s"], ["Bird dog", "3 x 8", "25s"]] },
+      { title: "Parte superior", focus: "Braços e tronco", time: "13 min", exercises: [["Flexão na parede", "3 x 10", "30s"], ["Elevação de braços", "3 x 12", "20s"], ["Marcha com braços", "3 x 30s", "20s"]] },
+      { title: "Corpo inteiro", focus: "Força e movimento", time: "15 min", exercises: [["Agachamento", "3 x 12", "30s"], ["Ponte de glúteos", "3 x 12", "30s"], ["Marcha com joelhos altos", "3 x 30s", "20s"]] },
+      { title: "Ritmo leve", focus: "Movimento e constância", time: "10 min", exercises: [["Passo lateral", "3 x 30s", "20s"], ["Panturrilha", "3 x 15", "20s"], ["Marcha parada", "3 x 40s", "20s"]] },
+      { title: "Fechamento da semana", focus: "Corpo inteiro", time: "16 min", exercises: [["Agachamento com braços", "3 x 10", "30s"], ["Bird dog", "3 x 8", "25s"], ["Ponte de glúteos", "3 x 12", "30s"]] }
+    ];
+    const day = trainingDays[activeDay];
+    const completedCount = Object.values(completedExercises).filter(Boolean).length;
+    return (
+      <main className="training-app">
+        <header className="training-topbar">
+          <div className="training-header-left"><div className="training-logo">Virada<span>FIT</span></div></div>
+          <div className="training-top-status">PROGRAMA <strong>7 DIAS</strong></div>
+        </header>
+        <section className="training-hero">
+          <div>
+            <div className="training-kicker">ACESSO LIBERADO • SEU PROGRAMA</div>
+            <h1>Seu treino está<br /><em>pronto para começar.</em></h1>
+            <p>Bem-vinda ao seu programa de 7 dias. Abra cada dia para ver os exercícios, séries, repetições e descansos e marque o que já concluiu.</p>
+          </div>
+          <div className="training-progress-ring"><strong>{completedCount}</strong><span>concluídos</span></div>
+        </section>
+        <section className="training-days">
+          <div className="training-section-head">
+            <div><span>SUA SEMANA</span><h2>7 dias para seguir</h2></div>
+            <small>Comece pelo Dia 1</small>
+          </div>
+          <div className="training-day-grid">
+            {trainingDays.map((item, index) => (
+              <button key={item.title} className={`training-day ${activeDay === index ? "active" : ""}`} onClick={() => setActiveDay(index)}>
+                <span className="day-number">DIA {String(index + 1).padStart(2, "0")}</span>
+                <strong>{item.title}</strong>
+                <small>{item.focus} • {item.time}</small>
+              </button>
+            ))}
+          </div>
+        </section>
+        <section className="training-routine">
+          <div className="training-routine-head">
+            <div>
+              <span>DIA {String(activeDay + 1).padStart(2, "0")} • {day.focus.toUpperCase()}</span>
+              <h2>{day.title}</h2>
+              <p>Faça os exercícios na ordem e respeite o descanso entre as séries.</p>
+            </div>
+            <div className="routine-progress"><strong>{day.time}</strong><small>tempo estimado</small></div>
+          </div>
+          <div className="exercise-grid">
+            {day.exercises.map(([name, reps, rest]) => {
+              const key = `${activeDay}-${name}`;
+              const done = !!completedExercises[key];
+              return (
+                <button key={key} className={`exercise-card ${done ? "done" : ""}`} onClick={() => setCompletedExercises((prev) => ({ ...prev, [key]: !prev[key] }))}>
+                  <div className="exercise-duration-clock">
+                    <span className="clock-label">EXERCÍCIO</span>
+                    <span className="clock-breakdown">{reps} • descanso {rest}</span>
+                    <svg className="duration-clock-svg" viewBox="0 0 120 120" aria-hidden="true">
+                      <circle className="clock-face" cx="60" cy="60" r="50" />
+                      <circle className="clock-inner" cx="60" cy="60" r="43" />
+                      {[0,30,60,90,120,150,180,210,240,270,300,330].map((angle) => {
+                        const r = Math.PI * angle / 180;
+                        return <line key={angle} className="clock-mark" x1={60 + Math.cos(r) * 44} y1={60 + Math.sin(r) * 44} x2={60 + Math.cos(r) * 48} y2={60 + Math.sin(r) * 48} />;
+                      })}
+                      <line className="clock-minute-hand" x1="60" y1="60" x2="60" y2="27" />
+                      <line className="clock-second-hand" x1="60" y1="60" x2="82" y2="72" />
+                      <circle className="clock-center" cx="60" cy="60" r="4" />
+                      <text className="clock-duration" x="60" y="84" textAnchor="middle">{reps.replace(" x ", "×")}</text>
+                    </svg>
+                  </div>
+                  <div className="exercise-info">
+                    <span>{done ? "CONCLUÍDO ✓" : "SEU EXERCÍCIO"}</span>
+                    <h3>{name}</h3>
+                    <p>Execute com controle e pare se sentir dor.</p>
+                    <div className="exercise-stats"><b>{reps}</b><b>Descanso {rest}</b></div>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          <div className="exercise-notes">
+            <label>ANOTAÇÕES DO TREINO</label>
+            <textarea placeholder="Escreva aqui como foi o treino, dificuldades ou observações..." />
+            <small>Suas anotações ficam nesta tela enquanto você estiver nela.</small>
+          </div>
+          <p className="training-note">Modo de visualização ativado: esta tela simula o conteúdo liberado após a compra para você revisar o entregável.</p>
+        </section>
+      </main>
+    );
+  }
+
   if (offer) {
     return (
       <main className="fit-app fit-offer">
@@ -288,8 +385,8 @@ function WeightLossQuiz() {
           <button
             className="fit-primary"
             type="button"
-            onClick={() => setOffer(false)}
-          >VOLTAR <span>←</span></button>
+            onClick={() => { setOffer(false); setPurchased(true); }}
+          >VER MEU TREINO <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
       </main>
