@@ -379,7 +379,7 @@ function WeightLossQuiz() {
           <button
             className="fit-primary"
             type="button"
-            onClick={() => { setOffer(false); setPurchased(true); }}
+            onClick={() => { window.location.href = "/treino"; }}
           >VER MEU TREINO <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
