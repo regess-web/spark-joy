@@ -783,7 +783,7 @@
 .fit-measurement-confirm{display:block;width:100%;margin-top:24px;border:0;border-radius:11px;background:var(--fit-accent);color:#fff;padding:15px 18px;font-size:10px;font-weight:800;letter-spacing:.7px;cursor:pointer;box-shadow:0 10px 24px rgba(184,107,69,.18)}
 .fit-measurement-confirm:hover{background:#a95d39}
 .fit-measurement-confirm span{margin-left:22px}
-.fit-loading{min-height:100vh}
+.fit-loading{min-height:100vh;display:grid;place-items:center;padding:30px}
 .fit-loading-card{width:min(620px,100%);background:rgba(255,255,255,.92);border:1px solid var(--fit-line);border-radius:28px;padding:55px;text-align:center;box-shadow:0 30px 80px rgba(80,52,35,.12)}
 .fit-loading-spinner{width:44px;height:44px;margin:0 auto 25px;border:3px solid #eaded3;border-top-color:var(--fit-accent);border-radius:50%;animation:fit-spin .85s linear infinite}
 .fit-loading h1{font-family:"Playfair Display",serif;font-size:52px;line-height:1.02;letter-spacing:-1.5px;margin:17px 0}
