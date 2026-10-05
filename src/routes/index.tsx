@@ -299,7 +299,7 @@ function WeightLossQuiz() {
 
 
   if (purchased) {
-    const trainingDays = [
+    const trainingDays: Array<{ title: string; focus: string; time: string; exercises: Array<[string, string, string]> }> = [
       { title: "Começo com energia", focus: "Corpo inteiro", time: "12 min", exercises: [["Agachamento", "3 x 10", "30s"], ["Marcha parada", "3 x 30s", "20s"], ["Ponte de glúteos", "3 x 12", "30s"]] },
       { title: "Pernas em movimento", focus: "Pernas e glúteos", time: "14 min", exercises: [["Agachamento sumô", "3 x 10", "30s"], ["Elevação de panturrilha", "3 x 15", "20s"], ["Passo alternado", "3 x 8", "30s"]] },
       { title: "Centro forte", focus: "Abdômen e estabilidade", time: "11 min", exercises: [["Prancha", "3 x 20s", "30s"], ["Dead bug", "3 x 8", "25s"], ["Bird dog", "3 x 8", "25s"]] },
