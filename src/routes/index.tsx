@@ -255,12 +255,6 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">
         <div className="fit-start-card">
-          <div className="fit-start-image">
-            <img
-              src="https://images.pexels.com/photos/6551129/pexels-photo-6551129.jpeg?cs=srgb&dl=pexels-andres-ayrton-6551129.jpg&fm=jpg"
-              alt="Mulher segurando a região da barriga"
-            />
-          </div>
           <div className="fit-start-content">
             <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
             <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
@@ -268,24 +262,37 @@ function WeightLossQuiz() {
             <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
               }}>COMEÇAR MEU QUIZ <span>→</span></button>
-            <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>rotina personalizada</span></div>
+            <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de treino</span></div>
             <div className="fit-conversion">
               <div className="fit-conversion-block">
-                <strong>O que você recebe</strong>
-                <span>✓ Treinos organizados por dia</span>
-                <span>✓ Exercícios com séries, repetições e descanso</span>
-                <span>✓ Rotina simples para acompanhar sua evolução</span>
+                <strong>Com isso você vai receber</strong>
+                <span>✓ <b>26+ exercícios</b> para variar sua rotina</span>
+                <span>✓ Treinos organizados para acompanhar por 7 dias</span>
+                <span>✓ Séries, repetições, descanso e orientações</span>
+                <span>✓ Uma rotina prática para não perder tempo decidindo o que fazer</span>
               </div>
               <div className="fit-conversion-block">
-                <strong>Como funciona</strong>
-                <span>1. Responda 10 perguntas rápidas</span>
-                <span>2. Descubra a rotina mais adequada ao seu perfil</span>
-                <span>3. Acesse o programa e comece no seu ritmo</span>
+                <strong>Por que fazer o quiz?</strong>
+                <span>① Você responde 10 perguntas rápidas</span>
+                <span>② Suas respostas ajudam a direcionar a experiência</span>
+                <span>③ Você conhece a proposta antes de decidir</span>
+                <span>④ Depois, pode acessar o programa e começar no seu ritmo</span>
+              </div>
+              <div className="fit-value-grid">
+                <div><b>26+</b><span>exercícios</span></div>
+                <div><b>7</b><span>dias de treino</span></div>
+                <div><b>10</b><span>perguntas</span></div>
+                <div><b>100%</b><span>guiado</span></div>
               </div>
               <div className="fit-proof">
-                <strong>Feito para quem quer começar sem complicar</strong>
-                <p>Uma experiência direta, guiada e pensada para transformar intenção em ação — sem precisar perder tempo montando o próprio treino.</p>
-                <small>Avaliações e depoimentos reais devem ser adicionados aqui somente com experiências verificadas de clientes.</small>
+                <strong>Você não precisa montar seu treino do zero</strong>
+                <p>Em vez de ficar procurando exercícios, séries e repetições, você recebe uma estrutura pronta para seguir durante a semana.</p>
+              </div>
+              <div className="fit-faq">
+                <strong>Antes de começar</strong>
+                <details><summary>Preciso saber treinar?</summary><p>Não. A proposta é justamente deixar o caminho mais simples, com exercícios e orientações organizados.</p></details>
+                <details><summary>Quanto tempo leva o quiz?</summary><p>São 10 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
+                <details><summary>Posso voltar uma pergunta?</summary><p>Sim. Use o botão “Voltar” para revisar ou alterar uma resposta.</p></details>
               </div>
             </div>
           </div>
