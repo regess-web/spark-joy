@@ -193,7 +193,6 @@ function DietQuiz() {
   const [result, setResult] = useState<PlanId | null>(null);
   const [openDay, setOpenDay] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   const current = questions[step];
   const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
