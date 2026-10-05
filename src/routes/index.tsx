@@ -192,7 +192,7 @@ function WeightLossQuiz() {
   const isMeasurement = current.kind === "weight" || current.kind === "height";
   const measurementDone = !!measurementComplete[step];
   const progress = ((step + (isMeasurement ? (measurementDone ? 1 : 0) : selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
-  const selectedAnswer = selected === null || !current.answers[selected] ? null : current.answers[selected];
+  const selectedAnswer = selected == null ? null : (current.answers[selected] ?? null);
 
   const dominant = useMemo(() => {
     return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
