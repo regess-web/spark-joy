@@ -15,6 +15,10 @@ type QuizQuestion = {
   question: string;
   subtitle: string;
   answers: Answer[];
+  kind?: "choices" | "weight" | "height";
+  min?: number;
+  max?: number;
+  unit?: string;
 };
 
 const baseQuestions: QuizQuestion[] = [
@@ -37,6 +41,24 @@ const baseQuestions: QuizQuestion[] = [
       { text: "Mais leve e disposta", tag: "energia", recommendation: "Vamos combinar força leve com movimentos que façam você se sentir ativa.", followUp: "Você gostaria de terminar o treino se sentindo mais energizada ou mais desafiada?" },
       { text: "Mais satisfeita com minha rotina", tag: "rotina", recommendation: "A melhor estratégia para você é uma rotina realista, curta e repetível.", followUp: "Qual parte do dia costuma ser mais fácil para você reservar alguns minutos?" }
     ]
+  },
+  {
+    question: "Qual é o seu peso atual?",
+    subtitle: "Arraste para escolher seu peso ou digite o valor exato no quadrinho.",
+    answers: [],
+    kind: "weight",
+    min: 0,
+    max: 250,
+    unit: "kg"
+  },
+  {
+    question: "Qual é a sua altura?",
+    subtitle: "Arraste para escolher sua altura ou digite o valor exato no quadrinho.",
+    answers: [],
+    kind: "height",
+    min: 0,
+    max: 250,
+    unit: "cm"
   },
   {
     question: "O que mais dificulta cuidar do seu corpo atualmente?",
@@ -136,6 +158,11 @@ function WeightLossQuiz() {
   const [result, setResult] = useState<string | null>(null);
   const [offer, setOffer] = useState(false);
   const [context, setContext] = useState<string>("");
+  const [weight, setWeight] = useState(70);
+  const [height, setHeight] = useState(170);
+  const [measurementComplete, setMeasurementComplete] = useState<Record<number, boolean>>({});
+  const [loading, setLoading] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   function trackQuizEvent(eventName: string, params: Record<string, string | number> = {}) {
     if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
@@ -145,8 +172,10 @@ function WeightLossQuiz() {
 
   const current = baseQuestions[step];
   const selected = answers[step];
-  const progress = ((step + (selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
-  const selectedAnswer = selected === null ? null : current.answers[selected];
+  const isMeasurement = current.kind === "weight" || current.kind === "height";
+  const measurementDone = !!measurementComplete[step];
+  const progress = ((step + (isMeasurement ? (measurementDone ? 1 : 0) : selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
+  const selectedAnswer = selected === null || !current.answers[selected] ? null : current.answers[selected];
 
   const dominant = useMemo(() => {
     return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
@@ -163,6 +192,28 @@ function WeightLossQuiz() {
     return nextScores;
   }
 
+  function finishStep(nextScores = scores) {
+    if (step === baseQuestions.length - 1) {
+      const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
+      setLoading(true);
+      setLoadingProgress(0);
+      trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
+      const startedAt = Date.now();
+      const interval = window.setInterval(() => {
+        const elapsed = Date.now() - startedAt;
+        const pct = Math.min(100, (elapsed / 12000) * 100);
+        setLoadingProgress(pct);
+        if (pct >= 100) {
+          window.clearInterval(interval);
+          setResult(finalTag);
+          setLoading(false);
+        }
+      }, 100);
+    } else {
+      setStep((s) => s + 1);
+    }
+  }
+
   function choose(index: number) {
     const nextAnswers = [...answers];
     nextAnswers[step] = index;
@@ -171,16 +222,18 @@ function WeightLossQuiz() {
     setScores(nextScores);
     setContext(current.answers[index].followUp);
     trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
+    window.setTimeout(() => finishStep(nextScores), 220);
+  }
 
-    window.setTimeout(() => {
-      if (step === baseQuestions.length - 1) {
-        const finalTag = Object.entries(nextScores).sort((a, b) => b[1] - a[1])[0][0];
-        setResult(finalTag);
-        trackQuizEvent("QuizComplete", { total_questions: baseQuestions.length });
-      } else {
-        setStep((s) => s + 1);
-      }
-    }, 220);
+  function confirmMeasurement() {
+    if (!isMeasurement) return;
+    setMeasurementComplete((prev) => ({ ...prev, [step]: true }));
+    trackQuizEvent(current.kind === "weight" ? "QuizWeight" : "QuizHeight", {
+      question_number: step + 1,
+      value: current.kind === "weight" ? weight : height,
+      unit: current.unit || ""
+    });
+    window.setTimeout(() => finishStep(scores), 220);
   }
 
   function goBack() {
@@ -197,6 +250,29 @@ function WeightLossQuiz() {
     setResult(null);
     setOffer(false);
     setContext("");
+    setWeight(70);
+    setHeight(170);
+    setMeasurementComplete({});
+    setLoading(false);
+    setLoadingProgress(0);
+  }
+
+  if (loading) {
+    return (
+      <main className="fit-app fit-loading">
+        <div className="fit-loading-card">
+          <div className="fit-loading-spinner" aria-hidden="true" />
+          <div className="fit-kicker">ANALISANDO SUAS RESPOSTAS</div>
+          <h1>Montando seu<br /><em>resultado...</em></h1>
+          <p>Estamos organizando suas respostas para preparar uma recomendação mais alinhada ao seu perfil.</p>
+          <div className="fit-loading-bar" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(loadingProgress)}>
+            <div style={{ width: loadingProgress + "%" }} />
+          </div>
+          <div className="fit-loading-percent">{Math.round(loadingProgress)}%</div>
+          <small>Isso leva alguns segundos. Não feche esta página.</small>
+        </div>
+      </main>
+    );
   }
 
   if (offer) {
@@ -256,13 +332,13 @@ function WeightLossQuiz() {
       <main className="fit-app fit-start">
         <div className="fit-start-card">
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
+            <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
             <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
               }}>COMEÇAR MEU QUIZ <span>→</span></button>
-            <div className="fit-trust"><span>10 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de treino</span></div>
+            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de treino</span></div>
             <div className="fit-conversion">
               <div className="fit-conversion-block">
                 <strong>Com isso você vai receber</strong>
@@ -273,7 +349,7 @@ function WeightLossQuiz() {
               </div>
               <div className="fit-conversion-block">
                 <strong>Por que fazer o quiz?</strong>
-                <span>① Você responde 10 perguntas rápidas</span>
+                <span>① Você responde 12 perguntas rápidas</span>
                 <span>② Suas respostas ajudam a direcionar a experiência</span>
                 <span>③ Você conhece a proposta antes de decidir</span>
                 <span>④ Depois, pode acessar o programa e começar no seu ritmo</span>
@@ -291,7 +367,7 @@ function WeightLossQuiz() {
               <div className="fit-faq">
                 <strong>Antes de começar</strong>
                 <details><summary>Preciso saber treinar?</summary><p>Não. A proposta é justamente deixar o caminho mais simples, com exercícios e orientações organizados.</p></details>
-                <details><summary>Quanto tempo leva o quiz?</summary><p>São 10 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
+                <details><summary>Quanto tempo leva o quiz?</summary><p>São 12 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
                 <details><summary>Posso voltar uma pergunta?</summary><p>Sim. Use o botão “Voltar” para revisar ou alterar uma resposta.</p></details>
               </div>
             </div>
@@ -303,27 +379,73 @@ function WeightLossQuiz() {
 
   return (
     <main className="fit-app fit-quiz">
-      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 10</div></header>
+      <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 12</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
         <h2>{current.question}</h2>
         <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
-        <div className="fit-answers">
-          {current.answers.map((answer, i) => (
-            <button key={answer.text} className={selected === i ? "selected" : ""} onClick={() => choose(i)}>
-              <span>{String.fromCharCode(65 + i)}</span>{answer.text}
+        {isMeasurement ? (
+          <div className="fit-measurement">
+            <div className="fit-measurement-value">
+              <div>
+                <span>{current.kind === "weight" ? "PESO" : "ALTURA"}</span>
+                <strong>{current.kind === "weight" ? weight : height}</strong>
+                <small>{current.unit}</small>
+              </div>
+              <input
+                aria-label={current.kind === "weight" ? "Peso em quilogramas" : "Altura em centímetros"}
+                type="number"
+                min={current.min}
+                max={current.max}
+                step="1"
+                value={current.kind === "weight" ? weight : height}
+                onChange={(event) => {
+                  const raw = Number(event.target.value);
+                  const safe = Number.isFinite(raw) ? Math.max(current.min || 0, Math.min(current.max || 250, raw)) : 0;
+                  if (current.kind === "weight") setWeight(safe);
+                  else setHeight(safe);
+                }}
+              />
+            </div>
+            <input
+              className="fit-measurement-slider"
+              aria-label={current.kind === "weight" ? "Selecionar peso" : "Selecionar altura"}
+              type="range"
+              min={current.min}
+              max={current.max}
+              step="1"
+              value={current.kind === "weight" ? weight : height}
+              onChange={(event) => {
+                const value = Number(event.target.value);
+                if (current.kind === "weight") setWeight(value);
+                else setHeight(value);
+              }}
+            />
+            <div className="fit-measurement-scale"><span>0 {current.unit}</span><span>{current.max} {current.unit}</span></div>
+            <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement}>
+              {measurementDone ? "VALOR CONFIRMADO ✓" : "CONTINUAR"} <span>→</span>
             </button>
-          ))}
-        </div>
-        {selectedAnswer && (
-          <div className="fit-answer-confirmation">
-            Resposta registrada. Avançando automaticamente...
           </div>
+        ) : (
+          <>
+            <div className="fit-answers">
+              {current.answers.map((answer, i) => (
+                <button key={answer.text} className={selected === i ? "selected" : ""} onClick={() => choose(i)}>
+                  <span>{String.fromCharCode(65 + i)}</span>{answer.text}
+                </button>
+              ))}
+            </div>
+            {selectedAnswer && (
+              <div className="fit-answer-confirmation">
+                Resposta registrada. Avançando automaticamente...
+              </div>
+            )}
+          </>
         )}
         <div className="fit-footer">
           <button className="fit-back" type="button" disabled={step === 0} onClick={goBack}>← Voltar</button>
-          <small>{selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
+          <small>{isMeasurement ? "Arraste ou digite o valor exato no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
         </div>
       </section>
     </main>
