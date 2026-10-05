@@ -314,7 +314,8 @@ function TrainingApp() {
       </header>
       {menuOpen && <><button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} /><aside className="training-side-menu"><div className="side-menu-head"><strong>ViradaFIT</strong><button onClick={() => setMenuOpen(false)}>×</button></div>
         <button className="side-menu-item" onClick={openHomeUpgrade}><span className="minimal-menu-icon minimal-home-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H4z"/><path d="M9 20v-6h6v6"/></svg></span><div><b>{homeUpgradeUnlocked ? "Treino completo em casa" : "Upgrade de treino"}</b><small>{homeUpgradeUnlocked ? "8 exercícios por dia • desbloqueado" : "Treino completo em casa • R$ 17,90"}</small></div></button>
-        <button className={activeSection === "dieta" ? "side-menu-item active" : "side-menu-item"} onClick={() => openSection("dieta")}><span className="minimal-menu-icon minimal-diet-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><div><b>Dieta</b><small>Quiz para montar sua dieta • R$ 7,90</small></div></button>
+        <button className="side-menu-item" onClick={() => openSection("dieta")}><span className="minimal-menu-icon minimal-diet-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="4.5"/></svg></span><div><b>Dieta</b><small>Quiz para montar sua dieta • R$ 7,90</small></div></button>
+        <button className="side-menu-item" onClick={() => { setActiveSection("dieta"); setDietMode("contador"); setMenuOpen(false); }}><span className="minimal-menu-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></svg></span><div><b>Contador</b><small>Contador diário de calorias • R$ 12,90</small></div></button>
       </aside></>}
       {activeSection === "treino" ? (
         <>
