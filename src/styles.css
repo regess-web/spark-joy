@@ -766,3 +766,38 @@
   .fit-value-grid{grid-template-columns:1fr 1fr}
   .fit-conversion-block{grid-template-columns:1fr}
 }
+
+
+/* Quiz: seletores de peso/altura e tela de processamento */
+.fit-measurement{margin-top:8px;padding:22px;border:1px solid var(--fit-line);border-radius:18px;background:#fffaf7}
+.fit-measurement-value{display:flex;align-items:flex-end;justify-content:center;gap:12px;margin-bottom:22px}
+.fit-measurement-value>div{text-align:center}
+.fit-measurement-value span{display:block;font-size:8px;letter-spacing:1.7px;color:#a09288;font-weight:800;margin-bottom:5px}
+.fit-measurement-value strong{font-family:"Playfair Display",serif;font-size:62px;line-height:.9;letter-spacing:-2px;color:var(--fit-text)}
+.fit-measurement-value small{font-size:12px;color:#8e837a;font-weight:700;margin-left:4px}
+.fit-measurement-value input{width:78px;height:46px;border:1px solid var(--fit-line);border-radius:10px;background:#fff;color:var(--fit-text);text-align:center;font:700 17px "DM Sans",sans-serif;outline:none}
+.fit-measurement-value input:focus{border-color:var(--fit-accent);box-shadow:0 0 0 3px rgba(184,107,69,.10)}
+.fit-measurement-slider{display:block;width:100%;height:9px;margin:8px 0 0;accent-color:var(--fit-accent);cursor:pointer}
+.fit-measurement-slider:focus{outline:2px solid rgba(184,107,69,.25);outline-offset:5px}
+.fit-measurement-scale{display:flex;justify-content:space-between;margin-top:8px;color:#a09288;font-size:8px;font-weight:700}
+.fit-measurement-confirm{display:block;width:100%;margin-top:24px;border:0;border-radius:11px;background:var(--fit-accent);color:#fff;padding:15px 18px;font-size:10px;font-weight:800;letter-spacing:.7px;cursor:pointer;box-shadow:0 10px 24px rgba(184,107,69,.18)}
+.fit-measurement-confirm:hover{background:#a95d39}
+.fit-measurement-confirm span{margin-left:22px}
+.fit-loading{min-height:100vh}
+.fit-loading-card{width:min(620px,100%);background:rgba(255,255,255,.92);border:1px solid var(--fit-line);border-radius:28px;padding:55px;text-align:center;box-shadow:0 30px 80px rgba(80,52,35,.12)}
+.fit-loading-spinner{width:44px;height:44px;margin:0 auto 25px;border:3px solid #eaded3;border-top-color:var(--fit-accent);border-radius:50%;animation:fit-spin .85s linear infinite}
+.fit-loading h1{font-family:"Playfair Display",serif;font-size:52px;line-height:1.02;letter-spacing:-1.5px;margin:17px 0}
+.fit-loading h1 em{font-style:normal;color:var(--fit-accent)}
+.fit-loading p{max-width:470px;margin:0 auto 28px;color:var(--fit-muted);font-size:13px;line-height:1.7}
+.fit-loading-bar{width:100%;height:9px;background:#eadfd7;border-radius:99px;overflow:hidden}
+.fit-loading-bar div{height:100%;background:linear-gradient(90deg,var(--fit-accent),var(--fit-accent2));transition:width .1s linear}
+.fit-loading-percent{margin-top:10px;font-size:10px;color:#8f8379;font-weight:700}
+.fit-loading-card small{display:block;margin-top:18px;color:#a1978f;font-size:8px}
+@keyframes fit-spin{to{transform:rotate(360deg)}}
+@media(max-width:700px){
+  .fit-measurement{padding:18px 14px}
+  .fit-measurement-value strong{font-size:52px}
+  .fit-measurement-value input{width:72px;height:44px}
+  .fit-loading-card{padding:38px 22px;border-radius:20px}
+  .fit-loading h1{font-size:43px}
+}
