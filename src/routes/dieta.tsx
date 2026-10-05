@@ -171,6 +171,7 @@ function DietQuiz() {
   });
   const [result, setResult] = useState<PlanId | null>(null);
   const [openDay, setOpenDay] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const current = questions[step];
   const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
@@ -206,6 +207,16 @@ function DietQuiz() {
   if (result && resultPlan) {
     return (
       <main className="fit-app fit-diet-result">
+        <button className="diet-result-menu-btn" aria-label="Abrir menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}>⋮</button>
+        {menuOpen && <>
+          <button className="diet-result-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} />
+          <aside className="diet-result-side-menu">
+            <div className="side-menu-head"><strong>ViradaFIT</strong><button aria-label="Fechar menu" onClick={() => setMenuOpen(false)}>×</button></div>
+            <button onClick={() => { window.location.href = "/treino"; }}>Treino</button>
+            <button onClick={() => { setMenuOpen(false); restart(); }}>Dieta</button>
+            <button onClick={() => { window.location.href = "/treino"; }}>Contador</button>
+          </aside>
+        </>}
         <div className="diet-result-shell">
           <div className="fit-kicker">SEU PLANO PERSONALIZADO</div>
           <div className="fit-result-icon">✓</div>
@@ -235,7 +246,7 @@ function DietQuiz() {
             ))}
             <div className="diet-plan-note"><strong>Como usar</strong><p>{resultPlan.note}</p></div>
           </div>
-          <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
+          <button className="fit-secondary diet-refazer-btn" onClick={restart}>Refazer quiz</button>
         </div>
       </main>
     );
