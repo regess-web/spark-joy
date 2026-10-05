@@ -287,21 +287,9 @@ function WeightLossQuiz() {
           </div>
           <button
             className="fit-primary"
-            onClick={() => {
-              const checkoutUrl = "https://pay.cakto.com.br/34rfhf7_1160901";
-              if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-                (window as any).fbq("track", "InitiateCheckout", {
-                  value: 27.99,
-                  currency: "BRL",
-                });
-                window.setTimeout(() => {
-                  window.location.href = checkoutUrl;
-                }, 250);
-              } else {
-                window.location.href = checkoutUrl;
-              }
-            }}
-          >QUERO COMEÇAR AGORA <span>→</span></button>
+            type="button"
+            onClick={() => setOffer(false)}
+          >VOLTAR <span>←</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
       </main>
