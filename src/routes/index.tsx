@@ -159,6 +159,9 @@ function WeightLossQuiz() {
   const [purchased, setPurchased] = useState(false);
   const [activeDay, setActiveDay] = useState(0);
   const [completedExercises, setCompletedExercises] = useState<Record<string, boolean>>({});
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeProduct, setActiveProduct] = useState<"treino" | "dieta" | "contador" | "chat">("treino");
+  const [selectedExercise, setSelectedExercise] = useState<{name:string; reps:string; rest:string} | null>(null);
   const [context, setContext] = useState<string>("");
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
@@ -290,83 +293,74 @@ function WeightLossQuiz() {
     ];
     const day = trainingDays[activeDay];
     const completedCount = Object.values(completedExercises).filter(Boolean).length;
+    const goProduct = (product: "treino" | "dieta" | "contador" | "chat") => {
+      setActiveProduct(product);
+      setMenuOpen(false);
+    };
     return (
       <main className="training-app">
         <header className="training-topbar">
-          <div className="training-header-left"><div className="training-logo">Virada<span>FIT</span></div></div>
+          <div className="training-header-left">
+            <button className="training-menu-btn" type="button" aria-label="Abrir menu" onClick={() => setMenuOpen(true)}>⋯</button>
+            <button className="training-logo-btn" type="button" onClick={() => goProduct("treino")}><div className="training-logo">Virada<span>FIT</span></div></button>
+          </div>
           <div className="training-top-status">PROGRAMA <strong>7 DIAS</strong></div>
         </header>
-        <section className="training-hero">
-          <div>
-            <div className="training-kicker">ACESSO LIBERADO • SEU PROGRAMA</div>
-            <h1>Seu treino está<br /><em>pronto para começar.</em></h1>
-            <p>Bem-vinda ao seu programa de 7 dias. Abra cada dia para ver os exercícios, séries, repetições e descansos e marque o que já concluiu.</p>
-          </div>
-          <div className="training-progress-ring"><strong>{completedCount}</strong><span>concluídos</span></div>
-        </section>
-        <section className="training-days">
-          <div className="training-section-head">
-            <div><span>SUA SEMANA</span><h2>7 dias para seguir</h2></div>
-            <small>Comece pelo Dia 1</small>
-          </div>
-          <div className="training-day-grid">
-            {trainingDays.map((item, index) => (
-              <button key={item.title} className={`training-day ${activeDay === index ? "active" : ""}`} onClick={() => setActiveDay(index)}>
-                <span className="day-number">DIA {String(index + 1).padStart(2, "0")}</span>
-                <strong>{item.title}</strong>
-                <small>{item.focus} • {item.time}</small>
-              </button>
-            ))}
-          </div>
-        </section>
-        <section className="training-routine">
-          <div className="training-routine-head">
-            <div>
-              <span>DIA {String(activeDay + 1).padStart(2, "0")} • {day.focus.toUpperCase()}</span>
-              <h2>{day.title}</h2>
-              <p>Faça os exercícios na ordem e respeite o descanso entre as séries.</p>
+
+        {menuOpen && (
+          <>
+            <button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} />
+            <aside className="training-side-menu">
+              <div className="side-menu-head"><strong>ViradaFIT</strong><button type="button" onClick={() => setMenuOpen(false)}>×</button></div>
+              <button className={`side-menu-item ${activeProduct === "treino" ? "active" : ""}`} onClick={() => goProduct("treino")}><span>🏃</span><div><b>Treino</b><small>Programa completo de 7 dias</small></div></button>
+              <button className={`side-menu-item ${activeProduct === "dieta" ? "active" : ""}`} onClick={() => goProduct("dieta")}><span>🥗</span><div><b>Dieta</b><small>Plano alimentar organizado</small></div></button>
+              <button className={`side-menu-item ${activeProduct === "contador" ? "active" : ""}`} onClick={() => goProduct("contador")}><span>◉</span><div><b>Dieta + Contador</b><small>Plano + contador de calorias</small></div></button>
+              <button className={`side-menu-item ${activeProduct === "chat" ? "active" : ""}`} onClick={() => goProduct("chat")}><span>💬</span><div><b>Chat Global</b><small>Espaço para dúvidas e comunidade</small></div></button>
+            </aside>
+          </>
+        )}
+
+        {activeProduct === "treino" ? (
+          <>
+            <section className="training-hero">
+              <div><div className="training-kicker">ACESSO LIBERADO • SEU PROGRAMA</div><h1>Seu treino está<br /><em>pronto para começar.</em></h1><p>Bem-vinda ao seu programa de 7 dias. Clique em qualquer exercício para abrir as informações completas, séries, repetições, descanso e instruções.</p></div>
+              <div className="training-progress-ring"><strong>{completedCount}</strong><span>concluídos</span></div>
+            </section>
+            <section className="training-days">
+              <div className="training-section-head"><div><span>SUA SEMANA</span><h2>7 dias para seguir</h2></div><small>Comece pelo Dia 1</small></div>
+              <div className="training-day-grid">{trainingDays.map((item,index)=><button key={item.title} className={`training-day ${activeDay===index?"active":""}`} onClick={()=>setActiveDay(index)}><span className="day-number">DIA {String(index+1).padStart(2,"0")}</span><strong>{item.title}</strong><small>{item.focus} • {item.time}</small></button>)}</div>
+            </section>
+            <section className="training-routine">
+              <div className="training-routine-head"><div><span>DIA {String(activeDay+1).padStart(2,"0")} • {day.focus.toUpperCase()}</span><h2>{day.title}</h2><p>Clique no exercício para ver os detalhes.</p></div><div className="routine-progress"><strong>{day.time}</strong><small>tempo estimado</small></div></div>
+              <div className="exercise-grid">{day.exercises.map(([name,reps,rest])=>{const key=`${activeDay}-${name}`;const done=!!completedExercises[key];return <button key={key} className={`exercise-card ${done?"done":""}`} onClick={()=>setSelectedExercise({name,reps,rest})}><div className="exercise-duration-clock"><span className="clock-label">EXERCÍCIO</span><span className="clock-breakdown">{reps} • descanso {rest}</span><svg className="duration-clock-svg" viewBox="0 0 120 120" aria-hidden="true"><circle className="clock-face" cx="60" cy="60" r="50"/><circle className="clock-inner" cx="60" cy="60" r="43"/>{[0,30,60,90,120,150,180,210,240,270,300,330].map(angle=>{const r=Math.PI*angle/180;return <line key={angle} className="clock-mark" x1={60+Math.cos(r)*44} y1={60+Math.sin(r)*44} x2={60+Math.cos(r)*48} y2={60+Math.sin(r)*48}/>})}<line className="clock-minute-hand" x1="60" y1="60" x2="60" y2="27"/><line className="clock-second-hand" x1="60" y1="60" x2="82" y2="72"/><circle className="clock-center" cx="60" cy="60" r="4"/><text className="clock-duration" x="60" y="84" textAnchor="middle">{reps.replace(" x ","×")}</text></svg></div><div className="exercise-info"><span>{done?"CONCLUÍDO ✓":"SEU EXERCÍCIO"}</span><h3>{name}</h3><p>Clique para ver execução e orientações.</p><div className="exercise-stats"><b>{reps}</b><b>Descanso {rest}</b></div></div></button>})}</div>
+              <div className="exercise-notes"><label>ANOTAÇÕES DO TREINO</label><textarea placeholder="Escreva aqui como foi o treino, dificuldades ou observações..." /><small>Suas anotações ficam nesta tela enquanto você estiver nela.</small></div>
+            </section>
+          </>
+        ) : (
+          <section className="feature-page">
+            <div className="feature-page-kicker">SEU PRODUTO</div>
+            <h1>{activeProduct==="dieta"?"Dieta":activeProduct==="contador"?"Dieta + Contador":"Chat Global"} <em>liberado</em></h1>
+            <p>{activeProduct==="dieta"?"Seu plano alimentar organizado para acompanhar durante a semana.":activeProduct==="contador"?"Registre alimentos e acompanhe seu consumo ao longo do dia.":"Espaço para dúvidas, acompanhamento e troca de experiências."}</p>
+            {activeProduct==="dieta" && <div className="diet-content-card"><h2>Seu plano alimentar</h2><div className="diet-meal"><b>CAFÉ DA MANHÃ</b><span>Opção simples e equilibrada para começar o dia.</span></div><div className="diet-meal"><b>ALMOÇO</b><span>Proteína + acompanhamento + vegetais, conforme sua rotina.</span></div><div className="diet-meal"><b>LANCHE</b><span>Uma opção prática para manter a rotina.</span></div><div className="diet-meal"><b>JANTAR</b><span>Uma refeição leve e organizada.</span></div></div>}
+            {activeProduct==="contador" && <div className="diet-content-card"><h2>Contador de calorias</h2><div className="food-input-grid"><input placeholder="Alimento" /><input placeholder="Quantidade" /><select defaultValue="g"><option value="g">g</option><option value="ml">ml</option><option value="un">un</option></select><button className="training-main-btn" type="button">Adicionar</button></div><div className="food-list"><div className="food-empty">Adicione um alimento para começar.</div></div><div className="food-total"><span>TOTAL DO DIA</span><strong>0 kcal</strong></div></div>}
+            {activeProduct==="chat" && <div className="feature-coming-card"><span>💬</span><h2>Chat Global</h2><p>Área de comunidade e suporte. Esta versão de visualização está liberada para você revisar o entregável.</p><button className="training-main-btn" type="button">COMEÇAR CONVERSA</button></div>}
+          </section>
+        )}
+
+        {selectedExercise && (
+          <div className="exercise-modal" role="dialog" aria-modal="true">
+            <div className="exercise-modal-card">
+              <button className="modal-close" type="button" aria-label="Fechar" onClick={()=>setSelectedExercise(null)}>×</button>
+              <div className="exercise-duration-clock"><span className="clock-label">DETALHES DO EXERCÍCIO</span><span className="clock-breakdown">{selectedExercise.reps} • descanso {selectedExercise.rest}</span><svg className="duration-clock-svg" viewBox="0 0 120 120" aria-hidden="true"><circle className="clock-face" cx="60" cy="60" r="50"/><circle className="clock-inner" cx="60" cy="60" r="43"/><line className="clock-minute-hand" x1="60" y1="60" x2="60" y2="27"/><line className="clock-second-hand" x1="60" y1="60" x2="82" y2="72"/><circle className="clock-center" cx="60" cy="60" r="4"/><text className="clock-duration" x="60" y="84" textAnchor="middle">{selectedExercise.reps.replace(" x ","×")}</text></svg></div>
+              <div className="modal-kicker">COMO FAZER</div><h2>{selectedExercise.name}</h2>
+              <div className="modal-stats"><span><b>{selectedExercise.reps.split(" x ")[0]}</b>séries</span><span><b>{selectedExercise.reps.split(" x ")[1]}</b>repetições</span><span><b>{selectedExercise.rest}</b>descanso</span></div>
+              <h4>PASSO A PASSO</h4><ol><li>Posicione-se com postura confortável e estável.</li><li>Execute o movimento de forma controlada, sem pressa.</li><li>Respire durante o movimento e respeite o descanso indicado.</li></ol>
+              <h4>ORIENTAÇÃO</h4><div className="modal-tip">Se sentir dor, interrompa o exercício. A proposta é aprender o movimento e manter uma rotina sustentável.</div>
+              <button className={`complete-btn ${completedExercises[`${activeDay}-${selectedExercise.name}`]?"completed":""}`} type="button" onClick={()=>{const key=`${activeDay}-${selectedExercise.name}`;setCompletedExercises(prev=>({...prev,[key]:!prev[key]}));setSelectedExercise(null)}}>{completedExercises[`${activeDay}-${selectedExercise.name}`]?"MARCAR COMO NÃO CONCLUÍDO":"MARCAR COMO CONCLUÍDO"} </button>
             </div>
-            <div className="routine-progress"><strong>{day.time}</strong><small>tempo estimado</small></div>
           </div>
-          <div className="exercise-grid">
-            {day.exercises.map(([name, reps, rest]) => {
-              const key = `${activeDay}-${name}`;
-              const done = !!completedExercises[key];
-              return (
-                <button key={key} className={`exercise-card ${done ? "done" : ""}`} onClick={() => setCompletedExercises((prev) => ({ ...prev, [key]: !prev[key] }))}>
-                  <div className="exercise-duration-clock">
-                    <span className="clock-label">EXERCÍCIO</span>
-                    <span className="clock-breakdown">{reps} • descanso {rest}</span>
-                    <svg className="duration-clock-svg" viewBox="0 0 120 120" aria-hidden="true">
-                      <circle className="clock-face" cx="60" cy="60" r="50" />
-                      <circle className="clock-inner" cx="60" cy="60" r="43" />
-                      {[0,30,60,90,120,150,180,210,240,270,300,330].map((angle) => {
-                        const r = Math.PI * angle / 180;
-                        return <line key={angle} className="clock-mark" x1={60 + Math.cos(r) * 44} y1={60 + Math.sin(r) * 44} x2={60 + Math.cos(r) * 48} y2={60 + Math.sin(r) * 48} />;
-                      })}
-                      <line className="clock-minute-hand" x1="60" y1="60" x2="60" y2="27" />
-                      <line className="clock-second-hand" x1="60" y1="60" x2="82" y2="72" />
-                      <circle className="clock-center" cx="60" cy="60" r="4" />
-                      <text className="clock-duration" x="60" y="84" textAnchor="middle">{reps.replace(" x ", "×")}</text>
-                    </svg>
-                  </div>
-                  <div className="exercise-info">
-                    <span>{done ? "CONCLUÍDO ✓" : "SEU EXERCÍCIO"}</span>
-                    <h3>{name}</h3>
-                    <p>Execute com controle e pare se sentir dor.</p>
-                    <div className="exercise-stats"><b>{reps}</b><b>Descanso {rest}</b></div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-          <div className="exercise-notes">
-            <label>ANOTAÇÕES DO TREINO</label>
-            <textarea placeholder="Escreva aqui como foi o treino, dificuldades ou observações..." />
-            <small>Suas anotações ficam nesta tela enquanto você estiver nela.</small>
-          </div>
-          <p className="training-note">Modo de visualização ativado: esta tela simula o conteúdo liberado após a compra para você revisar o entregável.</p>
-        </section>
+        )}
+        <p className="training-note">Modo de visualização ativado: esta tela simula o conteúdo liberado após a compra para você revisar o entregável.</p>
       </main>
     );
   }
