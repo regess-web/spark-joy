@@ -115,6 +115,16 @@ const baseQuestions: QuizQuestion[] = [
 
 ];
   {
+    question: "O que mais ajudaria você a manter o programa por 7 dias?",
+    subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
+    answers: [
+      { text: "Ter um treino pronto", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e deixa mais simples começar.", followUp: "Você prefere receber tudo organizado por dia?" },
+      { text: "Ver minha evolução", tag: "autoestima", recommendation: "Acompanhar pequenas conquistas pode ajudar a manter a motivação.", followUp: "Você gostaria de marcar cada treino concluído?" },
+      { text: "Exercícios fáceis de entender", tag: "corpo", recommendation: "Instruções claras ajudam você a saber exatamente o que fazer em cada etapa.", followUp: "Você prefere explicações rápidas ou mais detalhadas?" },
+      { text: "Sentir mais disposição", tag: "energia", recommendation: "Vamos priorizar movimentos que façam a rotina parecer ativa e sustentável.", followUp: "Você prefere começar devagar e aumentar o ritmo aos poucos?" }
+    ]
+  },
+  {
     question: "Qual é o seu peso atual?",
     subtitle: "Arraste para escolher seu peso ou digite o valor exato no quadrinho.",
     answers: [],
@@ -132,17 +142,6 @@ const baseQuestions: QuizQuestion[] = [
     max: 250,
     unit: "cm"
   },
-  {
-    question: "O que mais ajudaria você a manter o programa por 7 dias?",
-    subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
-    answers: [
-      { text: "Ter um treino pronto", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e deixa mais simples começar.", followUp: "Você prefere receber tudo organizado por dia?" },
-      { text: "Ver minha evolução", tag: "autoestima", recommendation: "Acompanhar pequenas conquistas pode ajudar a manter a motivação.", followUp: "Você gostaria de marcar cada treino concluído?" },
-      { text: "Exercícios fáceis de entender", tag: "corpo", recommendation: "Instruções claras ajudam você a saber exatamente o que fazer em cada etapa.", followUp: "Você prefere explicações rápidas ou mais detalhadas?" },
-      { text: "Sentir mais disposição", tag: "energia", recommendation: "Vamos priorizar movimentos que façam a rotina parecer ativa e sustentável.", followUp: "Você prefere começar devagar e aumentar o ritmo aos poucos?" }
-    ]
-  },
-
 ];;
 
 const resultCopy = {
