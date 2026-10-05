@@ -18,13 +18,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const DietaRoute = DietaRouteImport.update({
   id: '/dieta',
   path: '/dieta',
   getParentRoute: () => rootRouteImport,
 } as any)
-
 const TreinoRoute = TreinoRouteImport.update({
   id: '/treino',
   path: '/treino',
@@ -49,7 +47,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/treino'
+  fullPaths: '/' | '/dieta' | '/treino'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/dieta' | '/treino'
   id: '__root__' | '/' | '/dieta' | '/treino'
@@ -68,6 +66,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dieta': {
+      id: '/dieta'
+      path: '/dieta'
+      fullPath: '/dieta'
+      preLoaderRoute: typeof DietaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/treino': {
+      id: '/treino'
+      path: '/treino'
+      fullPath: '/treino'
+      preLoaderRoute: typeof TreinoRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

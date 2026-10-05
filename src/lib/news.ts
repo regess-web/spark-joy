@@ -25,8 +25,8 @@ const categories: Record<string,string> = {
 };
 
 export async function fetchNews(category: string): Promise<NewsItem[]> {
-  const base = import.meta.env.VITE_SUPABASE_URL;
-  const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const base = import.meta.env["VITE_SUPABASE_URL"];
+  const key = import.meta.env["VITE_SUPABASE_ANON_KEY"];
   if (!base || !key) return [];
 
   const filter = categories[category] || "all";

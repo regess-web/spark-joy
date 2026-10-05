@@ -1,7 +1,19 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 
-export const Route = createFileRoute("/treino")({ component: TrainingApp });
+export const Route = createFileRoute("/treino")({
+  head: () => ({
+    meta: [
+      { title: "Treino de 7 Dias | ViradaFIT" },
+      { name: "description", content: "Acompanhe uma rotina guiada de exercícios durante sete dias." },
+      { property: "og:title", content: "Treino de 7 Dias | ViradaFIT" },
+      { property: "og:description", content: "Acompanhe uma rotina guiada de exercícios durante sete dias." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: TrainingApp,
+});
 
 type Exercise = {
   id: string;
@@ -23,7 +35,7 @@ type DayPlan = {
   homeUpgradeExercises: Exercise[];
 };
 
-const days: DayPlan[] = [
+const days: [DayPlan, ...DayPlan[]] = [
   {
     day: 1,
     title: "Começo com energia",
@@ -254,7 +266,7 @@ function TrainingApp() {
     return Math.min(7, elapsed + 1);
   }, [startedAt, now]);
 
-  const currentDay = days[selectedDay - 1];
+  const currentDay = days[selectedDay - 1] ?? days[0];
   const visibleExercises = homeUpgradeUnlocked ? [...currentDay.exercises, ...currentDay.homeUpgradeExercises] : currentDay.exercises;
   const progress = Math.round((completed.filter(id => id.startsWith("d" + selectedDay + "-")).length / visibleExercises.length) * 100);
 
@@ -280,7 +292,7 @@ function TrainingApp() {
     localStorage.setItem("viva-training-completed", JSON.stringify(next));
   }
 
-  function openSection(section: "treino" | "chat" | "dieta") { if (section === "dieta") { window.location.href = "/dieta"; return; } setActiveSection(section); setMenuOpen(false); }
+  function openSection(section: "treino" | "dieta") { if (section === "dieta") { window.location.href = "/dieta"; return; } setActiveSection(section); setMenuOpen(false); }
   function addFood() {
     setShowDietOffer(true);
   }
