@@ -435,6 +435,29 @@ function WeightLossQuiz() {
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
               }}>COMEÇAR MEU QUIZ <span>→</span></button>
             <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de treino</span></div>
+            <div className="fit-transformation-showcase">
+              <span className="fit-transformation-badge">Evolução • Um passo de cada vez</span>
+              <div className="fit-transformation-grid">
+                <div className="fit-transformation-item">
+                  <div className="fit-transformation-img-wrap">
+                    <img src="/images/shape 1.jpg" alt="Antes de iniciar a rotina" loading="lazy" />
+                  </div>
+                  <span className="fit-transformation-label">Antes</span>
+                </div>
+                <div className="fit-transformation-arrow" aria-label="Evolução da foto 1 para a foto 2">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </div>
+                <div className="fit-transformation-item">
+                  <div className="fit-transformation-img-wrap">
+                    <img src="/images/shape 2.jpg" alt="Depois da rotina" loading="lazy" />
+                  </div>
+                  <span className="fit-transformation-label">Depois</span>
+                </div>
+              </div>
+            </div>
             <div className="fit-conversion">
               <div className="fit-conversion-block">
                 <strong>Com isso você vai receber</strong>
