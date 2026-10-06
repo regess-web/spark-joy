@@ -845,9 +845,19 @@
   border:1px solid var(--fit-line,#eaded3);
   box-shadow:0 8px 20px rgba(80,52,35,.08);
   background:#f7eee7;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .fit-transformation-img-wrap img{
-  width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  object-position:center;
+  display:block;
+  max-width:100%;
+  max-height:100%;
+  transition:transform .3s ease;
 }
 .fit-transformation-img-wrap:hover img{transform:scale(1.03)}
 .fit-transformation-label{
