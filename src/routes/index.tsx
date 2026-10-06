@@ -457,6 +457,7 @@ function WeightLossQuiz() {
                   <span className="fit-transformation-label">Depois</span>
                 </div>
               </div>
+              <div className="fit-transformation-result">Resultado em apenas 2 semanas</div>
             </div>
             <div className="fit-conversion">
               <div className="fit-conversion-block">
