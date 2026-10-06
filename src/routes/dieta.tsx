@@ -205,6 +205,12 @@ function DietQuiz() {
     economica: 0
   });
   const [result, setResult] = useState<PlanId | null>(null);
+  const [dietUnlocked, setDietUnlocked] = useState(() => {
+    if (typeof window === "undefined") return false;
+    const paid = new URLSearchParams(window.location.search).get("diet_paid") === "1";
+    if (paid) localStorage.setItem("virada-diet-unlocked", "true");
+    return paid || localStorage.getItem("virada-diet-unlocked") === "true";
+  });
   const [openDay, setOpenDay] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -263,6 +269,25 @@ function DietQuiz() {
     setResult(null);
     setOpenDay(0);
     setScores({ equilibrada: 0, proteica: 0, pratica: 0, economica: 0 });
+  }
+
+  if (result && resultPlan && !dietUnlocked) {
+    return (
+      <main className="fit-app fit-diet-result">
+        <div className="diet-result-shell">
+          <div className="fit-kicker">SEU PLANO FOI MONTADO</div>
+          <div className="fit-result-icon">✓</div>
+          <p className="fit-overline">RESULTADO DO SEU QUIZ</p>
+          <h1>{resultPlan.title}</h1>
+          <p className="fit-result-text">Seu cardápio personalizado de 7 dias está pronto. Libere o acesso completo para visualizar todas as refeições.</p>
+          <div className="diet-result-badge"><strong>R$ 7,90</strong><span>acesso ao<br />plano completo</span></div>
+          <button className="fit-primary" type="button" onClick={() => { window.location.href = "https://pay.cakto.com.br/35taav4_1161076"; }}>
+            LIBERAR MINHA DIETA <span>→</span>
+          </button>
+          <button className="fit-secondary diet-refazer-btn" onClick={restart}>Refazer quiz</button>
+        </div>
+      </main>
+    );
   }
 
   if (result && resultPlan) {
