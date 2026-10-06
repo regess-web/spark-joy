@@ -920,3 +920,24 @@
   .fit-offer-timer{min-height:42px;gap:7px;font-size:9px;padding:8px 10px}
   .fit-offer-timer strong{font-size:14px}
 }
+
+
+/* Example profile showcase */
+.fit-people-showcase{
+  margin-top:32px;
+  padding:28px 0 8px;
+  border-top:1px solid var(--fit-line,#eaded3);
+}
+.fit-people-heading{text-align:center;margin-bottom:20px}
+.fit-people-heading>span{display:block;font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--fit-accent,#a96f4e);margin-bottom:6px}
+.fit-people-heading h2{margin:0;font-size:22px;color:var(--fit-text,#302820)}
+.fit-people-heading p{margin:7px auto 0;max-width:430px;font-size:12px;line-height:1.5;color:#786c63}
+.fit-people-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.fit-person-card{display:flex;flex-direction:column;align-items:center;text-align:center;padding:12px 7px;border:1px solid var(--fit-line,#eaded3);border-radius:14px;background:#fff;box-shadow:0 6px 16px rgba(80,52,35,.06)}
+.fit-person-card img{width:58px;height:58px;border-radius:50%;object-fit:cover;display:block;margin-bottom:8px;border:2px solid #f1e4da}
+.fit-person-card strong{display:block;font-size:12px;color:var(--fit-text,#302820);margin-bottom:4px}
+.fit-stars{display:block;font-size:12px;letter-spacing:1px;line-height:1;color:#d99a43}
+@media(max-width:700px){
+  .fit-people-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fit-person-card:last-child{grid-column:1 / -1;max-width:180px;width:100%;justify-self:center}
+}
