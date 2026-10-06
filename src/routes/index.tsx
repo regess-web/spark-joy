@@ -280,7 +280,7 @@ function WeightLossQuiz() {
 
   if (loading) {
     return (
-      <main className="fit-app fit-loading">\n        <div className="fit-loading-card">
+      <main className="fit-app fit-loading">        <div className="fit-loading-card">
           <div className="fit-loading-spinner" aria-hidden="true" />
           <div className="fit-kicker">ANALISANDO SUAS RESPOSTAS</div>
           <h1>Montando seu<br /><em>resultado...</em></h1>
@@ -383,7 +383,7 @@ function WeightLossQuiz() {
 
   if (offer) {
     return (
-      <main className="fit-app fit-offer">\n        <div className="fit-offer-card">
+      <main className="fit-app fit-offer">        <div className="fit-offer-card">
           <div className="fit-kicker">SEU PRÓXIMO PASSO</div>
           <h1>Comece a cuidar de você<br /><em>do seu jeito.</em></h1>
           <p>Por apenas <strong>R$ 27,99</strong>, tenha acesso a um guia de exercícios práticos para ajudar você a construir uma rotina ativa e chegar ao verão se sentindo mais confiante.</p>
@@ -405,7 +405,7 @@ function WeightLossQuiz() {
   if (result) {
     const copy = resultCopy[result as keyof typeof resultCopy];
     return (
-      <main className="fit-app fit-result">\n        <div className="fit-result-card">
+      <main className="fit-app fit-result">        <div className="fit-result-card">
           <div className="fit-kicker">SEU RESULTADO</div>
           <div className="fit-result-icon">✓</div>
           <p className="fit-overline">PELO QUE VOCÊ RESPONDEU...</p>
@@ -421,7 +421,7 @@ function WeightLossQuiz() {
 
   if (!started) {
     return (
-      <main className="fit-app fit-start">\n        <div className="fit-start-card">
+      <main className="fit-app fit-start">        <div className="fit-start-card">
           <div className="fit-start-content">
             <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
             <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
@@ -507,7 +507,7 @@ function WeightLossQuiz() {
   }
 
   return (
-    <main className="fit-app fit-quiz">\n        <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 12</div></header>
+    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 12</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
