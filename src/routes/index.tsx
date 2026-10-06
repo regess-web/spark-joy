@@ -411,7 +411,7 @@ function WeightLossQuiz() {
           <p className="fit-overline">PELO QUE VOCÊ RESPONDEU...</p>
           <h1>{copy.title}</h1>
           <p className="fit-result-text">{copy.text}</p>
-          <div className="fit-special">✨ Sua recomendação foi montada a partir das respostas que você deu ao longo do quiz.</div>
+          <div className="fit-special">Ano novo, Nova vida</div>
           <button className="fit-primary" onClick={() => setOffer(true)}>CONTINUAR <span>→</span></button>
           <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
         </div>
