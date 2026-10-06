@@ -209,11 +209,11 @@ function DurationClock({ exercise }: { exercise: Exercise }) {
   );
 }
 
-function CaktoUpgradeButton({ onUnlock }: { onUnlock: () => void }) {
+function CaktoUpgradeButton() {
   return (
     <button
       className="training-main-btn diet-offer-cta"
-      onClick={onUnlock}
+      onClick={() => { window.location.href = "https://pay.cakto.com.br/quucckn_1161084"; }}
     >
       EVOLUIR MEU TREINO • R$ 17,90 →
     </button>
@@ -413,7 +413,7 @@ function TrainingApp() {
             <h2 id="home-upgrade-title">Evolua seu treino em casa</h2>
             <p>Com o upgrade, você adquire <strong>mais 28 exercícios para sua ViradaFIT</strong>, ampliando sua rotina ao longo dos 7 dias e trabalhando diferentes grupos musculares.</p>
             <div className="diet-offer-price"><small>ACESSO COMPLETO</small><strong>R$ 17,90</strong></div>
-            <CaktoUpgradeButton onUnlock={() => { localStorage.setItem("viva-home-upgrade-unlocked", "true"); setHomeUpgradeUnlocked(true); setShowHomeUpgrade(false); }} />
+            <CaktoUpgradeButton />
           </div>
         </div>
       )}
