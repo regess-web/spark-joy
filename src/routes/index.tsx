@@ -440,7 +440,7 @@ function WeightLossQuiz() {
               <div className="fit-transformation-grid">
                 <div className="fit-transformation-item">
                   <div className="fit-transformation-img-wrap">
-                    <img src="/images/shape 1.jpg" alt="Antes de iniciar a rotina" loading="lazy" />
+                    <img src="/images/shape 1.jpg" alt="Antes de iniciar a rotina" loading="eager" decoding="async" />
                   </div>
                   <span className="fit-transformation-label">Antes</span>
                 </div>
@@ -452,7 +452,7 @@ function WeightLossQuiz() {
                 </div>
                 <div className="fit-transformation-item">
                   <div className="fit-transformation-img-wrap">
-                    <img src="/images/shape 2.jpg" alt="Depois da rotina" loading="lazy" />
+                    <img src="/images/shape 2.jpg" alt="Depois da rotina" loading="eager" decoding="async" />
                   </div>
                   <span className="fit-transformation-label">Depois</span>
                 </div>
