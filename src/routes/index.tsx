@@ -489,7 +489,7 @@ function WeightLossQuiz() {
                 <div className="fit-people-heading">
                   <span>INSPIRAÇÃO</span>
                   <h2>Conheça alguns perfis</h2>
-                  <p>Exemplos de pessoas que poderiam seguir uma rotina como esta.</p>
+                  <p>Exemplos de pessoas que seguiram uma rotina como esta.</p>
                 </div>
                 <div className="fit-people-grid">
                   <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana" loading="lazy" /><div><strong>Ana</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
