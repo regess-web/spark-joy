@@ -485,6 +485,20 @@ function WeightLossQuiz() {
                 <details><summary>Quanto tempo leva o quiz?</summary><p>São 12 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
                 <details><summary>Posso voltar uma pergunta?</summary><p>Sim. Use o botão “Voltar” para revisar ou alterar uma resposta.</p></details>
               </div>
+              <section className="fit-people-showcase" aria-label="Perfis de exemplo">
+                <div className="fit-people-heading">
+                  <span>INSPIRAÇÃO</span>
+                  <h2>Conheça alguns perfis</h2>
+                  <p>Exemplos de pessoas que poderiam seguir uma rotina como esta.</p>
+                </div>
+                <div className="fit-people-grid">
+                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana" loading="lazy" /><div><strong>Ana</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pedro" loading="lazy" /><div><strong>Pedro</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Juliana" loading="lazy" /><div><strong>Juliana</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Gabriel" loading="lazy" /><div><strong>Gabriel</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Beatriz" loading="lazy" /><div><strong>Beatriz</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
