@@ -394,7 +394,7 @@ function WeightLossQuiz() {
           <button
             className="fit-primary"
             type="button"
-            onClick={() => { window.location.href = "/treino"; }}
+            onClick={() => { window.location.href = "https://pay.cakto.com.br/34rfhf7_1160901"; }}
           >VER MEU TREINO <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
