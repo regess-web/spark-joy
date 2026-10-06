@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import "../diet-quiz.css";
 
 export const Route = createFileRoute("/dieta")({
@@ -196,6 +196,8 @@ function DietQuiz() {
   const [started, setStarted] = useState(false);
   const [step, setStep] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
+  const [answers, setAnswers] = useState<number[]>([]);
+  const advanceTimer = useRef<number | null>(null);
   const [scores, setScores] = useState<Record<PlanId, number>>({
     equilibrada: 0,
     proteica: 0,
@@ -210,15 +212,15 @@ function DietQuiz() {
   const progress = ((step + (selected !== null ? 1 : 0)) / questions.length) * 100;
   const resultPlan = useMemo(() => (result ? plans[result] : null), [result]);
 
-  function next() {
-    if (selected === null) return;
-    const answer = current.answers[selected];
+  function applyAnswer(answerIndex: number) {
+    const answer = current.answers[answerIndex];
     if (!answer) return;
     const nextScores = { ...scores };
     (Object.keys(nextScores) as PlanId[]).forEach((id) => {
       nextScores[id] += answer.tags[id] ?? 0;
     });
     setScores(nextScores);
+    setAnswers((prev) => [...prev.slice(0, step), answerIndex]);
 
     if (step === questions.length - 1) {
       setResult(choosePlan(nextScores));
@@ -229,10 +231,35 @@ function DietQuiz() {
     }
   }
 
+  function selectAnswer(index: number) {
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+    setSelected(index);
+    advanceTimer.current = window.setTimeout(() => applyAnswer(index), 220);
+  }
+
+  function goBack() {
+    if (step === 0) return;
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
+    const previousIndex = answers[step - 1];
+    const previousAnswer = questions[step - 1]?.answers[previousIndex];
+    if (previousAnswer) {
+      const nextScores = { ...scores };
+      (Object.keys(nextScores) as PlanId[]).forEach((id) => {
+        nextScores[id] -= previousAnswer.tags[id] ?? 0;
+      });
+      setScores(nextScores);
+    }
+    setAnswers((prev) => prev.slice(0, step - 1));
+    setStep((value) => value - 1);
+    setSelected(previousIndex ?? null);
+  }
+
   function restart() {
     setStarted(false);
     setStep(0);
     setSelected(null);
+    setAnswers([]);
+    if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
     setResult(null);
     setOpenDay(0);
     setScores({ equilibrada: 0, proteica: 0, pratica: 0, economica: 0 });
@@ -320,14 +347,15 @@ function DietQuiz() {
         <p className="fit-subtitle">{current.subtitle}</p>
         <div className="fit-answers">
           {current.answers.map((answer, index) => (
-            <button key={answer.text} className={selected === index ? "selected" : ""} onClick={() => setSelected(index)}>
+            <button key={answer.text} className={selected === index ? "selected" : ""} onClick={() => selectAnswer(index)}>
               <span>{String.fromCharCode(65 + index)}</span>{answer.text}
             </button>
           ))}
         </div>
         <div className="fit-footer">
-          <small>{selected === null ? "Escolha uma alternativa para continuar." : "Resposta selecionada."}</small>
-          <button className="fit-next" disabled={selected === null} onClick={next}>{step === questions.length - 1 ? "MONTAR MINHA DIETA" : "CONTINUAR"} <span>→</span></button>
+          <button className="diet-back-btn" type="button" disabled={step === 0} onClick={goBack}>← VOLTAR</button>
+          <small>{selected === null ? "Escolha uma alternativa para continuar." : "Resposta selecionada. Avançando..."}</small>
+          <span className="diet-auto-next" aria-hidden="true">→</span>
         </div>
       </section>
     </main>
