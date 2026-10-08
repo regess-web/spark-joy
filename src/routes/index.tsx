@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,107 +31,30 @@ type QuizQuestion = {
   min?: number;
   max?: number;
   unit?: string;
+  image?: string;
 };
 
 const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
-  {
-    question: "O que você mais gostaria de mudar no seu corpo hoje?",
-    subtitle: "Escolha o que mais representa o resultado que você busca.",
-    answers: [
-      { text: "Perder gordura e diminuir medidas", tag: "corpo", recommendation: "Vamos priorizar uma rotina prática e progressiva.", followUp: "Vamos entender o que mais atrapalha você a manter esse objetivo." },
-      { text: "Definir e tonificar meu corpo", tag: "corpo", recommendation: "Vamos combinar movimentos de força com uma rotina sustentável.", followUp: "Agora vamos descobrir quanto tempo você realmente tem." },
-      { text: "Me sentir mais confiante comigo mesma", tag: "autoestima", recommendation: "Vamos focar em pequenas vitórias que ajudem você a construir constância.", followUp: "Vamos entender o que costuma fazer você desistir." },
-      { text: "Ter mais disposição e condicionamento", tag: "energia", recommendation: "Vamos buscar uma rotina que coloque você em movimento sem complicar.", followUp: "Agora vamos descobrir qual formato seria mais fácil de manter." }
-    ]
-  },
-  {
-    question: "Qual dessas situações mais parece com você?",
-    subtitle: "Não é sobre fazer perfeito. É sobre encontrar algo que você consiga manter.",
-    answers: [
-      { text: "Começo motivada e depois paro", tag: "rotina", recommendation: "Seu plano precisa reduzir a fricção e criar pequenas vitórias.", followUp: "Vamos descobrir qual obstáculo pesa mais na sua rotina." },
-      { text: "Não tenho tempo para treinos longos", tag: "rotina", recommendation: "Sessões curtas e objetivas podem ser mais realistas para você.", followUp: "Vamos ajustar o tempo disponível." },
-      { text: "Não sei exatamente o que fazer", tag: "corpo", recommendation: "Uma sequência pronta pode eliminar a dúvida sobre exercícios, séries e repetições.", followUp: "Vamos descobrir como você prefere treinar." },
-      { text: "Até começo, mas não consigo manter uma rotina", tag: "rotina", recommendation: "A prioridade será tornar o programa simples de repetir.", followUp: "Vamos identificar o formato mais fácil para você." }
-    ]
-  },
-  {
-    question: "O que mais dificulta sua evolução atualmente?",
-    subtitle: "Sua resposta ajuda a montar uma recomendação mais coerente com sua realidade.",
-    answers: [
-      { text: "Falta de tempo", tag: "rotina", recommendation: "Vamos priorizar treinos enxutos.", followUp: "Quanto tempo você conseguiria reservar?" },
-      { text: "Falta de constância", tag: "rotina", recommendation: "Vamos diminuir a complexidade e trabalhar com uma sequência clara.", followUp: "Qual duração parece mais realista?" },
-      { text: "Não saber qual treino fazer", tag: "corpo", recommendation: "Vamos organizar exercícios, séries, repetições e descanso.", followUp: "Agora vamos definir o ambiente." },
-      { text: "Desânimo depois de algumas tentativas", tag: "autoestima", recommendation: "Vamos trabalhar com metas pequenas e progresso visível.", followUp: "Vamos descobrir o que ajudaria você a continuar." }
-    ]
-  },
-  {
-    question: "Quanto tempo você conseguiria reservar por dia?",
-    subtitle: "Escolha o tempo que você realmente conseguiria repetir, não o ideal.",
-    answers: [
-      { text: "Até 15 minutos", tag: "rotina", recommendation: "Uma rotina curta pode reduzir a barreira para começar.", followUp: "Vamos escolher o melhor formato para esse tempo." },
-      { text: "15 a 30 minutos", tag: "corpo", recommendation: "Esse intervalo permite uma rotina equilibrada sem exigir horas do seu dia.", followUp: "Vamos descobrir onde você prefere treinar." },
-      { text: "30 a 45 minutos", tag: "energia", recommendation: "Com mais tempo, podemos combinar diferentes estímulos.", followUp: "Vamos ajustar o ambiente da sua rotina." },
-      { text: "Depende do dia", tag: "rotina", recommendation: "Flexibilidade será importante para não perder a sequência quando a rotina mudar.", followUp: "Vamos encontrar uma estrutura que aceite dias corridos." }
-    ]
-  },
-  {
-    question: "Onde você teria mais facilidade para treinar?",
-    subtitle: "Pense no lugar em que você realmente conseguiria manter o programa.",
-    answers: [
-      { text: "Em casa, sem equipamentos", tag: "rotina", recommendation: "Vamos priorizar exercícios simples e acessíveis.", followUp: "Agora vamos entender o que faria você continuar." },
-      { text: "Na academia", tag: "corpo", recommendation: "Podemos aproveitar equipamentos e organizar uma rotina mais completa.", followUp: "Vamos entender sua principal motivação." },
-      { text: "Em casa e na academia", tag: "energia", recommendation: "Uma rotina flexível pode funcionar melhor quando seu ambiente varia.", followUp: "Vamos definir seu principal motivo para começar." },
-      { text: "Ainda não sei", tag: "autoestima", recommendation: "Vamos começar pelo caminho mais simples e guiado.", followUp: "Agora pense no que você quer sentir ao começar." }
-    ]
-  },
-  {
-    question: "O que você gostaria de sentir quando perceber sua evolução?",
-    subtitle: "Essa resposta ajuda a identificar o que realmente importa para você.",
-    answers: [
-      { text: "Mais confiança nas minhas roupas", tag: "autoestima", recommendation: "Vamos conectar pequenas ações a uma evolução que você consiga acompanhar.", followUp: "Vamos descobrir o que ajudaria você a manter o ritmo." },
-      { text: "Mais satisfeita quando me olho no espelho", tag: "autoestima", recommendation: "A constância será mais importante do que tentar fazer tudo de uma vez.", followUp: "Vamos ajustar o programa à sua realidade." },
-      { text: "Mais disposta no dia a dia", tag: "energia", recommendation: "Vamos priorizar uma rotina progressiva e sustentável.", followUp: "Vamos definir o mínimo que você consegue manter." },
-      { text: "Orgulhosa por finalmente conseguir manter uma rotina", tag: "rotina", recommendation: "Seu plano deve ser claro, simples e fácil de acompanhar.", followUp: "Estamos chegando ao seu perfil." }
-    ]
-  },
-  {
-    question: "O que faria você ter mais chances de completar os próximos 7 dias?",
-    subtitle: "Escolha o que mais ajudaria você a não depender apenas da motivação.",
-    answers: [
-      { text: "Saber exatamente o que fazer em cada dia", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e facilita começar.", followUp: "Vamos finalizar seu perfil." },
-      { text: "Treinos curtos e objetivos", tag: "rotina", recommendation: "Quanto menor a barreira para começar, mais fácil manter a sequência.", followUp: "Vamos finalizar seu perfil." },
-      { text: "Exercícios explicados de forma simples", tag: "corpo", recommendation: "Instruções claras deixam a experiência mais guiada.", followUp: "Vamos finalizar seu perfil." },
-      { text: "Acompanhar cada treino concluído", tag: "autoestima", recommendation: "Marcar pequenas vitórias pode ajudar a transformar intenção em hábito.", followUp: "Vamos finalizar seu perfil." }
-    ]
-  },
-  {
-    question: "Se você continuar adiando por mais alguns meses, como acha que vai se sentir?",
-    subtitle: "Não existe resposta certa. Escolha a que mais representa o que você sente hoje.",
-    answers: [
-      { text: "Frustrada por continuar no mesmo lugar", tag: "autoestima", recommendation: "Seu primeiro passo deve ser pequeno o suficiente para acontecer agora.", followUp: "Seu perfil está quase pronto." },
-      { text: "Incomodada por começar e parar novamente", tag: "rotina", recommendation: "Sua prioridade deve ser consistência, não perfeição.", followUp: "Seu perfil está quase pronto." },
-      { text: "Com vontade de finalmente mudar", tag: "corpo", recommendation: "Vamos transformar essa intenção em uma sequência simples para começar.", followUp: "Seu perfil está quase pronto." },
-      { text: "Quero me sentir mais ativa e disposta", tag: "energia", recommendation: "Uma rotina progressiva pode ajudar você a colocar movimento no dia.", followUp: "Seu perfil está quase pronto." }
-    ]
-  },
-  {
-    question: "Qual é o seu peso atual?",
-    subtitle: "Arraste para escolher seu peso ou digite o valor exato.",
-    answers: [],
-    kind: "weight",
-    min: 0,
-    max: 250,
-    unit: "kg"
-  },
-  {
-    question: "Qual é a sua altura?",
-    subtitle: "Arraste para escolher sua altura ou digite o valor exato.",
-    answers: [],
-    kind: "height",
-    min: 0,
-    max: 250,
-    unit: "cm"
-  },
+{question:"Qual faixa de idade representa melhor você?",subtitle:"Escolha a pessoa que mais se parece com a sua fase de vida.",image:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"18 a 24 anos",tag:"corpo",recommendation:"Vamos buscar uma rotina dinâmica e simples.",followUp:"Agora vamos entender seu principal objetivo."},{text:"25 a 34 anos",tag:"corpo",recommendation:"Vamos equilibrar resultado e praticidade.",followUp:"Agora vamos entender seu principal objetivo."},{text:"35 a 44 anos",tag:"rotina",recommendation:"Vamos priorizar uma rotina que caiba na vida real.",followUp:"Agora vamos entender seu principal objetivo."},{text:"45 anos ou mais",tag:"energia",recommendation:"Vamos priorizar progressão e constância.",followUp:"Agora vamos entender seu principal objetivo."}]},
+{question:"O que você mais gostaria de mudar no seu corpo hoje?",subtitle:"Escolha o resultado que mais representa o que você procura.",image:"https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Diminuir medidas e perder gordura",tag:"corpo",recommendation:"Vamos priorizar uma rotina prática e progressiva.",followUp:"Agora vamos entender o que mais atrapalha você."},{text:"Definir e tonificar meu corpo",tag:"corpo",recommendation:"Vamos combinar força e uma rotina sustentável.",followUp:"Agora vamos entender o que mais atrapalha você."},{text:"Me sentir mais confiante comigo mesma",tag:"autoestima",recommendation:"Vamos focar em pequenas vitórias e constância.",followUp:"Agora vamos entender o que mais atrapalha você."},{text:"Ter mais disposição e condicionamento",tag:"energia",recommendation:"Vamos buscar uma rotina que coloque você em movimento.",followUp:"Agora vamos entender o que mais atrapalha você."}]},
+{question:"Qual dessas situações mais parece com você?",subtitle:"A ideia é encontrar uma rotina que funcione na sua vida real.",image:"https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Começo motivada e depois paro",tag:"rotina",recommendation:"Seu plano precisa reduzir a fricção e criar pequenas vitórias.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não tenho tempo para treinos longos",tag:"rotina",recommendation:"Sessões curtas podem ser mais realistas para você.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não sei exatamente o que fazer",tag:"corpo",recommendation:"Uma sequência pronta elimina a dúvida sobre o treino.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não consigo manter uma rotina",tag:"rotina",recommendation:"A prioridade será tornar o programa simples de repetir.",followUp:"Vamos descobrir o principal obstáculo."}]},
+{question:"O que mais dificulta sua evolução atualmente?",subtitle:"Escolha o obstáculo que mais aparece no seu dia a dia.",image:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Falta de tempo",tag:"rotina",recommendation:"Vamos priorizar treinos enxutos.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Falta de constância",tag:"rotina",recommendation:"Vamos diminuir a complexidade e trabalhar com uma sequência clara.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Não saber qual treino fazer",tag:"corpo",recommendation:"Vamos organizar exercícios, séries e descanso.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Desânimo depois de algumas tentativas",tag:"autoestima",recommendation:"Vamos trabalhar com metas pequenas e progresso visível.",followUp:"Agora vamos definir seu tempo disponível."}]},
+{question:"Quanto tempo você conseguiria reservar por dia?",subtitle:"Escolha o tempo que você realmente conseguiria repetir.",image:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Até 15 minutos",tag:"rotina",recommendation:"Uma rotina curta reduz a barreira para começar.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"15 a 30 minutos",tag:"corpo",recommendation:"Esse intervalo permite uma rotina equilibrada.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"30 a 45 minutos",tag:"energia",recommendation:"Com mais tempo, podemos combinar diferentes estímulos.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"Depende do dia",tag:"rotina",recommendation:"Flexibilidade será importante para não perder a sequência.",followUp:"Agora vamos descobrir onde você prefere treinar."}]},
+{question:"Onde você teria mais facilidade para treinar?",subtitle:"Escolha o ambiente em que você realmente conseguiria manter o programa.",image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Em casa, sem equipamentos",tag:"rotina",recommendation:"Vamos priorizar exercícios simples e acessíveis.",followUp:"Agora vamos entender sua motivação."},{text:"Na academia",tag:"corpo",recommendation:"Podemos aproveitar equipamentos e organizar uma rotina completa.",followUp:"Agora vamos entender sua motivação."},{text:"Em casa e na academia",tag:"energia",recommendation:"Uma rotina flexível pode funcionar melhor.",followUp:"Agora vamos entender sua motivação."},{text:"Ainda não sei",tag:"autoestima",recommendation:"Vamos começar pelo caminho mais simples e guiado.",followUp:"Agora vamos entender sua motivação."}]},
+{question:"O que você gostaria de sentir quando perceber sua evolução?",subtitle:"Pense no sentimento que faria você perceber que valeu a pena.",image:"https://images.unsplash.com/photo-1546483875-ad9014c88eba?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Mais confiança nas minhas roupas",tag:"autoestima",recommendation:"Vamos conectar pequenas ações a uma evolução acompanhável.",followUp:"Agora vamos entender o que faria você continuar."},{text:"Mais satisfeita quando me olho no espelho",tag:"autoestima",recommendation:"A constância será mais importante do que fazer tudo de uma vez.",followUp:"Agora vamos entender o que faria você continuar."},{text:"Mais disposta no dia a dia",tag:"energia",recommendation:"Vamos priorizar uma rotina progressiva e sustentável.",followUp:"Agora vamos entender o que faria você continuar."},{text:"Orgulhosa por manter uma rotina",tag:"rotina",recommendation:"Seu plano deve ser claro, simples e fácil de acompanhar.",followUp:"Agora vamos entender o que faria você continuar."}]},
+{question:"O que faria você ter mais chances de completar os próximos 7 dias?",subtitle:"Escolha o que mais ajudaria você a não depender só da motivação.",image:"https://images.unsplash.com/photo-1517832207067-4db24a2ae47c?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Saber exatamente o que fazer em cada dia",tag:"rotina",recommendation:"Uma sequência pronta reduz decisões.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Treinos curtos e objetivos",tag:"rotina",recommendation:"Uma barreira menor facilita começar.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Exercícios explicados de forma simples",tag:"corpo",recommendation:"Instruções claras deixam tudo mais guiado.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Acompanhar cada treino concluído",tag:"autoestima",recommendation:"Marcar pequenas vitórias ajuda a transformar intenção em hábito.",followUp:"Vamos fazer mais uma pergunta importante."}]},
+{question:"Qual frase mais combina com o seu momento?",subtitle:"Escolha sem pensar demais. A primeira que fizer sentido costuma ser a melhor.",image:"https://images.unsplash.com/photo-1517964603305-11c0f6f66012?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Quero voltar a cuidar de mim",tag:"autoestima",recommendation:"Vamos começar com algo simples e possível.",followUp:"Agora só faltam suas medidas."},{text:"Quero finalmente criar constância",tag:"rotina",recommendation:"Vamos estruturar uma sequência fácil de repetir.",followUp:"Agora só faltam suas medidas."},{text:"Quero ver mudanças no meu corpo",tag:"corpo",recommendation:"Vamos organizar uma rotina clara para você seguir.",followUp:"Agora só faltam suas medidas."},{text:"Quero ter mais disposição",tag:"energia",recommendation:"Vamos priorizar movimento e progressão.",followUp:"Agora só faltam suas medidas."}]},
+{question:"Qual é o seu peso atual?",subtitle:"Arraste ou digite o valor. Essa informação ajuda a personalizar sua experiência.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"weight",min:30,max:250,unit:"kg"},
+{question:"Qual é a sua altura?",subtitle:"Arraste ou digite o valor exato para finalizar seu perfil.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"height",min:120,max:220,unit:"cm"},
 ];
 
 const resultCopy = {
@@ -159,6 +82,8 @@ function WeightLossQuiz() {
   const [measurementComplete, setMeasurementComplete] = useState<Record<number, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
+  const [advancing, setAdvancing] = useState(false);
+  const advanceTimer = useRef<number | null>(null);
 
   function trackQuizEvent(eventName: string, params: Record<string, string | number> = {}) {
     if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
@@ -214,6 +139,7 @@ function WeightLossQuiz() {
   }
 
   function choose(index: number) {
+    if (advancing) return;
     const answer = current.answers[index];
     if (!answer) return;
     const nextAnswers = [...answers];
@@ -222,23 +148,31 @@ function WeightLossQuiz() {
     setAnswers(nextAnswers);
     setScores(nextScores);
     setContext(answer.followUp);
-    trackQuizEvent(`QuizQuestion${step + 1}`, { question_number: step + 1, total_questions: baseQuestions.length });
-    window.setTimeout(() => finishStep(nextScores), 220);
+    setAdvancing(true);
+    trackQuizEvent("QuizQuestion" + (step + 1), { question_number: step + 1, total_questions: baseQuestions.length });
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    advanceTimer.current = window.setTimeout(() => {
+      advanceTimer.current = null;
+      setAdvancing(false);
+      finishStep(nextScores);
+    }, 380);
   }
 
   function confirmMeasurement() {
-    if (!isMeasurement) return;
+    if (!isMeasurement || advancing) return;
     setMeasurementComplete((prev) => ({ ...prev, [step]: true }));
-    trackQuizEvent(current.kind === "weight" ? "QuizWeight" : "QuizHeight", {
-      question_number: step + 1,
-      value: current.kind === "weight" ? weight : height,
-      unit: current.unit || ""
-    });
-    window.setTimeout(() => finishStep(scores), 220);
+    setAdvancing(true);
+    trackQuizEvent(current.kind === "weight" ? "QuizWeight" : "QuizHeight", { question_number: step + 1, value: current.kind === "weight" ? weight : height, unit: current.unit || "" });
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    advanceTimer.current = window.setTimeout(() => {
+      advanceTimer.current = null;
+      setAdvancing(false);
+      finishStep(scores);
+    }, 380);
   }
 
   function goBack() {
-    if (step === 0) return;
+    if (step === 0 || advancing) return;
     setStep((s) => s - 1);
     setContext("");
   }
@@ -256,6 +190,8 @@ function WeightLossQuiz() {
     setMeasurementComplete({});
     setLoading(false);
     setLoadingProgress(0);
+    if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+    setAdvancing(false);
   }
 
   if (loading) {
@@ -403,7 +339,7 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">        <div className="fit-start-card">
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
+            <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
             <h1>Você está cansada de <em>começar e parar?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
@@ -486,10 +422,11 @@ function WeightLossQuiz() {
   }
 
   return (
-    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / 12</div></header>
+    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
+        {current.image && <div className="fit-question-image"><img src={current.image} alt="" /></div>}
         <h2>{current.question}</h2>
         <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
         {isMeasurement ? (
@@ -530,7 +467,7 @@ function WeightLossQuiz() {
               }}
             />
             <div className="fit-measurement-scale"><span>0 {current.unit}</span><span>{current.max} {current.unit}</span></div>
-            <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement}>
+            <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement} disabled={advancing}>
               {measurementDone ? "VALOR CONFIRMADO ✓" : "CONTINUAR"} <span>→</span>
             </button>
           </div>
@@ -538,7 +475,7 @@ function WeightLossQuiz() {
           <>
             <div className="fit-answers">
               {current.answers.map((answer, i) => (
-                <button key={answer.text} className={selected === i ? "selected" : ""} onClick={() => choose(i)}>
+                <button key={answer.text} className={selected === i ? "selected" : ""} onClick={() => choose(i)} disabled={advancing}>
                   <span>{String.fromCharCode(65 + i)}</span>{answer.text}
                 </button>
               ))}
@@ -551,7 +488,7 @@ function WeightLossQuiz() {
           </>
         )}
         <div className="fit-footer">
-          <button className="fit-back" type="button" disabled={step === 0} onClick={goBack}>← Voltar</button>
+          <button className="fit-back" type="button" disabled={step === 0 || advancing} onClick={goBack}>← Voltar</button>
           <small>{isMeasurement ? "Arraste ou digite o valor exato no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
         </div>
       </section>
