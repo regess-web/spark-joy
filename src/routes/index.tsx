@@ -547,7 +547,7 @@ function WeightLossQuiz() {
   }
 
   return (
-    <main className="fit-app fit-quiz">{activityNoticeElement}        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
+    <main className="fit-app fit-quiz">{activityNoticeElement}        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{Math.round(progress)}%</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         {insight && (
