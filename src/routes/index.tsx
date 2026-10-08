@@ -159,6 +159,7 @@ function WeightLossQuiz() {
     let hideTimer: number | null = null;
     const showNotice = () => {
       const item = activityMessages[Math.floor(Math.random() * activityMessages.length)];
+      if (!item) return;
       setActivityNotice(item);
       setActivityNoticeVisible(true);
       if (hideTimer) window.clearTimeout(hideTimer);
@@ -306,6 +307,32 @@ function WeightLossQuiz() {
     if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
     setAdvancing(false);
   }
+
+  const activityNoticeElement = activityNotice ? (
+    <div
+      role="status"
+      style={{
+        position: "fixed", left: 18, bottom: 18, zIndex: 1000,
+        display: "flex", alignItems: "center", gap: 10,
+        width: "min(360px, calc(100vw - 36px))", boxSizing: "border-box",
+        padding: "11px 13px", border: "1px solid rgba(184,107,69,.18)",
+        borderRadius: 16, background: "rgba(255,255,255,.97)",
+        boxShadow: "0 12px 30px rgba(58,42,31,.14)",
+        opacity: activityNoticeVisible ? 1 : 0,
+        transform: activityNoticeVisible ? "translateY(0)" : "translateY(14px)",
+        transition: "opacity .3s ease, transform .3s ease",
+        pointerEvents: "none"
+      }}
+    >
+      <div style={{position:"absolute",top:-8,right:10,padding:"3px 6px",borderRadius:999,background:"#f2e6de",color:"#8f5639",fontSize:7,fontWeight:900,letterSpacing:".7px"}}>PRÉVIA</div>
+      <div style={{width:34,height:34,flex:"0 0 34px",display:"grid",placeItems:"center",borderRadius:"50%",background:"#f3e4da",color:"#9d5f3d",fontWeight:900,fontSize:13}}>{activityNotice.name.charAt(0)}</div>
+      <div style={{display:"flex",flexDirection:"column",gap:2,minWidth:0}}>
+        <strong style={{fontSize:11,color:"#302820"}}>{activityNotice.name}</strong>
+        <span style={{fontSize:9,color:"#71645b",lineHeight:1.25}}>{activityNotice.text}</span>
+      </div>
+      <div style={{marginLeft:"auto",alignSelf:"flex-end",fontSize:7,color:"#a0958d",whiteSpace:"nowrap"}}>agora</div>
+    </div>
+  ) : null;
 
   if (loading) {
     return (
@@ -472,32 +499,6 @@ function WeightLossQuiz() {
       </main>
     );
   }
-
-  const activityNoticeElement = activityNotice ? (
-    <div
-      role="status"
-      style={{
-        position: "fixed", left: 18, bottom: 18, zIndex: 1000,
-        display: "flex", alignItems: "center", gap: 10,
-        width: "min(360px, calc(100vw - 36px))", boxSizing: "border-box",
-        padding: "11px 13px", border: "1px solid rgba(184,107,69,.18)",
-        borderRadius: 16, background: "rgba(255,255,255,.97)",
-        boxShadow: "0 12px 30px rgba(58,42,31,.14)",
-        opacity: activityNoticeVisible ? 1 : 0,
-        transform: activityNoticeVisible ? "translateY(0)" : "translateY(14px)",
-        transition: "opacity .3s ease, transform .3s ease",
-        pointerEvents: "none"
-      }}
-    >
-      <div style={{position:"absolute",top:-8,right:10,padding:"3px 6px",borderRadius:999,background:"#f2e6de",color:"#8f5639",fontSize:7,fontWeight:900,letterSpacing:".7px"}}>PRÉVIA</div>
-      <div style={{width:34,height:34,flex:"0 0 34px",display:"grid",placeItems:"center",borderRadius:"50%",background:"#f3e4da",color:"#9d5f3d",fontWeight:900,fontSize:13}}>{activityNotice.name.charAt(0)}</div>
-      <div style={{display:"flex",flexDirection:"column",gap:2,minWidth:0}}>
-        <strong style={{fontSize:11,color:"#302820"}}>{activityNotice.name}</strong>
-        <span style={{fontSize:9,color:"#71645b",lineHeight:1.25}}>{activityNotice.text}</span>
-      </div>
-      <div style={{marginLeft:"auto",alignSelf:"flex-end",fontSize:7,color:"#a0958d",whiteSpace:"nowrap"}}>agora</div>
-    </div>
-  ) : null;
 
   if (!started) {
     return (
