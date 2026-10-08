@@ -342,16 +342,6 @@ function WeightLossQuiz() {
             <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
             <h1>Você está cansada de <em>começar e parar?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
-            <div className="fit-start-cta">
-              <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
-                trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
-              }}>COMEÇAR MEU QUIZ <span>→</span></button>
-              <div className="fit-rating" aria-label="Avaliação 4.9 de 5 com 9583 avaliações">
-                <strong>4.9</strong><span className="fit-stars" aria-hidden="true">★★★★★</span><span>9583 avaliações</span>
-              </div>
-              <small className="fit-weekly-proof">534 mulheres fizeram essa semana</small>
-            </div>
-            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
             <div className="fit-transformation-showcase">
               <span className="fit-transformation-badge">Evolução • Um passo de cada vez</span>
               <div className="fit-transformation-grid">
@@ -376,6 +366,16 @@ function WeightLossQuiz() {
               </div>
               <div className="fit-transformation-result">Em apenas 2 Semanas</div>
             </div>
+            <div className="fit-start-cta">
+              <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
+                trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
+              }}>COMEÇAR MEU QUIZ <span>→</span></button>
+              <div className="fit-rating" aria-label="Avaliação 4.9 de 5 com 9583 avaliações">
+                <strong>4.9</strong><span className="fit-stars" aria-hidden="true">★★★★★</span><span>9583 avaliações</span>
+              </div>
+              <small className="fit-weekly-proof">534 mulheres fizeram essa semana</small>
+            </div>
+            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
           </div>
         </div>
       </main>
