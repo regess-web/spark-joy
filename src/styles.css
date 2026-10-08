@@ -966,3 +966,12 @@
   .fit-process-number{width:38px;height:38px;flex-basis:38px}
   .fit-result-card .fit-primary,.fit-offer-card .fit-primary{width:100%;min-width:0}
 }
+
+/* Quiz visual cards */
+.fit-question-image{width:100%;max-width:520px;height:190px;margin:0 auto 20px;border-radius:18px;overflow:hidden;background:#f5eee8;border:1px solid var(--fit-line);box-shadow:0 8px 24px rgba(65,45,35,.08)}
+.fit-question-image img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 35%}
+.fit-answers button{transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.fit-answers button:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(65,45,35,.08)}
+.fit-answers button:disabled{cursor:wait;opacity:.72}
+.fit-measurement-confirm:disabled{opacity:.65;cursor:wait}
+@media(max-width:700px){.fit-question-image{height:155px;margin-bottom:16px;border-radius:15px}.fit-question-image img{object-position:center 30%}}
