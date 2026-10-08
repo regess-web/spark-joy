@@ -372,7 +372,7 @@ function WeightLossQuiz() {
       <path className="fit-index-grid-line" d="M20 69 H500" />
       <path className="fit-index-grid-line" d="M20 26 H500" />
       <path className="fit-index-line" d="M20 154 C105 150 120 128 185 125 C250 122 260 94 325 91 C390 88 405 55 500 24" />
-      <circle className="fit-index-point" cx={height > 0 ? Math.max(20, Math.min(500, 20 + (((weight / ((height / 100) ** 2)) - 15) / 35) * 480)) : 20} cy={height > 0 ? Math.max(24, Math.min(154, 154 - ((((weight / ((height / 100) ** 2)) - 15) / 35) * 130))) : 154} r="7" />
+      <circle className="fit-index-point" cx="260" cy={height > 0 ? Math.max(24, Math.min(154, 154 - ((((weight / ((height / 100) ** 2)) - 15) / 35) * 130))) : 154} r="5" />
     </svg>
     <div className="fit-body-index-axis"><span>Menor</span><b>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</b><span>Maior</span></div>
   </div>
