@@ -109,6 +109,10 @@ function WeightLossQuiz() {
   const progress = ((step + (isMeasurement ? (measurementDone ? 1 : 0) : selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
   const selectedAnswer = selected == null ? null : (current.answers[selected] ?? null);
 
+  const dominant = useMemo(() => {
+    return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
+  }, [scores]);
+
   const insight = step >= 3 && step < baseQuestions.length - 2 && step % 4 === 3
     ? {
         label: "ANÁLISE PARCIAL DO SEU PERFIL",
@@ -123,10 +127,6 @@ function WeightLossQuiz() {
         note: "Isso é uma leitura do seu padrão de respostas, não um diagnóstico médico."
       }
     : null;
-
-  const dominant = useMemo(() => {
-    return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
-  }, [scores]);
 
   function calculateScores(nextAnswers: (number | null)[]) {
     const nextScores = { autoestima: 0, rotina: 0, corpo: 0, energia: 0 };
