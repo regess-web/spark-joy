@@ -27,7 +27,7 @@ type QuizQuestion = {
   question: string;
   subtitle: string;
   answers: Answer[];
-  kind?: "choices" | "weight" | "height";
+  kind?: "choices" | "weight" | "height" | "goalWeight";
   min?: number;
   max?: number;
   unit?: string;
@@ -68,6 +68,7 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
 {question:"Como você prefere receber orientação?",subtitle:"Escolha o formato que faria você se sentir mais segura para começar.",image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85",answers:[{text:"Passo a passo bem definido",tag:"rotina",recommendation:"Você tende a aproveitar bem uma sequência estruturada.",followUp:"Seu perfil está quase pronto."},{text:"Explicações simples e diretas",tag:"corpo",recommendation:"Clareza pode facilitar sua execução.",followUp:"Seu perfil está quase pronto."},{text:"Metas e lembretes",tag:"autoestima",recommendation:"Acompanhamento pode reforçar sua constância.",followUp:"Seu perfil está quase pronto."},{text:"Liberdade para adaptar",tag:"energia",recommendation:"Flexibilidade pode manter sua rotina mais confortável.",followUp:"Seu perfil está quase pronto."}]},
 {question:"Qual é o seu peso atual?",subtitle:"Arraste ou digite o valor. Essa informação ajuda a personalizar sua experiência.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"weight",min:30,max:250,unit:"kg"},
 {question:"Qual é a sua altura?",subtitle:"Arraste ou digite o valor exato para finalizar seu perfil.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"height",min:120,max:220,unit:"cm"},
+{question:"Quanto você gostaria de pesar?",subtitle:"Defina uma meta pessoal para deixar sua experiência mais alinhada ao que você busca.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"goalWeight",min:30,max:250,unit:"kg"},
 ];
 
 const resultCopy = {
@@ -92,6 +93,7 @@ function WeightLossQuiz() {
   const [context, setContext] = useState<string>("");
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
+  const [goalWeight, setGoalWeight] = useState(65);
   const [measurementComplete, setMeasurementComplete] = useState<Record<number, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -106,7 +108,7 @@ function WeightLossQuiz() {
 
   const current = baseQuestions[step] ?? baseQuestions[0];
   const selected = answers[step];
-  const isMeasurement = current.kind === "weight" || current.kind === "height";
+  const isMeasurement = current.kind === "weight" || current.kind === "height" || current.kind === "goalWeight";
   const measurementDone = !!measurementComplete[step];
   const progress = ((step + (isMeasurement ? (measurementDone ? 1 : 0) : selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
   const selectedAnswer = selected == null ? null : (current.answers[selected] ?? null);
@@ -190,7 +192,7 @@ function WeightLossQuiz() {
     if (!isMeasurement || advancing) return;
     setMeasurementComplete((prev) => ({ ...prev, [step]: true }));
     setAdvancing(true);
-    trackQuizEvent(current.kind === "weight" ? "QuizWeight" : "QuizHeight", { question_number: step + 1, value: current.kind === "weight" ? weight : height, unit: current.unit || "" });
+    trackQuizEvent(current.kind === "weight" ? "QuizWeight" : current.kind === "height" ? "QuizHeight" : "QuizGoalWeight", { question_number: step + 1, value: current.kind === "weight" ? weight : current.kind === "height" ? height : goalWeight, unit: current.unit || "" });
     if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
     advanceTimer.current = window.setTimeout(() => {
       advanceTimer.current = null;
@@ -215,6 +217,7 @@ function WeightLossQuiz() {
     setContext("");
     setWeight(70);
     setHeight(170);
+    setGoalWeight(65);
     setMeasurementComplete({});
     setLoading(false);
     setLoadingProgress(0);
@@ -458,12 +461,12 @@ function WeightLossQuiz() {
           <div className="fit-measurement">
             <div className="fit-measurement-value">
               <div>
-                <span>{current.kind === "weight" ? "PESO" : "ALTURA"}</span>
-                <strong>{current.kind === "weight" ? weight : height}</strong>
+                <span>{current.kind === "weight" ? "PESO" : current.kind === "height" ? "ALTURA" : "META DE PESO"}</span>
+                <strong>{current.kind === "weight" ? weight : current.kind === "height" ? height : goalWeight}</strong>
                 <small>{current.unit}</small>
               </div>
               <input
-                aria-label={current.kind === "weight" ? "Peso em quilogramas" : "Altura em centímetros"}
+                aria-label={current.kind === "weight" ? "Peso em quilogramas" : current.kind === "height" ? "Altura em centímetros" : "Meta de peso em quilogramas"}
                 type="number"
                 min={current.min}
                 max={current.max}
@@ -473,13 +476,14 @@ function WeightLossQuiz() {
                   const raw = Number(event.target.value);
                   const safe = Number.isFinite(raw) ? Math.max(current.min || 0, Math.min(current.max || 250, raw)) : 0;
                   if (current.kind === "weight") setWeight(safe);
-                  else setHeight(safe);
+                  else if (current.kind === "height") setHeight(safe);
+                  else setGoalWeight(safe);
                 }}
               />
             </div>
             <input
               className="fit-measurement-slider"
-              aria-label={current.kind === "weight" ? "Selecionar peso" : "Selecionar altura"}
+              aria-label={current.kind === "weight" ? "Selecionar peso" : current.kind === "height" ? "Selecionar altura" : "Selecionar meta de peso"}
               type="range"
               min={current.min}
               max={current.max}
@@ -488,10 +492,11 @@ function WeightLossQuiz() {
               onChange={(event) => {
                 const value = Number(event.target.value);
                 if (current.kind === "weight") setWeight(value);
-                else setHeight(value);
+                else if (current.kind === "height") setHeight(value);
+                else setGoalWeight(value);
               }}
             />
-            <div className="fit-measurement-scale"><span>0 {current.unit}</span><span>{current.max} {current.unit}</span></div>
+            <div className="fit-measurement-scale"><span>{current.min} {current.unit}</span><span>{current.max} {current.unit}</span></div>
             <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement} disabled={advancing}>
               {measurementDone ? "VALOR CONFIRMADO ✓" : "CONTINUAR"} <span>→</span>
             </button>
@@ -514,7 +519,7 @@ function WeightLossQuiz() {
         )}
         <div className="fit-footer">
           <button className="fit-back" type="button" disabled={step === 0 || advancing} onClick={goBack}>← Voltar</button>
-          <small>{isMeasurement ? "Arraste ou digite o valor exato no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
+          <small>{isMeasurement ? "Arraste ou digite o valor no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
         </div>
       </section>
     </main>
