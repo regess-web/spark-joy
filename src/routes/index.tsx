@@ -356,10 +356,18 @@ function WeightLossQuiz() {
           <h1>{copy.title}</h1>
           <p className="fit-result-text">{copy.text}</p>
           <div className="fit-body-index-card">
-  <div className="fit-body-index-head"><div><span>ÍNDICE CORPORAL</span><strong>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</strong></div><small>estimativa pelo IMC</small></div>
-  <div className="fit-body-index-track"><span className="fit-bmi-marker" style={{left: Math.min(94, Math.max(6, ((weight / ((height / 100) ** 2) - 15) / 25) * 100)) + "%"}} /></div>
+  <div className="fit-body-index-head"><div><span>ÍNDICE CORPORAL</span><strong>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</strong></div><small>gráfico proporcional ao índice</small></div>
+  <div className="fit-body-index-chart" aria-label="Gráfico proporcional do índice corporal">
+    <div className="fit-body-index-bars">
+      <span className="fit-index-bar bar-low"><i /></span>
+      <span className="fit-index-bar bar-moderate"><i /></span>
+      <span className="fit-index-bar bar-high"><i /></span>
+      <span className="fit-index-bar bar-very-high"><i /></span>
+    </div>
+    <div className="fit-body-index-axis"><span>Menor</span><b>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</b><span>Maior</span></div>
+  </div>
   <div className="fit-body-index-labels"><span>Abaixo</span><span>Ideal</span><span>Acima</span><span>Obesidade</span></div>
-  <p>O índice é uma referência matemática baseada em peso e altura. Para adolescentes, gestantes e situações clínicas, a interpretação correta deve ser feita por profissional de saúde.</p>
+  <p>O gráfico cresce conforme o índice calculado a partir de peso e altura. Ele não estima diretamente o percentual de gordura corporal.</p>
 </div>
 <div className="fit-goal-card"><span>META INICIAL ESTIMADA</span><strong>Perca {Math.max(2, Math.min(6, Math.round(weight * 0.05)))} kg em 4 semanas</strong><small>Uma meta moderada e progressiva é mais adequada do que prometer uma perda rápida.</small></div>
 <div className="fit-special"><strong>Seu próximo passo:</strong><br />começar com uma rotina organizada para os próximos 7 dias, sem precisar montar o treino do zero.</div>
