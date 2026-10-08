@@ -122,11 +122,20 @@ function WeightLossQuiz() {
       if (hideTimer) window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(() => setActivityNoticeVisible(false), 4200);
     };
-    const initialTimer = window.setTimeout(showNotice, 5500);
-    const interval = window.setInterval(showNotice, 6500);
+    let interval: number | null = null;
+    const scheduleNext = () => {
+      interval = window.setTimeout(() => {
+        showNotice();
+        scheduleNext();
+      }, 6500);
+    };
+    const initialTimer = window.setTimeout(() => {
+      showNotice();
+      scheduleNext();
+    }, 5500);
     return () => {
       window.clearTimeout(initialTimer);
-      window.clearInterval(interval);
+      if (interval) window.clearTimeout(interval);
       if (hideTimer) window.clearTimeout(hideTimer);
     };
   }, []);
