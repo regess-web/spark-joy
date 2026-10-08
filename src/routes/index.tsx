@@ -4,9 +4,9 @@ import { useMemo, useRef, useState } from "react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "ViradaFIT | Sua Rotina de Treino" },
+      { title: "Método Leve | Sua Rotina de Treino" },
       { name: "description", content: "Responda ao quiz e encontre uma rotina de treino adequada ao seu momento." },
-      { property: "og:title", content: "ViradaFIT | Sua Rotina de Treino" },
+      { property: "og:title", content: "Método Leve | Sua Rotina de Treino" },
       { property: "og:description", content: "Responda ao quiz e encontre uma rotina de treino adequada ao seu momento." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -243,7 +243,7 @@ function WeightLossQuiz() {
           <>
             <button className="training-menu-overlay" aria-label="Fechar menu" onClick={() => setMenuOpen(false)} />
             <aside className="training-side-menu">
-              <div className="side-menu-head"><strong>ViradaFIT</strong><button type="button" onClick={() => setMenuOpen(false)}>×</button></div>
+              <div className="side-menu-head"><strong>Método Leve</strong><button type="button" onClick={() => setMenuOpen(false)}>×</button></div>
               <button className={`side-menu-item ${activeProduct === "treino" ? "active" : ""}`} onClick={() => goProduct("treino")}><span>🏃</span><div><b>Treino</b><small>Programa completo de 7 dias</small></div></button>
               <button className={`side-menu-item ${activeProduct === "dieta" ? "active" : ""}`} onClick={() => goProduct("dieta")}><span>🥗</span><div><b>Dieta</b><small>Plano alimentar organizado</small></div></button>
               <button className={`side-menu-item ${activeProduct === "contador" ? "active" : ""}`} onClick={() => goProduct("contador")}><span>◉</span><div><b>Dieta + Contador</b><small>Plano + contador de calorias</small></div></button>
@@ -422,13 +422,13 @@ function WeightLossQuiz() {
   }
 
   return (
-    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">ViradaFIT</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
+    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
-        {current.image && <div className="fit-question-image"><img src={current.image} alt="" /></div>}
         <h2>{current.question}</h2>
         <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
+        {current.image && <div className="fit-question-image"><img src={current.image} alt="" /></div>}
         {isMeasurement ? (
           <div className="fit-measurement">
             <div className="fit-measurement-value">
