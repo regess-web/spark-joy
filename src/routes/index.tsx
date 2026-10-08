@@ -35,108 +35,88 @@ type QuizQuestion = {
 
 const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
   {
-    question: "Você se sente cansada de chegar aos eventos e não se sentir do jeito que gostaria?",
-    subtitle: "Não existe resposta certa. Escolha o que mais combina com você hoje.",
+    question: "O que você mais gostaria de mudar no seu corpo hoje?",
+    subtitle: "Escolha o que mais representa o resultado que você busca.",
     answers: [
-      { text: "Sim, isso mexe bastante comigo", tag: "autoestima", recommendation: "Vamos priorizar uma rotina que ajude você a se sentir mais confortável e confiante.", followUp: "O que faria você se sentir mais confortável nesses momentos?" },
-      { text: "Às vezes, principalmente em fotos", tag: "autoestima", recommendation: "Vamos pensar em passos pequenos e consistentes, sem transformar sua rotina em uma obrigação.", followUp: "Em que situação você gostaria de perceber mais confiança?" },
-      { text: "Quero começar a mudar isso", tag: "corpo", recommendation: "Ótimo ponto de partida: vamos buscar exercícios simples, progressivos e fáceis de acompanhar.", followUp: "Qual tipo de mudança você gostaria de começar a perceber primeiro?" },
-      { text: "Não penso muito nisso", tag: "rotina", recommendation: "Então vamos focar no que realmente importa: uma rotina ativa que caiba no seu dia.", followUp: "O que faria uma rotina de exercícios valer a pena para você?" }
+      { text: "Perder gordura e diminuir medidas", tag: "corpo", recommendation: "Vamos priorizar uma rotina prática e progressiva.", followUp: "Vamos entender o que mais atrapalha você a manter esse objetivo." },
+      { text: "Definir e tonificar meu corpo", tag: "corpo", recommendation: "Vamos combinar movimentos de força com uma rotina sustentável.", followUp: "Agora vamos descobrir quanto tempo você realmente tem." },
+      { text: "Me sentir mais confiante comigo mesma", tag: "autoestima", recommendation: "Vamos focar em pequenas vitórias que ajudem você a construir constância.", followUp: "Vamos entender o que costuma fazer você desistir." },
+      { text: "Ter mais disposição e condicionamento", tag: "energia", recommendation: "Vamos buscar uma rotina que coloque você em movimento sem complicar.", followUp: "Agora vamos descobrir qual formato seria mais fácil de manter." }
     ]
   },
   {
-    question: "Quando você se olha no espelho, como gostaria de se sentir?",
-    subtitle: "Sua resposta anterior ajuda a direcionar esta etapa.",
+    question: "Qual dessas situações mais parece com você?",
+    subtitle: "Não é sobre fazer perfeito. É sobre encontrar algo que você consiga manter.",
     answers: [
-      { text: "Mais confiante comigo mesma", tag: "autoestima", recommendation: "Seu plano deve ser simples o bastante para gerar constância e não cobrança.", followUp: "O que costuma ajudar você a manter algo novo por mais tempo?" },
-      { text: "Mais confortável com minhas roupas", tag: "corpo", recommendation: "Vamos priorizar movimentos de corpo inteiro e uma evolução gradual.", followUp: "Você prefere exercícios mais tranquilos ou um ritmo um pouco mais ativo?" },
-      { text: "Mais leve e disposta", tag: "energia", recommendation: "Vamos combinar força leve com movimentos que façam você se sentir ativa.", followUp: "Você gostaria de terminar o treino se sentindo mais energizada ou mais desafiada?" },
-      { text: "Mais satisfeita com minha rotina", tag: "rotina", recommendation: "A melhor estratégia para você é uma rotina realista, curta e repetível.", followUp: "Qual parte do dia costuma ser mais fácil para você reservar alguns minutos?" }
+      { text: "Começo motivada e depois paro", tag: "rotina", recommendation: "Seu plano precisa reduzir a fricção e criar pequenas vitórias.", followUp: "Vamos descobrir qual obstáculo pesa mais na sua rotina." },
+      { text: "Não tenho tempo para treinos longos", tag: "rotina", recommendation: "Sessões curtas e objetivas podem ser mais realistas para você.", followUp: "Vamos ajustar o tempo disponível." },
+      { text: "Não sei exatamente o que fazer", tag: "corpo", recommendation: "Uma sequência pronta pode eliminar a dúvida sobre exercícios, séries e repetições.", followUp: "Vamos descobrir como você prefere treinar." },
+      { text: "Até começo, mas não consigo manter uma rotina", tag: "rotina", recommendation: "A prioridade será tornar o programa simples de repetir.", followUp: "Vamos identificar o formato mais fácil para você." }
     ]
   },
   {
-    question: "O que mais dificulta cuidar do seu corpo atualmente?",
-    subtitle: "Agora vamos adaptar o plano ao obstáculo que mais aparece na sua rotina.",
+    question: "O que mais dificulta sua evolução atualmente?",
+    subtitle: "Sua resposta ajuda a montar uma recomendação mais coerente com sua realidade.",
     answers: [
-      { text: "Falta de tempo", tag: "rotina", recommendation: "Vamos priorizar sessões enxutas, com poucos exercícios e descansos bem definidos.", followUp: "Se a sessão fosse curta, você preferiria 10, 15 ou 20 minutos?" },
-      { text: "Falta de constância", tag: "rotina", recommendation: "Vamos reduzir a complexidade: quanto mais simples o treino, mais fácil acompanhar a sequência.", followUp: "Você prefere repetir alguns movimentos até pegar confiança ou variar bastante?" },
-      { text: "Não sei quais exercícios fazer", tag: "corpo", recommendation: "Vamos usar movimentos básicos com instruções claras e demonstrações no próprio site.", followUp: "Você gostaria de aprender primeiro exercícios para pernas, braços ou corpo inteiro?" },
-      { text: "Começo e acabo desistindo", tag: "autoestima", recommendation: "Vamos trabalhar com metas pequenas para que terminar uma sessão já seja uma vitória.", followUp: "O que faria você sentir que conseguiu cumprir o treino mesmo em um dia corrido?" }
+      { text: "Falta de tempo", tag: "rotina", recommendation: "Vamos priorizar treinos enxutos.", followUp: "Quanto tempo você conseguiria reservar?" },
+      { text: "Falta de constância", tag: "rotina", recommendation: "Vamos diminuir a complexidade e trabalhar com uma sequência clara.", followUp: "Qual duração parece mais realista?" },
+      { text: "Não saber qual treino fazer", tag: "corpo", recommendation: "Vamos organizar exercícios, séries, repetições e descanso.", followUp: "Agora vamos definir o ambiente." },
+      { text: "Desânimo depois de algumas tentativas", tag: "autoestima", recommendation: "Vamos trabalhar com metas pequenas e progresso visível.", followUp: "Vamos descobrir o que ajudaria você a continuar." }
     ]
   },
   {
-    question: "Qual formato combina mais com a sua rotina?",
-    subtitle: "Escolha pensando no que você realmente conseguiria repetir durante a semana.",
+    question: "Quanto tempo você conseguiria reservar por dia?",
+    subtitle: "Escolha o tempo que você realmente conseguiria repetir, não o ideal.",
     answers: [
-      { text: "Treinos curtos e objetivos", tag: "rotina", recommendation: "Seu plano pode usar blocos rápidos, sem exigir uma longa sessão.", followUp: "Você prefere uma sessão única curta ou dois blocos pequenos no dia?" },
-      { text: "Treinos moderados e completos", tag: "corpo", recommendation: "Vamos aproveitar seu tempo para trabalhar vários grupos musculares em uma mesma sessão.", followUp: "Você se sente confortável treinando por cerca de 20 a 30 minutos?" },
-      { text: "Movimentos leves ao longo do dia", tag: "energia", recommendation: "Seu plano pode distribuir movimento em pequenas doses para deixar a rotina mais ativa.", followUp: "Você teria facilidade para fazer pequenos blocos de movimento durante o dia?" },
-      { text: "Uma rotina pronta para eu só seguir", tag: "rotina", recommendation: "Você não precisa decidir o treino todos os dias: a sequência pronta vai diminuir essa fricção.", followUp: "Você prefere receber um treino diferente a cada dia ou repetir uma base simples?" }
+      { text: "Até 15 minutos", tag: "rotina", recommendation: "Uma rotina curta pode reduzir a barreira para começar.", followUp: "Vamos escolher o melhor formato para esse tempo." },
+      { text: "15 a 30 minutos", tag: "corpo", recommendation: "Esse intervalo permite uma rotina equilibrada sem exigir horas do seu dia.", followUp: "Vamos descobrir onde você prefere treinar." },
+      { text: "30 a 45 minutos", tag: "energia", recommendation: "Com mais tempo, podemos combinar diferentes estímulos.", followUp: "Vamos ajustar o ambiente da sua rotina." },
+      { text: "Depende do dia", tag: "rotina", recommendation: "Flexibilidade será importante para não perder a sequência quando a rotina mudar.", followUp: "Vamos encontrar uma estrutura que aceite dias corridos." }
     ]
   },
   {
-    question: "Que tipo de exercício você teria mais vontade de fazer?",
-    subtitle: "Não precisa escolher o exercício perfeito; escolha o estilo que parece mais confortável.",
+    question: "Onde você teria mais facilidade para treinar?",
+    subtitle: "Pense no lugar em que você realmente conseguiria manter o programa.",
     answers: [
-      { text: "Pernas e glúteos", tag: "corpo", recommendation: "Podemos dar mais atenção a movimentos de pernas e glúteos, mantendo o treino equilibrado.", followUp: "Você prefere exercícios em pé ou no chão?" },
-      { text: "Braços e parte superior", tag: "corpo", recommendation: "Vamos incluir movimentos simples para a parte superior sem depender de equipamentos.", followUp: "Você prefere usar uma parede/superfície de apoio ou fazer tudo sem apoio?" },
-      { text: "Corpo inteiro", tag: "energia", recommendation: "Uma rotina de corpo inteiro pode ser prática quando você quer aproveitar poucos minutos.", followUp: "Você gosta mais de movimentos lentos e controlados ou de um ritmo contínuo?" },
-      { text: "Algo bem simples para começar", tag: "rotina", recommendation: "Vamos começar pelo básico e deixar a progressão acontecer aos poucos.", followUp: "Você quer começar com movimentos muito fáceis ou com um pequeno desafio?" }
+      { text: "Em casa, sem equipamentos", tag: "rotina", recommendation: "Vamos priorizar exercícios simples e acessíveis.", followUp: "Agora vamos entender o que faria você continuar." },
+      { text: "Na academia", tag: "corpo", recommendation: "Podemos aproveitar equipamentos e organizar uma rotina mais completa.", followUp: "Vamos entender sua principal motivação." },
+      { text: "Em casa e na academia", tag: "energia", recommendation: "Uma rotina flexível pode funcionar melhor quando seu ambiente varia.", followUp: "Vamos definir seu principal motivo para começar." },
+      { text: "Ainda não sei", tag: "autoestima", recommendation: "Vamos começar pelo caminho mais simples e guiado.", followUp: "Agora pense no que você quer sentir ao começar." }
     ]
   },
   {
-    question: "Como você gostaria que o treino se encaixasse no seu dia?",
-    subtitle: "Estamos chegando à parte mais prática: adaptar o programa ao seu tempo e energia.",
+    question: "O que você gostaria de sentir quando perceber sua evolução?",
+    subtitle: "Essa resposta ajuda a identificar o que realmente importa para você.",
     answers: [
-      { text: "Antes de começar o dia", tag: "rotina", recommendation: "Uma sessão curta no começo do dia pode funcionar como um compromisso rápido consigo mesma.", followUp: "Quanto tempo você normalmente consegue reservar de manhã?" },
-      { text: "Depois da escola ou trabalho", tag: "rotina", recommendation: "Vamos evitar uma sessão complicada para não aumentar o cansaço do fim do dia.", followUp: "Nesse horário você teria mais ou menos 15, 30 ou 45 minutos?" },
-      { text: "À noite", tag: "energia", recommendation: "Podemos priorizar uma sessão controlada, especialmente se você estiver cansada no fim do dia.", followUp: "Você prefere uma sessão relaxada ou ainda quer sentir que treinou?" },
-      { text: "Quando surgir um espaço", tag: "rotina", recommendation: "Flexibilidade será importante: o treino precisa funcionar mesmo quando o horário mudar.", followUp: "Se aparecer uma janela inesperada, qual duração seria realista?" }
+      { text: "Mais confiança nas minhas roupas", tag: "autoestima", recommendation: "Vamos conectar pequenas ações a uma evolução que você consiga acompanhar.", followUp: "Vamos descobrir o que ajudaria você a manter o ritmo." },
+      { text: "Mais satisfeita quando me olho no espelho", tag: "autoestima", recommendation: "A constância será mais importante do que tentar fazer tudo de uma vez.", followUp: "Vamos ajustar o programa à sua realidade." },
+      { text: "Mais disposta no dia a dia", tag: "energia", recommendation: "Vamos priorizar uma rotina progressiva e sustentável.", followUp: "Vamos definir o mínimo que você consegue manter." },
+      { text: "Orgulhosa por finalmente conseguir manter uma rotina", tag: "rotina", recommendation: "Seu plano deve ser claro, simples e fácil de acompanhar.", followUp: "Estamos chegando ao seu perfil." }
     ]
   },
   {
-    question: "Quanto tempo você conseguiria reservar para cuidar de você?",
-    subtitle: "Escolha o tempo que parece mais realista para a sua rotina atual.",
+    question: "O que faria você ter mais chances de completar os próximos 7 dias?",
+    subtitle: "Escolha o que mais ajudaria você a não depender apenas da motivação.",
     answers: [
-      { text: "Até 15 minutos", tag: "rotina", recommendation: "Vamos priorizar uma rotina curta e objetiva, para facilitar a constância.", followUp: "Você prefere fazer esses minutos de uma vez ou dividir em pequenos blocos?" },
-      { text: "De 15 a 30 minutos", tag: "corpo", recommendation: "Esse tempo permite uma sequência equilibrada, sem deixar o treino pesado demais.", followUp: "Você prefere focar mais em força ou em movimentos para o corpo inteiro?" },
-      { text: "De 30 a 45 minutos", tag: "energia", recommendation: "Com esse tempo, dá para combinar diferentes movimentos e construir uma sessão mais completa.", followUp: "Você gostaria de um treino mais intenso ou moderado?" },
-      { text: "Depende do dia", tag: "rotina", recommendation: "Flexibilidade será importante para você, com opções que se adaptem aos dias mais corridos.", followUp: "Nos dias corridos, qual seria o mínimo de tempo que você conseguiria manter?" }
+      { text: "Saber exatamente o que fazer em cada dia", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e facilita começar.", followUp: "Vamos finalizar seu perfil." },
+      { text: "Treinos curtos e objetivos", tag: "rotina", recommendation: "Quanto menor a barreira para começar, mais fácil manter a sequência.", followUp: "Vamos finalizar seu perfil." },
+      { text: "Exercícios explicados de forma simples", tag: "corpo", recommendation: "Instruções claras deixam a experiência mais guiada.", followUp: "Vamos finalizar seu perfil." },
+      { text: "Acompanhar cada treino concluído", tag: "autoestima", recommendation: "Marcar pequenas vitórias pode ajudar a transformar intenção em hábito.", followUp: "Vamos finalizar seu perfil." }
     ]
   },
   {
-    question: "Onde você prefere fazer seus treinos?",
-    subtitle: "Escolha o ambiente em que você realmente conseguiria manter uma rotina.",
+    question: "Se você continuar adiando por mais alguns meses, como acha que vai se sentir?",
+    subtitle: "Não existe resposta certa. Escolha a que mais representa o que você sente hoje.",
     answers: [
-      { text: "Em casa, sem equipamentos", tag: "rotina", recommendation: "Vamos priorizar exercícios simples que você consiga começar sem depender de academia.", followUp: "Você gostaria de receber tudo pronto para apenas abrir e seguir?" },
-      { text: "Na academia", tag: "corpo", recommendation: "Podemos considerar uma rotina mais completa e organizada para acompanhar sua evolução.", followUp: "Você prefere uma rotina já estruturada para não perder tempo escolhendo exercícios?" },
-      { text: "Um pouco de cada", tag: "energia", recommendation: "Flexibilidade pode ser a melhor estratégia para você manter o movimento mesmo quando a rotina muda.", followUp: "Você gostaria de ter opções diferentes conforme o tempo disponível?" },
-      { text: "Ainda não sei", tag: "autoestima", recommendation: "Tudo bem começar pelo mais simples e descobrir aos poucos o que funciona para você.", followUp: "Você prefere começar com uma rotina bem guiada?" }
-    ]
-  },
-  {
-    question: "O que você mais gostaria de conquistar nos próximos 7 dias?",
-    subtitle: "Pense em uma mudança que faria você sentir que valeu a pena começar.",
-    answers: [
-      { text: "Sentir que finalmente comecei", tag: "autoestima", recommendation: "Seu primeiro objetivo pode ser criar confiança através de pequenas vitórias.", followUp: "Ter uma sequência pronta ajudaria você a começar?" },
-      { text: "Criar uma rotina", tag: "rotina", recommendation: "Vamos valorizar consistência e praticidade para você conseguir repetir o plano.", followUp: "Você gostaria de saber exatamente o que fazer em cada dia?" },
-      { text: "Me sentir mais ativa", tag: "energia", recommendation: "Vamos priorizar movimentos simples que ajudem você a colocar o corpo em ação.", followUp: "Você prefere uma rotina curta que seja fácil de repetir?" },
-      { text: "Cuidar mais do meu corpo", tag: "corpo", recommendation: "Vamos organizar uma sequência equilibrada para você saber como começar.", followUp: "Você gostaria de ter séries e repetições já definidas?" }
-    ]
-  },
-  {
-    question: "O que mais ajudaria você a manter o programa por 7 dias?",
-    subtitle: "A última etapa ajuda a entender o que torna uma rotina mais fácil de seguir.",
-    answers: [
-      { text: "Ter um treino pronto", tag: "rotina", recommendation: "Uma sequência pronta reduz decisões e deixa mais simples começar.", followUp: "Você prefere receber tudo organizado por dia?" },
-      { text: "Ver minha evolução", tag: "autoestima", recommendation: "Acompanhar pequenas conquistas pode ajudar a manter a motivação.", followUp: "Você gostaria de marcar cada treino concluído?" },
-      { text: "Exercícios fáceis de entender", tag: "corpo", recommendation: "Instruções claras ajudam você a saber exatamente o que fazer em cada etapa.", followUp: "Você prefere explicações rápidas ou mais detalhadas?" },
-      { text: "Sentir mais disposição", tag: "energia", recommendation: "Vamos priorizar movimentos que façam a rotina parecer ativa e sustentável.", followUp: "Você prefere começar devagar e aumentar o ritmo aos poucos?" }
+      { text: "Frustrada por continuar no mesmo lugar", tag: "autoestima", recommendation: "Seu primeiro passo deve ser pequeno o suficiente para acontecer agora.", followUp: "Seu perfil está quase pronto." },
+      { text: "Incomodada por começar e parar novamente", tag: "rotina", recommendation: "Sua prioridade deve ser consistência, não perfeição.", followUp: "Seu perfil está quase pronto." },
+      { text: "Com vontade de finalmente mudar", tag: "corpo", recommendation: "Vamos transformar essa intenção em uma sequência simples para começar.", followUp: "Seu perfil está quase pronto." },
+      { text: "Quero me sentir mais ativa e disposta", tag: "energia", recommendation: "Uma rotina progressiva pode ajudar você a colocar movimento no dia.", followUp: "Seu perfil está quase pronto." }
     ]
   },
   {
     question: "Qual é o seu peso atual?",
-    subtitle: "Arraste para escolher seu peso ou digite o valor exato no quadrinho.",
+    subtitle: "Arraste para escolher seu peso ou digite o valor exato.",
     answers: [],
     kind: "weight",
     min: 0,
@@ -145,7 +125,7 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
   },
   {
     question: "Qual é a sua altura?",
-    subtitle: "Arraste para escolher sua altura ou digite o valor exato no quadrinho.",
+    subtitle: "Arraste para escolher sua altura ou digite o valor exato.",
     answers: [],
     kind: "height",
     min: 0,
@@ -155,10 +135,10 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
 ];
 
 const resultCopy = {
-  autoestima: { title: "Seu plano deve começar leve.", text: "Pelas suas respostas, você tende a se beneficiar de uma experiência simples, com pequenas vitórias e uma rotina que ajude você a se sentir mais confortável consigo mesma." },
-  rotina: { title: "Seu plano precisa caber na vida real.", text: "Suas respostas mostram que praticidade e constância são importantes. Por isso, a recomendação é uma sequência objetiva, organizada e fácil de acompanhar." },
-  corpo: { title: "Seu plano pode ser mais prático e guiado.", text: "Pelas suas respostas, você quer entender o que fazer e acompanhar cada exercício. A recomendação é uma rotina com demonstrações, séries, repetições e descanso." },
-  energia: { title: "Seu plano deve colocar você em movimento.", text: "Suas respostas mostram interesse em ficar mais ativa e disposta. A recomendação é combinar movimentos simples com uma rotina progressiva e sustentável." }
+  autoestima: { title: "Seu perfil pede uma rotina que você consiga manter.", text: "Pelas suas respostas, confiança e constância parecem andar juntas. O melhor ponto de partida é uma sequência simples, com pequenas vitórias e progresso que você consiga acompanhar." },
+  rotina: { title: "Seu perfil pede praticidade e constância.", text: "Suas respostas mostram que o maior desafio é encaixar o cuidado com o corpo na vida real. Por isso, a recomendação é uma rotina objetiva, organizada e fácil de repetir." },
+  corpo: { title: "Seu perfil pede uma rotina clara e guiada.", text: "Você quer saber exatamente o que fazer para evoluir. A recomendação é uma sequência organizada com exercícios, séries, repetições e descanso definidos." },
+  energia: { title: "Seu perfil pede mais movimento no dia a dia.", text: "Suas respostas mostram que disposição e condicionamento são importantes para você. A recomendação é uma rotina progressiva, prática e sustentável." }
 };
 function WeightLossQuiz() {
   const [started, setStarted] = useState(false);
@@ -384,18 +364,18 @@ function WeightLossQuiz() {
   if (offer) {
     return (
       <main className="fit-app fit-offer">        <div className="fit-offer-card">
-          <div className="fit-kicker">SEU PRÓXIMO PASSO</div>
-          <h1>Comece a cuidar de você<br /><em>do seu jeito.</em></h1>
-          <p>Por apenas <strong>R$ 27,99</strong>, tenha acesso a um guia de exercícios práticos para ajudar você a construir uma rotina ativa e chegar ao verão se sentindo mais confiante.</p>
+          <div className="fit-kicker">SEU PLANO ESTÁ PRONTO</div>
+          <h1>Uma rotina feita para você<br /><em>começar de verdade.</em></h1>
+          <p>Com base no seu perfil, você pode liberar um programa de 7 dias com exercícios organizados para não precisar decidir o que fazer a cada dia.</p>
           <div className="fit-price"><s>R$ 49,90</s><strong>R$ 27,99</strong><span>acesso ao guia</span></div>
           <div className="fit-benefits">
-            <span>✓ Exercícios organizados por objetivo</span><span>✓ Rotinas simples para começar</span><span>✓ Guia para acompanhar sua evolução</span><span>✓ Acesso imediato ao material</span>
+            <span>✓ 7 dias organizados passo a passo</span><span>✓ 26+ exercícios para variar a rotina</span><span>✓ Séries, repetições e descansos definidos</span><span>✓ Acompanhamento do que você concluiu</span>
           </div>
           <button
             className="fit-primary"
             type="button"
             onClick={() => { window.location.href = "https://pay.cakto.com.br/34rfhf7_1160901"; }}
-          >VER MEU TREINO <span>→</span></button>
+          >LIBERAR MEU PLANO <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
         </div>
       </main>
@@ -408,11 +388,11 @@ function WeightLossQuiz() {
       <main className="fit-app fit-result">        <div className="fit-result-card">
           <div className="fit-kicker">SEU RESULTADO</div>
           <div className="fit-result-icon">✓</div>
-          <p className="fit-overline">PELO QUE VOCÊ RESPONDEU...</p>
+          <p className="fit-overline">SEU PERFIL FOI IDENTIFICADO</p>
           <h1>{copy.title}</h1>
           <p className="fit-result-text">{copy.text}</p>
-          <div className="fit-special">Ano novo, Nova vida</div>
-          <button className="fit-primary" onClick={() => setOffer(true)}>CONTINUAR <span>→</span></button>
+          <div className="fit-special"><strong>Seu próximo passo:</strong><br />começar com uma rotina organizada para os próximos 7 dias, sem precisar montar o treino do zero.</div>
+          <button className="fit-primary" onClick={() => setOffer(true)}>VER MEU PLANO <span>→</span></button>
           <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
         </div>
       </main>
@@ -423,13 +403,13 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">        <div className="fit-start-card">
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
-            <h1>Você está cansada de ir aos eventos e não se sentir <em>do jeito que gostaria?</em></h1>
+            <div className="fit-kicker">SEU MOMENTO • 10 PERGUNTAS</div>
+            <h1>Você está cansada de <em>começar e parar?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
               }}>COMEÇAR MEU QUIZ <span>→</span></button>
-            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de treino</span></div>
+            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
             <div className="fit-transformation-showcase">
               <span className="fit-transformation-badge">Evolução • Um passo de cada vez</span>
               <div className="fit-transformation-grid">
@@ -452,7 +432,7 @@ function WeightLossQuiz() {
                   <span className="fit-transformation-label">Depois</span>
                 </div>
               </div>
-              <div className="fit-transformation-result">Resultado em apenas 2 semanas</div>
+              <div className="fit-transformation-result">Uma rotina para começar e continuar</div>
             </div>
             <div className="fit-conversion">
               <div className="fit-conversion-block">
@@ -485,18 +465,17 @@ function WeightLossQuiz() {
                 <details><summary>Quanto tempo leva o quiz?</summary><p>São 12 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
                 <details><summary>Posso voltar uma pergunta?</summary><p>Sim. Use o botão “Voltar” para revisar ou alterar uma resposta.</p></details>
               </div>
-              <section className="fit-people-showcase" aria-label="Perfis de exemplo">
+              <section className="fit-people-showcase" aria-label="Como funciona">
                 <div className="fit-people-heading">
-                  <span>INSPIRAÇÃO</span>
-                  <h2>Conheça alguns perfis</h2>
-                  <p>Exemplos de pessoas que seguiram uma rotina como esta.</p>
+                  <span>COMO FUNCIONA</span>
+                  <h2>Feito para facilitar o começo</h2>
+                  <p>Você responde, recebe uma recomendação de rotina e decide se quer liberar o programa completo.</p>
                 </div>
                 <div className="fit-people-grid">
-                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana" loading="lazy" /><div><strong>Ana</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
-                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Pedro" loading="lazy" /><div><strong>Pedro</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
-                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Juliana" loading="lazy" /><div><strong>Juliana</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
-                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Gabriel" loading="lazy" /><div><strong>Gabriel</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
-                  <div className="fit-person-card"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Beatriz" loading="lazy" /><div><strong>Beatriz</strong><span className="fit-stars" aria-label="5 estrelas">★★★★★</span></div></div>
+                  <div className="fit-person-card"><div className="fit-process-number">01</div><div><strong>Você responde</strong><span className="fit-process-text">Algumas perguntas rápidas sobre seu objetivo e sua rotina.</span></div></div>
+                  <div className="fit-person-card"><div className="fit-process-number">02</div><div><strong>Seu perfil é analisado</strong><span className="fit-process-text">Suas respostas direcionam a recomendação.</span></div></div>
+                  <div className="fit-person-card"><div className="fit-process-number">03</div><div><strong>Você vê seu resultado</strong><span className="fit-process-text">Entenda qual tipo de rotina faz mais sentido para você.</span></div></div>
+                  <div className="fit-person-card"><div className="fit-process-number">04</div><div><strong>Libere o programa</strong><span className="fit-process-text">Acesse os 7 dias organizados para começar.</span></div></div>
                 </div>
               </section>
             </div>
