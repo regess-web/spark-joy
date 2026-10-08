@@ -64,6 +64,8 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
 {text:"Começo mesmo sem saber tudo",tag:"energia",recommendation:"Você tende a aprender enquanto faz.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Planejo antes de começar",tag:"rotina",recommendation:"Preparação e clareza podem aumentar sua segurança.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Procuro alguém ou algo para me orientar",tag:"corpo",recommendation:"Ter direção pode facilitar sua execução.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Adio até sentir que estou pronta",tag:"autoestima",recommendation:"Começar pequeno pode diminuir a pressão de fazer tudo perfeito.",followUp:"Agora vamos identificar seu estilo de progresso."}]},
 {question:"Qual destas descrições combina mais com seu jeito de buscar resultados?",subtitle:"Escolha a que parece mais natural para você.",image:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=85",answers:[
 {text:"Gosto de progresso rápido e visível",tag:"corpo",recommendation:"Metas de curto prazo podem ajudar a manter seu envolvimento.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Prefiro construir um hábito aos poucos",tag:"rotina",recommendation:"Consistência gradual pode combinar melhor com você.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Preciso sentir que estou fazendo algo por mim",tag:"autoestima",recommendation:"Conectar a rotina com autocuidado pode aumentar seu comprometimento.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Quero perceber mais energia no cotidiano",tag:"energia",recommendation:"Uma rotina progressiva pode conversar com seu objetivo.",followUp:"Última parte: vamos fechar seu perfil."}]},
+{question:"O que costuma fazer você desistir de uma meta?",subtitle:"Isso ajuda a entender qual ambiente de rotina combina mais com você.",image:"https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=900&q=85",answers:[{text:"Fico sem tempo",tag:"rotina",recommendation:"Seu plano precisa ser flexível e objetivo.",followUp:"Estamos entendendo como você funciona sob pressão."},{text:"Não vejo resultado logo",tag:"corpo",recommendation:"Vamos trabalhar com marcos de progresso realistas.",followUp:"Estamos entendendo como você funciona sob pressão."},{text:"Perco a motivação",tag:"autoestima",recommendation:"Pequenas metas podem ajudar a manter o envolvimento.",followUp:"Estamos entendendo como você funciona sob pressão."},{text:"A rotina fica cansativa",tag:"energia",recommendation:"Alternar estímulos pode tornar o processo mais agradável.",followUp:"Estamos entendendo como você funciona sob pressão."}]},
+{question:"Como você prefere receber orientação?",subtitle:"Escolha o formato que faria você se sentir mais segura para começar.",image:"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85",answers:[{text:"Passo a passo bem definido",tag:"rotina",recommendation:"Você tende a aproveitar bem uma sequência estruturada.",followUp:"Seu perfil está quase pronto."},{text:"Explicações simples e diretas",tag:"corpo",recommendation:"Clareza pode facilitar sua execução.",followUp:"Seu perfil está quase pronto."},{text:"Metas e lembretes",tag:"autoestima",recommendation:"Acompanhamento pode reforçar sua constância.",followUp:"Seu perfil está quase pronto."},{text:"Liberdade para adaptar",tag:"energia",recommendation:"Flexibilidade pode manter sua rotina mais confortável.",followUp:"Seu perfil está quase pronto."}]},
 {question:"Qual é o seu peso atual?",subtitle:"Arraste ou digite o valor. Essa informação ajuda a personalizar sua experiência.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"weight",min:30,max:250,unit:"kg"},
 {question:"Qual é a sua altura?",subtitle:"Arraste ou digite o valor exato para finalizar seu perfil.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"height",min:120,max:220,unit:"cm"},
 ];
@@ -353,7 +355,14 @@ function WeightLossQuiz() {
           <p className="fit-overline">SEU PERFIL FOI IDENTIFICADO</p>
           <h1>{copy.title}</h1>
           <p className="fit-result-text">{copy.text}</p>
-          <div className="fit-special"><strong>Seu próximo passo:</strong><br />começar com uma rotina organizada para os próximos 7 dias, sem precisar montar o treino do zero.</div>
+          <div className="fit-body-index-card">
+  <div className="fit-body-index-head"><div><span>ÍNDICE CORPORAL</span><strong>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</strong></div><small>estimativa pelo IMC</small></div>
+  <div className="fit-body-index-track"><span className="fit-bmi-marker" style={{left: Math.min(94, Math.max(6, ((weight / ((height / 100) ** 2) - 15) / 25) * 100)) + "%"}} /></div>
+  <div className="fit-body-index-labels"><span>Abaixo</span><span>Ideal</span><span>Acima</span><span>Obesidade</span></div>
+  <p>O índice é uma referência matemática baseada em peso e altura. Para adolescentes, gestantes e situações clínicas, a interpretação correta deve ser feita por profissional de saúde.</p>
+</div>
+<div className="fit-goal-card"><span>META INICIAL ESTIMADA</span><strong>Perca {Math.max(2, Math.min(6, Math.round(weight * 0.05)))} kg em 4 semanas</strong><small>Uma meta moderada e progressiva é mais adequada do que prometer uma perda rápida.</small></div>
+<div className="fit-special"><strong>Seu próximo passo:</strong><br />começar com uma rotina organizada para os próximos 7 dias, sem precisar montar o treino do zero.</div>
           <button className="fit-primary" onClick={() => setOffer(true)}>VER MEU PLANO <span>→</span></button>
           <button className="fit-secondary" onClick={restart}>Refazer quiz</button>
         </div>
@@ -365,7 +374,7 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">        <div className="fit-start-card">
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • 12 PERGUNTAS</div>
+            <div className="fit-kicker">SEU MOMENTO • {baseQuestions.length} PERGUNTAS</div>
             <h1>Você está cansada de <em>começar e parar?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <div className="fit-transformation-showcase">
