@@ -356,18 +356,28 @@ function WeightLossQuiz() {
           <h1>{copy.title}</h1>
           <p className="fit-result-text">{copy.text}</p>
           <div className="fit-body-index-card">
-  <div className="fit-body-index-head"><div><span>ÍNDICE CORPORAL</span><strong>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</strong></div><small>gráfico proporcional ao índice</small></div>
-  <div className="fit-body-index-chart" aria-label="Gráfico proporcional do índice corporal">
-    <div className="fit-body-index-bars">
-      <span className="fit-index-bar bar-low"><i /></span>
-      <span className="fit-index-bar bar-moderate"><i /></span>
-      <span className="fit-index-bar bar-high"><i /></span>
-      <span className="fit-index-bar bar-very-high"><i /></span>
-    </div>
+  <div className="fit-body-index-head"><div><span>ÍNDICE CORPORAL</span><strong>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</strong></div><small>linha proporcional ao índice</small></div>
+  <div className="fit-body-index-chart" aria-label="Gráfico de linha contínua do índice corporal">
+    <svg className="fit-body-index-line-chart" viewBox="0 0 520 190" role="img" aria-hidden="true">
+      <defs>
+        <linearGradient id="fitIndexLine" x1="0" x2="1" y1="0" y2="0">
+          <stop offset="0%" stopColor="#72b84b" />
+          <stop offset="45%" stopColor="#9acb55" />
+          <stop offset="70%" stopColor="#e5a62f" />
+          <stop offset="100%" stopColor="#d85a45" />
+        </linearGradient>
+      </defs>
+      <path className="fit-index-grid-line" d="M20 155 H500" />
+      <path className="fit-index-grid-line" d="M20 112 H500" />
+      <path className="fit-index-grid-line" d="M20 69 H500" />
+      <path className="fit-index-grid-line" d="M20 26 H500" />
+      <path className="fit-index-line" d="M20 154 C105 150 120 128 185 125 C250 122 260 94 325 91 C390 88 405 55 500 24" />
+      <circle className="fit-index-point" cx={height > 0 ? Math.max(20, Math.min(500, 20 + (((weight / ((height / 100) ** 2)) - 15) / 35) * 480)) : 20} cy={height > 0 ? Math.max(24, Math.min(154, 154 - ((((weight / ((height / 100) ** 2)) - 15) / 35) * 130))) : 154} r="7" />
+    </svg>
     <div className="fit-body-index-axis"><span>Menor</span><b>{height > 0 ? (weight / ((height / 100) ** 2)).toFixed(1) : "—"}</b><span>Maior</span></div>
   </div>
   <div className="fit-body-index-labels"><span>Abaixo</span><span>Ideal</span><span>Acima</span><span>Obesidade</span></div>
-  <p>O gráfico cresce conforme o índice calculado a partir de peso e altura. Ele não estima diretamente o percentual de gordura corporal.</p>
+  <p>A linha sobe conforme o índice calculado a partir de peso e altura. Ela é uma referência visual e não estima diretamente o percentual de gordura corporal.</p>
 </div>
 <div className="fit-goal-card"><span>META INICIAL ESTIMADA</span><strong>Perca {Math.max(2, Math.min(6, Math.round(weight * 0.05)))} kg em 4 semanas</strong><small>Uma meta moderada e progressiva é mais adequada do que prometer uma perda rápida.</small></div>
 <div className="fit-special"><strong>Seu próximo passo:</strong><br />começar com uma rotina organizada para os próximos 7 dias, sem precisar montar o treino do zero.</div>
