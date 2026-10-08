@@ -247,7 +247,7 @@ function DietQuiz() {
     if (step === 0) return;
     if (advanceTimer.current !== null) window.clearTimeout(advanceTimer.current);
     const previousIndex = answers[step - 1];
-    const previousAnswer = questions[step - 1]?.answers[previousIndex];
+    const previousAnswer = previousIndex == null ? undefined : questions[step - 1]?.answers[previousIndex];
     if (previousAnswer) {
       const nextScores = { ...scores };
       (Object.keys(nextScores) as PlanId[]).forEach((id) => {
