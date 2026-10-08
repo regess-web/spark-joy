@@ -941,3 +941,28 @@
   .fit-people-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .fit-person-card:last-child{grid-column:1 / -1;max-width:180px;width:100%;justify-self:center}
 }
+
+
+/* Conversion funnel refresh */
+.fit-process-number{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+  background:#fbefe8;color:var(--fit-accent);font-size:11px;font-weight:800;
+  letter-spacing:.5px;flex:0 0 42px;
+}
+.fit-process-text{
+  display:block;margin-top:4px;font-size:9px!important;line-height:1.45;color:#8a7e75!important;
+}
+.fit-people-grid .fit-person-card{
+  align-items:flex-start;text-align:left;flex-direction:row;gap:10px;
+}
+.fit-people-grid .fit-person-card strong{margin-bottom:0}
+.fit-result-card{max-width:720px}
+.fit-result-card .fit-primary{min-width:220px}
+.fit-special strong{color:var(--fit-text)}
+.fit-offer-card{max-width:760px}
+.fit-offer-card .fit-primary{min-width:260px}
+@media(max-width:700px){
+  .fit-people-grid .fit-person-card{align-items:flex-start}
+  .fit-process-number{width:38px;height:38px;flex-basis:38px}
+  .fit-result-card .fit-primary,.fit-offer-card .fit-primary{width:100%;min-width:0}
+}
