@@ -370,51 +370,6 @@ function WeightLossQuiz() {
               </div>
               <div className="fit-transformation-result">Uma rotina para começar e continuar</div>
             </div>
-            <div className="fit-conversion">
-              <div className="fit-conversion-block">
-                <strong>Com isso você vai receber</strong>
-                <span>✓ <b>26+ exercícios</b> para variar sua rotina</span>
-                <span>✓ Treinos organizados para acompanhar por 7 dias</span>
-                <span>✓ Séries, repetições, descanso e orientações</span>
-                <span>✓ Uma rotina prática para não perder tempo decidindo o que fazer</span>
-              </div>
-              <div className="fit-conversion-block">
-                <strong>Por que fazer o quiz?</strong>
-                <span>① Você responde 12 perguntas rápidas</span>
-                <span>② Suas respostas ajudam a direcionar a experiência</span>
-                <span>③ Você conhece a proposta antes de decidir</span>
-                <span>④ Depois, pode acessar o programa e começar no seu ritmo</span>
-              </div>
-              <div className="fit-value-grid">
-                <div><b>26+</b><span>exercícios</span></div>
-                <div><b>7</b><span>dias de treino</span></div>
-                <div><b>12</b><span>perguntas</span></div>
-                <div><b>100%</b><span>guiado</span></div>
-              </div>
-              <div className="fit-proof">
-                <strong>Você não precisa montar seu treino do zero</strong>
-                <p>Em vez de ficar procurando exercícios, séries e repetições, você recebe uma estrutura pronta para seguir durante a semana.</p>
-              </div>
-              <div className="fit-faq">
-                <strong>Antes de começar</strong>
-                <details><summary>Preciso saber treinar?</summary><p>Não. A proposta é justamente deixar o caminho mais simples, com exercícios e orientações organizados.</p></details>
-                <details><summary>Quanto tempo leva o quiz?</summary><p>São 12 perguntas rápidas e você avança automaticamente a cada resposta.</p></details>
-                <details><summary>Posso voltar uma pergunta?</summary><p>Sim. Use o botão “Voltar” para revisar ou alterar uma resposta.</p></details>
-              </div>
-              <section className="fit-people-showcase" aria-label="Como funciona">
-                <div className="fit-people-heading">
-                  <span>COMO FUNCIONA</span>
-                  <h2>Feito para facilitar o começo</h2>
-                  <p>Você responde, recebe uma recomendação de rotina e decide se quer liberar o programa completo.</p>
-                </div>
-                <div className="fit-people-grid">
-                  <div className="fit-person-card"><div className="fit-process-number">01</div><div><strong>Você responde</strong><span className="fit-process-text">Algumas perguntas rápidas sobre seu objetivo e sua rotina.</span></div></div>
-                  <div className="fit-person-card"><div className="fit-process-number">02</div><div><strong>Seu perfil é analisado</strong><span className="fit-process-text">Suas respostas direcionam a recomendação.</span></div></div>
-                  <div className="fit-person-card"><div className="fit-process-number">03</div><div><strong>Você vê seu resultado</strong><span className="fit-process-text">Entenda qual tipo de rotina faz mais sentido para você.</span></div></div>
-                  <div className="fit-person-card"><div className="fit-process-number">04</div><div><strong>Libere o programa</strong><span className="fit-process-text">Acesse os 7 dias organizados para começar.</span></div></div>
-                </div>
-              </section>
-            </div>
           </div>
         </div>
       </main>
