@@ -53,6 +53,17 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
 {text:"Saber exatamente o que fazer em cada dia",tag:"rotina",recommendation:"Uma sequência pronta reduz decisões.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Treinos curtos e objetivos",tag:"rotina",recommendation:"Uma barreira menor facilita começar.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Exercícios explicados de forma simples",tag:"corpo",recommendation:"Instruções claras deixam tudo mais guiado.",followUp:"Vamos fazer mais uma pergunta importante."},{text:"Acompanhar cada treino concluído",tag:"autoestima",recommendation:"Marcar pequenas vitórias ajuda a transformar intenção em hábito.",followUp:"Vamos fazer mais uma pergunta importante."}]},
 {question:"Qual frase mais combina com o seu momento?",subtitle:"Escolha sem pensar demais. A primeira que fizer sentido costuma ser a melhor.",image:"https://images.unsplash.com/photo-1517964603305-11c0f6f66012?auto=format&fit=crop&w=900&q=85",answers:[
 {text:"Quero voltar a cuidar de mim",tag:"autoestima",recommendation:"Vamos começar com algo simples e possível.",followUp:"Agora só faltam suas medidas."},{text:"Quero finalmente criar constância",tag:"rotina",recommendation:"Vamos estruturar uma sequência fácil de repetir.",followUp:"Agora só faltam suas medidas."},{text:"Quero ver mudanças no meu corpo",tag:"corpo",recommendation:"Vamos organizar uma rotina clara para você seguir.",followUp:"Agora só faltam suas medidas."},{text:"Quero ter mais disposição",tag:"energia",recommendation:"Vamos priorizar movimento e progressão.",followUp:"Agora só faltam suas medidas."}]},
+
+{question:"Quando você sai da rotina por alguns dias, o que costuma acontecer?",subtitle:"Escolha a reação que mais parece com você.",image:"https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Eu volto na próxima oportunidade",tag:"rotina",recommendation:"Você tende a recuperar o ritmo quando tem um próximo passo claro.",followUp:"Seu padrão de retomada ajuda a definir seu perfil."},{text:"Eu penso que perdi o progresso e desanimo",tag:"autoestima",recommendation:"Pequenas retomadas podem funcionar melhor do que tentar compensar tudo.",followUp:"Agora vamos entender como você reage a regras."},{text:"Eu tento compensar fazendo muito de uma vez",tag:"energia",recommendation:"Uma progressão equilibrada pode ser mais sustentável.",followUp:"Agora vamos entender como você reage a regras."},{text:"Eu acabo abandonando o plano",tag:"corpo",recommendation:"Um plano simples e guiado pode reduzir a chance de desistência.",followUp:"Agora vamos entender como você reage a regras."}]},
+{question:"Como você se sente diante de uma rotina muito rígida?",subtitle:"Não existe resposta certa. Queremos entender seu estilo de rotina.",image:"https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Gosto de saber exatamente o que fazer",tag:"rotina",recommendation:"Estrutura e previsibilidade podem combinar com seu perfil.",followUp:"Vamos entender o que realmente mantém sua atenção."},{text:"Prefiro ter opções para adaptar",tag:"energia",recommendation:"Flexibilidade pode ajudar você a manter o movimento.",followUp:"Vamos entender o que realmente mantém sua atenção."},{text:"Se for muito complicado, eu perco a vontade",tag:"autoestima",recommendation:"Simplicidade pode ser uma vantagem para sua constância.",followUp:"Vamos entender o que realmente mantém sua atenção."},{text:"Depende de como o plano é apresentado",tag:"corpo",recommendation:"Uma orientação clara pode fazer diferença para você.",followUp:"Vamos entender o que realmente mantém sua atenção."}]},
+{question:"O que mais prende sua atenção quando você começa algo novo?",subtitle:"Escolha o fator que mais aumenta sua vontade de continuar.",image:"https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Ver que estou evoluindo",tag:"corpo",recommendation:"Acompanhar progresso pode manter seu foco.",followUp:"Estamos chegando ao seu perfil comportamental."},{text:"Sentir que estou cuidando de mim",tag:"autoestima",recommendation:"Seu significado pessoal pode ser um forte motivador.",followUp:"Estamos chegando ao seu perfil comportamental."},{text:"Ter uma meta clara para cumprir",tag:"rotina",recommendation:"Metas objetivas podem combinar com seu jeito de agir.",followUp:"Estamos chegando ao seu perfil comportamental."},{text:"Sentir mais disposição",tag:"energia",recommendation:"Sensações do dia a dia podem ser um incentivo importante.",followUp:"Estamos chegando ao seu perfil comportamental."}]},
+{question:"Quando você recebe uma tarefa que parece difícil, qual é sua tendência?",subtitle:"Pense em como você normalmente age, não em como gostaria de agir.",image:"https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Começo mesmo sem saber tudo",tag:"energia",recommendation:"Você tende a aprender enquanto faz.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Planejo antes de começar",tag:"rotina",recommendation:"Preparação e clareza podem aumentar sua segurança.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Procuro alguém ou algo para me orientar",tag:"corpo",recommendation:"Ter direção pode facilitar sua execução.",followUp:"Agora vamos identificar seu estilo de progresso."},{text:"Adio até sentir que estou pronta",tag:"autoestima",recommendation:"Começar pequeno pode diminuir a pressão de fazer tudo perfeito.",followUp:"Agora vamos identificar seu estilo de progresso."}]},
+{question:"Qual destas descrições combina mais com seu jeito de buscar resultados?",subtitle:"Escolha a que parece mais natural para você.",image:"https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=85",answers:[
+{text:"Gosto de progresso rápido e visível",tag:"corpo",recommendation:"Metas de curto prazo podem ajudar a manter seu envolvimento.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Prefiro construir um hábito aos poucos",tag:"rotina",recommendation:"Consistência gradual pode combinar melhor com você.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Preciso sentir que estou fazendo algo por mim",tag:"autoestima",recommendation:"Conectar a rotina com autocuidado pode aumentar seu comprometimento.",followUp:"Última parte: vamos fechar seu perfil."},{text:"Quero perceber mais energia no cotidiano",tag:"energia",recommendation:"Uma rotina progressiva pode conversar com seu objetivo.",followUp:"Última parte: vamos fechar seu perfil."}]},
 {question:"Qual é o seu peso atual?",subtitle:"Arraste ou digite o valor. Essa informação ajuda a personalizar sua experiência.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"weight",min:30,max:250,unit:"kg"},
 {question:"Qual é a sua altura?",subtitle:"Arraste ou digite o valor exato para finalizar seu perfil.",image:"https://images.unsplash.com/photo-1594737625785-a6cbdabd333c?auto=format&fit=crop&w=900&q=85",answers:[],kind:"height",min:120,max:220,unit:"cm"},
 ];
@@ -97,6 +108,21 @@ function WeightLossQuiz() {
   const measurementDone = !!measurementComplete[step];
   const progress = ((step + (isMeasurement ? (measurementDone ? 1 : 0) : selected !== null ? 1 : 0)) / baseQuestions.length) * 100;
   const selectedAnswer = selected == null ? null : (current.answers[selected] ?? null);
+
+  const insight = step >= 3 && step < baseQuestions.length - 2 && step % 4 === 3
+    ? {
+        label: "ANÁLISE PARCIAL DO SEU PERFIL",
+        title: step < 8 ? "Já dá para perceber alguns padrões em você." : "Seu perfil está ficando mais claro.",
+        text: dominant === "rotina"
+          ? "Suas respostas apontam para alguém que tende a evoluir melhor quando existe clareza, simplicidade e uma sequência fácil de repetir."
+          : dominant === "autoestima"
+            ? "Suas respostas mostram que o significado pessoal e a confiança podem ter bastante peso na sua constância."
+            : dominant === "corpo"
+              ? "Suas respostas indicam que entender o que fazer e perceber evolução pode ser importante para você continuar."
+              : "Suas respostas sugerem que movimento, disposição e sensação de progresso podem ser grandes motivadores para você.",
+        note: "Isso é uma leitura do seu padrão de respostas, não um diagnóstico médico."
+      }
+    : null;
 
   const dominant = useMemo(() => {
     return Object.entries(scores).sort((a, b) => b[1] - a[1])[0]?.[0] || "autoestima";
@@ -375,7 +401,7 @@ function WeightLossQuiz() {
               </div>
               <small className="fit-weekly-proof">534 mulheres fizeram essa semana</small>
             </div>
-            <div className="fit-trust"><span>12 perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
+            <div className="fit-trust"><span>{baseQuestions.length} perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
           </div>
         </div>
       </main>
@@ -386,6 +412,17 @@ function WeightLossQuiz() {
     <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
+        {insight && (
+          <div className="fit-quiz-insight">
+            <div className="fit-quiz-insight-icon">✦</div>
+            <div>
+              <span>{insight.label}</span>
+              <strong>{insight.title}</strong>
+              <p>{insight.text}</p>
+              <small>{insight.note}</small>
+            </div>
+          </div>
+        )}
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
         <h2>{current.question}</h2>
         <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
