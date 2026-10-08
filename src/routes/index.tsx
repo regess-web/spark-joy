@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -94,11 +94,42 @@ function WeightLossQuiz() {
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
   const [goalWeight, setGoalWeight] = useState(65);
+  const [activityNotice, setActivityNotice] = useState<{ name: string; text: string } | null>(null);
+  const [activityNoticeVisible, setActivityNoticeVisible] = useState(false);
   const [measurementComplete, setMeasurementComplete] = useState<Record<number, boolean>>({});
   const [loading, setLoading] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [advancing, setAdvancing] = useState(false);
   const advanceTimer = useRef<number | null>(null);
+
+  const activityMessages = [
+    { name: "Mariana", text: "iniciou o tratamento" },
+    { name: "Juliana", text: "acabou de deixar sua avaliação" },
+    { name: "Camila", text: "escolheu o plano avançado" },
+    { name: "Fernanda", text: "iniciou o tratamento" },
+    { name: "Amanda", text: "acabou de deixar sua avaliação" },
+    { name: "Beatriz", text: "escolheu o plano avançado" },
+    { name: "Larissa", text: "iniciou o tratamento" },
+    { name: "Carolina", text: "acabou de deixar sua avaliação" }
+  ];
+
+  useEffect(() => {
+    let hideTimer: number | null = null;
+    const showNotice = () => {
+      const item = activityMessages[Math.floor(Math.random() * activityMessages.length)];
+      setActivityNotice(item);
+      setActivityNoticeVisible(true);
+      if (hideTimer) window.clearTimeout(hideTimer);
+      hideTimer = window.setTimeout(() => setActivityNoticeVisible(false), 4200);
+    };
+    const initialTimer = window.setTimeout(showNotice, 5500);
+    const interval = window.setInterval(showNotice, 6500);
+    return () => {
+      window.clearTimeout(initialTimer);
+      window.clearInterval(interval);
+      if (hideTimer) window.clearTimeout(hideTimer);
+    };
+  }, []);
 
   function trackQuizEvent(eventName: string, params: Record<string, string | number> = {}) {
     if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
@@ -352,7 +383,7 @@ function WeightLossQuiz() {
   if (result) {
     const copy = resultCopy[result as keyof typeof resultCopy];
     return (
-      <main className="fit-app fit-result">        <div className="fit-result-card">
+      <main className="fit-app fit-result">{activityNoticeElement}        <div className="fit-result-card">
           <div className="fit-kicker">SEU RESULTADO</div>
           <div className="fit-result-icon">✓</div>
           <p className="fit-overline">SEU PERFIL FOI IDENTIFICADO</p>
@@ -391,9 +422,35 @@ function WeightLossQuiz() {
     );
   }
 
+  const activityNoticeElement = activityNotice ? (
+    <div
+      role="status"
+      style={{
+        position: "fixed", left: 18, bottom: 18, zIndex: 1000,
+        display: "flex", alignItems: "center", gap: 10,
+        width: "min(360px, calc(100vw - 36px))", boxSizing: "border-box",
+        padding: "11px 13px", border: "1px solid rgba(184,107,69,.18)",
+        borderRadius: 16, background: "rgba(255,255,255,.97)",
+        boxShadow: "0 12px 30px rgba(58,42,31,.14)",
+        opacity: activityNoticeVisible ? 1 : 0,
+        transform: activityNoticeVisible ? "translateY(0)" : "translateY(14px)",
+        transition: "opacity .3s ease, transform .3s ease",
+        pointerEvents: "none"
+      }}
+    >
+      <div style={{position:"absolute",top:-8,right:10,padding:"3px 6px",borderRadius:999,background:"#f2e6de",color:"#8f5639",fontSize:7,fontWeight:900,letterSpacing:".7px"}}>PRÉVIA</div>
+      <div style={{width:34,height:34,flex:"0 0 34px",display:"grid",placeItems:"center",borderRadius:"50%",background:"#f3e4da",color:"#9d5f3d",fontWeight:900,fontSize:13}}>{activityNotice.name.charAt(0)}</div>
+      <div style={{display:"flex",flexDirection:"column",gap:2,minWidth:0}}>
+        <strong style={{fontSize:11,color:"#302820"}}>{activityNotice.name}</strong>
+        <span style={{fontSize:9,color:"#71645b",lineHeight:1.25}}>{activityNotice.text}</span>
+      </div>
+      <div style={{marginLeft:"auto",alignSelf:"flex-end",fontSize:7,color:"#a0958d",whiteSpace:"nowrap"}}>agora</div>
+    </div>
+  ) : null;
+
   if (!started) {
     return (
-      <main className="fit-app fit-start">        <div className="fit-start-card">
+      <main className="fit-app fit-start">{activityNoticeElement}        <div className="fit-start-card">
           <div className="fit-start-content">
             <div className="fit-kicker">SEU MOMENTO • {baseQuestions.length} PERGUNTAS</div>
             <h1>Você está cansada de <em>começar e parar?</em></h1>
@@ -439,7 +496,7 @@ function WeightLossQuiz() {
   }
 
   return (
-    <main className="fit-app fit-quiz">        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
+    <main className="fit-app fit-quiz">{activityNoticeElement}        <header className="fit-header"><div className="fit-brand">Método Leve</div><div className="fit-count">{String(step + 1).padStart(2, "0")} / {baseQuestions.length}</div></header>
       <div className="fit-progress"><div style={{ width: progress + "%" }} /></div>
       <section className="fit-question-card">
         {insight && (
