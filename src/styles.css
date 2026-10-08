@@ -1050,11 +1050,11 @@
 .fit-body-index-head{display:flex;align-items:end;justify-content:space-between;gap:12px}
 .fit-body-index-head span,.fit-goal-card>span{display:block;font-size:8px;font-weight:800;letter-spacing:1.5px;color:var(--fit-accent)}
 .fit-body-index-head strong{display:block;font-family:"Playfair Display",serif;font-size:38px;line-height:1;margin-top:6px}
-.fit-body-index-head small{font-size:8px;color:#9b9087}
-.fit-body-index-track{position:relative;height:12px;margin:18px 2px 7px;border-radius:99px;background:linear-gradient(90deg,#d8e9c9 0 25%,#d9e9c8 25% 50%,#f0d9a8 50% 70%,#e9b8a8 70% 100%);overflow:visible}
+.fit-body-index-head small{font-size:8px;font-weight:700;color:#665950}
+.fit-body-index-track{position:relative;height:12px;margin:18px 2px 7px;border-radius:99px;background:linear-gradient(90deg,#72b84b 0 25%,#9acb55 25% 50%,#e5a62f 50% 70%,#d85a45 70% 100%);overflow:visible}
 .fit-bmi-marker{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#2e2924;border:3px solid #fff;box-shadow:0 3px 10px rgba(42,31,25,.2);transform:translate(-50%,-50%)}
-.fit-body-index-labels{display:flex;justify-content:space-between;font-size:7px;color:#8f8379}
-.fit-body-index-card p{margin:12px 0 0;color:#a0958d;font-size:8px;line-height:1.5}
+.fit-body-index-labels{display:flex;justify-content:space-between;font-size:8px;font-weight:800;color:#4b4038}
+.fit-body-index-card p{margin:12px 0 0;color:#71645b;font-size:8px;line-height:1.5}
 .fit-goal-card{margin:14px 0 20px;padding:18px;border-radius:16px;background:#fbefe8;border:1px solid #eaded3;text-align:center}
 .fit-goal-card strong{display:block;font-family:"Playfair Display",serif;font-size:25px;line-height:1.15;margin:7px 0;color:#302820}
 .fit-goal-card small{display:block;color:#8a7e75;font-size:8px;line-height:1.5}
