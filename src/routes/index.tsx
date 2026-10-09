@@ -275,6 +275,7 @@ function WeightLossQuiz() {
 
   function confirmMeasurement() {
     if (!isMeasurement || advancing) return;
+    if (current.kind === "goalWeight" && goalWeight > weight) return;
     setMeasurementComplete((prev) => ({ ...prev, [step]: true }));
     setAdvancing(true);
     trackQuizEvent(current.kind === "weight" ? "QuizWeight" : current.kind === "height" ? "QuizHeight" : "QuizGoalWeight", { question_number: step + 1, value: current.kind === "weight" ? weight : current.kind === "height" ? height : goalWeight, unit: current.unit || "" });
@@ -582,7 +583,7 @@ function WeightLossQuiz() {
                 min={current.min}
                 max={current.max}
                 step="1"
-                value={current.kind === "weight" ? weight : height}
+                value={current.kind === "weight" ? weight : current.kind === "height" ? height : goalWeight}
                 onChange={(event) => {
                   const raw = Number(event.target.value);
                   const safe = Number.isFinite(raw) ? Math.max(current.min || 0, Math.min(current.max || 250, raw)) : 0;
@@ -599,7 +600,7 @@ function WeightLossQuiz() {
               min={current.min}
               max={current.max}
               step="1"
-              value={current.kind === "weight" ? weight : height}
+              value={current.kind === "weight" ? weight : current.kind === "height" ? height : goalWeight}
               onChange={(event) => {
                 const value = Number(event.target.value);
                 if (current.kind === "weight") setWeight(value);
@@ -608,7 +609,10 @@ function WeightLossQuiz() {
               }}
             />
             <div className="fit-measurement-scale"><span>{current.min} {current.unit}</span><span>{current.max} {current.unit}</span></div>
-            <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement} disabled={advancing}>
+            {current.kind === "goalWeight" && goalWeight > weight && (
+              <p role="alert" className="fit-measurement-error">Informação inválida. O peso desejado não pode ser maior que o peso atual.</p>
+            )}
+            <button className="fit-measurement-confirm" type="button" onClick={confirmMeasurement} disabled={advancing || (current.kind === "goalWeight" && goalWeight > weight)}>
               {measurementDone ? "VALOR CONFIRMADO ✓" : "CONTINUAR"} <span>→</span>
             </button>
           </div>
