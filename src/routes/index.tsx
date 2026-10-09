@@ -567,8 +567,12 @@ function WeightLossQuiz() {
           </div>
         )}
         <div className="fit-question-kicker">PERGUNTA {String(step + 1).padStart(2, "0")}</div>
-        <h2>{current.question}</h2>
-        <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
+        {current.kind !== "proof" && (
+          <>
+            <h2>{current.question}</h2>
+            <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
+          </>
+        )}
         {current.image && <div className="fit-question-image"><img src={current.image} alt="" /></div>}
         {current.kind === "proof" ? (
           <div className="fit-proof-screen">
@@ -668,7 +672,7 @@ function WeightLossQuiz() {
         )}
         <div className="fit-footer">
           <button className="fit-back" type="button" disabled={step === 0 || advancing} onClick={goBack}>← Voltar</button>
-          <small>{isMeasurement ? "Arraste ou digite o valor no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
+          <small>{current.kind === "proof" ? "Continue para seguir com o quiz." : isMeasurement ? "Arraste ou digite o valor no quadrinho." : selected === null ? "Escolha uma alternativa para avançar automaticamente." : "Avançando para a próxima pergunta..."}</small>
         </div>
       </section>
     </main>
