@@ -458,7 +458,7 @@ function WeightLossQuiz() {
               <p>Um começo simples, com orientação em cada etapa.</p>
             </div>
             <div className="fit-offer-feature-grid">
-              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">✦</span><div><strong>26+ exercícios</strong><span>Opções para variar sua rotina de treino.</span></div></div>
+              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">✦</span><div><strong>42+ exercícios</strong><span>Opções para variar sua rotina de treino.</span></div></div>
               <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">7</span><div><strong>Plano de 7 dias</strong><span>Treinos organizados passo a passo.</span></div></div>
               <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">✓</span><div><strong>Séries e descanso</strong><span>Orientações claras para cada exercício.</span></div></div>
               <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">↗</span><div><strong>Acompanhe seu progresso</strong><span>Marque os treinos que você concluir.</span></div></div>
@@ -571,7 +571,7 @@ function WeightLossQuiz() {
               </div>
               <small className="fit-weekly-proof">534 mulheres fizeram essa semana</small>
             </div>
-            <div className="fit-trust"><span>{baseQuestions.length} perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
+            <div className="fit-trust"><span>{baseQuestions.length} perguntas</span><i>•</i><span>42+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
             <style>{`.fit-start-features { margin: 22px 0 8px; text-align: left; }
 .fit-start-features h2 { margin: 0 0 12px; font-size: 18px; text-align: center; }
 .fit-start-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
