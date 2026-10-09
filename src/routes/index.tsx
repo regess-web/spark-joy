@@ -94,7 +94,7 @@ function WeightLossQuiz() {
   const [weight, setWeight] = useState(70);
   const [height, setHeight] = useState(170);
   const [goalWeight, setGoalWeight] = useState(65);
-  const [activityNotice, setActivityNotice] = useState<{ name: string; text: string } | null>(null);
+  const [activityNotice, setActivityNotice] = useState<{ name: string; text: string; state: string } | null>(null);
   const [activityNoticeVisible, setActivityNoticeVisible] = useState(false);
   const [measurementComplete, setMeasurementComplete] = useState<Record<number, boolean>>({});
   const [loading, setLoading] = useState(false);
@@ -157,10 +157,12 @@ function WeightLossQuiz() {
 
   useEffect(() => {
     let hideTimer: number | null = null;
+    const brazilianStates = ["AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"];
     const showNotice = () => {
       const item = activityMessages[Math.floor(Math.random() * activityMessages.length)];
       if (!item) return;
-      setActivityNotice(item);
+      const state = brazilianStates[Math.floor(Math.random() * brazilianStates.length)];
+      setActivityNotice({ ...item, state });
       setActivityNoticeVisible(true);
       if (hideTimer) window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(() => setActivityNoticeVisible(false), 4200);
@@ -327,7 +329,7 @@ function WeightLossQuiz() {
       <div style={{position:"absolute",top:-8,right:10,padding:"3px 6px",borderRadius:999,background:"#f2e6de",color:"#8f5639",fontSize:7,fontWeight:900,letterSpacing:".7px"}}>PRÉVIA</div>
       <div style={{width:34,height:34,flex:"0 0 34px",display:"grid",placeItems:"center",borderRadius:"50%",background:"#f3e4da",color:"#9d5f3d",fontWeight:900,fontSize:13}}>{activityNotice.name.charAt(0)}</div>
       <div style={{display:"flex",flexDirection:"column",gap:2,minWidth:0}}>
-        <strong style={{fontSize:11,color:"#302820"}}>{activityNotice.name}</strong>
+        <strong style={{fontSize:11,color:"#302820"}}>{activityNotice.name} do {activityNotice.state}</strong>
         <span style={{fontSize:9,color:"#71645b",lineHeight:1.25}}>{activityNotice.text}</span>
       </div>
       <div style={{marginLeft:"auto",alignSelf:"flex-end",fontSize:7,color:"#a0958d",whiteSpace:"nowrap"}}>agora</div>
