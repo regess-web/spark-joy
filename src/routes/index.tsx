@@ -448,8 +448,8 @@ function WeightLossQuiz() {
           <h1>Uma rotina feita para você<br /><em>começar de verdade.</em></h1>
           <p>Com base no seu perfil, você pode liberar um programa de 7 dias com exercícios organizados para não precisar decidir o que fazer a cada dia.</p>
           <div className="fit-price"><s>R$ 49,90</s><strong>R$ 27,99</strong><span>acesso ao guia</span></div>
-          <div className="fit-offer-image-placeholder" role="img" aria-label="Espaço reservado para imagem do programa de treino">
-            <span>ESPAÇO PARA IMAGEM DO PROGRAMA</span>
+          <div className="fit-offer-image">
+            <img src="/images/-8kg.jpg" alt="Transformação com resultado de menos 8 kg" loading="eager" decoding="async" />
           </div>
           <section className="fit-start-features fit-offer-features" aria-label="O que está incluído no programa">
             <h2>O que você vai receber</h2>
@@ -562,7 +562,10 @@ function WeightLossQuiz() {
 .fit-start-feature-grid > div { display: flex; flex-direction: column; gap: 6px; padding: 13px 10px; border: 1px solid #eadbd2; border-radius: 14px; background: #fffaf7; }
 .fit-start-feature-grid strong { color: #9d5f3d; font-size: 16px; line-height: 1.2; }
 .fit-start-feature-grid span { color: #65554c; font-size: 12px; line-height: 1.4; }
-.fit-offer-image-placeholder { min-height: 230px; width: 100%; margin: 18px 0; display: grid; place-items: center; border: 2px dashed #d7b9a6; border-radius: 18px; background: #faf5f1; color: #98745f; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-align: center; padding: 12px; box-sizing: border-box; }
+.fit-offer-image { width: 100%; margin: 18px 0; overflow: hidden; border-radius: 18px; }
+.fit-offer-image img { display: block; width: 100%; height: auto; object-fit: contain; border-radius: 18px; }
+.fit-proof-image { width: 100%; overflow: hidden; border-radius: 18px; }
+.fit-proof-image img { display: block; width: 100%; max-height: 520px; height: auto; object-fit: contain; border-radius: 18px; margin: 0 auto; }
 @media (max-width: 480px) { .fit-start-feature-grid { grid-template-columns: 1fr; } .fit-start-feature-grid > div { flex-direction: row; align-items: center; justify-content: space-between; } }`}</style>
           </div>
         </div>
@@ -597,8 +600,8 @@ function WeightLossQuiz() {
           <div className="fit-proof-screen">
             <h2>Isso é só uma parte do que você pode chegar.</h2>
             <p>Em apenas 2 meses, ela chegou nesse resultado.</p>
-            <div className="fit-proof-image-placeholder" role="img" aria-label="Espaço reservado para imagem de resultado">
-              <span>ESPAÇO PARA SUA IMAGEM</span>
+            <div className="fit-proof-image">
+              <img src="/images/-15kg.jpg" alt="Transformação com resultado de menos 15 kg" loading="eager" decoding="async" />
             </div>
             <button
               className="fit-proof-continue"
@@ -618,7 +621,8 @@ function WeightLossQuiz() {
             >CONTINUAR <span>→</span></button>
             <style>{`@keyframes fitProofPulse { 0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(157,95,61,.18); } 50% { transform: scale(1.035); box-shadow: 0 12px 28px rgba(157,95,61,.3); } }
 .fit-proof-continue { animation: fitProofPulse 1.15s ease-in-out infinite; }
-.fit-proof-image-placeholder { min-height: 260px; width: 100%; display: grid; place-items: center; border: 2px dashed #d7b9a6; border-radius: 18px; background: #faf5f1; color: #98745f; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+.fit-proof-image { width: 100%; overflow: hidden; border-radius: 18px; }
+.fit-proof-image img { display: block; width: 100%; max-height: 520px; height: auto; object-fit: contain; border-radius: 18px; margin: 0 auto; }
 .fit-proof-screen { display: flex; flex-direction: column; gap: 16px; }
 .fit-proof-screen h2 { margin: 0; }
 .fit-proof-screen p { margin: 0; }
