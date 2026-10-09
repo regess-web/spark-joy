@@ -448,6 +448,9 @@ function WeightLossQuiz() {
           <h1>Uma rotina feita para você<br /><em>começar de verdade.</em></h1>
           <p>Com base no seu perfil, você pode liberar um programa de 7 dias com exercícios organizados para não precisar decidir o que fazer a cada dia.</p>
           <div className="fit-price"><s>R$ 49,90</s><strong>R$ 27,99</strong><span>acesso ao guia</span></div>
+          <div className="fit-offer-image-placeholder" role="img" aria-label="Espaço reservado para imagem do programa de treino">
+            <span>ESPAÇO PARA IMAGEM DO PROGRAMA</span>
+          </div>
           <div className="fit-benefits">
             <span>✓ 7 dias organizados passo a passo</span><span>✓ 26+ exercícios para variar a rotina</span><span>✓ Séries, repetições e descansos definidos</span><span>✓ Acompanhamento do que você concluiu</span>
           </div>
@@ -535,6 +538,14 @@ function WeightLossQuiz() {
               </div>
               <div className="fit-transformation-result">Em apenas 2 Semanas</div>
             </div>
+            <section className="fit-start-features" aria-label="O que está incluído no programa">
+              <h2>Seu próximo passo começa aqui</h2>
+              <div className="fit-start-feature-grid">
+                <div><strong>26+</strong><span>exercícios para variar sua rotina</span></div>
+                <div><strong>7 dias</strong><span>de treino organizado passo a passo</span></div>
+                <div><strong>Séries + descanso</strong><span>orientações claras em cada exercício</span></div>
+              </div>
+            </section>
             <div className="fit-start-cta">
               <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
@@ -545,6 +556,14 @@ function WeightLossQuiz() {
               <small className="fit-weekly-proof">534 mulheres fizeram essa semana</small>
             </div>
             <div className="fit-trust"><span>{baseQuestions.length} perguntas</span><i>•</i><span>26+ exercícios</span><i>•</i><span>7 dias de rotina</span></div>
+            <style>{`.fit-start-features { margin: 22px 0 8px; text-align: left; }
+.fit-start-features h2 { margin: 0 0 12px; font-size: 18px; text-align: center; }
+.fit-start-feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 9px; }
+.fit-start-feature-grid > div { display: flex; flex-direction: column; gap: 6px; padding: 13px 10px; border: 1px solid #eadbd2; border-radius: 14px; background: #fffaf7; }
+.fit-start-feature-grid strong { color: #9d5f3d; font-size: 16px; line-height: 1.2; }
+.fit-start-feature-grid span { color: #65554c; font-size: 12px; line-height: 1.4; }
+.fit-offer-image-placeholder { min-height: 230px; width: 100%; margin: 18px 0; display: grid; place-items: center; border: 2px dashed #d7b9a6; border-radius: 18px; background: #faf5f1; color: #98745f; font-size: 12px; font-weight: 800; letter-spacing: 1px; text-align: center; padding: 12px; box-sizing: border-box; }
+@media (max-width: 480px) { .fit-start-feature-grid { grid-template-columns: 1fr; } .fit-start-feature-grid > div { flex-direction: row; align-items: center; justify-content: space-between; } }`}</style>
           </div>
         </div>
       </main>
