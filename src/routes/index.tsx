@@ -27,7 +27,7 @@ type QuizQuestion = {
   question: string;
   subtitle: string;
   answers: Answer[];
-  kind?: "choices" | "weight" | "height" | "goalWeight";
+  kind?: "choices" | "weight" | "height" | "goalWeight" | "proof";
   min?: number;
   max?: number;
   unit?: string;
@@ -43,6 +43,7 @@ const baseQuestions: [QuizQuestion, ...QuizQuestion[]] = [
 {text:"Começo motivada e depois paro",tag:"rotina",recommendation:"Seu plano precisa reduzir a fricção e criar pequenas vitórias.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não tenho tempo para treinos longos",tag:"rotina",recommendation:"Sessões curtas podem ser mais realistas para você.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não sei exatamente o que fazer",tag:"corpo",recommendation:"Uma sequência pronta elimina a dúvida sobre o treino.",followUp:"Vamos descobrir o principal obstáculo."},{text:"Não consigo manter uma rotina",tag:"rotina",recommendation:"A prioridade será tornar o programa simples de repetir.",followUp:"Vamos descobrir o principal obstáculo."}]},
 {question:"O que mais dificulta sua evolução atualmente?",subtitle:"Escolha o obstáculo que mais aparece no seu dia a dia.",image:"https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=85",answers:[
 {text:"Falta de tempo",tag:"rotina",recommendation:"Vamos priorizar treinos enxutos.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Falta de constância",tag:"rotina",recommendation:"Vamos diminuir a complexidade e trabalhar com uma sequência clara.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Não saber qual treino fazer",tag:"corpo",recommendation:"Vamos organizar exercícios, séries e descanso.",followUp:"Agora vamos definir seu tempo disponível."},{text:"Desânimo depois de algumas tentativas",tag:"autoestima",recommendation:"Vamos trabalhar com metas pequenas e progresso visível.",followUp:"Agora vamos definir seu tempo disponível."}]},
+{question:"",subtitle:"",answers:[],kind:"proof"},
 {question:"Quanto tempo você conseguiria reservar por dia?",subtitle:"Escolha o tempo que você realmente conseguiria repetir.",image:"https://images.unsplash.com/photo-1518310383802-640c2de311b2?auto=format&fit=crop&w=900&q=85",answers:[
 {text:"Até 15 minutos",tag:"rotina",recommendation:"Uma rotina curta reduz a barreira para começar.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"15 a 30 minutos",tag:"corpo",recommendation:"Esse intervalo permite uma rotina equilibrada.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"30 a 45 minutos",tag:"energia",recommendation:"Com mais tempo, podemos combinar diferentes estímulos.",followUp:"Agora vamos descobrir onde você prefere treinar."},{text:"Depende do dia",tag:"rotina",recommendation:"Flexibilidade será importante para não perder a sequência.",followUp:"Agora vamos descobrir onde você prefere treinar."}]},
 {question:"Onde você teria mais facilidade para treinar?",subtitle:"Escolha o ambiente em que você realmente conseguiria manter o programa.",image:"https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=900&q=85",answers:[
@@ -507,7 +508,7 @@ function WeightLossQuiz() {
     return (
       <main className="fit-app fit-start">{activityNoticeElement}        <div className="fit-start-card">
           <div className="fit-start-content">
-            <div className="fit-kicker">SEU MOMENTO • {baseQuestions.length} PERGUNTAS</div>
+            <div className="fit-kicker">SEU MOMENTO</div>
             <h1>Você está cansada de <em>começar e parar?</em></h1>
             <p>Descubra a sua rotina ideal a partir de um mini quiz interativo</p>
             <div className="fit-transformation-showcase">
@@ -569,7 +570,40 @@ function WeightLossQuiz() {
         <h2>{current.question}</h2>
         <p className="fit-subtitle">{step > 0 ? current.subtitle + " " + context : current.subtitle}</p>
         {current.image && <div className="fit-question-image"><img src={current.image} alt="" /></div>}
-        {isMeasurement ? (
+        {current.kind === "proof" ? (
+          <div className="fit-proof-screen">
+            <h2>Isso é só uma parte do que você pode chegar.</h2>
+            <p>Em apenas 2 meses, ela chegou nesse resultado.</p>
+            <div className="fit-proof-image-placeholder" role="img" aria-label="Espaço reservado para imagem de resultado">
+              <span>ESPAÇO PARA SUA IMAGEM</span>
+            </div>
+            <button
+              className="fit-proof-continue"
+              type="button"
+              disabled={advancing}
+              onClick={() => {
+                if (advancing) return;
+                setAdvancing(true);
+                trackQuizEvent("QuizProofContinue", { question_number: step + 1, total_questions: baseQuestions.length });
+                if (advanceTimer.current) window.clearTimeout(advanceTimer.current);
+                advanceTimer.current = window.setTimeout(() => {
+                  advanceTimer.current = null;
+                  setAdvancing(false);
+                  finishStep(scores);
+                }, 250);
+              }}
+            >CONTINUAR <span>→</span></button>
+            <style>{`@keyframes fitProofPulse { 0%, 100% { transform: scale(1); box-shadow: 0 8px 20px rgba(157,95,61,.18); } 50% { transform: scale(1.035); box-shadow: 0 12px 28px rgba(157,95,61,.3); } }
+.fit-proof-continue { animation: fitProofPulse 1.15s ease-in-out infinite; }
+.fit-proof-image-placeholder { min-height: 260px; width: 100%; display: grid; place-items: center; border: 2px dashed #d7b9a6; border-radius: 18px; background: #faf5f1; color: #98745f; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+.fit-proof-screen { display: flex; flex-direction: column; gap: 16px; }
+.fit-proof-screen h2 { margin: 0; }
+.fit-proof-screen p { margin: 0; }
+.fit-proof-continue { width: 100%; border: 0; border-radius: 14px; padding: 17px 20px; background: #9d5f3d; color: white; font-weight: 800; cursor: pointer; }
+.fit-proof-continue:disabled { opacity: .7; cursor: wait; }
+@media (prefers-reduced-motion: reduce) { .fit-proof-continue { animation: none; } }`}</style>
+          </div>
+        ) : isMeasurement ? (
           <div className="fit-measurement">
             <div className="fit-measurement-value">
               <div>
