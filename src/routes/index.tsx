@@ -451,8 +451,16 @@ function WeightLossQuiz() {
           <div className="fit-offer-image-placeholder" role="img" aria-label="Espaço reservado para imagem do programa de treino">
             <span>ESPAÇO PARA IMAGEM DO PROGRAMA</span>
           </div>
+          <section className="fit-start-features fit-offer-features" aria-label="O que está incluído no programa">
+            <h2>O que você vai receber</h2>
+            <div className="fit-start-feature-grid">
+              <div><strong>26+</strong><span>exercícios para variar sua rotina</span></div>
+              <div><strong>7 dias</strong><span>de treino organizado passo a passo</span></div>
+              <div><strong>Séries + descanso</strong><span>orientações claras em cada exercício</span></div>
+            </div>
+          </section>
           <div className="fit-benefits">
-            <span>✓ 7 dias organizados passo a passo</span><span>✓ 26+ exercícios para variar a rotina</span><span>✓ Séries, repetições e descansos definidos</span><span>✓ Acompanhamento do que você concluiu</span>
+            <span>✓ Acompanhamento do que você concluiu</span>
           </div>
           <button
             className="fit-primary"
@@ -538,14 +546,6 @@ function WeightLossQuiz() {
               </div>
               <div className="fit-transformation-result">Em apenas 2 Semanas</div>
             </div>
-            <section className="fit-start-features" aria-label="O que está incluído no programa">
-              <h2>Seu próximo passo começa aqui</h2>
-              <div className="fit-start-feature-grid">
-                <div><strong>26+</strong><span>exercícios para variar sua rotina</span></div>
-                <div><strong>7 dias</strong><span>de treino organizado passo a passo</span></div>
-                <div><strong>Séries + descanso</strong><span>orientações claras em cada exercício</span></div>
-              </div>
-            </section>
             <div className="fit-start-cta">
               <button type="button" className="fit-primary fit-start-button" onPointerUp={(event) => { event.preventDefault(); event.currentTarget.blur(); setStarted(true);
                 trackQuizEvent("QuizStart", { total_questions: baseQuestions.length });
