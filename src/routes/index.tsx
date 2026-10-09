@@ -451,23 +451,39 @@ function WeightLossQuiz() {
           <div className="fit-offer-image">
             <img src="/images/-8kg.jpg" alt="Transformação com resultado de menos 8 kg" loading="eager" decoding="async" />
           </div>
-          <section className="fit-start-features fit-offer-features" aria-label="O que está incluído no programa">
-            <h2>O que você vai receber</h2>
-            <div className="fit-start-feature-grid">
-              <div><strong>26+</strong><span>exercícios para variar sua rotina</span></div>
-              <div><strong>7 dias</strong><span>de treino organizado passo a passo</span></div>
-              <div><strong>Séries + descanso</strong><span>orientações claras em cada exercício</span></div>
+          <section className="fit-offer-features" aria-label="O que está incluído no programa">
+            <div className="fit-offer-features-heading">
+              <span className="fit-offer-eyebrow">TUDO ORGANIZADO PARA VOCÊ</span>
+              <h2>Seu plano inclui</h2>
+              <p>Um começo simples, com orientação em cada etapa.</p>
+            </div>
+            <div className="fit-offer-feature-grid">
+              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">✦</span><div><strong>26+ exercícios</strong><span>Opções para variar sua rotina de treino.</span></div></div>
+              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">7</span><div><strong>Plano de 7 dias</strong><span>Treinos organizados passo a passo.</span></div></div>
+              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">✓</span><div><strong>Séries e descanso</strong><span>Orientações claras para cada exercício.</span></div></div>
+              <div className="fit-offer-feature"><span className="fit-offer-feature-icon" aria-hidden="true">↗</span><div><strong>Acompanhe seu progresso</strong><span>Marque os treinos que você concluir.</span></div></div>
             </div>
           </section>
-          <div className="fit-benefits">
-            <span>✓ Acompanhamento do que você concluiu</span>
-          </div>
           <button
             className="fit-primary"
             type="button"
             onClick={() => { window.location.href = "https://pay.cakto.com.br/34rfhf7_1160901"; }}
           >LIBERAR MEU PLANO <span>→</span></button>
           <small>O material é educativo e não substitui orientação individual de profissional de saúde ou educação física.</small>
+          <style>{`.fit-offer-image { width: 100%; margin: 18px 0 24px; border-radius: 18px; overflow: visible; }
+.fit-offer-image img { display: block; width: 100%; height: auto !important; max-height: none !important; object-fit: initial !important; object-position: center; border-radius: 18px; }
+.fit-offer-features { margin: 26px 0 22px; padding: 22px 18px; border: 1px solid #eadbd2; border-radius: 22px; background: linear-gradient(180deg, #fffaf6 0%, #ffffff 100%); color: #33251f; }
+.fit-offer-features-heading { text-align: center; margin-bottom: 18px; }
+.fit-offer-eyebrow { display: inline-block; margin-bottom: 8px; color: #9d5f3d; font-size: 10px; font-weight: 800; letter-spacing: 1.4px; }
+.fit-offer-features h2 { margin: 0 0 7px; color: #33251f; font-size: 23px; line-height: 1.2; text-align: center; }
+.fit-offer-features-heading p { margin: 0; color: #78675e; font-size: 13px; line-height: 1.5; text-align: center; }
+.fit-offer-feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+.fit-offer-feature { display: flex; align-items: flex-start; gap: 11px; min-width: 0; padding: 15px 12px; border: 1px solid #f0e3da; border-radius: 15px; background: #fff; box-shadow: 0 3px 10px rgba(73, 43, 28, .035); }
+.fit-offer-feature-icon { display: flex; flex: 0 0 32px; width: 32px; height: 32px; align-items: center; justify-content: center; border-radius: 11px; background: #f5e6dc; color: #9d5f3d; font-size: 17px; font-weight: 800; }
+.fit-offer-feature > div { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.fit-offer-feature strong { color: #3d2b22; font-size: 13px; line-height: 1.35; }
+.fit-offer-feature span:not(.fit-offer-feature-icon) { color: #76665e; font-size: 12px; line-height: 1.45; }
+@media (max-width: 480px) { .fit-offer-features { padding: 19px 13px; } .fit-offer-feature-grid { grid-template-columns: 1fr; gap: 9px; } .fit-offer-feature { padding: 13px; } .fit-offer-features h2 { font-size: 21px; } }`}</style>
         </div>
       </main>
     );
