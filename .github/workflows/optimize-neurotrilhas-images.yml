@@ -1,0 +1,78 @@
+name: Optimize NeuroTrilhas images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/optimize-neurotrilhas-images.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install image optimizer
+        run: python -m pip install --upgrade Pillow
+
+      - name: Convert large landing-page images to WebP
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps
+
+          root = Path("public/images")
+          names = [
+              "neurotrilhas-hero.png.jpg",
+              "atividade-atencao.png.jpg",
+              "atividade-logica.png.jpg",
+              "atividade-memoria.png.jpg",
+              "familia-usando.png.jpg",
+          ]
+
+          for name in names:
+              source = root / name
+              target = root / (name.removesuffix(".png.jpg") + ".webp")
+              if not source.exists():
+                  raise SystemExit(f"Image not found: {source}")
+              with Image.open(source) as original:
+                  image = ImageOps.exif_transpose(original)
+                  image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
+                  if image.mode not in ("RGB", "RGBA"):
+                      image = image.convert("RGBA" if "transparency" in image.info else "RGB")
+                  image.save(target, "WEBP", quality=80, method=6)
+              before = source.stat().st_size
+              after = target.stat().st_size
+              print(f"{source.name}: {before:,} -> {target.name}: {after:,} bytes ({after / before:.0%})")
+
+          html_path = Path("public/neurotrilhas.html")
+          html = html_path.read_text(encoding="utf-8")
+          for name in names:
+              html = html.replace(f"images/{name}", f"images/{name.removesuffix('.png.jpg')}.webp")
+          html_path.write_text(html, encoding="utf-8")
+          PY
+
+      - name: Commit optimized assets and HTML references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/*.webp public/neurotrilhas.html
+          if git diff --cached --quiet; then
+            echo "No optimized assets to commit."
+            exit 0
+          fi
+          git commit -m "Optimize NeuroTrilhas images for faster loading"
+          git push origin main
